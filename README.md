@@ -9,14 +9,14 @@ TiCP(Ti Compute Platform)是远算科技有限公司开发的下一代企业级�
 ### 3D云桌面
 支持将各种3D单机软件云化，支持显卡虚拟化和直通的方式。
 ## 支持应用
-|------------------|------------------|------------------|------------------|
-| Ansys Mechanical | Ansys Fluent   | Ansys LS-Dyna    | Ansys CFX        |
-| SolidEdge        | NX               | STAR-CCM+        | Isight           | 
-| Heeds            | Abaqus           | CATIA            | PowerFlow        |
-| XFLow            | Matlab           | MSC Adams        | MSC Nastran      | 
-| OptiStruct       | HyperWorks       | ANSA             | Converge         |
-| Code Aster       | Code Saturne     | Salome CFD       | Telemac          | 
-| PreonLab         | AVL FIRE M       |
+| Ansys Mechanical | Ansys Fluent     | Ansys LS-Dyna | Ansys CFX   |
+|------------------|------------------|---------------|-------------|
+| SolidEdge        | NX               | STAR-CCM+     | Isight      | 
+| Heeds            | Abaqus           | CATIA         | PowerFlow   |
+| XFLow            | Matlab           | MSC Adams     | MSC Nastran | 
+| OptiStruct       | HyperWorks       | ANSA          | Converge    |
+| Code Aster       | Code Saturne     | Salome CFD    | Telemac     | 
+| PreonLab         | AVL FIRE M       |               |             |
 ## 系统架构
 ![img.png](docs/architecture.png)
 ## 使用文档
