@@ -1,0 +1,73 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "protos/platform/company/company_check.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "CompanyCheckService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {},
+  "definitions": {
+    "companyCompanyMerchandiseResourceIsPricedResponse": {
+      "type": "object",
+      "properties": {
+        "companyId": {
+          "type": "string"
+        },
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/companyCompanyMerchandiseResourceIsPricedResult"
+          }
+        }
+      }
+    },
+    "companyCompanyMerchandiseResourceIsPricedResult": {
+      "type": "object",
+      "properties": {
+        "appruntimeId": {
+          "type": "string"
+        },
+        "isAvaliable": {
+          "type": "boolean"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

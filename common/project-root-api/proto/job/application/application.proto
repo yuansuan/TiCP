@@ -1,0 +1,545 @@
+syntax = "proto3";
+
+package application;
+option go_package = "github.com/yuansuan/ticp/project-root-api/proto/job/application";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+import "proto/ptype/page.proto";
+
+// The application management service for system administrator
+service ApplicationManagement {
+
+  // List application
+  rpc ListApps (AppListRequest) returns (AppListReply) {}
+
+  // Get application information
+  rpc GetAppInfo (AppInfoRequest) returns (AppInfoReply) {}
+
+  // Get canary application information
+  rpc GetCanaryAppInfo (AppInfoRequest) returns (AppInfoReply) {}
+
+  // Add a new application information
+  rpc AddApp (AppAddRequest) returns (google.protobuf.Empty) {}
+
+  // Delete one unpublished application
+  rpc DeleteApp (AppDeleteRequest) returns (google.protobuf.Empty) {}
+
+  // Delete one canary application
+  rpc DeleteCanaryApp (AppDeleteRequest) returns (google.protobuf.Empty) {}
+
+  //SaveAppParamsByIDs 按应用id批量存储AppParams
+  rpc SaveAppParamsByIDs(SaveAppParamsByIDsRequest) returns (google.protobuf.Empty) {}
+
+  // SaveApp saves the application
+  rpc SaveApp (AppSaveRequest) returns (google.protobuf.Empty) {}
+
+  // SaveCanaryApp saves canary the application
+  rpc SaveCanaryApp (AppSaveRequest) returns (google.protobuf.Empty) {}
+
+  // Deprecated - List published application
+  rpc ListPublishedApps (PublishedAppListRequest) returns (PublishedAppListReply) {}
+
+  // Get the app result file file rule
+  rpc GetAppResultFileFilterRule(AppResultFileFilterRuleRequest) returns (AppResultFileFilterRuleReply){}
+
+  // List all SCs
+  rpc ListAppSCs (ScListRequest) returns (ScListReply) {}
+
+  // GetAppFiles with content
+  rpc GetAppFiles (GetAppFilesRequest) returns (GetAppFilesReply){}
+
+  // GetCanaryAppFiles with content
+  rpc GetCanaryAppFiles (GetCanaryAppFilesRequest) returns (GetCanaryAppFilesReply){}
+
+}
+
+// The application runtime service for server parameters management
+service ApplicationRuntimeManagement {
+
+  // List application runtime
+  rpc ListAppRuntimes (ApplicationRuntimeListRequest) returns (ApplicationRuntimeListReply) {}
+
+  // Get application runtime information
+  rpc GetAppRuntime (ApplicationRuntimeRequest) returns (ApplicationRuntimeReply) {}
+
+  // Get canary application runtime information
+  rpc GetCanaryAppRuntime (ApplicationRuntimeRequest) returns (ApplicationRuntimeReply) {}
+
+  // Add one unpublished application runtime
+  rpc AddAppRuntime (ApplicationRuntimeAddRequest) returns (google.protobuf.Empty) {}
+
+  // Delete one unpublished application runtime
+  rpc DeleteAppRuntime (ApplicationRuntimeDeleteRequest) returns (google.protobuf.Empty) {}
+
+  // Delete one canary application runtime
+  rpc DeleteCanaryAppRuntime (ApplicationRuntimeDeleteRequest) returns (google.protobuf.Empty) {}
+
+  // Update the application runtime
+  rpc SaveAppRuntime (ApplicationRuntimeSaveRequest) returns (google.protobuf.Empty) {}
+
+  // SaveAppRuntimeParamsByIDs ...
+  rpc SaveAppRuntimeParamsByIDs (SaveAppRuntimeParamsByIDsRequest) returns (google.protobuf.Empty) {}
+
+  // Update the canary application runtime
+  rpc SaveCanaryAppRuntime (ApplicationRuntimeSaveRequest) returns (google.protobuf.Empty) {}
+
+  // Publish one application in SCs
+  rpc PublishAppRuntime (ApplicationRuntimePublishRequest) returns (google.protobuf.Empty) {}
+
+  // Publish one canary application to official in SCs
+  rpc OfficialPublishCanaryAppRuntime (CanaryApplicationRuntimePublishRequest) returns (google.protobuf.Empty) {}
+
+  // GetAppRuntimeAvailableCPUCores Get available CPU cores for the application in this SC.
+  // If user is canarying this runtime, the canary version will be returned.
+  rpc GetAppRuntimeAvailableCPUCores(AppRuntimeAvailableCPUCoresRequest) returns (AppRuntimeAvailableCPUCoresReply) {}
+}
+
+// The application runtime service for supplying server parameters key-value to server side. Used by SCHandler.
+service ServerApplicationRuntimeInfo {
+
+  // deprecated api, use ApplicationRuntimeManagement.ListAppRuntimes instead
+  rpc ListAllAppRuntimes (AllApplicationRuntimesListRequest) returns (AllApplicationRuntimesListReply) {}
+
+  // Get server application runtime information. If user is canarying this runtime,
+  // deprecated api, use ApplicationRuntimeManagement.GetAppRuntime instead
+  rpc GetServerAppRuntime (ServerApplicationRuntimeRequest) returns (ServerApplicationRuntimeReply) {}
+}
+
+enum OrderBy {
+  DEFAULT = 0;
+  ID = 1;
+  NAME = 2;
+  TYPE = 4;
+  VERSION = 5;
+  CREATE_TIME_ASC = 6;
+  UPDATE_TIME = 7;
+  UPDATE_TIME_ASC = 8;
+}
+
+// The application list request.
+message AppListRequest {
+  ptype.Page page = 1;
+  OrderBy order_by = 2;
+}
+
+// The application list response.
+message AppListReply {
+  repeated Application applications = 1;
+  ptype.PageCtx page_ctx = 2;
+}
+
+// The sc list request.
+message ScListRequest {
+
+}
+
+// The sc list response.
+message ScListReply {
+  repeated SC scs = 1;
+}
+
+message SC {
+  string sc_id = 1;
+  string sc_name = 2;
+  string tier_name = 3;
+}
+
+// The published application list request.
+message PublishedAppListRequest {
+  ptype.Page page = 1;
+
+  OrderBy order_by = 2;
+}
+
+// The published application list response.
+message PublishedAppListReply {
+  repeated PublishedApplication applications = 1;
+  ptype.PageCtx page_ctx = 2;
+}
+
+message GetCanaryAppFilesRequest {
+  // The application id.
+  string app_id = 1;
+}
+
+message GetCanaryAppFilesReply {
+  string appName = 1;
+  repeated AppFile app_files = 2;
+}
+
+message AppFile {
+  string file_name = 1;
+  string file_content = 2;
+}
+
+message GetAppFilesRequest {
+  // The application id.
+  string app_id = 1;
+  bool only_published_appruntime = 2;
+}
+
+message GetAppFilesReply {
+  string appName = 1;
+  repeated AppFile app_files = 2;
+}
+
+// AppInfoRequest AppInfoRequest
+message AppInfoRequest {
+  // The application id.
+  string app_id = 1;
+  // The application name.
+  string app_name = 2;
+}
+
+// AppInfoReply AppInfoReply
+message AppInfoReply {
+  // The application configuration information
+  Application application = 1;
+}
+
+// AppResultFileFilterRuleRequest AppResultFileFilterRuleRequest
+message AppResultFileFilterRuleRequest {
+  // The application id.
+  string app_id = 1;
+}
+
+// AppResultFileFilterRuleReply AppResultFileFilterRuleReply
+message AppResultFileFilterRuleReply {
+  // The application result file filter rule
+  string result_file_filter_rule = 1;
+}
+
+// AppDeleteRequest AppDeleteRequest
+message AppDeleteRequest {
+  // Required: true The application id.
+  string app_id = 1;
+}
+
+// ApplicationRuntimePublishRequest ApplicationRuntimePublishRequest
+message ApplicationRuntimePublishRequest {
+  // Required: true The application runtime id.
+  string id = 1;
+  // State 0 - unpublished | 1 - published
+  int64 state = 2;
+}
+
+// CanaryApplicationRuntimePublishRequest CanaryApplicationRuntimePublishRequest
+message CanaryApplicationRuntimePublishRequest {
+  // Required: true The application runtime id.
+  string id = 1;
+}
+
+// AppAddRequest AppAddRequest
+message AppAddRequest {
+  // Required: true The new application name and the max length is 255. It can only contain Chinese, alphanumeric, underline and dash.
+  string name = 1;
+  // Required: true The application name of new application and the max length is 255. It can only contain Chinese, alphanumeric, underline and dash.
+  string type = 2;
+  // the application version
+  string version = 3;
+  // The description of new application template
+  string desc = 4;
+}
+
+// SaveAppParamsByIDsRequest ...
+message SaveAppParamsByIDsRequest {
+  // The application type - real name of the application, such as: Abaqus
+  repeated string IDs = 1;
+  // Required: true The modified application configuration
+  AppParams app_params = 2;
+  // if the app params is changed
+  bool app_params_changed = 3;
+}
+
+// AppSaveRequest AppSaveRequest
+message AppSaveRequest {
+  // Required: true The modified application configuration
+  Application application = 1;
+  // if the app params is changed
+  bool app_params_changed = 2;
+}
+
+// GetAppScriptRequest GetAppScriptRequest
+message GetAppScriptRequest {
+  // Required: true The application id.
+  string app_id = 1;
+  // Required: true The application name.
+  string app_name = 2;
+  // Required: true SC id
+  string sc_id = 3;
+}
+
+// GetAppScriptReply GetAppScriptReply
+message GetAppScriptReply {
+  // The content of script
+  string content = 1;
+}
+
+// The ApplicationRuntime list request.
+message ApplicationRuntimeListRequest {
+  // The application state.
+  ApplicationRuntimeState state = 1;
+}
+
+// app runtime state
+enum ApplicationRuntimeState {
+  // unpublished appruntimes
+  APP_RUNTIME_UNPUBLISHED = 0;
+  // published appruntimes
+  APP_RUNTIME_PUBLISHED = 1;
+  // published + unpublished appruntimes
+  APP_RUNTIME_ALL = 2;
+}
+
+// The ApplicationRuntime list response.
+message ApplicationRuntimeListReply {
+  repeated ApplicationRuntime application_runtimes = 1;
+}
+
+// ApplicationRuntimeAddRequest ApplicationRuntimeAddRequest
+message ApplicationRuntimeAddRequest {
+  // The modified application runtime configuration when save as it.
+  ApplicationRuntime application_runtime = 1;
+}
+
+// ApplicationRuntimeDeleteRequest ApplicationRuntimeDeleteRequest
+message ApplicationRuntimeDeleteRequest {
+  // The application runtime id.
+  string id = 1;
+}
+
+// ApplicationRuntimeSaveRequest ApplicationRuntimeSaveRequest
+message ApplicationRuntimeSaveRequest {
+  // The modified application runtime configuration when save as it.
+  ApplicationRuntime application_runtime = 1;
+}
+
+// SaveAppRuntimeParamsByIDsRequest ...
+message SaveAppRuntimeParamsByIDsRequest {
+  // Required: true The AppParams sections for field group
+  repeated Section sections = 1;
+  repeated string IDs = 2;
+
+}
+
+// SCAppInfoRequest SCAppInfoRequest
+message ApplicationRuntimeRequest {
+  // ApplicationRuntime id.
+  string id = 1;
+  // The SC id
+  string sc_id = 2;
+  // The application id.
+  string app_id = 3;
+}
+
+// ApplicationRuntimeReply ApplicationRuntimeReply
+message ApplicationRuntimeReply {
+  // The Application runtime information
+  ApplicationRuntime application_runtime = 1;
+  // the availability of runtime, 0 undefined 1 available 2 not available
+  int32 availability = 2;
+}
+
+// ServerApplicationRuntimeRequest ServerApplicationRuntimeRequest
+message ServerApplicationRuntimeRequest {
+  // ApplicationRuntime id.
+  string id = 1;
+  // The SC id
+  string sc_id = 2;
+  // The application id.
+  string app_id = 3;
+}
+
+// AppRuntimeAvailableCPUCoresRequest
+message AppRuntimeAvailableCPUCoresRequest {
+  // ApplicationRuntime id.
+  string id = 1;
+  // The SC id
+  string sc_id = 2;
+  // The application id.
+  string app_id = 3;
+}
+
+// AppRuntimeAvailableCPUCoresReply
+message AppRuntimeAvailableCPUCoresReply {
+  repeated int64 availableCPUCores = 1;
+}
+
+// ServerApplicationRuntimeReply ServerApplicationRuntimeReply
+message ServerApplicationRuntimeReply {
+  // The Server application runtime information
+  ServerApplicationRuntime server_application_runtime = 1;
+  // Indicates the returned runtime contains canary information.
+  bool is_canary = 2;
+}
+
+// AllApplicationRuntimesListRequest AllApplicationRuntimesListRequest
+message AllApplicationRuntimesListRequest {
+  // The application id
+  string app_id = 1;
+}
+
+// AllApplicationRuntimesListReply AllApplicationRuntimesListReply
+message AllApplicationRuntimesListReply {
+  repeated ServerApplicationRuntime server_application_runtimes = 1;
+}
+
+//////////////////  Application used for Admin  /////////////////
+message Application {
+  // The application id
+  string id = 1;
+  // The application name and the max length is 255. It can only contain Chinese, alphanumeric, underline and dash.
+  string name = 2;
+  // The application type - real name of the application, such as: Abaqus
+  string type = 3;
+  // The application version
+  string version = 4;
+  // The application parameters
+  AppParams app_params = 5;
+  // The application parameters version
+  int64 app_params_version = 6;
+  // The application description
+  string description = 7;
+  google.protobuf.Timestamp create_time = 20;
+  google.protobuf.Timestamp update_time = 21;
+}
+
+//////////////////  Published Application used for end user/admin management  /////////////////
+message PublishedApplication {
+  // The application id
+  string id = 1;
+  // The application name and the max length is 255. It can only contain Chinese, alphanumeric, underline and dash.
+  string name = 2;
+  // The application type - real name of the application, such as: Abaqus
+  string type = 3;
+  // The application version
+  string version = 4;
+  // The application parameters
+  AppParams app_params = 5;
+  // The application parameters version
+  int64 app_params_version = 6;
+  // The application description
+  string description = 7;
+  // SC short name
+  repeated string sc_ids = 8;
+}
+
+message ApplicationRuntime {
+  string id = 1;
+  // Application id from the application object
+  string app_id = 2;
+  // Application id from the application object
+  string app_name = 3;
+  // SC short name
+  string sc_id = 4;
+  // The application running script template
+  string scriptTemplate = 5;
+  // The application type, true - published | false - unpublished
+  bool published = 6;
+  // The server side configuration parameters
+  ServerParams server_params = 7;
+  // The server parameters key-values
+  ServerParamsMapWrapper server_params_map_wrapper = 8;
+
+  google.protobuf.Timestamp create_time = 20;
+  google.protobuf.Timestamp update_time = 21;
+}
+
+// The application runtime exported for server
+message ServerApplicationRuntime {
+  string id = 1;
+  // Application id from the application object
+  string app_id = 2;
+  // Application id from the application object
+  string app_name = 3;
+  // SC short name
+  string sc_id = 4;
+  // The application running script template
+  string scriptTemplate = 5;
+  // The application type, true - published | false - unpublished
+  bool published = 6;
+  // The server parameters key-values
+  ServerParamsMapWrapper server_params_map_wrapper = 7;
+}
+
+message ServerParamsMapWrapper {
+  map<string, ParamValues> map = 1;
+}
+
+message ParamValues {
+  repeated string values = 1;
+}
+
+message ServerParams {
+  // Required: true The AppParams sections for field group
+  repeated Section sections = 1;
+}
+
+// AppParams is the user parameters form for job
+message AppParams {
+  // Required: true The AppParams sections for field group
+  repeated Section sections = 1;
+}
+
+// Section is the section of submission form
+message Section {
+  // Required: true The section name
+  string name = 1;
+  // Required: true The fields in section
+  repeated Field fields = 2;
+}
+
+// Field is the form element of submission form
+message Field {
+  // Required: true Field ID. Uniq.
+  string  id = 1;
+  // Field Label
+  string label = 2;
+  // Help text
+  string help = 3;
+  // Required: true Field type: label/text/date/list/multi/radio/checkbox/lsfile/sfile
+  string type = 4;
+  // Field required
+  bool required = 5;
+  // Field hidden
+  bool hidden = 6;
+  // Filed validation
+  FiledValidation validation = 7;
+  // Field default value for text/date/list/radio/sfile
+  string default_value = 8;
+  // Field default values for multi/checkbox/lsfile
+  repeated string default_values = 9;
+  // Field value for text/date/list/radio/sfile
+  string value = 10;
+  // Field values for multi/checkbox/lsfile
+  repeated string values = 11;
+  // Field action: one executed file path
+  string action = 12;
+  // Field options: The given value list for selection
+  repeated string options = 13;
+  // Field post text: the post text behind the field
+  string post_text = 14;
+  // Field file from type: when type is lsfile, this attribute must have value which is one of local, server and local_server
+  string file_from_type = 15;
+  // Field master slave mode flag: enable or disable master-slave file selection when type is lsfile
+  bool is_master_slave = 16;
+  // Field master file include keywords: when IsMasterSlave is true, must set the include keywords for master files
+  string master_include_keywords = 17;
+  // Field master file include extensions: when IsMasterSlave is true, must set the include file extensions for master files
+  string master_include_extensions = 18;
+  // The field value for master slave files relationship json string, only for lsfile
+  string master_slave = 19;
+}
+
+// User input validation
+message FiledValidation {
+  // Filed validation, Filed type: regex/script
+  string type = 1;
+  // Filed validation options
+  repeated string options = 2;
+  // Filed validation
+  string rule = 3;
+  // Filed validation error message
+  string error_msg = 4;
+}

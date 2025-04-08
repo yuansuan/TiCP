@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+package job;
+option go_package = "github.com/yuansuan/ticp/project-root-api/proto/job";
+
+service SchedulerPluginsResourceGroup {
+    rpc GetResourceGroups (GetResourceGroupsRequest) returns (GetResourceGroupsReply) {}
+
+    rpc SetResourceGroupCount(SetResourceGroupCountRequest) returns (google.protobuf.Empty) {}
+}
+
+message ResourceGroup {
+    string key = 1;
+    string sc_id = 2;
+    string type = 3;
+    string script = 4;
+}
+
+message GetResourceGroupsRequest {
+    string sc_id = 1;
+}
+
+message GetResourceGroupsReply {
+    repeated ResourceGroup groups = 1;
+}
+
+message SetResourceGroupCountRequest {
+    string key = 1;
+    int64 count = 2;
+}

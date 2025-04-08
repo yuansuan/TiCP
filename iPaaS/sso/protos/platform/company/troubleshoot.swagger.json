@@ -1,0 +1,229 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "protos/platform/company/troubleshoot.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "TroubleShootService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {},
+  "definitions": {
+    "companyCreateTroubleShootRecordResponse": {
+      "type": "object",
+      "properties": {
+        "record": {
+          "$ref": "#/definitions/companyTroubleShootRecord"
+        }
+      }
+    },
+    "companyCreateTroubleShootResponse": {
+      "type": "object",
+      "properties": {
+        "troubleShoot": {
+          "$ref": "#/definitions/companyTroubleShoot"
+        }
+      }
+    },
+    "companyGetTroubleShootCountResponse": {
+      "type": "object",
+      "properties": {
+        "unresoledCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "resolvedCount": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "companyGetTroubleShootResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/companyTroubleShoot"
+        }
+      }
+    },
+    "companyListTroubleShootResponse": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/companyTroubleShoot"
+          }
+        },
+        "pageCtx": {
+          "$ref": "#/definitions/ptypePageCtx"
+        }
+      }
+    },
+    "companyMigrateTroubleShootResponse": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "companyTroubleShoot": {
+      "type": "object",
+      "properties": {
+        "jobId": {
+          "type": "string"
+        },
+        "jobName": {
+          "type": "string"
+        },
+        "submitterUserId": {
+          "type": "string"
+        },
+        "submitterUserName": {
+          "type": "string"
+        },
+        "productId": {
+          "type": "string"
+        },
+        "logs": {
+          "type": "string"
+        },
+        "msg": {
+          "type": "string"
+        },
+        "companyId": {
+          "type": "string"
+        },
+        "submitterUserPhone": {
+          "type": "string"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "isResolved": {
+          "type": "boolean"
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/companyTroubleShootRecord"
+          }
+        }
+      }
+    },
+    "companyTroubleShootRecord": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "troubleShootId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "isSubmitter": {
+          "type": "boolean"
+        },
+        "ysStaffUserId": {
+          "type": "string"
+        },
+        "ysStaffUserName": {
+          "type": "string"
+        },
+        "msg": {
+          "type": "string"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "companyUpdateTroubleShootResolvedResponse": {
+      "type": "object"
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "ptypePage": {
+      "type": "object",
+      "properties": {
+        "index": {
+          "type": "string",
+          "format": "int64",
+          "title": "@inject_tag: `validate:\"gte=1\"`"
+        },
+        "size": {
+          "type": "string",
+          "format": "int64",
+          "title": "@inject_tag: `validate:\"gt=0,max=1000\"`"
+        }
+      }
+    },
+    "ptypePageCtx": {
+      "type": "object",
+      "properties": {
+        "index": {
+          "type": "string",
+          "format": "int64"
+        },
+        "size": {
+          "type": "string",
+          "format": "int64"
+        },
+        "total": {
+          "type": "string",
+          "format": "int64",
+          "title": "total record number, not page number"
+        }
+      }
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

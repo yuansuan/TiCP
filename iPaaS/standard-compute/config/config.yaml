@@ -1,0 +1,110 @@
+http_address: 0.0.0.0:8899
+# 如果为空，则pporf handler注册在 http_address中
+performance_address: 127.0.0.1:8081
+hpc_storage_address: http://127.0.0.1:8899
+
+openapi:
+  max_retry_times: 5
+  retry_interval: 10s
+  proxy: "http://127.0.0.1:3128"
+
+iam:
+  endpoint: "https://openapi.yuansuan.cn"
+  app_key: ""
+  app_secret: ""
+  ys_id: ""
+  proxy: ""
+
+access_log:
+  path: "./log/standard-compute.log"
+  use_console: false
+  max_size: 100
+  max_age: 60
+  max_backups: 50
+
+log:
+  path: "./log/standard-compute.log"
+  level: "info"
+  release_level: "production"
+  use_console: false
+  max_size: 100
+  max_age: 60
+  max_backups: 50
+
+database:
+  type: mysql
+  dsn: "wukong_user:wukong6655@tcp(mysql:3306)/wukong?charset=utf8&parseTime=true&loc=Local&multiStatements=true"
+
+migrations:
+  auto-migration: true
+  # 数据库版本，设置为"up"时表示升级至最新版。
+  migration-version: up
+
+backend-provider:
+  check-alive-interval: 3
+  scheduler-common:
+    # 作业提交的默认队列
+    default-queue: Job1
+    # 候选队列
+    candidate-queues: [job2]
+    # 工作根目录
+    workspace: ./jobs
+    # 计算节点单机核数
+    cores-per-node-list:
+    - name: Job1
+      core: 20
+    - name: job2
+      core: 25
+    # 队列预留核数
+    reserved-cores-list:
+    - name: Job1
+      core: 20
+    # 提交作业用户
+    # !!! 重要：私有云场景下，如果该配置项非空，需要使用此处配置的用户启动hpc_storage进程 !!!
+    submit-sys-user: "yuansuan"
+    # !!! 重要：私有云场景下，作业登陆节点有可能是非本地认证
+    # 如果配置了如下的uid/gid，即从配置文件里获取uid/gid，否则使用user.Lookup查找uid/gid
+    submit-sys-user-uid: 0
+    submit-sys-user-gid: 0
+  type: slurm
+  slurm:
+    # !!! 重要：代码中有写死的逻辑，最后的--wrap "/bin/bash ${script}"部署时不能更改
+    submit: sbatch -D "${cwd}" -o "${out}" -e "${err}" --nodes "${nodes}" --ntasks-per-node "${ntasks_per_node}" --mem "${memory_mb}" -p "${queue}" --wrap "/bin/bash ${script}"
+    # 均分提交 --ntasks
+    submit-average: sbatch -D "${cwd}" -o "${out}" -e "${err}" --ntasks "${ntasks}" --mem "${memory_mb}" -p "${queue}" --wrap "/bin/bash ${script}"
+    kill: scancel ${job_id}
+    check-alive: scontrol show job ${job_id}
+    check-history: sacct -j ${job_id} -o JobID,JobName,AllocCPUS,State,ExitCode,Submit,Start,End,Priority -P
+    get-resource: sinfo -N --Format=StateCompact,CPUS,FreeMem,Memory -p ${queue}
+    job-id-regex: Submitted batch job (\d+).*
+  pbs-pro:
+    # 均填写命令的绝对路径
+    # !!! 重要：代码中有写死的逻辑，最后的"${script}"部署时不能更改
+    submit: /opt/pbs/bin/qsub -o "${out}" -e "${err}" -q "${queue}" -l select="${nodes}":ncpus="${number_of_cpu}":mem="${memory_mb}"mb "${script}"
+    kill: /opt/pbs/bin/qdel -x ${job_id}
+    check-alive: /opt/pbs/bin/qstat -fx ${job_id}
+    get-resource: /opt/pbs/bin/pbsnodes -av
+
+singularity:
+  # 存储镜像根目录
+  storage: /shared/singularity
+  registry:
+    ## cos_rw 账号 该账号可以读写 standard-compute-1234 桶
+    access_key: ""
+    access_secret: ""
+    region: ap-shanghai
+    endpoint: cos.ap-shanghai.myqcloud.com
+    bucket: standard-compute-1234
+    path_prefix: singularity
+
+state-machine:
+  channel: memory
+
+snowflake:
+  node: 1
+
+# 标识作业命令准备完毕的文件存放路径，可以在比如log同级目录建一个prepared目录
+prepared_file_path: /tmp
+
+#sync:
+#  compressor: zstd

@@ -1,0 +1,100 @@
+.actmenu {
+    --bg1: rgba(249, 249, 249, 0.9);
+    --bg1a: rgba(248, 248, 248, 0.96);
+    --bg2: rgba(0, 0, 0, 0.08);
+    position: absolute;
+    background: var(--bg1);
+    -webkit-backdrop-filter: saturate(2) blur(20px);
+    backdrop-filter: saturate(2) blur(20px);
+    z-index: 10000;
+    opacity: 1;
+    pointer-events: all;
+    border-radius: 8px;
+    transition: opacity .1s ease
+}
+
+.actmenu[data-hide=true] {
+    opacity: 0;
+    pointer-events: none
+}
+
+.actmenu[data-left=false] .minimenu {
+    left: unset;
+    right: 98%
+}
+
+body[data-theme=dark] .actmenu {
+    --bg1: rgba(34, 36, 47, 0.8);
+    --bg1a: rgba(30, 32, 47, 0.9);
+    --bg2: rgba(255, 255, 255, 0.08)
+}
+
+.minimenu {
+    position: absolute;
+    display: none;
+    top: 0;
+    left: 99%;
+    background: var(--bg1a);
+    z-index: 9999;
+    padding: 4px 0;
+    animation: fadein 600ms ease-in-out;
+    border-radius: 8px
+}
+
+.menuopt {
+    height: 28px;
+    box-sizing: border-box;
+    position: relative;
+    padding: 4px 6px;
+    font-size: 12px;
+    cursor: default;
+    margin: 6px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    color: #000;
+}
+
+.menuopt:hover {
+    background: var(--bg2)
+}
+
+.menuopt[data-disabled='true'] {
+    color: #aaa;
+    cursor: not-allowed;
+}
+
+.menuopt:hover .minimenu {
+    display: block
+}
+
+.menuopt .spcont {
+    width: 16px;
+    margin-right: 12px
+}
+
+.menuopt .micon {
+    position: absolute
+}
+
+.menuopt .rightIcon {
+    right: 8px;
+    justify-content: right!important;
+}
+
+.menuopt .dotIcon,
+.menuopt .checkIcon {
+    right: 8px;
+    color: var(--med-txt);
+    justify-content: right!important;
+}
+
+.menuhr {
+    position: relative;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: rgba(204, 204, 204, .3333333333);
+    margin: 4px 0
+}

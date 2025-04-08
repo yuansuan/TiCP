@@ -1,0 +1,13 @@
+current_environment: local
+environments:
+ local:
+    compute_access_key_id:
+    compute_access_key_secret:
+    compute_ys_id:
+    endpoint: https://openapi3.intern.yuansuan.cn/
+    iam_admin_access_key_id: ys_iam_admin
+    iam_admin_access_key_secret: ys_iam_admin===>4321
+    iam_endpoint: https://openapi3.intern.yuansuan.cn/
+    storage_access_key_id:
+    storage_access_key_secret:
+    storage_ys_id:

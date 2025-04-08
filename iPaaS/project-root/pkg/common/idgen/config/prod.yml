@@ -1,0 +1,29 @@
+app:
+  name: idgen
+  ver: 1.0.0
+
+  host: 0.0.0.0
+  port: 8899
+
+  # load config from etcd
+  load_remote_config: false
+
+  middleware:
+    logger:
+      log_dir: ./log
+
+    monitor:
+      _startup: false
+      listen: ":9090"
+      metric: "/metrics"
+
+    grpc:
+      server:
+        default:
+          addr: ":11211"
+          _startup: true
+
+    etcd:
+      startup: true
+      endpoints: ["etcd-cluster-client.storage:2379"]
+      tls: false

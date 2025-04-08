@@ -1,0 +1,128 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* change webkit scrollbar style */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  width: 8px;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.ant-tabs .ant-tabs-tabpane {
+  outline: none;
+}
+
+.guide-driver-job-creator .driver-prev-btn {
+  display: none !important;
+}
+
+.ant-notification {
+  margin-right: 0;
+  margin-top: 64px;
+}
+
+#daodream-launcher {
+  z-index: 212 !important;
+}
+
+#driver-popover-item .driver-navigation-btns button {
+  display: inline-block !important;
+  border-radius: 2px !important;
+  text-shadow: none !important;
+  font-size: 12px !important;
+  border: 1px solid #dddddd !important;
+  height: 24px !important;
+  padding: 0 12px !important;
+  line-height: 16px !important;
+}
+
+#driver-popover-item .driver-navigation-btns button.driver-prev-btn {
+  color: #666666 !important;
+  background-color: white !important;
+  border-color: #dddddd !important;
+}
+
+#driver-popover-item .driver-navigation-btns button.driver-prev-btn:hover {
+  color: #005dfc !important;
+  border-color: #005dfc !important;
+}
+
+#driver-popover-item .driver-navigation-btns button.driver-next-btn {
+  color: white !important;
+  background-color: #3182ff !important;
+  border-color: #3182ff !important;
+}
+
+#driver-popover-item .driver-navigation-btns button.driver-next-btn:hover {
+  background-color: #005dfc !important;
+  border-color: #005dfc !important;
+}
+
+#driver-popover-item button.driver-close-btn {
+  font-size: 14px !important;
+  color: #999999 !important;
+  border: none !important;
+  background-color: white !important;
+  padding: 0 !important;
+}
+
+#driver-popover-item {
+  width: 360px !important;
+  max-width: none !important;
+  min-height: 188px !important;
+  background: #ffffff !important;
+  box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.2) !important;
+  border-radius: 2px !important;
+  padding: 20px !important;
+}
+
+#driver-popover-item .driver-popover-title {
+  height: 24px !important;
+  font-size: 14px !important;
+  color: #333333 !important;
+  line-height: 24px !important;
+  font-weight: 600 !important;
+}
+
+#driver-popover-item .driver-popover-description {
+  font-size: 14px !important;
+  color: #666666 !important;
+  line-height: 24px !important;
+  font-weight: 400 !important;
+  margin-bottom: 24px !important;
+}
+
+#driver-popover-item .driver-popover-footer {
+  position: absolute !important;
+  bottom: 20px !important;
+  width: calc(100% - 40px) !important;
+}
+
+#driver-page-overlay {
+  opacity: 0.5 !important;
+}
+
+#driver-popover-item button.driver-disabled {
+  display: none !important;
+}
+
+#driver-highlighted-element-stage {
+  border-radius: 0 !important;
+}
+.ys-pageLayout-title .text {
+  font-size: 21px;
+  padding-left: 9px;
+}

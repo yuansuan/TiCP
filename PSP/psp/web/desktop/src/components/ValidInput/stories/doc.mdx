@@ -1,0 +1,31 @@
+import { Story, Preview } from '@storybook/addon-docs/blocks'
+
+# ValidInput 验证输入框
+
+ValidInput 可以通过传入正则表达式或验证函数禁止非法输入。
+
+## 代码演示
+
+### 基本使用
+
+使用 validator 属性限制合法的输入值。
+
+<Preview withSource='none'>
+  <Story id='components-validinput--basic' />
+</Preview>
+
+### 错误提示信息
+
+使用函数形式的 validator 属性限制合法的输入值，并在验证失败的情况下提示错误信息。
+
+<Preview withSource='none'>
+  <Story id='components-validinput--message' />
+</Preview>
+
+## API
+
+| 参数      | 说明                                         | 类型                                       | 默认值 |
+| --------- | -------------------------------------------- | ------------------------------------------ | ------ |
+| validator | 输入验证器，支持正则表达式和验证函数两种形式 | RegExp &#124; ((value: string) => boolean) | -      |
+
+其他属性请参考 [Antd Input 属性](https://ant.design/components/input-cn/)

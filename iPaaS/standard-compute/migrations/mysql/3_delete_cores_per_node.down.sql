@@ -1,0 +1,1 @@
+ALTER TABLE `sc_job` DROP COLUMN `cores_per_node`;

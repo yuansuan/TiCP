@@ -1,0 +1,278 @@
+#tool-bar {
+  display: none;
+  margin: 0;
+  width: 100%;
+  height: 40px;
+  background-color: #10398b;
+  z-index: 1000;
+}
+
+#tool-bar li img {
+  height: 20px;
+  margin: 0 20px;
+}
+
+#tool-bar,
+#tool-bar ul {
+  display: flex;
+  justify-content: space-between;
+  list-style-type: none;
+  padding: 0 0px 0 10px;
+  height: 40px;
+}
+
+#tool-bar li,
+#tool-bar ul li {
+  display: flex;
+  align-items: center;
+  color: white;
+}
+
+#tool-bar ul li span {
+  font-size: 20px;
+  margin: 0 20px 0 10px;
+}
+
+.tool-button {
+  cursor: pointer;
+}
+
+#tool-bar .tool-button img:hover {
+  opacity: 1;
+}
+
+#tool-bar .tool-button img {
+  opacity: 0.65;
+}
+
+#tool-bar ul .status-card img {
+  margin: 0;
+}
+
+#hide-tb-btn {
+  width: 40px;
+  justify-content: center;
+  border-left: 1px solid #444;
+  margin-left: 20px;
+  cursor: pointer;
+}
+
+#hide-tb-btn svg {
+  opacity: 0.65;
+}
+
+#hide-tb-btn svg:hover {
+  opacity: 1;
+}
+
+.latency {
+  width: 60px;
+}
+
+#mini-toolbar {
+  position: fixed;
+  right: 0px;
+  bottom: 0px;
+  width: 40px;
+  height: 40px;
+  background-color: #10398b;
+  opacity: 0.65;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  svg {
+    opacity: 0.65;
+  }
+
+  svg:hover {
+    opacity: 1;
+  }
+}
+
+#close-worktask-modal-close,
+#inactive-tip-modal-close,
+#set-paste-text-modal-close {
+  cursor: pointer;
+  height: 56px;
+  width: 56px;
+  line-height: 56px;
+  text-align: center;
+
+  svg {
+    height: 16px;
+    width: 16px;
+  }
+}
+
+#set-paste-text-modal {
+  .modal-card-head {
+    padding: 0px;
+    height: 56px;
+    background-color: white;
+  }
+
+  .modal-content {
+    width: 720px;
+  }
+
+  .modal-card {
+    width: 720px;
+  }
+
+  .modal-card-title {
+    color: #10398b;
+    font-weight: 500;
+    font-size: 16px;
+    padding-left: 24px;
+  }
+
+  .modal-card-body {
+    font-size: 14px;
+    padding: 10px 70px 30px 70px;
+    background: #f0f5fd;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+
+    p {
+      padding: 15px 0px;
+    }
+
+    textarea {
+      resize: none;
+    }
+  }
+}
+
+#close-worktask-confirm-modal,
+#inactive-tip-confirm-modal {
+  .modal-card-head {
+    padding: 0px;
+    height: 56px;
+    background-color: white;
+  }
+
+  .modal-card {
+    width: 520px;
+  }
+
+  .modal-card-title {
+    color: #10398b;
+    font-weight: 500;
+    font-size: 16px;
+    padding-left: 24px;
+  }
+
+  .modal-card-body {
+    height: 166px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .modal-card-foot {
+    background-color: white;
+    height: 56px;
+    justify-content: flex-end;
+
+    button {
+      font-size: 14px;
+      height: 32px;
+      width: 62px;
+    }
+  }
+}
+
+#inactive-tip-confirm-modal {
+  .modal-card-foot {
+    button {
+      width: 92px;
+    }
+  }
+
+  .count-down {
+    font-size: 30px;
+    padding: 0px 5px;
+    text-align: center;
+  }
+}
+
+#close-worktask-confirm-modal-confirm {
+  background-color: #10398b;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.fluence-slider {
+  width: 120px;
+  margin-right: 20px;
+}
+
+#resolution-item {
+  display: none;
+  margin-bottom: -1px;
+  position: absolute;
+  left: 120px;
+  bottom: 41px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  box-shadow: 0 2px 3px -2px rgba(0, 0, 0, 0.3);
+}
+
+#resolution-item em {
+  position: absolute;
+  left: 40px;
+  bottom: -16px;
+  border: 8px solid transparent;
+  border-top-color: #d8d8d8;
+}
+
+#resolution-item i {
+  position: absolute;
+  bottom: -10px;
+  left: 43px;
+  border: 5px solid transparent;
+  border-top-color: #fff;
+  border-style: solid dashed dashed;
+}
+
+#resolution-item div {
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
+}
+
+#resolution-item span {
+  padding: 0 10px;
+}
+
+#resolution-item span {
+  padding: 0 10px;
+}
+
+#resolution-item div> :first-child {
+  margin-top: 10px;
+}
+
+#resolution-item div> :last-child {
+  margin-bottom: 2px;
+}
+
+#resolution-item span:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.resolution-selected {
+  background-color: #10398b;
+  color: white;
+}
+
+.resolution-classification {
+  font-size: 20px;
+}

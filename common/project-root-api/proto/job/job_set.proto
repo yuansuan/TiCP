@@ -1,0 +1,165 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+import "proto/ptype/page.proto";
+import "google/protobuf/empty.proto";
+import "proto/job/job.proto";
+
+package job;
+option go_package = "github.com/yuansuan/ticp/project-root-api/proto/job";
+
+
+service JobSetServer {
+    rpc GetJobSets(GetJobSetsRequest) returns (GetJobSetsResponse) {}
+    rpc GetJobs(GetJobsRequest) returns (GetJobsResponse) {}
+    rpc GetJobSetCreator(GetJobSetCreatorRequest) returns(GetJobSetCreatorResponse) {}
+
+    // 创建作业集
+    rpc CreateJobSet(CreateJobSetRequest) returns (JobSet) {}
+    // 作业加入已存在作业集
+    rpc AddJob(AddJobRequest) returns (google.protobuf.Empty) {}
+    // 删除作业集 (作业集内部状态 必须完成 2)
+    rpc DeleteJobSet(DeleteJobSetRequest) returns (google.protobuf.Empty) {}
+    // 取消作业集 (作业集内部状态 必须运行 1)
+    rpc CancelJobSet(CancelJobSetRequest) returns (google.protobuf.Empty) {}
+
+    //JobID request
+    rpc OnEvent(OnEventRequest) returns (google.protobuf.Empty) {}
+    rpc RemoveJobFromSet(OnEventRequest) returns (google.protobuf.Empty) {}
+
+    rpc JobSetNameIsExists(JobSetNameIsExistsRequest) returns (JobSetNameIsExistsResponse) {}
+
+    // Get the total number job & completed job set in project
+    rpc GetTotalNumberOfJobSetInProject (GetTotalNumberOfJobSetInProjectRequest) returns (GetTotalNumberOfJobSetInProjectResponse) {}
+}
+
+message JobSet {
+    string id = 1;
+
+    string project_id = 2;
+    
+    string name = 3;
+    
+    // 1 运行 2 已完成
+    int32 state = 4;
+
+    int32 display_state = 5;
+
+    bool has_failed = 6;
+
+    string creator = 7;
+
+    bool is_batch_job = 8;
+
+    string workflow_id = 9;
+
+    int32 count = 10;
+
+    google.protobuf.Timestamp create_time = 30;
+    google.protobuf.Timestamp update_time = 31;
+    google.protobuf.Timestamp finish_time = 32;
+}
+
+message GetJobSetsRequest {
+    // @inject_tag: `validate:"is_ysid,required"`
+    string project_id = 1;
+
+    repeated string filter_by_creator = 2;
+
+    bool order_by_create_time_asc = 3;
+
+    // @inject_tag: `validate:"required"`
+    ptype.Page page = 4;
+}
+
+message GetJobSetsResponse {
+    repeated JobSet list = 1;
+
+    ptype.PageCtx page_ctx = 2;
+}
+
+message GetJobSetCreatorRequest {
+    // @inject_tag: `validate:"is_ysid,required"`
+    string project_id = 1;
+}
+
+message GetJobSetCreatorResponse {
+    repeated string users = 1;
+}
+
+message CreateJobSetRequest {
+    // @inject_tag: `validate:"required"`
+    string name = 2;
+
+    // @inject_tag: `validate:"is_ysid,required"`
+    string project_id = 3;
+
+    // @inject_tag: `validate:"is_ysid,required"`
+    string creator = 5;
+
+    bool is_batch_job = 6;
+
+    string workflow_id = 7;
+
+    repeated string jobs = 8;
+}
+
+message JobSetNameIsExistsRequest {
+    // @inject_tag: `validate:"required"`
+    string name = 2;
+
+    // @inject_tag: `validate:"is_ysid,required"`
+    string project_id = 3;
+}
+
+message JobSetNameIsExistsResponse {
+    bool exists = 1;
+}
+
+message AddJobRequest {
+    // @inject_tag: `validate:"is_ysid,required"`
+    string job_set_id = 1;
+    // @inject_tag: `validate:"is_ysid,required"`
+    string job_id = 2;
+}
+
+message OnEventRequest {
+    // @inject_tag: `validate:"is_ysid,required"`
+    string job_id = 1;
+}
+
+message DeleteJobSetRequest {
+    // @inject_tag: `validate:"is_ysid,required"`
+    string job_set_id = 1;
+}
+
+message CancelJobSetRequest {
+    // @inject_tag: `validate:"is_ysid,required"`
+    string job_set_id = 1;
+}
+
+message GetJobsRequest {
+    // @inject_tag: `validate:"is_ysid,required"`
+    string job_set_id = 1;
+
+    // @inject_tag: `validate:"required"`
+    ptype.Page page = 4;
+}
+
+message GetJobsResponse {
+    repeated job.Job jobs = 1;
+
+    ptype.PageCtx page_ctx = 2;
+
+    JobSet job_set = 3;
+}
+
+message GetTotalNumberOfJobSetInProjectRequest {
+    // @inject_tag: `validate:"is_ysid,required"`
+    string project_id = 1;
+}
+
+message GetTotalNumberOfJobSetInProjectResponse {
+    int64 total = 1;
+    int64 completed = 2;
+}

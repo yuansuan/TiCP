@@ -1,0 +1,33 @@
+{
+    "schema": 5,
+    "addons": [
+        {
+            "id": "easyscreenshot@mozillaonline.com",
+            "icons": {
+                "32": "https://addons.cdn.mozilla.net/user-media/addon_icons/431/431482-32.png?modified=1509960022",
+                "64": "https://addons.cdn.mozilla.net/user-media/addon_icons/431/431482-64.png?modified=1509960022"
+            },
+            "name": "网页截图",
+            "version": "3.57",
+            "sourceURI": "https://addons.mozilla.org/firefox/downloads/file/760845/addon-3.57-an+fx-windows.xpi?src=",
+            "homepageURL": null,
+            "supportURL": null,
+            "description": "帮您方便的截取网页并保存为图片。",
+            "fullDescription": "帮您方便的截取网页并保存为图片。",
+            "weeklyDownloads": 32796,
+            "type": "extension",
+            "creator": {
+                "name": "Mozilla Online",
+                "url": "https://addons.mozilla.org/zh-CN/firefox/user/mozillaonline/"
+            },
+            "developers": [],
+            "screenshots": [],
+            "contributionURL": null,
+            "averageRating": 3.9929,
+            "reviewCount": 301,
+            "reviewURL": "https://addons.mozilla.org/zh-CN/firefox/addon/easyscreenshot/reviews/",
+            "updateDate": 1509958812000
+        }
+    ],
+    "compatOverrides": []
+}

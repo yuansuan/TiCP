@@ -1,0 +1,13 @@
+server:
+  addr: ":8080"
+
+logger:
+  level: debug
+
+turn_server:
+  - uri:
+    secret:
+    expire: 3600
+  - uri:
+    secret:
+    expire: 3600

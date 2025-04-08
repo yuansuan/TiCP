@@ -1,0 +1,2 @@
+# 计算应用调度资源信息配置文件路径
+scheduler_resource_path: config/scheduler_resource.yaml

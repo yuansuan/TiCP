@@ -1,0 +1,275 @@
+syntax = "proto3";
+
+package company;
+option go_package = "github.com/yuansuan/ticp/iPaaS/sso/protos/platform/company";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+import "protos/platform/ptype/page.proto";
+import "protos/platform/protoconsts/protoconsts.proto";
+
+
+// CompanyMerchandiseService service definition.
+service CompanyMerchandiseService {
+    // Query company merchandises
+    rpc CompanyMerchandiseQuery (CompanyMerchandiseQueryRequest) returns (CompanyMerchandiseQueryResponse) {}
+
+    // Query company bundle merchandises
+    rpc CompanyBundleMerchandiseQuery (CompanyBundleMerchandiseQueryRequest) returns (CompanyBundleMerchandiseQueryResponse) {}
+    
+    // Add merchandise to a company.
+    rpc AddCompanyMerchandise (AddCompanyMerchandiseRequest) returns (AddCompanyMerchandiseResponse) {}
+    // 批量添加企业商品
+    rpc BatchAddCompanyMerchandise (BatchAddCompanyMerchandiseRequest) returns (BatchAddCompanyMerchandiseResponse) {}
+    // Update company merchandise info.
+    rpc UpdateCompanyMerchandiseState (UpdateCompanyMerchandiseStateRequest) returns (UpdateCompanyMerchandiseStateResponse) {}
+
+    // 获取企业/个人已生效价格商品列表 未分页
+    rpc GetCompanyPriceMerchandise (GetCompanyPriceMerchandiseRequest) returns (GetCompanyPriceMerchandiseResponse) {}
+
+    // 获取企业已生效商品License
+    rpc GetCompanyMerchandiseLicense (GetCompanyMerchandiseLicenseReq) returns (CompanyMerchandiseLicense) {}
+    // 为企业商品设置License
+    rpc SaveCompanyMerchandiseLicense (SaveCompanyMerchandiseLicenseReq) returns (google.protobuf.Empty) {}
+
+    // 获取企业/个人已生效价格的指定商品
+    rpc GetCompanyPriceApplicationMerchandise (GetCompanyPriceApplicationMerchandiseRequest) returns (GetCompanyPriceApplicationMerchandiseResponse) {}
+}
+
+// 企业商品查询请求
+message CompanyMerchandiseQueryRequest {
+    // 搜索关键字，全匹配企业名和商品名
+    string keyword = 1;
+    // 企业ID，传 "1" 查个人用户的商品
+    // @inject_tag: `validate:"is_ysid"`
+    string company_id = 2;
+    // 商品ID
+    // @inject_tag: `validate:"is_ysid"`
+    string merchandise_id = 3;
+    // 企业商品状态
+    CompanyMerchandiseState state = 4;
+    // 结果排序
+    CompanyMerchandiseQueryOrderBy order_by = 5;
+    // @inject_tag: `validate:"required"`
+    ptype.Page page = 6;
+    // @inject_tag: `validate:"is_ysid"`
+    string product_id = 7;
+    // 企业商品资源类型
+    protoconsts.ResourceType out_resource_type = 8;
+    string license_type = 9;
+    // 多资源类型查询
+    repeated protoconsts.ResourceType out_resource_types = 10;
+    // 超算id
+    string sc_id = 11;
+}
+
+// 企业商品查询结果
+message CompanyMerchandiseQueryResponse {
+    // 数据列表
+    repeated CompanyMerchandise companyMerchandises = 1;
+    // @inject_tag: `validate:"required"`
+    ptype.PageCtx page_ctx = 2;
+}
+
+// 企业商品查询请求
+message CompanyBundleMerchandiseQueryRequest {
+    // 搜索关键字，全匹配企业名和商品名、套餐名
+    string keyword = 1;
+    // 企业ID，传 "1" 查个人用户的商品
+    // @inject_tag: `validate:"is_ysid"`
+    string company_id = 2;
+    // 商品ID
+    // @inject_tag: `validate:"is_ysid"`
+    string merchandise_id = 3;
+    // 企业商品状态
+    CompanyMerchandiseState state = 4;
+    // 结果排序
+    CompanyMerchandiseQueryOrderBy order_by = 5;
+    // @inject_tag: `validate:"required"`
+    ptype.Page page = 6;
+    // @inject_tag: `validate:"is_ysid"`
+    string product_id = 7;
+    // 企业商品资源类型
+    protoconsts.ResourceType out_resource_type = 8;
+    string license_type = 9;
+    // 套餐内包含商品名，仅针对套餐内商品名称进行搜做
+    string merchandise_name = 10;
+}
+
+// 企业商品查询结果
+message CompanyBundleMerchandiseQueryResponse {
+    // 数据列表
+    repeated CompanyMerchandise companyMerchandises = 1;
+    // @inject_tag: `validate:"required"`
+    ptype.PageCtx page_ctx = 2;
+}
+
+message CheckIsCompanyMerchandiseAcitveRequest {
+    // 企业ID，传 "1" 查个人用户的商品
+    // @inject_tag: `validate:"is_ysid,required"`
+    string company_id = 1;
+    // 商品ID
+    // @inject_tag: `validate:"is_ysid,required"`
+    string merchandise_id =2;
+}
+
+message CheckIsCompanyMerchandiseAcitveResponse {
+    bool is_active = 1;
+    bool is_priced = 2;
+}
+
+// 获取企业/个人已生效价格商品请求
+message GetCompanyPriceMerchandiseRequest {
+    // 企业ID，传 "1" 查个人用户的商品
+    // @inject_tag: `validate:"is_ysid,required"`
+    string company_id = 1;
+
+    // @inject_tag: `validate:"is_ysid"`
+    string product_id =2;
+
+    // 企业商品资源类型
+    protoconsts.ResourceType out_resource_type = 3;
+    string license_type = 4;
+}
+
+// 获取企业/个人已生效价格商品结果
+message GetCompanyPriceMerchandiseResponse {
+    repeated CompanyMerchandise companyMerchandises = 1;
+}
+
+message GetCompanyMerchandiseLicenseReq {
+    string merchandise_id = 1;
+    string company_id = 2;
+}
+
+message SaveCompanyMerchandiseLicenseReq {
+    // @inject_tag: `validate:"is_ysid"`
+    string id = 1;
+    // @inject_tag: `validate:"is_ysid"`
+    string company_id = 2;
+    // @inject_tag: `validate:"is_ysid"`
+    string merchandise_id = 3;
+    // @inject_tag: `validate:"is_ysid"`
+    string app_runtime_id = 4;
+    // @inject_tag: `validate:"required"`
+    string license = 5;
+    // @inject_tag: `validate:"is_ysid"`
+    string creator_id = 6;
+}
+
+message CompanyMerchandiseLicense {
+    // @inject_tag: `validate:"is_ysid"`
+    string id = 1;
+    // @inject_tag: `validate:"is_ysid"`
+    string company_id = 2;
+    // @inject_tag: `validate:"is_ysid"`
+    string merchandise_id = 3;
+    // @inject_tag: `validate:"is_ysid"`
+    string app_runtime_id = 4;
+    string license = 5;
+    string is_active = 6;
+    // @inject_tag: `validate:"is_ysid"`
+    string creator_id = 7;
+    google.protobuf.Timestamp create_time= 8;
+    google.protobuf.Timestamp update_time= 9;
+}
+
+// 企业商品状态
+enum CompanyMerchandiseState {
+    // 未知
+    STATE_UNKNOWN = 0;
+    // 启用
+    STATE_ONLINE = 1;
+    // 停用
+    STATE_OFFLINE = 2;
+}
+
+// 企业商品查询排序
+enum CompanyMerchandiseQueryOrderBy {
+    ORDERBY_UPDATETIME_UNKNOWN = 0;
+    // 更新时间降序
+    ORDERBY_UPDATETIME_DESC = 1;
+    // 更新时间升序
+    ORDERBY_UPDATETIME_ASC = 2;
+}
+
+message AddCompanyMerchandiseRequest {
+    // 企业ID，传 "1" 为个人用户添加商品
+    // @inject_tag: `validate:"is_ysid,required"`
+    string company_id = 1;
+    // @inject_tag: `validate:"is_ysid,required"`
+    string merchandise_id = 2;
+    // @inject_tag: `validate:"is_ysid,required"`
+    string create_uid = 3;
+}
+
+message AddCompanyMerchandiseResponse {
+
+}
+
+message BatchAddCompanyMerchandiseRequest {
+    // 企业ID，传 "1" 为个人用户添加商品
+    // @inject_tag: `validate:"is_ysid,required"`
+    string company_id = 1;
+    // @inject_tag: `validate:"required"`
+    repeated string merchandise_id = 2;
+    // @inject_tag: `validate:"is_ysid,required"`
+    string create_uid = 3;
+}
+
+message BatchAddCompanyMerchandiseResponse {
+
+}
+
+message UpdateCompanyMerchandiseStateRequest {
+     // @inject_tag: `validate:"required"`
+     repeated string ids = 1;
+     // @inject_tag: `validate:"min=1,max=2"`
+     int64 state = 2;
+}
+
+message UpdateCompanyMerchandiseStateResponse {
+
+}
+
+// 企业商品
+message CompanyMerchandise {
+    string id = 1;
+    // 企业ID，"1" 表示个人用户商品
+    string company_id = 2;
+    string company_name = 3;
+    string merchandise_id = 4;
+    string merchandise_name = 5;
+    int64  out_resource_type = 6;
+    string out_resource_id = 7;
+    string license_type = 8;
+    string license_active = 9;
+    int64  state = 10;
+    //创建者用户id
+    string create_uid = 11;
+    // 创建时间
+    google.protobuf.Timestamp create_time = 12;
+    // 更新时间
+    google.protobuf.Timestamp update_time=13;
+    // 所属产品
+    string product_id =14;
+}
+
+// 获取企业/个人已生效价格商品请求
+message GetCompanyPriceApplicationMerchandiseRequest {
+    // 企业ID，传 "1" 查个人用户的商品
+    // @inject_tag: `validate:"is_ysid,required"`
+    string company_id = 1;
+
+    // @inject_tag: `validate:"is_ysid"`
+    string product_id =2;
+
+    // @inject_tag: `validate:"is_ysid,required"`
+    string app_id =3;
+}
+
+// 获取企业/个人已生效价格商品结果
+message GetCompanyPriceApplicationMerchandiseResponse {
+    bool is_avaliable =1;
+    CompanyMerchandise companyMerchandises = 2;
+}

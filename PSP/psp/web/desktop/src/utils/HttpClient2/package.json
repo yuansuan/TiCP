@@ -1,0 +1,12 @@
+{
+  "name": "http-client",
+  "version": "0.0.1",
+  "private": true,
+  "description": "http-client addon for ys-fe-utils",
+  "main": "./index.js",
+  "module": "./index.module.js",
+  "source": "./index.ts",
+  "types": "./index.d.ts",
+  "sideEffects": false,
+  "license": "MIT"
+}

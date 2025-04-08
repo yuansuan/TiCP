@@ -1,0 +1,1 @@
+alter table job add column is_user_failed integer not null default 0;

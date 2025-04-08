@@ -1,0 +1,7 @@
+project_check:
+  enable: true # 是否开启项目检查
+  interval: 600 # 每隔多少秒检查一次
+  daily_time: 9 # 每天几点检查(24时)
+selector_list_limit:
+  enable: true
+  max_months: 12

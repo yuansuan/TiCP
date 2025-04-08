@@ -1,0 +1,4 @@
+*.pb.go             -diff
+*.pb.validate.go    -diff
+*.swagger.json      -diff
+

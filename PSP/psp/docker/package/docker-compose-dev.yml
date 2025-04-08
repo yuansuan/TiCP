@@ -1,0 +1,47 @@
+version: '3'
+
+volumes:
+  frontend_path:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: ./fe
+  pspd_path:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: ./bin
+
+services:
+  psp:
+    container_name: psp-be
+    image: psp-be:v4.2.3
+    privileged: true
+    restart: always
+    ports:
+      - '32432:32432'
+      - '22340:22340'
+    volumes:
+      - ./config:/opt/yuansuan/psp/config/
+      - /home/yuansuan/data/4TiSsZonTa3:/home/yuansuan/data/4TiSsZonTa3
+      - /usr/sbin/dmidecode:/usr/sbin/dmidecode
+      - /dev/mem:/dev/mem
+      - pspd_path:/opt/yuansuan/psp/bin/
+      - ./logs:/opt/yuansuan/psp/logs/
+    logging:
+      driver: json-file
+      options:
+        max-size: 50m
+        max-file: '20'
+  frontend:
+    container_name: psp-fe
+    image: psp-fe:v4.2.3
+    restart: always
+    ports:
+      - '443:443'
+    volumes:
+      - ./config:/opt/yuansuan/psp/config/
+      - frontend_path:/opt/yuansuan/psp/fe
+

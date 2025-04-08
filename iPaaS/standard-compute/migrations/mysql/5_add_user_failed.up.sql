@@ -1,0 +1,1 @@
+ALTER TABLE `sc_job` ADD COLUMN `is_user_failed` tinyint(1) NOT NULL DEFAULT 0 COMMENT '用户失败' AFTER `sub_state`;

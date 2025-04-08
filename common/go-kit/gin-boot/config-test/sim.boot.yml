@@ -1,0 +1,74 @@
+app:
+  name: gin_demo
+  ver: 1.0.0
+  host: 0.0.0.0
+  port: 8080
+
+  middleware:
+    logger:
+      log_dir: /data1/ms/log/lib/
+    mysql:
+      default:
+        _startup: true
+        dsn: "root:password@tcp(localhost:3306)/xx?charset=utf8&parseTime=true&loc=Local"
+      local:
+        _startup: false
+        dsn: "root:password@tcp(localhost:3306)/xx?charset=utf8&parseTime=true&loc=Local"
+
+    redis:
+      db1:
+        _startup: true
+        addr: 127.0.0.1:6379
+        password:
+        db: 0
+      default:
+        _startup: true
+        network:
+        addr: 127.0.0.1:6379
+        password:
+        db: 1
+        max_retries: 1
+        min_retry_backoff: 8
+        max_retry_backoff: 512
+        dial_timeout: 5000
+        read_timeout: 3000
+        write_timeout: 4000
+        pool_size: 10
+        min_idle_conns: 0
+        max_connage_age: 0
+        pool_timeout: 4000
+        idle_timeout: 180000
+        idle_check_frequency: 60000
+      db2:
+        _startup: false
+        addr: 127.0.0.1:6379
+        password:
+        db: 0
+
+    rpc:
+      server:
+        demo1:
+          _startup: true
+          addr: 127.0.0.1:50051
+        demo2:
+          _startup: true
+          addr: 127.0.0.1:50052
+      client:
+        demo1:
+          addr: 127.0.0.1:50051
+          timeout: 1000
+        demo2:
+          addr: 127.0.0.1:50052
+          timeout: 1000
+
+    elasticsearch:
+      default: 
+        _startup: true
+        addresses: 
+        - "http://127.0.0.1:9200"
+        #username:
+        #password:
+
+    temporal:
+      _startup: true
+      host: "10.0.1.118:7233"

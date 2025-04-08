@@ -1,0 +1,438 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "protos/platform/company/project.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "ProjectService"
+    },
+    {
+      "name": "ProjectReadOnlyService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {},
+  "definitions": {
+    "companyAddUserToProjectResponse": {
+      "type": "object",
+      "properties": {
+        "addedNum": {
+          "type": "integer",
+          "format": "int32",
+          "title": "添加成功用户数"
+        }
+      },
+      "title": "添加项目成员结果"
+    },
+    "companyCheckUserAccessRightOnProjectResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "boolean",
+          "title": "true 有权限  false 无权限"
+        }
+      },
+      "title": "验证用户是否访问指定项目权限结果"
+    },
+    "companyCreateProjectResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/companyProject"
+        }
+      },
+      "title": "新增项目结果"
+    },
+    "companyDelUserFromProjectResponse": {
+      "type": "object",
+      "properties": {
+        "deletedNum": {
+          "type": "integer",
+          "format": "int32",
+          "title": "删除成功用户数"
+        }
+      },
+      "title": "删除项目成员结果"
+    },
+    "companyDeleteProjectResponse": {
+      "type": "object",
+      "properties": {
+        "msg": {
+          "type": "string",
+          "title": "success 成功 ； fail 失败"
+        },
+        "isRunJob": {
+          "type": "boolean",
+          "title": "是否存在运行的作业"
+        },
+        "isOpenApp": {
+          "type": "boolean",
+          "title": "是否存在打开的应用"
+        }
+      },
+      "title": "删除项目结果"
+    },
+    "companyGetCompanyProjectListResponse": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/companyProject"
+          }
+        },
+        "pageCtx": {
+          "$ref": "#/definitions/ptypePageCtx"
+        }
+      },
+      "title": "获取用户项目列表结果"
+    },
+    "companyGetProjectListByBoxResponse": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/companyProjectLiteInfo"
+          }
+        },
+        "pageCtx": {
+          "$ref": "#/definitions/ptypePageCtx"
+        }
+      },
+      "title": "获取实体盒子对应的所有项目结果"
+    },
+    "companyGetProjectListResponse": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/companyProjectLiteInfo"
+          }
+        },
+        "pageCtx": {
+          "$ref": "#/definitions/ptypePageCtx"
+        }
+      },
+      "title": "获取项目列表结果"
+    },
+    "companyGetProjectResponse": {
+      "type": "object",
+      "properties": {
+        "project": {
+          "$ref": "#/definitions/companyProject"
+        }
+      },
+      "title": "获取项目结果"
+    },
+    "companyGetProjectUserListResponse": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/companyProjectUser"
+          }
+        },
+        "pageCtx": {
+          "$ref": "#/definitions/ptypePageCtx"
+        }
+      },
+      "title": "获取项目成员列表结果"
+    },
+    "companyGetTotalNumberOfUserInProjectResponse": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "string",
+          "format": "int64",
+          "title": "总数"
+        }
+      },
+      "title": "获取项目下所有用户数量结果"
+    },
+    "companyGetUserJoinCompanyProjectListResponse": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/companyProject"
+          }
+        },
+        "pageCtx": {
+          "$ref": "#/definitions/ptypePageCtx"
+        }
+      },
+      "title": "获取用户参与的企业项目列表结果"
+    },
+    "companyGetUserProjectListResponse": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/companyProject"
+          }
+        },
+        "pageCtx": {
+          "$ref": "#/definitions/ptypePageCtx"
+        }
+      },
+      "title": "获取用户参与的个人项目列表结果"
+    },
+    "companyModifyProjectResponse": {
+      "type": "object",
+      "properties": {
+        "msg": {
+          "type": "string",
+          "title": "success 成功 ； fail 失败"
+        }
+      },
+      "title": "修改项目信息结果"
+    },
+    "companyProject": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "integer",
+          "format": "int32",
+          "title": "项目类型： 1个人项目；2企业项目"
+        },
+        "companyId": {
+          "type": "string",
+          "title": "企业ID"
+        },
+        "userId": {
+          "type": "string",
+          "title": "用户ID"
+        },
+        "status": {
+          "$ref": "#/definitions/companyProjectStatus",
+          "title": "项目状态"
+        },
+        "name": {
+          "type": "string",
+          "title": "项目名"
+        },
+        "remark": {
+          "type": "string"
+        },
+        "isDefault": {
+          "type": "boolean",
+          "title": "是否默认项目"
+        },
+        "modifyUid": {
+          "type": "string"
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "createUid": {
+          "type": "string"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "accountId": {
+          "type": "string",
+          "title": "资金账户ID"
+        },
+        "productId": {
+          "type": "string",
+          "title": "产品ID"
+        },
+        "projectIcon": {
+          "type": "string",
+          "title": "项目icon"
+        },
+        "boxDomain": {
+          "type": "string",
+          "title": "盒子域名\n如果不为空 覆盖 GetUserInfo 接口上盒子domain信息"
+        },
+        "consumeLimitAmount": {
+          "type": "string",
+          "format": "int64",
+          "title": "消费限额"
+        },
+        "allowSubmitJobOverLimit": {
+          "type": "boolean",
+          "title": "是否允许在高于消费限额的情况下提交任务"
+        },
+        "consumeLimitEnabled": {
+          "type": "boolean"
+        },
+        "ownerUid": {
+          "type": "string",
+          "title": "项目属主ID"
+        },
+        "storageQuota": {
+          "type": "string",
+          "format": "int64",
+          "title": "存储配额 \n! 弃用↓"
+        }
+      },
+      "title": "项目（工作空间）"
+    },
+    "companyProjectLiteInfo": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "项目ID"
+        },
+        "name": {
+          "type": "string",
+          "title": "项目ID"
+        },
+        "companyId": {
+          "type": "string",
+          "title": "企业ID"
+        },
+        "createUid": {
+          "type": "string",
+          "title": "创建用户ID"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "创建时间"
+        },
+        "ownerUid": {
+          "type": "string",
+          "title": "项目属主ID"
+        }
+      },
+      "title": "简化项目信息"
+    },
+    "companyProjectStatus": {
+      "type": "string",
+      "enum": [
+        "PROJECT_UNKNOWN",
+        "PROJECT_NORMAL",
+        "PROJECT_DELETED"
+      ],
+      "default": "PROJECT_UNKNOWN",
+      "description": "- PROJECT_UNKNOWN: 未知\n - PROJECT_NORMAL: 正常\n - PROJECT_DELETED: 删除",
+      "title": "项目状态"
+    },
+    "companyProjectType": {
+      "type": "string",
+      "enum": [
+        "PROJECT_TYPE_UNKNOWN",
+        "PROJECT_TYPE_PERSON",
+        "PROJECT_TYPE_COMPANY"
+      ],
+      "default": "PROJECT_TYPE_UNKNOWN",
+      "description": "- PROJECT_TYPE_UNKNOWN: 未知\n - PROJECT_TYPE_PERSON: 个人项目\n - PROJECT_TYPE_COMPANY: 企业项目",
+      "title": "项目类型"
+    },
+    "companyProjectUser": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "realName": {
+          "type": "string",
+          "title": "姓名"
+        },
+        "phone": {
+          "type": "string",
+          "title": "电话"
+        },
+        "email": {
+          "type": "string",
+          "title": "email"
+        },
+        "joinTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "创建时间"
+        },
+        "userName": {
+          "type": "string",
+          "title": "用户名"
+        },
+        "displayUserName": {
+          "type": "string",
+          "title": "显示用户名"
+        }
+      },
+      "title": "项目成员"
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "ptypePage": {
+      "type": "object",
+      "properties": {
+        "index": {
+          "type": "string",
+          "format": "int64",
+          "title": "@inject_tag: `validate:\"gte=1\"`"
+        },
+        "size": {
+          "type": "string",
+          "format": "int64",
+          "title": "@inject_tag: `validate:\"gt=0,max=1000\"`"
+        }
+      }
+    },
+    "ptypePageCtx": {
+      "type": "object",
+      "properties": {
+        "index": {
+          "type": "string",
+          "format": "int64"
+        },
+        "size": {
+          "type": "string",
+          "format": "int64"
+        },
+        "total": {
+          "type": "string",
+          "format": "int64",
+          "title": "total record number, not page number"
+        }
+      }
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

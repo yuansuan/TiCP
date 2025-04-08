@@ -1,0 +1,685 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "protos/platform/company/user.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "UserService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {},
+  "definitions": {
+    "companyAddProductToUserResponse": {
+      "type": "object",
+      "properties": {
+        "msg": {
+          "type": "string"
+        }
+      }
+    },
+    "companyAddUserRemarkResponse": {
+      "type": "object",
+      "properties": {
+        "msg": {
+          "type": "string",
+          "title": "success 成功 ； fail 失败"
+        }
+      },
+      "title": "添加用户备注结果"
+    },
+    "companyBatchInviteUserResponse": {
+      "type": "object",
+      "properties": {
+        "inviteResult": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/companyInviteResult"
+          }
+        },
+        "totalCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "failCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "successCount": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "批量邀请用户结果"
+    },
+    "companyCheckUserPermissonResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "boolean",
+          "title": "验证结果； true 有权限； false 无权限"
+        }
+      },
+      "title": "验证用户权限结果"
+    },
+    "companyCheckUserProductResponse": {
+      "type": "object",
+      "properties": {
+        "has": {
+          "type": "boolean"
+        }
+      }
+    },
+    "companyConfirmInviteResponse": {
+      "type": "object",
+      "properties": {
+        "msg": {
+          "type": "string",
+          "title": "success 成功 ； fail 失败"
+        }
+      },
+      "title": "用户确认邀请结果"
+    },
+    "companyGetUserCompanyInfoResponse": {
+      "type": "object",
+      "properties": {
+        "companyId": {
+          "type": "string",
+          "title": "企业ID"
+        },
+        "companyName": {
+          "type": "string",
+          "title": "企业名称"
+        }
+      },
+      "title": "获取用户企业信息结果"
+    },
+    "companyGetUserInfoResponse": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "title": "用户ID"
+        },
+        "phone": {
+          "type": "string",
+          "title": "电话"
+        },
+        "realName": {
+          "type": "string",
+          "title": "姓名"
+        },
+        "accountId": {
+          "type": "string",
+          "title": "资金账户ID"
+        },
+        "companyId": {
+          "type": "string",
+          "title": "企业ID"
+        },
+        "companyName": {
+          "type": "string",
+          "title": "企业名称"
+        },
+        "companyBoxDomain": {
+          "type": "string",
+          "title": "盒子访问域名"
+        },
+        "permissionList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/companyPermission"
+          }
+        },
+        "publicBoxDomain": {
+          "type": "string"
+        },
+        "userName": {
+          "type": "string",
+          "title": "用户名"
+        },
+        "displayUserName": {
+          "type": "string",
+          "title": "显示用户名"
+        },
+        "userSource": {
+          "type": "string",
+          "title": "用户来源"
+        },
+        "userChannel": {
+          "type": "string",
+          "title": "用户渠道"
+        },
+        "userReferer": {
+          "type": "string",
+          "title": "推荐用户id"
+        },
+        "headimgUrl": {
+          "type": "string",
+          "title": "用户头像"
+        },
+        "wechatUnionId": {
+          "type": "string",
+          "title": "微信UnionId"
+        },
+        "createTime": {
+          "type": "string",
+          "title": "用户创建时间"
+        },
+        "email": {
+          "type": "string",
+          "title": "用户email"
+        },
+        "wechatNickName": {
+          "type": "string",
+          "title": "用户微信昵称"
+        },
+        "feCode": {
+          "type": "string",
+          "format": "int64",
+          "title": "前端自定义码(新手引导执行步骤、设置等)"
+        },
+        "departmentId": {
+          "type": "string",
+          "title": "部门ID"
+        },
+        "maxProjects": {
+          "type": "string",
+          "format": "int64",
+          "title": "用户最大空间数量"
+        },
+        "storageQuota": {
+          "type": "string",
+          "format": "int64",
+          "title": "增加存储配额"
+        }
+      },
+      "title": "获取用户信息结果"
+    },
+    "companyGetUserInviteInfoResponse": {
+      "type": "object",
+      "properties": {
+        "Info": {
+          "$ref": "#/definitions/companyInviteUser"
+        }
+      },
+      "title": "用户邀请信息结果"
+    },
+    "companyGetUserProductListResponse": {
+      "type": "object",
+      "properties": {
+        "productList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "companyGetUserRoleAndPermissonResponse": {
+      "type": "object",
+      "properties": {
+        "roleList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/companyRole"
+          },
+          "title": "角色ID"
+        },
+        "permissionList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/companyPermission"
+          },
+          "title": "权限列表"
+        }
+      },
+      "title": "获取用户角色及权限结果"
+    },
+    "companyInviteResult": {
+      "type": "object",
+      "properties": {
+        "phone": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string",
+          "format": "int64",
+          "title": "170011 : 用户已邀请（user invited）\n170012 : 手机号格式错误（phone invalidate）\n170013 ：用户已经加入其他企业（user already join other company）\n2 :  未知错误（unknown error）\n0 : 成功（success）"
+        },
+        "message": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string",
+          "title": "用户ID（手机号成功注册平台时返回）"
+        }
+      },
+      "title": "邀请结果"
+    },
+    "companyInviteUser": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "companyId": {
+          "type": "string",
+          "title": "企业ID"
+        },
+        "companyName": {
+          "type": "string",
+          "title": "企业名称"
+        },
+        "realName": {
+          "type": "string",
+          "title": "姓名"
+        },
+        "userId": {
+          "type": "string",
+          "title": "用户ID"
+        },
+        "status": {
+          "$ref": "#/definitions/companyInviteUserStatus",
+          "title": "邀请状态"
+        },
+        "isAdmin": {
+          "$ref": "#/definitions/companyInviteUserToAdmin",
+          "title": "是否初始化为管理员 1否；2是；"
+        },
+        "createUid": {
+          "type": "string"
+        },
+        "createName": {
+          "type": "string"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "phone": {
+          "type": "string",
+          "title": "电话"
+        },
+        "roleId": {
+          "type": "string",
+          "title": "角色ID"
+        },
+        "departmentId": {
+          "type": "string"
+        },
+        "maxProjects": {
+          "type": "string",
+          "format": "int64",
+          "title": "最大项目数量"
+        }
+      }
+    },
+    "companyInviteUserResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      },
+      "title": "企业邀请用户返回结果"
+    },
+    "companyInviteUserStatus": {
+      "type": "string",
+      "enum": [
+        "INVITE_UNKNOWN",
+        "INVITE_UNCONFIRMED",
+        "INVITE_ACCEPT",
+        "INVITE_REJECT"
+      ],
+      "default": "INVITE_UNKNOWN",
+      "description": "- INVITE_UNKNOWN: 未知\n - INVITE_UNCONFIRMED: 未确认\n - INVITE_ACCEPT: 同意\n - INVITE_REJECT: 拒绝",
+      "title": "邀请用户状态"
+    },
+    "companyInviteUserToAdmin": {
+      "type": "string",
+      "enum": [
+        "INVITE_TO_UNKNOW",
+        "INVITE_NOT_ADMIN",
+        "INVITE_IS_ADMIN"
+      ],
+      "default": "INVITE_TO_UNKNOW",
+      "description": "- INVITE_TO_UNKNOW: 未知\n - INVITE_NOT_ADMIN: 非管理员\n - INVITE_IS_ADMIN: 管理员",
+      "title": "邀请用户是否成为管理员"
+    },
+    "companyPUser": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "realName": {
+          "type": "string",
+          "title": "姓名"
+        },
+        "phone": {
+          "type": "string",
+          "title": "电话"
+        },
+        "email": {
+          "type": "string",
+          "title": "email"
+        },
+        "remark": {
+          "type": "string",
+          "title": "用户备注"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "创建时间"
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "更新时间"
+        },
+        "lastLoginTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "最近登录时间"
+        },
+        "isJoinCompany": {
+          "type": "boolean",
+          "title": "是否加入企业"
+        },
+        "userName": {
+          "type": "string",
+          "title": "用户名"
+        },
+        "displayUserName": {
+          "type": "string",
+          "title": "显示用户名"
+        },
+        "userChannel": {
+          "type": "string",
+          "title": "用户渠道"
+        },
+        "userSource": {
+          "type": "string",
+          "title": "用户来源"
+        },
+        "userReferer": {
+          "type": "string",
+          "title": "用户推荐人"
+        },
+        "headimgUrl": {
+          "type": "string",
+          "title": "用户头像"
+        },
+        "wechatUnionId": {
+          "type": "string",
+          "title": "微信UnionId"
+        },
+        "wechatNickName": {
+          "type": "string",
+          "title": "用户微信昵称"
+        },
+        "companyName": {
+          "type": "string",
+          "title": "已加入的企业名称"
+        }
+      },
+      "title": "个人用户"
+    },
+    "companyPermission": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        },
+        "remark": {
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/companyPermissionStatus"
+        },
+        "createUid": {
+          "type": "string"
+        },
+        "createName": {
+          "type": "string"
+        },
+        "modifyUid": {
+          "type": "string"
+        },
+        "modifyName": {
+          "type": "string"
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "title": "权限"
+    },
+    "companyPermissionStatus": {
+      "type": "string",
+      "enum": [
+        "PERMISSION_UNKOWN",
+        "PERMISSION_NORMAL",
+        "PERMISSION_DELETED"
+      ],
+      "default": "PERMISSION_UNKOWN",
+      "title": "- PERMISSION_NORMAL: 正常\n - PERMISSION_DELETED: 删除"
+    },
+    "companyRemoveProductFromUserResponse": {
+      "type": "object",
+      "properties": {
+        "msg": {
+          "type": "string"
+        }
+      }
+    },
+    "companyRole": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "角色ID"
+        },
+        "name": {
+          "type": "string",
+          "title": "角色名秒"
+        },
+        "companyId": {
+          "type": "string",
+          "title": "企业ID"
+        },
+        "type": {
+          "type": "integer",
+          "format": "int32",
+          "title": "角色类型： 1 内置 2 自定义"
+        },
+        "status": {
+          "$ref": "#/definitions/companyRoleStatus",
+          "title": "状态"
+        },
+        "createUid": {
+          "type": "string"
+        },
+        "createName": {
+          "type": "string"
+        },
+        "modifyUid": {
+          "type": "string"
+        },
+        "modifyName": {
+          "type": "string"
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "companyRoleStatus": {
+      "type": "string",
+      "enum": [
+        "ROLE_UNKOWN",
+        "ROLE_NORMAL",
+        "ROLE_DELETED"
+      ],
+      "default": "ROLE_UNKOWN",
+      "title": "- ROLE_NORMAL: 正常\n - ROLE_DELETED: 删除"
+    },
+    "companyUpdateUserFeCodeResponse": {
+      "type": "object",
+      "properties": {
+        "msg": {
+          "type": "string",
+          "title": "success 成功 ； fail 失败"
+        }
+      }
+    },
+    "companyUserInitResponse": {
+      "type": "object",
+      "properties": {
+        "msg": {
+          "type": "string",
+          "title": "success 成功 ； fail 失败"
+        }
+      },
+      "title": "用户初始化结果"
+    },
+    "companyUserListQueryResponse": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/companyPUser"
+          },
+          "title": "数据列表"
+        },
+        "pageCtx": {
+          "$ref": "#/definitions/ptypePageCtx"
+        }
+      },
+      "title": "个人用户查询结果"
+    },
+    "companyUserModifyResponse": {
+      "type": "object",
+      "properties": {
+        "msg": {
+          "type": "string",
+          "title": "success 成功 ； fail 失败"
+        }
+      },
+      "title": "用户信息修改结果"
+    },
+    "companyUserQueryOrderBy": {
+      "type": "string",
+      "enum": [
+        "USER_ORDERBY_NULL",
+        "USER_ORDERBY_REGTIME_DESC",
+        "USER_ORDERBY_REGTIME_ASC",
+        "USER_ORDERBY_LASTLOGINTIME_DESC",
+        "USER_ORDERBY_LASTLOGINTIME_ASC"
+      ],
+      "default": "USER_ORDERBY_NULL",
+      "description": "- USER_ORDERBY_REGTIME_DESC: 注册时间倒序\n - USER_ORDERBY_REGTIME_ASC: 注册时间正序\n - USER_ORDERBY_LASTLOGINTIME_DESC: 最近登录时间倒序\n - USER_ORDERBY_LASTLOGINTIME_ASC: 最近登录时间正序",
+      "title": "个人用户查询排序"
+    },
+    "companyWhetherJoinCompany": {
+      "type": "string",
+      "enum": [
+        "UNKNOW_JOIN_COMPANY",
+        "NOT_JOIN_COMPANY",
+        "ALREADY_JOIN_COMPANY"
+      ],
+      "default": "UNKNOW_JOIN_COMPANY",
+      "title": "是否加入企业"
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "ptypePage": {
+      "type": "object",
+      "properties": {
+        "index": {
+          "type": "string",
+          "format": "int64",
+          "title": "@inject_tag: `validate:\"gte=1\"`"
+        },
+        "size": {
+          "type": "string",
+          "format": "int64",
+          "title": "@inject_tag: `validate:\"gt=0,max=1000\"`"
+        }
+      }
+    },
+    "ptypePageCtx": {
+      "type": "object",
+      "properties": {
+        "index": {
+          "type": "string",
+          "format": "int64"
+        },
+        "size": {
+          "type": "string",
+          "format": "int64"
+        },
+        "total": {
+          "type": "string",
+          "format": "int64",
+          "title": "total record number, not page number"
+        }
+      }
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

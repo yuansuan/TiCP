@@ -1,0 +1,32 @@
+{
+	"Name": "MyApp 1.0",
+	"Type": "Application",
+	"Version": "1.0",
+	"AppParamsVersion": 1,
+	"Image": "myapp-image:v1",
+	"Endpoint": "endpoint",
+	"Command": "myapp start",
+	"Description": "My Sample App",
+	"IconUrl": "http://example.com/myapp.png",
+	"CoresMaxLimit": 10,
+	"CoresPlaceholder": "placeholder",
+	"FileFilterRule": "{\"result\": \"\\\\\\\\.dat$\",\"model\": \"\\\\\\\\.(jou|cas)$\",\"log\": \"\\\\\\\\.(sta|dat|msg|out|log)$\",\"middle\": \"\\\\\\\\.(com|prt)$\"}",
+	"ResidualEnable": false,
+	"ResidualLogRegexp": "stdout.log",
+	"ResidualLogParser": "fluent",
+	"MonitorChartEnable": false,
+	"MonitorChartRegexp": ".*\\\\.out",
+	"MonitorChartParser": "fluent",
+	"LicenseVars": "LicenseVars",
+	"SnapshotEnable": false,
+	"BinPath": "{\"az-jinan\":\"real jinan app bin path\",\"az-zhigu\":\"1212\",\"az-zhigu-pbs\":\"wqwq\"}",
+	"ExtentionParams": "{\"YS_MAIN_FILE\":{\"Type\":\"String\",\"ReadableName\":\"主文件\",\"Must\":true}}",
+	"LicManagerId": "",
+	"PublishStatus": "published",
+	"NeedLimitCore": false,
+	"SpecifyQueue" : {
+		"az-jinan": "jinan-queue",
+		"az-zhigu": "zhigu-queue",
+		"az-zhigu-pbs": "zhigu-pbs-queue"
+	}
+}

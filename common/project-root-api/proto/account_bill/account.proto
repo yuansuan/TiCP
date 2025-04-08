@@ -1,0 +1,332 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+//import "proto/ptype/page.proto";
+
+package account_bill;
+option go_package = "github.com/yuansuan/ticp/project-root-api/proto/account_bill";
+
+service AccountService {
+    // 获取资金账户
+    rpc GetAccount (GetAccountRequest) returns (GetAccountReply) {}
+
+    rpc GetAccountByUserID (GetAccountRequest) returns (GetAccountReply) {}
+
+    // 创建资金账户
+    rpc CreateAccount (CreateAccountRequest) returns (CreateAccountReply) {}
+    // 修改资金账户
+    rpc ModifyAccount (ModifyAccountRequest) returns (ModifyAccountReply) {}
+    // 账户收支明细
+    rpc AccountIncomeAndExpendDetail (AccountIncomeAndExpendDetailRequest) returns (AccountIncomeAndExpendDetailReply) {}
+
+
+    // 支付 扣款操作
+    rpc AccountPayReduce (AccountPayReduceRequest) returns (AccountPayReduceReply) {}
+    // 支付 冻结操作
+    rpc AccountPayFreeze (AccountPayFreezeRequest) returns (AccountPayFreezeReply) {}
+    // 支付 解冻操作
+    rpc AccountPayUnfreeze (AccountPayUnfreezeRequest) returns (AccountPayUnfreezeReply) {}
+    // 充值 加款操作
+//    rpc AccountCreditAdd (AccountCreditAddRequest) returns (AccountCreditAddReply) {}
+    //通过用户id充值操作
+    rpc AccountRechargeByUserId (AccountRechargeByUserIdRequest) returns (AccountCreditAddReply) {}
+
+    // 资金操作（管理员, 可扣为负）
+    rpc AccountFundOperate( AccountFundOperateRequest) returns (AccountFundOperateReply) {}
+
+    // 一键冻结账户操作 打开｜关闭
+    rpc ManualFreezeAccount(ManualFreezeAccountRequest)returns (ManualFreezeAccountReply){}
+}
+
+
+enum AccountStatus {
+    DELETED = 0;
+    NORMAL = 1;
+}
+message AccountRechargeByUserIdRequest {
+    // 用户ID
+    string user_id = 2;
+    // 赠送金额
+    int64 award_amount = 3;
+    // 充值金额
+    int64 normal_amount = 4;
+    // 备注
+    string comment = 5;
+    // 操作人
+    string operator_user_id = 6;
+}
+message Account {
+    // 账户ID
+    string id = 1;
+    // 客户ID （个人为user_id, 企业为 company_id）
+    string customer_id = 2;
+    // 实名认证ID （预留）
+    string real_customer_id = 3;
+    string name = 4;
+    // 币种 （CNY为人民币 ISO4217）
+    string currency = 5;
+    // 账户余额（不含冻结，即未结算）
+    int64 account_balance = 6;
+    // 冻结金额
+    int64 freezed_amount = 7;
+    // 普通余额
+    int64 normal_balance = 8;
+    // 赠送余额
+    int64 award_balance = 9;
+    // 是否提现
+    bool withdraw_enabled = 10;
+    // 授信额度
+    int64 credit_quota = 11;
+    AccountStatus status = 12;
+    // 账户余额（含冻结，即未结算）
+    int64 account_balance_contain_freezed = 13;
+    //账户冻结状态
+    int64 is_freeze = 14;
+
+    google.protobuf.Timestamp create_time = 100;
+    google.protobuf.Timestamp update_time = 101;
+}
+
+message GetAccountRequest {
+    // @inject_tag: `validate:"is_ysid"`
+    string id = 1;
+}
+
+message GetAccountReply {
+    Account account = 1;
+}
+
+message CreateAccountRequest {
+    // @inject_tag: `validate:"is_ysid,required"`
+    string customer_id = 2;
+    // @inject_tag: `validate:"is_ysid"`
+    string real_customer_id = 3;
+    string name = 4;
+    string currency = 5;
+
+    bool withdraw_enabled = 10;
+    int64 credit_quota = 11;
+}
+
+message CreateAccountReply {
+    Account account = 1;
+}
+
+message CreditQuota {
+    int64 value = 1;
+}
+message ModifyAccountRequest {
+    // 账户ID
+    // @inject_tag: `validate:"is_ysid"`
+    string account_id = 1;
+    // 实名认证ID
+    // @inject_tag: `validate:"is_ysid"`
+    string real_customer_id = 2;
+    // 账户名
+    string name = 3;
+    // 是否允许取现： 1允许  2不允许
+    int64 withdraw_enabled = 4;
+    // 授信额度
+    CreditQuota credit_quota = 5;
+}
+
+message ModifyAccountReply {
+    bool result = 1;
+}
+
+// 收支类型（其中 冻结、解冻属于中间态，不给用户展示）
+enum AccountBillSign {
+    AccountBillUnknow = 0;
+    // 收入
+    AccountBillAdd = 1;
+    // 支出
+    AccountBillReduce = 2;
+    // 冻结
+    AccountBillFreeze = 3;
+    // 解冻
+    AccountBillUnfreeze = 4;
+}
+
+enum AccountBillTradeType {
+    AccountBillTradeUnknow = 0;
+    // 支付
+    AccountBillTradePay = 1;
+    // 充值
+    AccountBillTradeCredit = 2;
+    // 退款
+    AccountBillTradeRefund = 3;
+    // 提现
+    AccountBillTradeWithdraw = 4;
+    // 加款（管理员）
+    AccountBillTradeFundAdd = 5;
+    // 扣款（管理员）
+    AccountBillTradeFundSub = 6;
+}
+
+message AccountBill {
+    // 收支记录ID
+    string id = 1;
+    // 资金账户ID
+    string account_id = 2;
+    // 收支类型
+    AccountBillSign bill_sign = 3;
+    // 金额
+    int64 amount  = 4;
+    // 交易类型
+    AccountBillTradeType trade_type =5;
+    // 交易编号
+    string trade_id = 6;
+    // 交易时间
+    google.protobuf.Timestamp trade_time = 7;
+    // 账户余额（含冻结，即未结算）
+    int64 account_balance_contain_freezed = 8;
+    // 交易备注
+    string comment = 9;
+    // 业务单号（订单号/账单号）
+    string out_trade_id = 10;
+    // 普通余额操作金额
+    int64 delta_normal_balance = 11;
+    // 赠送余额操作金额
+    int64 delta_award_balance = 12;
+
+}
+
+
+// 账户收支明细请求
+// 时间是左闭右开：create >= start_time and create_time < end_time
+message AccountIncomeAndExpendDetailRequest {
+    // @inject_tag: `validate:"is_ysid,required"`
+    string  account_id = 1;
+    // @inject_tag: `validate:"required"`
+    google.protobuf.Timestamp start_time = 2;
+    // @inject_tag: `validate:"required"`
+    google.protobuf.Timestamp end_time = 3;
+    // @inject_tag: `validate:"required"`
+    Page page = 4;
+}
+
+// 账户收支明细结果
+message AccountIncomeAndExpendDetailReply {
+    repeated AccountBill list = 1;
+    PageCtx page_ctx = 2;
+}
+
+message AccountPayReduceRequest  {
+    // @inject_tag: `validate:"is_ysid,required"`
+    string account_id = 1;
+
+    int64 amount = 3;
+    // @inject_tag: `validate:"is_ysid,required"`
+    string trade_id = 5;
+    string comment = 6;
+    // @inject_tag: `validate:"is_ysid"`
+    string out_trade_id = 7;
+    // @inject_tag: `validate:"is_ysid"`
+    string operator_user_id = 8;
+}
+
+message AccountPayReduceReply {
+    Account account = 1;
+}
+
+message AccountPayFreezeRequest{
+    // @inject_tag: `validate:"is_ysid"`
+    string account_id = 1;
+    int64 amount = 3;
+    // @inject_tag: `validate:"is_ysid"`
+    string trade_id = 5;
+    string comment = 6;
+    // @inject_tag: `validate:"is_ysid"`
+    string out_trade_id = 7;
+    // @inject_tag: `validate:"is_ysid"`
+    string operator_user_id = 8;
+}
+
+message AccountPayFreezeReply {
+    Account account = 1;
+}
+
+message AccountPayUnfreezeRequest {
+    // @inject_tag: `validate:"is_ysid"`
+    string account_id = 1;
+    // @inject_tag: `validate:"is_ysid"`
+    string trade_id = 5;
+    string comment = 6;
+    // @inject_tag: `validate:"is_ysid"`
+    string out_trade_id = 7;
+    // @inject_tag: `validate:"is_ysid"`
+    string operator_user_id = 8;
+}
+
+message AccountPayUnfreezeReply {
+    Account account = 1;
+}
+
+message AccountCreditAddRequest {
+    // @inject_tag: `validate:"is_ysid"`
+    string account_id = 1;
+
+    // @inject_tag: `validate:"is_ysid"`
+//    string trade_id = 5;
+    string comment = 6;
+    // @inject_tag: `validate:"is_ysid"`
+    string out_trade_id = 7;
+
+    // @inject_tag: `validate:"is_ysid"`
+    string operator_user_id = 8;
+    // 普通余额操作金额
+    int64 delta_normal_balance = 9;
+    // 赠送金额操作金额
+    int64 delta_award_balance = 10;
+}
+
+message AccountCreditAddReply {
+    Account account = 1;
+}
+
+message AccountFundOperateRequest {
+    // @inject_tag: `validate:"is_ysid,required"`
+    string account_id = 1;
+    // @inject_tag: `validate:"is_ysid,required"`
+    string trade_id = 2;
+    string out_trade_id = 3;
+    // 操作类型: 1 加款; 2 扣款; 3退款
+    int32 type = 4;
+    // 备注
+    // @inject_tag: `validate:"required"`
+    string comment = 5;
+    // @inject_tag: `validate:"is_ysid"`
+    string operator_user_id = 6;
+    // 普通余额操作金额
+    int64 delta_normal_balance = 7;
+    // 赠送金额操作金额
+    int64 delta_award_balance = 8;
+}
+
+message AccountFundOperateReply {
+    Account account = 1;
+}
+
+message ManualFreezeAccountRequest{
+    string account_id = 1;
+    int64 frozen_state =2;
+    string operator_user_id = 3;
+}
+
+message ManualFreezeAccountReply{
+
+}
+
+message Page {
+    // @inject_tag: `validate:"gte=1"`
+    int64 index = 1 ;
+    // @inject_tag: `validate:"gt=0,max=1000"`
+    int64 size  = 2;
+}
+
+message PageCtx {
+    int64 index = 1;
+    int64 size  = 2;
+    // total record number, not page number
+    int64 total = 3;
+}

@@ -1,0 +1,70 @@
+id: 4WczvHGYh5Y
+out_app_id: 4VqFwiiUuy1
+name: STAR-CCM+ 12.02-R8
+type: STAR-CCM+
+compute_type: local
+version: 12.02-R8
+state: unpublished
+image: starccm:14.02
+bin_path: [ ]
+license_manager_id: ""
+script: STAR-CCM+.cmd
+icon: STAR-CCM+.png
+description: ""
+help_doc:
+  type: ""
+  value: ""
+sub_form:
+  section:
+    - name: 作业参数
+      field:
+        - id: JOB_NAME
+          label: 作业名称
+          help: ""
+          type: text
+          required: true
+          hidden: false
+          default_value: ""
+          default_values: [ ]
+          value: ""
+          values: [ ]
+          action: ""
+          options: [ ]
+          post_text: ""
+          file_from_type: ""
+          is_master_slave: false
+          master_include_keywords: ""
+          master_include_extensions: ""
+          master_slave: ""
+          options_from: custom
+          options_script: ""
+          custom_json_value_string: '{}'
+          is_support_master: true
+          master_file: ""
+          is_support_workdir: false
+          workdir: ""
+        - id: CPU_NUM
+          label: 核数
+          help: ""
+          type: text
+          required: true
+          hidden: false
+          default_value: ""
+          default_values: [ ]
+          value: ""
+          values: [ ]
+          action: ""
+          options: [ ]
+          post_text: ""
+          file_from_type: ""
+          is_master_slave: false
+          master_include_keywords: ""
+          master_include_extensions: ""
+          master_slave: ""
+          options_from: custom
+          options_script: ""
+          custom_json_value_string: '{}'
+          is_support_master: true
+          master_file: ""
+          is_support_workdir: false
+          workdir: ""

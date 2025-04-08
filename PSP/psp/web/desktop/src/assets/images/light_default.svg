@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="42px" height="42px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 63 (92445) - https://sketch.com -->
+    <title>灯泡-默认</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="42" height="42"></rect>
+    </defs>
+    <g id="灯泡-默认" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g>
+            <mask id="mask-2" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <g id="矩形"></g>
+            <g mask="url(#mask-2)">
+                <g transform="translate(21.000000, 20.997368) rotate(-30.000000) translate(-21.000000, -20.997368) translate(6.000000, 6.497368)">
+                    <path d="M14.7129116,5.89285714 C19.4467809,5.89285714 23.2843402,9.73041643 23.2843402,14.4642857 C23.2843402,15.9611384 22.5471378,17.6909429 21.0727331,19.6536993 C20.422329,20.5195155 20.0706029,21.5730891 20.0704381,22.6559848 L20.0702065,24.1785714 C20.0699704,24.7307968 19.6222798,25.1784193 19.0700544,25.1785714 L10.3557687,25.1785714 C9.80348397,25.178668 9.35576872,24.7309528 9.35576872,24.178668 C9.35576872,24.1786358 9.35576872,24.1786036 9.3558653,24.1785714 L9.35601223,22.6572498 C9.35612446,21.5736611 9.00421084,20.5193642 8.35326191,19.6530907 C6.87874264,17.6908214 6.14148301,15.9612197 6.14148301,14.4642857 C6.14148301,9.73041643 9.9790423,5.89285714 14.7129116,5.89285714 Z" id="路径" stroke="none" fill="#FFC929" fill-rule="evenodd"></path>
+                    <rect id="矩形" stroke="none" fill="#FFC929" fill-rule="evenodd" x="9.35576872" y="27" width="10.7142857" height="2" rx="1"></rect>
+                    <line x1="25.1401089" y1="16.6071429" x2="29.4258232" y2="16.6071429" id="路径-2备份" stroke="#FFC929" stroke-width="1.5" fill="none" stroke-linecap="round"></line>
+                    <line x1="23.5714286" y1="9.10714286" x2="27.282966" y2="6.96428571" id="路径-2备份-2" stroke="#FFC929" stroke-width="1.5" fill="none" stroke-linecap="round"></line>
+                    <line x1="14.7129116" y1="4.28571429" x2="14.7129116" y2="-5.1450907e-14" id="路径-2备份-3" stroke="#FFC929" stroke-width="1.5" fill="none" stroke-linecap="round"></line>
+                    <line x1="-3.24185123e-14" y1="16.6071429" x2="4.28571429" y2="16.6071429" id="路径-2备份" stroke="#FFC929" stroke-width="1.5" fill="none" stroke-linecap="round" transform="translate(2.142857, 16.607143) scale(-1, 1) translate(-2.142857, -16.607143) "></line>
+                    <line x1="2.14285714" y1="9.10714286" x2="5.85439459" y2="6.96428571" id="路径-2备份-2" stroke="#FFC929" stroke-width="1.5" fill="none" stroke-linecap="round" transform="translate(3.998626, 8.035714) scale(-1, 1) translate(-3.998626, -8.035714) "></line>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

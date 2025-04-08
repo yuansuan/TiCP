@@ -1,0 +1,19 @@
+#
+# Copyright (C) 2020 LambdaCal Inc.
+#
+# The system service configuration for Agent daemons management
+#
+# You can do 'systemctl [start | enable | stop] [serviceName].service' operations on this service
+#
+
+[Unit]
+Description=YuanSuan Agent service management
+
+[Service]
+Type=simple
+WorkingDirectory=@YS_TOP@/agent/
+ExecStart=@YS_TOP@/agent/bin/psp_agent --port=9001 --log_path=@YS_TOP@/agent/log/agent.log --log_max_size=50 --log_max_num=20
+Restart=no
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,5 @@
+[Unit]
+Description=yuansuan cloudapp target
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,123 @@
+syntax = "proto3";
+
+package company;
+option go_package = "github.com/yuansuan/ticp/iPaaS/sso/protos/platform/company";
+
+import "google/protobuf/timestamp.proto";
+import "protos/platform/ptype/page.proto";
+
+service TroubleShootService {
+	rpc CreateTroubleShoot (CreateTroubleShootRequest) returns (CreateTroubleShootResponse) {}
+	rpc ListTroubleShoot (ListTroubleShootRequest) returns (ListTroubleShootResponse) {}
+	rpc UpdateTroubleShootResolved (UpdateTroubleShootResolvedRequest) returns (UpdateTroubleShootResolvedResponse) {}
+	rpc CreateTroubleShootRecord (CreateTroubleShootRecordRequest) returns (CreateTroubleShootRecordResponse) {}
+	rpc GetTroubleShoot (GetTroubleShootRequest) returns (GetTroubleShootResponse) {}
+	rpc GetTroubleShootCount (GetTroubleShootCountRequest) returns (GetTroubleShootCountResponse) {}
+	rpc MigrateTroubleShoot (MigrateTroubleShootRequest) returns (MigrateTroubleShootResponse) {}
+}
+
+message TroubleShoot {
+	string job_id = 1;
+	string job_name = 2;
+	string submitter_user_id = 3;
+	string submitter_user_name = 4;
+	string product_id = 5;
+	string logs = 6;
+	string msg = 7;
+	string company_id = 8;
+	string submitter_user_phone = 9;
+	google.protobuf.Timestamp create_time = 10;
+	google.protobuf.Timestamp update_time = 11;
+	int64 id = 12;
+	bool is_resolved = 13;
+	repeated TroubleShootRecord records = 14;
+}
+
+message TroubleShootRecord {
+	string id = 1;
+	int64 trouble_shoot_id = 2;
+	bool is_submitter = 3;
+	string ys_staff_user_id = 4;
+	string ys_staff_user_name = 5;
+	string msg = 6;
+	google.protobuf.Timestamp create_time = 7;
+	google.protobuf.Timestamp update_time = 8;
+}
+
+message CreateTroubleShootRequest {
+	string job_id = 1;
+	string job_name = 2;
+	string submitter_user_id = 3;
+	string submitter_user_name = 4;
+	string product_id = 5;
+	string logs = 6;
+	string company_id = 7;
+	string submitter_user_phone = 8;
+	string msg = 9;
+}
+
+message CreateTroubleShootResponse {
+	TroubleShoot trouble_shoot = 1;
+}
+
+message UpdateTroubleShootResolvedRequest {
+	int64 id = 1;
+	bool resolved = 2;
+	bool is_submitter = 3;
+	string ys_staff_user_id = 4;
+	string ys_staff_user_name = 5;
+}
+
+message UpdateTroubleShootResolvedResponse {}
+
+message ListTroubleShootRequest {
+	string job_id = 1;
+	int32 status = 2; // 0 -> all; 1-> resolved only; 2 -> not resolved only
+	ptype.Page page = 3;
+	// 开始时间 (create_time >= start_time)
+	google.protobuf.Timestamp start_time = 4;
+	// 结束时间 (create_time < end_time)
+	google.protobuf.Timestamp end_time = 5;
+	string user_id = 6;
+	string company_id = 7;
+}
+
+message ListTroubleShootResponse {
+	repeated TroubleShoot list = 1;
+	ptype.PageCtx page_ctx = 2;
+}
+
+message CreateTroubleShootRecordRequest {
+	int64 trouble_shoot_id = 1;
+	bool is_submitter = 2;
+	string ys_staff_user_id = 3;
+	string ys_staff_user_name = 4;
+	string msg = 5;
+}
+
+message CreateTroubleShootRecordResponse {
+	TroubleShootRecord record = 1;
+}
+
+message GetTroubleShootRequest {
+	int64 id = 1;
+}
+
+message GetTroubleShootResponse {
+	TroubleShoot result = 1;
+}
+
+message GetTroubleShootCountRequest {
+	string user_id = 1;
+}
+
+message GetTroubleShootCountResponse {
+	int32 unresoled_count = 1;
+	int32 resolved_count = 2;
+}
+
+message MigrateTroubleShootRequest {}
+
+message MigrateTroubleShootResponse {
+	int32 count = 1;
+}

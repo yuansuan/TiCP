@@ -1,0 +1,16 @@
+ALTER TABLE upload_info MODIFY COLUMN path MEDIUMTEXT;
+ALTER TABLE upload_info MODIFY COLUMN tmp_path MEDIUMTEXT;
+
+ALTER TABLE compress_info MODIFY COLUMN tmp_path MEDIUMTEXT;
+ALTER TABLE compress_info MODIFY COLUMN paths MEDIUMTEXT;
+ALTER TABLE compress_info MODIFY COLUMN target_path MEDIUMTEXT;
+ALTER TABLE compress_info MODIFY COLUMN base_path MEDIUMTEXT;
+
+ALTER TABLE storage_operation_log MODIFY COLUMN src_path MEDIUMTEXT;
+ALTER TABLE storage_operation_log MODIFY COLUMN dest_path MEDIUMTEXT;
+
+ALTER TABLE shared_directory MODIFY COLUMN path MEDIUMTEXT;
+
+ALTER TABLE directory_usage MODIFY COLUMN path MEDIUMTEXT;
+
+

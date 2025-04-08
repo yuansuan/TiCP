@@ -1,0 +1,126 @@
+[
+  {
+    "id": "1",
+    "plugins": [["router", "dashboard"]],
+    "steps": [
+      {
+        "element": ".chart",
+        "stageBackground": "rgb(240, 242, 245)",
+        "popover": {
+          "title": "仪表盘",
+          "description": "可快速查看当前工作空间的用量情况。",
+          "position": "top",
+          "nextBtnText": "下一步(1/7)"
+        }
+      },
+      ["history.push", "/files"],
+      {
+        "element": ".toolbar .left",
+        "popover": {
+          "title": "文件管理",
+          "description": "用户管理算例文件和计算结果，可以从本地上传文件，也可以将文件下载至本地。",
+          "position": "bottom",
+          "nextBtnText": "下一步(2/7)"
+        },
+        "options": {
+          "highlightDisabled": true
+        }
+      },
+      ["history.push", "/job-creator"],
+      {
+        "element": ".apps>div",
+        "popover": {
+          "title": "软件及版本选择",
+          "description": "需根据算例文件选择对应的软件及版本。",
+          "position": "right",
+          "nextBtnText": "下一步(3/7)"
+        }
+      },
+      {
+        "element": ".fileUploaderToolbar",
+        "popover": {
+          "title": "算例选择",
+          "description": "可从本地上传算例，也可从我的文件(即文件管理)中选择已经上传的算例。",
+          "position": "right",
+          "nextBtnText": "下一步(4/7)"
+        },
+        "options": {
+          "highlightDisabled": true
+        }
+      },
+      {
+        "element": ".mainFile",
+        "popover": {
+          "title": "主文件设置",
+          "description": "设置算例中的主要计算文件，如Fluent提交计算需设置.jou脚本为主文件。",
+          "position": "left",
+          "nextBtnText": "下一步(5/7)"
+        }
+      },
+      {
+        "element": ".paramSettings .section-content",
+        "popover": {
+          "title": "参数设置",
+          "description": "选择对应的算力资源以及计算所需的核数，若选择多个算力资源，则系统会自动分派最优算力。",
+          "position": "top",
+          "nextBtnText": "下一步(6/7)"
+        }
+      },
+      {
+        "element": ".bottomToolbar",
+        "popover": {
+          "title": "提交计算",
+          "description": "选择完软件及版本，上传算例，设置主文件，完成参数设置后，即可提交作业至超算运行。",
+          "position": "top",
+          "nextBtnText": "下一步(7/7)"
+        }
+      },
+      ["history.push", "/jobs"],
+      {
+        "element": ".job-search-bar",
+        "popover": {
+          "title": "查询功能",
+          "description": "可根据 名称、作业编号、创建人、软件、作业状态、回传状态、作业集名称、提交时间 来查询作业。",
+          "position": "bottom",
+          "nextBtnText": "下一步(1/3)"
+        }
+      },
+      {
+        "element": ".table-jobset-name-header",
+        "popover": {
+          "title": "作业集名称",
+          "description": "可通过作业列表的作业集查看该作业集中的所有作业。",
+          "position": "bottom",
+          "nextBtnText": "下一步(2/3)"
+        }
+      },
+      {
+        "element": ".table-job-name-header",
+        "popover": {
+          "title": "作业名称",
+          "description": "点击作业名称进入作业详情。",
+          "position": "bottom",
+          "nextBtnText": "完成(3/3)"
+        }
+      }
+    ]
+  },
+  {
+    "id": "2",
+    "steps": [
+      {
+        "element": "#ys_header_user_menu",
+        "stageBackground": "rgb(240, 242, 245)",
+        "popover": {
+          "title": "工作空间管理",
+          "description": "\"工作空间管理\"功能现已移动到\"企业管理\"中",
+          "position": "bottom-right",
+          "nextBtnText": "下一步"
+        },
+        "options": {
+          "highlightDisabled": true
+        }
+      }
+    ]
+  }
+]

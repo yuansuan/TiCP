@@ -1,0 +1,1020 @@
+{
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "schemes": [
+    "https"
+  ],
+  "swagger": "2.0",
+  "info": {
+    "description": "Documentation of our Standard-Compute API.",
+    "title": "Standard-Compute API.",
+    "version": "1.0.0"
+  },
+  "host": "localhost",
+  "basePath": "/",
+  "paths": {
+    "/jobs": {
+      "post": {
+        "description": "提交作业",
+        "tags": [
+          "Standard-Compute"
+        ],
+        "operationId": "postJobsRequest",
+        "parameters": [
+          {
+            "description": "This text will appear as description of your request body.",
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/PostJobsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/postJobsResponse"
+          },
+          "400": {
+            "$ref": "#/responses/errorResponse"
+          },
+          "401": {
+            "$ref": "#/responses/errorResponse"
+          }
+        }
+      }
+    },
+    "/jobs/:job_id": {
+      "get": {
+        "description": "查询作业",
+        "tags": [
+          "Standard-Compute"
+        ],
+        "operationId": "getJobRequest",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "ID",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/getJobResponse"
+          },
+          "400": {
+            "$ref": "#/responses/errorResponse"
+          },
+          "401": {
+            "$ref": "#/responses/errorResponse"
+          }
+        }
+      },
+      "patch": {
+        "description": "取消作业",
+        "tags": [
+          "Standard-Compute"
+        ],
+        "operationId": "terminateJobRequest",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "Status",
+            "name": "status",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "ID",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/terminateJobRequest"
+          },
+          "400": {
+            "$ref": "#/responses/errorResponse"
+          },
+          "401": {
+            "$ref": "#/responses/errorResponse"
+          }
+        }
+      }
+    },
+    "/jobs/:job_id/workspace/checksum/*file_path": {
+      "get": {
+        "description": "获取作业token",
+        "tags": [
+          "Standard-Compute"
+        ],
+        "operationId": "workspaceChecksumRequest",
+        "parameters": [
+          {
+            "type": "integer",
+            "format": "int64",
+            "name": "ID",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "FilePath",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "name": "Offset",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "name": "ChunkSize",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "name": "ChunkNum",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/workspaceChecksumResponse"
+          },
+          "400": {
+            "$ref": "#/responses/errorResponse"
+          },
+          "401": {
+            "$ref": "#/responses/errorResponse"
+          }
+        }
+      }
+    },
+    "/jobs/:job_id/workspace/content/*file_path": {
+      "get": {
+        "description": "获取作业token",
+        "tags": [
+          "Standard-Compute"
+        ],
+        "operationId": "workspaceContentRequest",
+        "parameters": [
+          {
+            "type": "integer",
+            "format": "int64",
+            "name": "ID",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "FilePath",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/workspaceContentResponse"
+          },
+          "400": {
+            "$ref": "#/responses/errorResponse"
+          },
+          "401": {
+            "$ref": "#/responses/errorResponse"
+          }
+        }
+      }
+    },
+    "/jobs/:job_id/workspace/ls/*file_path": {
+      "get": {
+        "description": "获取作业token",
+        "tags": [
+          "Standard-Compute"
+        ],
+        "operationId": "workspaceListRequest",
+        "parameters": [
+          {
+            "type": "integer",
+            "format": "int64",
+            "name": "ID",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "FilePath",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "name": "Page",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "name": "PageSize",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/workspaceListResponse"
+          },
+          "400": {
+            "$ref": "#/responses/errorResponse"
+          },
+          "401": {
+            "$ref": "#/responses/errorResponse"
+          }
+        }
+      }
+    },
+    "/jobs/:job_id/workspace/stat/*file_path": {
+      "get": {
+        "description": "获取作业token",
+        "tags": [
+          "Standard-Compute"
+        ],
+        "operationId": "workspaceStatRequest",
+        "parameters": [
+          {
+            "type": "integer",
+            "format": "int64",
+            "name": "ID",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "FilePath",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/workspaceStatResponse"
+          },
+          "400": {
+            "$ref": "#/responses/errorResponse"
+          },
+          "401": {
+            "$ref": "#/responses/errorResponse"
+          }
+        }
+      }
+    },
+    "/jobs/:job_id/workspace/token": {
+      "post": {
+        "description": "获取作业token",
+        "tags": [
+          "Standard-Compute"
+        ],
+        "operationId": "postTokenRequest",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/postTokensRequest"
+          },
+          "400": {
+            "$ref": "#/responses/errorResponse"
+          },
+          "401": {
+            "$ref": "#/responses/errorResponse"
+          }
+        }
+      }
+    },
+    "/webhook-address": {
+      "post": {
+        "description": "webhook 接口",
+        "tags": [
+          "Webhook"
+        ],
+        "operationId": "webhookRequest",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Job"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/webhookResponse"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ErrorResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "Code"
+        },
+        "message": {
+          "type": "string",
+          "x-go-name": "Message"
+        }
+      },
+      "x-go-package": "github.com/yuansuan/ticp/standard-compute/pkg/model"
+    },
+    "GetJobResponse": {
+      "type": "object",
+      "properties": {
+        "alloc_cores": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "AllocCores"
+        },
+        "application": {
+          "description": "容器镜像名",
+          "type": "string",
+          "x-go-name": "Application",
+          "example": "ubuntu:18.04"
+        },
+        "cmd": {
+          "type": "string",
+          "x-go-name": "Cmd"
+        },
+        "completed_time": {
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "CompletedTime"
+        },
+        "completing_time": {
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "CompletingTime"
+        },
+        "env": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-go-name": "Env"
+        },
+        "execution_duration": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "ExecutionDuration"
+        },
+        "exit_code": {
+          "type": "string",
+          "x-go-name": "ExitCode"
+        },
+        "id": {
+          "type": "string",
+          "x-go-name": "ID"
+        },
+        "inputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InputStorage"
+          },
+          "x-go-name": "Inputs"
+        },
+        "output": {
+          "$ref": "#/definitions/OutputStorage"
+        },
+        "pending_time": {
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "PendingTime"
+        },
+        "resource": {
+          "$ref": "#/definitions/resource"
+        },
+        "running_time": {
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "RunningTime"
+        },
+        "state_reason": {
+          "type": "string",
+          "x-go-name": "StateReason"
+        },
+        "status": {
+          "type": "string",
+          "x-go-name": "Status"
+        },
+        "webhook": {
+          "description": "Webhook 输入用户回调的服务器回调接口的url",
+          "type": "string",
+          "x-go-name": "Webhook",
+          "example": "http://example.com/standard-compute/webhook"
+        }
+      },
+      "x-go-package": "github.com/yuansuan/ticp/standard-compute/pkg/model"
+    },
+    "InputStorage": {
+      "type": "object",
+      "properties": {
+        "authorization": {
+          "$ref": "#/definitions/authorization"
+        },
+        "dst": {
+          "type": "string",
+          "x-go-name": "Dst"
+        },
+        "src": {
+          "type": "string",
+          "x-go-name": "Src"
+        },
+        "type": {
+          "$ref": "#/definitions/StorageType"
+        }
+      },
+      "x-go-package": "github.com/yuansuan/ticp/standard-compute/pkg/model"
+    },
+    "sc_job": {
+      "type": "object",
+      "properties": {
+        "alloc_cores": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "AllocCores"
+        },
+        "application": {
+          "description": "容器镜像名",
+          "type": "string",
+          "x-go-name": "Application",
+          "example": "ubuntu:18.04"
+        },
+        "cmd": {
+          "type": "string",
+          "x-go-name": "Cmd"
+        },
+        "completed_time": {
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "CompletedTime"
+        },
+        "completing_time": {
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "CompletingTime"
+        },
+        "env": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-go-name": "Env"
+        },
+        "execution_duration": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "ExecutionDuration"
+        },
+        "exit_code": {
+          "type": "string",
+          "x-go-name": "ExitCode"
+        },
+        "id": {
+          "type": "string",
+          "x-go-name": "ID"
+        },
+        "inputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InputStorage"
+          },
+          "x-go-name": "Inputs"
+        },
+        "output": {
+          "$ref": "#/definitions/OutputStorage"
+        },
+        "pending_time": {
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "PendingTime"
+        },
+        "resource": {
+          "$ref": "#/definitions/resource"
+        },
+        "running_time": {
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "RunningTime"
+        },
+        "state_reason": {
+          "type": "string",
+          "x-go-name": "StateReason"
+        },
+        "status": {
+          "type": "string",
+          "x-go-name": "Status"
+        },
+        "webhook": {
+          "description": "Webhook 输入用户回调的服务器回调接口的url",
+          "type": "string",
+          "x-go-name": "Webhook",
+          "example": "http://example.com/standard-compute/webhook"
+        }
+      },
+      "x-go-package": "github.com/yuansuan/ticp/standard-compute/pkg/model"
+    },
+    "OutputStorage": {
+      "type": "object",
+      "properties": {
+        "authorization": {
+          "$ref": "#/definitions/authorization"
+        },
+        "dst": {
+          "type": "string",
+          "x-go-name": "Dst"
+        },
+        "type": {
+          "$ref": "#/definitions/StorageType"
+        }
+      },
+      "x-go-package": "github.com/yuansuan/ticp/standard-compute/pkg/model"
+    },
+    "PatchJobResponse": {
+      "type": "object",
+      "properties": {
+        "alloc_cores": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "AllocCores"
+        },
+        "application": {
+          "description": "容器镜像名",
+          "type": "string",
+          "x-go-name": "Application",
+          "example": "ubuntu:18.04"
+        },
+        "cmd": {
+          "type": "string",
+          "x-go-name": "Cmd"
+        },
+        "completed_time": {
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "CompletedTime"
+        },
+        "completing_time": {
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "CompletingTime"
+        },
+        "env": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-go-name": "Env"
+        },
+        "execution_duration": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "ExecutionDuration"
+        },
+        "exit_code": {
+          "type": "string",
+          "x-go-name": "ExitCode"
+        },
+        "id": {
+          "type": "string",
+          "x-go-name": "ID"
+        },
+        "inputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InputStorage"
+          },
+          "x-go-name": "Inputs"
+        },
+        "output": {
+          "$ref": "#/definitions/OutputStorage"
+        },
+        "pending_time": {
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "PendingTime"
+        },
+        "resource": {
+          "$ref": "#/definitions/resource"
+        },
+        "running_time": {
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "RunningTime"
+        },
+        "state_reason": {
+          "type": "string",
+          "x-go-name": "StateReason"
+        },
+        "status": {
+          "type": "string",
+          "x-go-name": "Status"
+        },
+        "webhook": {
+          "description": "Webhook 输入用户回调的服务器回调接口的url",
+          "type": "string",
+          "x-go-name": "Webhook",
+          "example": "http://example.com/standard-compute/webhook"
+        }
+      },
+      "x-go-package": "github.com/yuansuan/ticp/standard-compute/pkg/model"
+    },
+    "Permission": {
+      "type": "object",
+      "properties": {
+        "method": {
+          "type": "string",
+          "x-go-name": "Method"
+        },
+        "url": {
+          "type": "string",
+          "x-go-name": "Url"
+        }
+      },
+      "x-go-package": "github.com/yuansuan/ticp/standard-compute/pkg/model"
+    },
+    "PostJobsRequest": {
+      "type": "object",
+      "properties": {
+        "application": {
+          "description": "容器镜像名",
+          "type": "string",
+          "x-go-name": "Application",
+          "example": "ubuntu:18.04"
+        },
+        "cmd": {
+          "type": "string",
+          "x-go-name": "Cmd"
+        },
+        "env": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-go-name": "Env"
+        },
+        "inputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InputStorage"
+          },
+          "x-go-name": "Inputs"
+        },
+        "output": {
+          "$ref": "#/definitions/OutputStorage"
+        },
+        "resource": {
+          "$ref": "#/definitions/resource"
+        },
+        "webhook": {
+          "description": "Webhook 输入用户回调的服务器回调接口的url",
+          "type": "string",
+          "x-go-name": "Webhook",
+          "example": "http://example.com/standard-compute/webhook"
+        }
+      },
+      "x-go-package": "github.com/yuansuan/ticp/standard-compute/pkg/model"
+    },
+    "PostJobsResponse": {
+      "type": "object",
+      "properties": {
+        "alloc_cores": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "AllocCores"
+        },
+        "application": {
+          "description": "容器镜像名",
+          "type": "string",
+          "x-go-name": "Application",
+          "example": "ubuntu:18.04"
+        },
+        "cmd": {
+          "type": "string",
+          "x-go-name": "Cmd"
+        },
+        "completed_time": {
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "CompletedTime"
+        },
+        "completing_time": {
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "CompletingTime"
+        },
+        "env": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-go-name": "Env"
+        },
+        "execution_duration": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "ExecutionDuration"
+        },
+        "exit_code": {
+          "type": "string",
+          "x-go-name": "ExitCode"
+        },
+        "id": {
+          "type": "string",
+          "x-go-name": "ID"
+        },
+        "inputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InputStorage"
+          },
+          "x-go-name": "Inputs"
+        },
+        "output": {
+          "$ref": "#/definitions/OutputStorage"
+        },
+        "pending_time": {
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "PendingTime"
+        },
+        "resource": {
+          "$ref": "#/definitions/resource"
+        },
+        "running_time": {
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "RunningTime"
+        },
+        "state_reason": {
+          "type": "string",
+          "x-go-name": "StateReason"
+        },
+        "status": {
+          "type": "string",
+          "x-go-name": "Status"
+        },
+        "webhook": {
+          "description": "Webhook 输入用户回调的服务器回调接口的url",
+          "type": "string",
+          "x-go-name": "Webhook",
+          "example": "http://example.com/standard-compute/webhook"
+        }
+      },
+      "x-go-package": "github.com/yuansuan/ticp/standard-compute/pkg/model"
+    },
+    "PostTokensResponse": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string",
+          "x-go-name": "Token"
+        }
+      },
+      "x-go-package": "github.com/yuansuan/ticp/standard-compute/pkg/model"
+    },
+    "StorageType": {
+      "type": "integer",
+      "format": "int64",
+      "x-go-package": "github.com/yuansuan/ticp/standard-compute/pkg/model"
+    },
+    "WorkspaceChecksumResponse": {
+      "type": "object",
+      "properties": {
+        "chunk_num": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "ChunkNum"
+        },
+        "chunk_size": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "ChunkSize"
+        },
+        "chunks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkspaceFileChunk"
+          },
+          "x-go-name": "Chunks"
+        },
+        "file_size": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "FileSize"
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "Offset"
+        }
+      },
+      "x-go-package": "github.com/yuansuan/ticp/standard-compute/pkg/model"
+    },
+    "WorkspaceFile": {
+      "type": "object",
+      "properties": {
+        "create_time": {
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "CreateTime"
+        },
+        "file_size": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "FileSize"
+        },
+        "filename": {
+          "type": "string",
+          "x-go-name": "Filename"
+        },
+        "filepath": {
+          "type": "string",
+          "x-go-name": "Filepath"
+        },
+        "is_dir": {
+          "type": "boolean",
+          "x-go-name": "IsDir"
+        },
+        "modified_time": {
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "ModifiedTime"
+        }
+      },
+      "x-go-package": "github.com/yuansuan/ticp/standard-compute/pkg/model"
+    },
+    "WorkspaceFileChunk": {
+      "type": "object",
+      "properties": {
+        "md5": {
+          "type": "string",
+          "x-go-name": "MD5"
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "Offset"
+        },
+        "rolling_hash": {
+          "type": "string",
+          "x-go-name": "RollingHash"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "Size"
+        }
+      },
+      "x-go-package": "github.com/yuansuan/ticp/standard-compute/pkg/model"
+    },
+    "WorkspaceListResponse": {
+      "type": "object",
+      "properties": {
+        "files": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkspaceFile"
+          },
+          "x-go-name": "Files"
+        },
+        "page": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "Page"
+        },
+        "page_sizes": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "PageSize"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "Total"
+        }
+      },
+      "x-go-package": "github.com/yuansuan/ticp/standard-compute/pkg/model"
+    },
+    "WorkspaceStatResponse": {
+      "type": "object",
+      "properties": {
+        "file": {
+          "$ref": "#/definitions/WorkspaceFile"
+        }
+      },
+      "x-go-package": "github.com/yuansuan/ticp/standard-compute/pkg/model"
+    },
+    "authorization": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "x-go-name": "Key"
+        },
+        "secret": {
+          "type": "string",
+          "x-go-name": "Secret"
+        }
+      },
+      "x-go-package": "github.com/yuansuan/ticp/standard-compute/pkg/model"
+    },
+    "resource": {
+      "type": "object",
+      "properties": {
+        "core_number": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "CoreNumber"
+        }
+      },
+      "x-go-package": "github.com/yuansuan/ticp/standard-compute/pkg/model"
+    }
+  },
+  "responses": {
+    "errorResponse": {
+      "description": "",
+      "schema": {
+        "$ref": "#/definitions/ErrorResponse"
+      }
+    },
+    "getJobResponse": {
+      "description": "This text will appear as description of your response body.",
+      "schema": {
+        "$ref": "#/definitions/GetJobResponse"
+      }
+    },
+    "postJobsResponse": {
+      "description": "This text will appear as description of your response body.",
+      "schema": {
+        "$ref": "#/definitions/PostJobsResponse"
+      }
+    },
+    "postTokensResponse": {
+      "description": "This text will appear as description of your response body.",
+      "schema": {
+        "$ref": "#/definitions/PostTokensResponse"
+      }
+    },
+    "terminateJobResponse": {
+      "description": "This text will appear as description of your response body.",
+      "schema": {
+        "$ref": "#/definitions/PatchJobResponse"
+      }
+    },
+    "webhookResponse": {
+      "description": ""
+    },
+    "workspaceChecksumResponse": {
+      "description": "This text will appear as description of your response body.",
+      "schema": {
+        "$ref": "#/definitions/WorkspaceChecksumResponse"
+      }
+    },
+    "workspaceContentResponse": {
+      "description": "http提供的文件下载功能 整个body是文件内容, 本API支持Range 参考https://developer.mozilla.org/en-US/docs/Web/HTTP/Range_requests",
+      "schema": {
+        "type": "array",
+        "items": {
+          "type": "integer",
+          "format": "uint8"
+        }
+      }
+    },
+    "workspaceListResponse": {
+      "description": "This text will appear as description of your response body.",
+      "schema": {
+        "$ref": "#/definitions/WorkspaceListResponse"
+      }
+    },
+    "workspaceStatResponse": {
+      "description": "This text will appear as description of your response body.",
+      "schema": {
+        "$ref": "#/definitions/WorkspaceStatResponse"
+      }
+    }
+  },
+  "securityDefinitions": {
+    "basic": {
+      "type": "basic"
+    }
+  }
+}

@@ -1,0 +1,1054 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "protos/platform/company/company.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "CompanyService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {},
+  "definitions": {
+    "companyAddOperateFileLogResponse": {
+      "type": "object",
+      "properties": {
+        "msg": {
+          "type": "string",
+          "title": "success 成功 ； fail 失败"
+        }
+      }
+    },
+    "companyAddProductToCompanyResponse": {
+      "type": "object",
+      "properties": {
+        "msg": {
+          "type": "string"
+        }
+      }
+    },
+    "companyAddUserToCompanyResponse": {
+      "type": "object",
+      "properties": {
+        "msg": {
+          "type": "string",
+          "title": "success 成功 ； fail 失败"
+        }
+      },
+      "title": "添加用户到企业结果"
+    },
+    "companyBox": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "companyId": {
+          "type": "string"
+        },
+        "boxSerialNumber": {
+          "type": "string",
+          "title": "盒子序列号"
+        },
+        "boxDomain": {
+          "type": "string",
+          "title": "盒子域名"
+        },
+        "status": {
+          "$ref": "#/definitions/companyBoxStatus",
+          "title": "状态 1正常 2删除"
+        },
+        "remark": {
+          "type": "string",
+          "title": "备注"
+        },
+        "modifyUid": {
+          "type": "string",
+          "title": "修改者用户ID"
+        },
+        "modifyName": {
+          "type": "string",
+          "title": "修改者姓名"
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "更新时间"
+        },
+        "createUid": {
+          "type": "string",
+          "title": "创建者用户ID"
+        },
+        "createName": {
+          "type": "string",
+          "title": "创建者姓名"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "创建时间"
+        }
+      }
+    },
+    "companyBoxStatus": {
+      "type": "string",
+      "enum": [
+        "BOX_UNKNOWN",
+        "BOX_NORMAL",
+        "BOX_DELETED"
+      ],
+      "default": "BOX_UNKNOWN",
+      "description": "- BOX_UNKNOWN: 未知\n - BOX_NORMAL: 正常\n - BOX_DELETED: 删除",
+      "title": "盒子状态"
+    },
+    "companyCheckCompanyProductResponse": {
+      "type": "object",
+      "properties": {
+        "has": {
+          "type": "boolean"
+        }
+      }
+    },
+    "companyCheckUserAlreadyJoinCompanyResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "boolean",
+          "title": "true 已加入  false 没有加入"
+        }
+      },
+      "title": "验证用户是否已加入企业结果"
+    },
+    "companyCompany": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "企业ID"
+        },
+        "name": {
+          "type": "string",
+          "title": "企业名称"
+        },
+        "bizCode": {
+          "type": "string",
+          "title": "营业执照注册号"
+        },
+        "isYsCloud": {
+          "type": "integer",
+          "format": "int32",
+          "title": "@inject_tag: `validate:\"min=1,max=2\"`"
+        },
+        "contact": {
+          "type": "string",
+          "title": "联系人"
+        },
+        "phone": {
+          "type": "string",
+          "title": "联系人电话"
+        },
+        "remark": {
+          "type": "string",
+          "title": "备注"
+        },
+        "status": {
+          "$ref": "#/definitions/companyCompanyStatus",
+          "title": "企业状态"
+        },
+        "accountId": {
+          "type": "string"
+        },
+        "modifyUid": {
+          "type": "string",
+          "title": "修改者用户uid"
+        },
+        "modifyName": {
+          "type": "string",
+          "title": "修改者姓名"
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "更新时间"
+        },
+        "createUid": {
+          "type": "string",
+          "title": "创建者用户id"
+        },
+        "createName": {
+          "type": "string",
+          "title": "创建者姓名"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "创建时间"
+        },
+        "domain": {
+          "type": "string",
+          "title": "域名"
+        },
+        "isOpenDepartmentManage": {
+          "$ref": "#/definitions/companyOpenDepartMentMangeStatus",
+          "title": "是否开启部门管理功能"
+        },
+        "maxProjects": {
+          "type": "string",
+          "format": "int64",
+          "title": "最大项目数量"
+        },
+        "storageQuota": {
+          "type": "string",
+          "format": "int64",
+          "title": "存储配额"
+        },
+        "superAdminId": {
+          "type": "string",
+          "title": "超级管理员ID"
+        },
+        "productId": {
+          "type": "string",
+          "title": "平台ID"
+        },
+        "label": {
+          "$ref": "#/definitions/companyCompanyLabel",
+          "title": "企业标签"
+        }
+      }
+    },
+    "companyCompanyAlertCode": {
+      "type": "string",
+      "enum": [
+        "ALERT_UNKNOWN",
+        "ALERT_NORMAL",
+        "ALERT_ORANGE",
+        "ALERT_RED"
+      ],
+      "default": "ALERT_UNKNOWN",
+      "description": "- ALERT_UNKNOWN: 未知状态\n - ALERT_NORMAL: 正常状态\n - ALERT_ORANGE: 橙色警告\n - ALERT_RED: 红色警告",
+      "title": "企业看板警告代码"
+    },
+    "companyCompanyBoxModifyResponse": {
+      "type": "object",
+      "properties": {
+        "msg": {
+          "type": "string",
+          "title": "success 成功 ； fail 失败"
+        }
+      },
+      "title": "企业盒子修改结果"
+    },
+    "companyCompanyDashboardInfo": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "企业ID"
+        },
+        "name": {
+          "type": "string",
+          "title": "企业名称"
+        },
+        "status": {
+          "$ref": "#/definitions/companyCompanyStatus",
+          "title": "企业状态"
+        },
+        "balance": {
+          "type": "string",
+          "format": "int64",
+          "title": "余额"
+        },
+        "credit": {
+          "type": "string",
+          "format": "int64",
+          "title": "授信额度"
+        },
+        "storageUsed": {
+          "type": "string",
+          "format": "int64",
+          "title": "已用存储空间"
+        },
+        "storageTotal": {
+          "type": "string",
+          "format": "int64",
+          "title": "可用存储空间"
+        },
+        "storageExpire": {
+          "type": "string",
+          "format": "date-time",
+          "title": "存储空间过期时间"
+        },
+        "alertCode": {
+          "$ref": "#/definitions/companyCompanyAlertCode",
+          "title": "警告类型"
+        }
+      }
+    },
+    "companyCompanyLabel": {
+      "type": "string",
+      "enum": [
+        "LABEL_UNKNOWN",
+        "LABEL_FORMAL",
+        "LABEL_TRIAL",
+        "LABEL_ABANDONED"
+      ],
+      "default": "LABEL_UNKNOWN",
+      "description": "- LABEL_UNKNOWN: 未知\n - LABEL_FORMAL: 正式\n - LABEL_TRIAL: 试用\n - LABEL_ABANDONED: 废弃",
+      "title": "企业标签"
+    },
+    "companyCompanyListResponse": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/companyCompany"
+          }
+        },
+        "pageCtx": {
+          "$ref": "#/definitions/ptypePageCtx"
+        }
+      },
+      "title": "企业列表结果"
+    },
+    "companyCompanyQueryOrderBy": {
+      "type": "string",
+      "enum": [
+        "COMPANY_ORDERBY_NULL",
+        "COMPANY_ORDERBY_IDASC",
+        "COMPANY_ORDERBY_IDDESC"
+      ],
+      "default": "COMPANY_ORDERBY_NULL",
+      "description": "- COMPANY_ORDERBY_NULL: 默认为ID倒序\n - COMPANY_ORDERBY_IDASC: 企业ID正序\n - COMPANY_ORDERBY_IDDESC: 企业ID倒序",
+      "title": "企业查询排序"
+    },
+    "companyCompanyStatus": {
+      "type": "string",
+      "enum": [
+        "COMPANY_UNKNOWN",
+        "COMPANY_NORMAL",
+        "COMPANY_DELETED"
+      ],
+      "default": "COMPANY_UNKNOWN",
+      "description": "- COMPANY_UNKNOWN: 未知\n - COMPANY_NORMAL: 正常\n - COMPANY_DELETED: 删除",
+      "title": "企业状态"
+    },
+    "companyCompanyUser": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "companyId": {
+          "type": "string",
+          "title": "企业ID"
+        },
+        "realName": {
+          "type": "string",
+          "title": "姓名"
+        },
+        "phone": {
+          "type": "string",
+          "title": "电话"
+        },
+        "email": {
+          "type": "string",
+          "title": "email"
+        },
+        "status": {
+          "$ref": "#/definitions/companyCompanyUserStatus",
+          "title": "用户状态"
+        },
+        "roleList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/companyRole"
+          },
+          "title": "角色信息"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "创建时间"
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "更新时间"
+        },
+        "lastLoginTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "最后登录时间"
+        },
+        "userName": {
+          "type": "string",
+          "title": "用户名"
+        },
+        "displayUserName": {
+          "type": "string",
+          "title": "显示用户名"
+        }
+      },
+      "title": "企业用户"
+    },
+    "companyCompanyUserModifyResponse": {
+      "type": "object",
+      "properties": {
+        "msg": {
+          "type": "string",
+          "title": "success 成功 ； fail 失败"
+        }
+      },
+      "title": "企业用户信息修改结果"
+    },
+    "companyCompanyUserQueryOrderBy": {
+      "type": "string",
+      "enum": [
+        "ORDERBY_NULL",
+        "ORDERBY_JOINTIME_DESC",
+        "ORDERBY_JOINTIME_ASC",
+        "ORDERBY_LASTLOGINTIME_DESC",
+        "ORDERBY_LASTLOGINTIME_ASC"
+      ],
+      "default": "ORDERBY_NULL",
+      "description": "- ORDERBY_JOINTIME_DESC: 加入时间倒序\n - ORDERBY_JOINTIME_ASC: 加入时间正序\n - ORDERBY_LASTLOGINTIME_DESC: 最近登录时间倒序\n - ORDERBY_LASTLOGINTIME_ASC: 最近登录时间正序",
+      "title": "企业用户查询排序"
+    },
+    "companyCompanyUserStatus": {
+      "type": "string",
+      "enum": [
+        "UNKNOWN",
+        "NORMAL",
+        "DELETED"
+      ],
+      "default": "UNKNOWN",
+      "description": "- UNKNOWN: 未知\n - NORMAL: 正常\n - DELETED: 删除",
+      "title": "用户状态"
+    },
+    "companyCreateCompanyBoxResponse": {
+      "type": "object",
+      "properties": {
+        "companyBoxId": {
+          "type": "string",
+          "title": "盒子ID"
+        }
+      },
+      "title": "创建企业盒子结果"
+    },
+    "companyCreateResponse": {
+      "type": "object",
+      "properties": {
+        "companyId": {
+          "type": "string",
+          "title": "公司ID"
+        },
+        "superAdminId": {
+          "type": "string",
+          "title": "超级管理员ID"
+        }
+      }
+    },
+    "companyDeleteCompanyUserResponse": {
+      "type": "object",
+      "properties": {
+        "msg": {
+          "type": "string",
+          "title": "success 成功 ； fail 失败"
+        },
+        "isRunJob": {
+          "type": "boolean",
+          "title": "@inject_tag: `validate:\"required\"`"
+        },
+        "isOpenApp": {
+          "type": "boolean",
+          "title": "@inject_tag: `validate:\"required\"`"
+        }
+      }
+    },
+    "companyFileType": {
+      "type": "string",
+      "enum": [
+        "FILE_UNKNOWN",
+        "FILE",
+        "FOLDER",
+        "BATCH"
+      ],
+      "default": "FILE_UNKNOWN",
+      "title": "- FILE_UNKNOWN: 未知\n - FILE: 普通文件\n - FOLDER: 文件夹\n - BATCH: 批量操作"
+    },
+    "companyGetCompanyAdminsResponse": {
+      "type": "object",
+      "properties": {
+        "users": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/companyUser"
+          }
+        }
+      }
+    },
+    "companyGetCompanyBoxByDomainResponse": {
+      "type": "object",
+      "properties": {
+        "boxInfo": {
+          "$ref": "#/definitions/companyBox"
+        }
+      },
+      "title": "通过域名获取盒子请求"
+    },
+    "companyGetCompanyBoxListResponse": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/companyBox"
+          }
+        }
+      },
+      "title": "获取企业盒子结果"
+    },
+    "companyGetCompanyDashboardResponse": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/companyCompanyDashboardInfo"
+          },
+          "title": "数据列表"
+        },
+        "pageCtx": {
+          "$ref": "#/definitions/ptypePageCtx",
+          "title": "@inject_tag: `validate:\"required\"`"
+        }
+      }
+    },
+    "companyGetCompanyInviteListResponse": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/companyInviteUser"
+          }
+        },
+        "pageCtx": {
+          "$ref": "#/definitions/ptypePageCtx"
+        }
+      },
+      "title": "获取企业用户邀请列表结果"
+    },
+    "companyGetCompanyProductListResponse": {
+      "type": "object",
+      "properties": {
+        "productList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "companyGetCompanyUserPermissionListResponse": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/companyPermission"
+          }
+        }
+      },
+      "title": "获取企业用户操作权限列表结果"
+    },
+    "companyGetUserInviteListResponse": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/companyInviteUser"
+          }
+        },
+        "pageCtx": {
+          "$ref": "#/definitions/ptypePageCtx"
+        }
+      },
+      "title": "用户被邀请列表结果"
+    },
+    "companyGetUserJoinCompanyResponse": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/companyCompany"
+          }
+        }
+      },
+      "title": "获取用户加入企业信息结果"
+    },
+    "companyInviteUser": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "companyId": {
+          "type": "string",
+          "title": "企业ID"
+        },
+        "companyName": {
+          "type": "string",
+          "title": "企业名称"
+        },
+        "realName": {
+          "type": "string",
+          "title": "姓名"
+        },
+        "userId": {
+          "type": "string",
+          "title": "用户ID"
+        },
+        "status": {
+          "$ref": "#/definitions/companyInviteUserStatus",
+          "title": "邀请状态"
+        },
+        "isAdmin": {
+          "$ref": "#/definitions/companyInviteUserToAdmin",
+          "title": "是否初始化为管理员 1否；2是；"
+        },
+        "createUid": {
+          "type": "string"
+        },
+        "createName": {
+          "type": "string"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "phone": {
+          "type": "string",
+          "title": "电话"
+        },
+        "roleId": {
+          "type": "string",
+          "title": "角色ID"
+        },
+        "departmentId": {
+          "type": "string"
+        },
+        "maxProjects": {
+          "type": "string",
+          "format": "int64",
+          "title": "最大项目数量"
+        }
+      }
+    },
+    "companyInviteUserStatus": {
+      "type": "string",
+      "enum": [
+        "INVITE_UNKNOWN",
+        "INVITE_UNCONFIRMED",
+        "INVITE_ACCEPT",
+        "INVITE_REJECT"
+      ],
+      "default": "INVITE_UNKNOWN",
+      "description": "- INVITE_UNKNOWN: 未知\n - INVITE_UNCONFIRMED: 未确认\n - INVITE_ACCEPT: 同意\n - INVITE_REJECT: 拒绝",
+      "title": "邀请用户状态"
+    },
+    "companyInviteUserToAdmin": {
+      "type": "string",
+      "enum": [
+        "INVITE_TO_UNKNOW",
+        "INVITE_NOT_ADMIN",
+        "INVITE_IS_ADMIN"
+      ],
+      "default": "INVITE_TO_UNKNOW",
+      "description": "- INVITE_TO_UNKNOW: 未知\n - INVITE_NOT_ADMIN: 非管理员\n - INVITE_IS_ADMIN: 管理员",
+      "title": "邀请用户是否成为管理员"
+    },
+    "companyModifyResponse": {
+      "type": "object",
+      "properties": {
+        "msg": {
+          "type": "string",
+          "title": "success 成功 ； fail 失败"
+        }
+      }
+    },
+    "companyOpenDepartMentMangeStatus": {
+      "type": "string",
+      "enum": [
+        "DEPARTMENT_MANAGE_STATUS_UNKNOWN",
+        "DEPARTMENT_MANAGE_STATUS_OPEN",
+        "DEPARTMENT_MANAGE_STATUS_CLOSE"
+      ],
+      "default": "DEPARTMENT_MANAGE_STATUS_UNKNOWN",
+      "description": "- DEPARTMENT_MANAGE_STATUS_UNKNOWN: 未知\n - DEPARTMENT_MANAGE_STATUS_OPEN: 开启\n - DEPARTMENT_MANAGE_STATUS_CLOSE: 关闭",
+      "title": "开启部门管理状态"
+    },
+    "companyOperateDetailLog": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "操作记录id"
+        },
+        "fileName": {
+          "type": "string",
+          "title": "文件名"
+        },
+        "opUserName": {
+          "type": "string",
+          "title": "操作人名字"
+        },
+        "opUserPhone": {
+          "type": "string",
+          "title": "电话"
+        },
+        "fileType": {
+          "$ref": "#/definitions/companyFileType",
+          "title": "文件类型"
+        },
+        "opType": {
+          "$ref": "#/definitions/companyOperateType",
+          "title": "操作类型"
+        },
+        "storageSize": {
+          "type": "string",
+          "title": "存储大小"
+        },
+        "opTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "操作时间"
+        }
+      }
+    },
+    "companyOperateInfo": {
+      "type": "object",
+      "properties": {
+        "storageSize": {
+          "type": "string"
+        },
+        "fileName": {
+          "type": "string"
+        },
+        "fileType": {
+          "$ref": "#/definitions/companyFileType"
+        }
+      }
+    },
+    "companyOperateType": {
+      "type": "string",
+      "enum": [
+        "OP_UNKNOWN",
+        "UPLOAD",
+        "DOWNLOAD",
+        "DELETE",
+        "RENAME",
+        "ADD_FOLDER"
+      ],
+      "default": "OP_UNKNOWN",
+      "title": "- OP_UNKNOWN: 未知\n - UPLOAD: 上传\n - DOWNLOAD: 下载\n - DELETE: 删除\n - RENAME: 重命名\n - ADD_FOLDER: 添加文件夹"
+    },
+    "companyPermission": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        },
+        "remark": {
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/companyPermissionStatus"
+        },
+        "createUid": {
+          "type": "string"
+        },
+        "createName": {
+          "type": "string"
+        },
+        "modifyUid": {
+          "type": "string"
+        },
+        "modifyName": {
+          "type": "string"
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "title": "权限"
+    },
+    "companyPermissionStatus": {
+      "type": "string",
+      "enum": [
+        "PERMISSION_UNKOWN",
+        "PERMISSION_NORMAL",
+        "PERMISSION_DELETED"
+      ],
+      "default": "PERMISSION_UNKOWN",
+      "title": "- PERMISSION_NORMAL: 正常\n - PERMISSION_DELETED: 删除"
+    },
+    "companyQueryOperateFileLogResponse": {
+      "type": "object",
+      "properties": {
+        "log": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/companyOperateDetailLog"
+          },
+          "title": "数据列表"
+        },
+        "pageCtx": {
+          "$ref": "#/definitions/ptypePageCtx",
+          "title": "@inject_tag: `validate:\"required\"`"
+        }
+      }
+    },
+    "companyRemoveProductFromCompanyResponse": {
+      "type": "object",
+      "properties": {
+        "msg": {
+          "type": "string"
+        }
+      }
+    },
+    "companyRole": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "角色ID"
+        },
+        "name": {
+          "type": "string",
+          "title": "角色名秒"
+        },
+        "companyId": {
+          "type": "string",
+          "title": "企业ID"
+        },
+        "type": {
+          "type": "integer",
+          "format": "int32",
+          "title": "角色类型： 1 内置 2 自定义"
+        },
+        "status": {
+          "$ref": "#/definitions/companyRoleStatus",
+          "title": "状态"
+        },
+        "createUid": {
+          "type": "string"
+        },
+        "createName": {
+          "type": "string"
+        },
+        "modifyUid": {
+          "type": "string"
+        },
+        "modifyName": {
+          "type": "string"
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "companyRoleStatus": {
+      "type": "string",
+      "enum": [
+        "ROLE_UNKOWN",
+        "ROLE_NORMAL",
+        "ROLE_DELETED"
+      ],
+      "default": "ROLE_UNKOWN",
+      "title": "- ROLE_NORMAL: 正常\n - ROLE_DELETED: 删除"
+    },
+    "companySetRoleForCompanyUserResponse": {
+      "type": "object",
+      "properties": {
+        "msg": {
+          "type": "string",
+          "title": "success 成功 ； fail 失败"
+        }
+      },
+      "title": "企业用户设置角色结果"
+    },
+    "companyUpdateSuperAdminUserResponse": {
+      "type": "object",
+      "properties": {
+        "msg": {
+          "type": "string",
+          "title": "success 成功 ； fail 失败"
+        }
+      }
+    },
+    "companyUser": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "companyId": {
+          "type": "string",
+          "title": "企业ID"
+        },
+        "realName": {
+          "type": "string",
+          "title": "姓名"
+        },
+        "phone": {
+          "type": "string",
+          "title": "电话"
+        },
+        "email": {
+          "type": "string",
+          "title": "email"
+        },
+        "accountId": {
+          "type": "string",
+          "title": "资金账号ID"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "创建时间"
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "更新时间"
+        },
+        "lastLoginTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "最近登录时间"
+        },
+        "userName": {
+          "type": "string",
+          "title": "用户名"
+        },
+        "displayUserName": {
+          "type": "string",
+          "title": "显示用户名"
+        },
+        "maxProjects": {
+          "type": "string",
+          "format": "int64",
+          "title": "最大空间数量"
+        }
+      }
+    },
+    "companyUserQueryResponse": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/companyCompanyUser"
+          },
+          "title": "数据列表"
+        },
+        "pageCtx": {
+          "$ref": "#/definitions/ptypePageCtx",
+          "title": "@inject_tag: `validate:\"required\"`"
+        }
+      },
+      "title": "企业用户查询结果"
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "ptypePage": {
+      "type": "object",
+      "properties": {
+        "index": {
+          "type": "string",
+          "format": "int64",
+          "title": "@inject_tag: `validate:\"gte=1\"`"
+        },
+        "size": {
+          "type": "string",
+          "format": "int64",
+          "title": "@inject_tag: `validate:\"gt=0,max=1000\"`"
+        }
+      }
+    },
+    "ptypePageCtx": {
+      "type": "object",
+      "properties": {
+        "index": {
+          "type": "string",
+          "format": "int64"
+        },
+        "size": {
+          "type": "string",
+          "format": "int64"
+        },
+        "total": {
+          "type": "string",
+          "format": "int64",
+          "title": "total record number, not page number"
+        }
+      }
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,23 @@
+# 本地存储文件根路径配置, 配置的文件路径需要 777 权限
+local_root_path: /Users
+# 文件列表中用于过滤特殊文件, 使用正向正则表达式配置
+filter_hide_file_regex: ^[.|_]
+# 作业文件上传的临时目录, 无需修改
+white_path_list:
+  - /.tmp_upload
+hpc_upload_config:
+  # 单文件切片上传每片大小(单位:mb)
+  block_size: 5
+  # 切片上传并发数量限制
+  concurrency_limit: 5
+  # 上传失败自动重试次数
+  retry_count: 3
+  # 上传失败自动重试间隔(单位:秒)
+  retry_delay: 1
+# 用户home目录下的只读文件(无法移动/删除/重命名)
+only_read_path_list:
+  - public
+  - workspace
+  - workspace/personal
+# 是否开启企业共享目录
+public_folder_enable: true

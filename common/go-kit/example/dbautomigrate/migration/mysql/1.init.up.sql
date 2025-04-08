@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS person
+(
+    `id`   INT(64) UNSIGNED NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(32)      NOT NULL DEFAULT '',
+
+    PRIMARY KEY (`id`)
+);

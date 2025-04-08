@@ -1,0 +1,41 @@
+change_license: true
+
+# 分区信息
+zones:
+    az-wuxi:
+        hpc_endpoint: ""
+        storage_endpoint: ""
+        cloud_app_enable: true
+    az-jinan:
+        hpc_endpoint: ""
+        storage_endpoint: ""
+        cloud_app_enable: true
+
+
+self_ys_id: 5qd4J7N2iKo
+ak: U657UVGT5UD8A7MIOMF1
+as: 6izevZ4E9t8yyapl3d2LG4JORqyhM9OhsRLD6UJ7
+openapi_endpoint: http://10.0.4.48:8899
+
+bill_enabled: false
+
+residual_max_file_size: 1073741824 # 1G
+monitor_chart_max_file_size: 1073741824 # 1G
+
+selector_weights:
+  ResourceCount: 1
+  ZonePrioritySelector: 10
+  QueuePrioritySelector: 10
+  StorageFirst: 10000
+
+mongo:
+  enable: false
+# the following settings are set in k8s secret
+  username:
+  password:
+  host:
+  port:
+  database:
+
+long_running_job_threshold: 806400 # 56 * 3600 * 4 
+webhook_url: 

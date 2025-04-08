@@ -1,0 +1,103 @@
+syntax = "proto3";
+
+package user;
+option go_package = "yuansuan.cn/psp/internal/common/proto/user";
+
+import "ptype/page.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+
+
+service Users {
+  rpc Exist (UserIdentity) returns (UserExistResponse) {}
+  rpc Get(UserIdentity) returns (UserObj) {}
+  rpc GetIncludeDeleted(UserIdentity) returns (UserObj) {}
+  rpc GetIdByName(NameCondRequest) returns (UserIdentity) {}
+  rpc GetUserByName(NameCondRequest) returns (UserObj) {}
+  rpc BatchGetUser(UserIdentities) returns (BatchUsersResponse) {}
+  rpc GetAllUserName(GetAllUserRequest) returns (GetAllUserResponse) {}
+  rpc AddUserWithRole(AddUserWithRoleRequest) returns (UserIdentity) {}
+  rpc UpdateUser(UpdateUserRequest) returns (google.protobuf.Empty) {}
+  rpc DelUser(UserIdentity) returns (google.protobuf.Empty) {}
+  rpc EnableUser(EnableUserRequest) returns (google.protobuf.Empty) {}
+  rpc GetUserRoleNames(UserIdentity) returns (GetUserRoleNamesResponse) {}
+
+}
+
+message GetUserRoleNamesResponse {
+  string roleNames = 1;
+}
+
+message EnableUserRequest {
+  string id = 1;
+  bool enable = 2;
+}
+
+
+message UpdateUserRequest {
+  string id = 1;
+  string email = 2;
+  string mobile = 3;
+  repeated int64 role_ids = 4;
+  bool enable_openapi = 5;
+}
+
+message AddUserWithRoleRequest {
+  string name = 1;
+  string password = 2;
+  string email = 3;
+  string mobile = 4;
+  string real_name = 5;
+  repeated int64 role_ids = 6;
+  bool enable_openapi = 7;
+}
+
+
+message GetAllUserRequest {
+}
+
+message GetAllUserResponse {
+  repeated string names = 1;
+}
+
+message UserIdentities {
+  repeated UserIdentity userIdentities = 1;
+}
+
+message BatchUsersResponse {
+  bool success = 1;
+  int64 total = 2;
+  repeated UserObj user_obj = 3;
+}
+
+
+message NameCondRequest {
+  string name = 1;
+}
+
+message UserExistResponse {
+  bool exist = 1;
+}
+
+message UserObj {
+  string id = 1;
+  string name = 2;
+  string email = 3;
+  string mobile = 4;
+  bool enabled = 5;
+  bool is_internal = 6;
+  int64 created_at = 7;
+  string account_id = 8;
+  string real_name = 9;
+  int64 approve_status = 10;
+}
+
+message UserIdentity {
+  string id = 1;
+}
+
+
+
+
+
+

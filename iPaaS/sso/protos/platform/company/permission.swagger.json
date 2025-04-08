@@ -1,0 +1,166 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "protos/platform/company/permission.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "PermissionService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {},
+  "definitions": {
+    "companyCreatePermissionResponse": {
+      "type": "object",
+      "properties": {
+        "permissionId": {
+          "type": "string",
+          "title": "权限ID"
+        }
+      },
+      "title": "创建权限结果"
+    },
+    "companyGetPermissionListResponse": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/companyPermission"
+          }
+        },
+        "pageCtx": {
+          "$ref": "#/definitions/ptypePageCtx"
+        }
+      },
+      "title": "获取权限列表结果"
+    },
+    "companyModifyPermissionResponse": {
+      "type": "object",
+      "properties": {
+        "msg": {
+          "type": "string"
+        }
+      },
+      "title": "修改权限结果"
+    },
+    "companyPermission": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        },
+        "remark": {
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/companyPermissionStatus"
+        },
+        "createUid": {
+          "type": "string"
+        },
+        "createName": {
+          "type": "string"
+        },
+        "modifyUid": {
+          "type": "string"
+        },
+        "modifyName": {
+          "type": "string"
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "title": "权限"
+    },
+    "companyPermissionStatus": {
+      "type": "string",
+      "enum": [
+        "PERMISSION_UNKOWN",
+        "PERMISSION_NORMAL",
+        "PERMISSION_DELETED"
+      ],
+      "default": "PERMISSION_UNKOWN",
+      "title": "- PERMISSION_NORMAL: 正常\n - PERMISSION_DELETED: 删除"
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "ptypePage": {
+      "type": "object",
+      "properties": {
+        "index": {
+          "type": "string",
+          "format": "int64",
+          "title": "@inject_tag: `validate:\"gte=1\"`"
+        },
+        "size": {
+          "type": "string",
+          "format": "int64",
+          "title": "@inject_tag: `validate:\"gt=0,max=1000\"`"
+        }
+      }
+    },
+    "ptypePageCtx": {
+      "type": "object",
+      "properties": {
+        "index": {
+          "type": "string",
+          "format": "int64"
+        },
+        "size": {
+          "type": "string",
+          "format": "int64"
+        },
+        "total": {
+          "type": "string",
+          "format": "int64",
+          "title": "total record number, not page number"
+        }
+      }
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

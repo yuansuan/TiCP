@@ -1,0 +1,1908 @@
+------------- bluntbody_unsteady.sim
+Starting local server: /usr/sw-cluster/install/starccm+/unlimited/ys_unlimited_12.02/12.02.011/STAR-CCM+12.02.011/star/bin/starccm_1202 -power -on c01b03n04:28 -server -rsh /usr/bin/ssh bluntbody_unsteady.sim
+Starting STAR-CCM+ parallel server
+MPI Distribution : Platform Computing MPI-09.01.04.02
+Host 0 -- c01b03n04 -- Ranks 0-27
+Process rank 0 c01b03n04 298609
+Total number of processes : 28
+
+STAR-CCM+ 12.02.011 (linux-x86_64-2.5/gnu4.8)
+License build date: 10 February 2015
+This version of the code requires license version 2017.02 or greater.
+Checking license file: /usr/sw-cluster/install/starccm+/unlimited/ys/license.dat
+Checking license file: /usr/sw-cluster/install/starccm+/unlimited/12.02/12.02.010/STAR-CCM+12.02.010/license.dat
+Checking license file: 1999@psn008
+1 copy of ccmppower checked out from /usr/sw-cluster/install/starccm+/unlimited/ys/license.dat
+Feature ccmppower expires in 3650000 days
+Wed Apr 24 13:49:44 2019
+
+Server::start -host c01b03n04:47827
+Loading object database: bluntbody_unsteady.sim
+Loading module: CoupledFlowModel
+Loading module: KeTurbModel
+Loading module: StarMeshing
+Loading module: MeshingSurfaceRepair
+Loading module: StarResurfacer
+Loading module: StarTrimmer
+Loading module: StarDelaunayMesher
+Loading module: SegregatedFlowModel
+Loading module: StarSolidMesher
+Loading module: StarDualMesher
+Loading module: CaeImport
+Simulation database saved by:
+  STAR-CCM+ 11.06.010 (linux-x86_64-2.5/gnu4.8-r8) Tue Oct 4 19:59:23 UTC 2016 Serial 
+Loading into:
+  STAR-CCM+ 12.02.011 (linux-x86_64-2.5/gnu4.8) Fri Mar 10 20:03:37 UTC 2017 Np=28
+Object database load completed.
+Running
+Loading/configuring connectivity (old|new partitions: 1|28)
+  subdomain-1 (index 0): 7786 cells, 48810 faces, 44858 verts.
+Configuring finished
+Reading material property database "/usr/sw-cluster/install/starccm+/unlimited/ys_unlimited_12.02/12.02.011/STAR-CCM+12.02.011/star/props.mdb"...
+PISO unsteady: setting turbulence under-relaxation factor to 1.
+TimeStep    1: Time  1.000000e-03
+     Iteration     Z-momentum            Tdr            Tke     Y-momentum     X-momentum     Continuity Force Coefficient 1 
+           567   1.972342e-09   1.768769e-15   1.363460e-11   1.690016e-09   1.158895e-09   1.489168e-06        2.694721e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep    2: Time  2.000000e-03
+           568   1.359575e-09   1.554315e-15   1.499890e-12   1.100845e-09   7.314855e-10   4.869432e-07        2.848356e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep    3: Time  3.000000e-03
+           569   9.203517e-10   1.519125e-15   1.508094e-12   8.577576e-10   5.548785e-10   5.630474e-07        2.883189e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep    4: Time  4.000000e-03
+           570   3.035556e-10   1.467327e-15   1.544969e-12   3.248488e-10   1.808824e-10   2.542582e-07        2.913974e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep    5: Time  5.000000e-03
+           571   3.108240e-10   1.406261e-15   1.540269e-12   3.327594e-10   1.861763e-10   1.927916e-07        2.939105e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep    6: Time  6.000000e-03
+           572   1.483644e-10   1.352596e-15   1.566138e-12   1.674876e-10   8.400196e-11   1.198858e-07        2.921261e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep    7: Time  7.000000e-03
+           573   1.239477e-10   1.305168e-15   1.568528e-12   1.255160e-10   5.947148e-11   8.708727e-08        2.894641e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep    8: Time  8.000000e-03
+           574   8.436377e-11   1.263907e-15   1.570178e-12   8.727849e-11   4.308519e-11   7.230098e-08        2.892788e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep    9: Time  9.000000e-03
+           575   5.631380e-11   1.231271e-15   1.566963e-12   5.768951e-11   2.439154e-11   5.266492e-08        2.903757e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   10: Time  1.000000e-02
+           576   4.649826e-11   1.207684e-15   1.567461e-12   5.120291e-11   2.170697e-11   4.918712e-08        2.908433e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   11: Time  1.100000e-02
+     Iteration     Z-momentum            Tdr            Tke     Y-momentum     X-momentum     Continuity Force Coefficient 1 
+           577   1.351595e-11   1.189766e-15   1.567779e-12   1.475329e-11   5.455984e-12   8.155402e-09        2.903093e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   12: Time  1.200000e-02
+           578   3.220891e-11   1.173889e-15   1.567688e-12   3.399615e-11   1.344519e-11   3.751025e-08        2.900906e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   13: Time  1.300000e-02
+           579   1.025025e-11   1.159303e-15   1.566185e-12   1.077358e-11   4.219335e-12   6.521296e-09        2.902159e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   14: Time  1.400000e-02
+           580   2.412564e-11   1.145928e-15   1.564864e-12   2.640708e-11   1.020803e-11   3.083317e-08        2.902394e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   15: Time  1.500000e-02
+           581   8.897605e-12   1.132919e-15   1.563716e-12   1.050409e-11   3.765797e-12   5.541946e-09        2.901588e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   16: Time  1.600000e-02
+           582   8.057303e-12   1.119723e-15   1.561978e-12   8.161878e-12   2.888124e-12   5.575290e-09        2.900046e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   17: Time  1.700000e-02
+           583   7.887736e-12   1.106032e-15   1.559950e-12   9.352239e-12   3.394495e-12   4.585348e-09        2.899586e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   18: Time  1.800000e-02
+           584   1.707192e-11   1.092051e-15   1.557993e-12   1.811010e-11   6.187286e-12   2.345264e-08        2.899877e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   19: Time  1.900000e-02
+           585   7.033727e-12   1.078255e-15   1.556138e-12   8.526236e-12   3.118032e-12   4.136762e-09        2.899651e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   20: Time  2.000000e-02
+           586   1.670128e-11   1.064598e-15   1.554241e-12   1.621090e-11   5.762683e-12   2.080684e-08        2.898414e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   21: Time  2.100000e-02
+     Iteration     Z-momentum            Tdr            Tke     Y-momentum     X-momentum     Continuity Force Coefficient 1 
+           587   6.325951e-12   1.051011e-15   1.552194e-12   7.548750e-12   2.792019e-12   3.951983e-09        2.897429e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   22: Time  2.200000e-02
+           588   1.564361e-11   1.037502e-15   1.550088e-12   1.509838e-11   5.700453e-12   1.946772e-08        2.897161e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   23: Time  2.300000e-02
+           589   5.756249e-12   1.024115e-15   1.548015e-12   6.716899e-12   2.641726e-12   3.958258e-09        2.896729e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   24: Time  2.400000e-02
+           590   1.473236e-11   1.011059e-15   1.545992e-12   1.549142e-11   6.291060e-12   1.821375e-08        2.895749e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   25: Time  2.500000e-02
+           591   5.502144e-12   9.983839e-16   1.544034e-12   6.246947e-12   2.552789e-12   4.245262e-09        2.895447e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   26: Time  2.600000e-02
+           592   1.528810e-11   9.860547e-16   1.542065e-12   1.591344e-11   6.733096e-12   1.632127e-08        2.894702e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   27: Time  2.700000e-02
+           593   5.417360e-12   9.739783e-16   1.540110e-12   5.962319e-12   2.618022e-12   4.069021e-09        2.893647e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   28: Time  2.800000e-02
+           594   1.500702e-11   9.622176e-16   1.538207e-12   1.592451e-11   6.817027e-12   1.628510e-08        2.893558e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   29: Time  2.900000e-02
+           595   1.467331e-11   9.508131e-16   1.536323e-12   1.655713e-11   7.482590e-12   1.897669e-08        2.893504e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   30: Time  3.000000e-02
+           596   1.646978e-11   9.397584e-16   1.534511e-12   1.620074e-11   7.141760e-12   1.656022e-08        2.891625e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   31: Time  3.100000e-02
+     Iteration     Z-momentum            Tdr            Tke     Y-momentum     X-momentum     Continuity Force Coefficient 1 
+           597   1.458411e-11   9.289250e-16   1.532720e-12   1.675865e-11   7.458113e-12   1.747388e-08        2.890002e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   32: Time  3.200000e-02
+           598   1.704895e-11   9.183179e-16   1.530959e-12   1.684535e-11   7.270215e-12   1.895445e-08        2.891273e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   33: Time  3.300000e-02
+           599   6.124197e-12   9.080537e-16   1.529232e-12   6.549604e-12   2.870697e-12   3.704988e-09        2.891430e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   34: Time  3.400000e-02
+           600   1.928628e-11   8.981155e-16   1.527579e-12   1.696545e-11   7.750646e-12   1.953475e-08        2.888837e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   35: Time  3.500000e-02
+           601   5.698106e-12   8.884529e-16   1.525961e-12   5.829532e-12   2.573871e-12   3.359797e-09        2.887354e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   36: Time  3.600000e-02
+           602   1.838868e-11   8.790021e-16   1.524369e-12   1.712471e-11   7.796603e-12   2.001356e-08        2.888955e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   37: Time  3.700000e-02
+           603   5.565098e-12   8.698574e-16   1.522807e-12   6.272602e-12   2.704169e-12   3.784980e-09        2.888747e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   38: Time  3.800000e-02
+           604   2.008834e-11   8.610049e-16   1.521311e-12   1.778032e-11   8.545017e-12   1.878754e-08        2.885842e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   39: Time  3.900000e-02
+           605   1.428903e-11   8.523631e-16   1.519857e-12   1.681988e-11   7.363354e-12   1.803844e-08        2.884750e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   40: Time  4.000000e-02
+           606   1.892040e-11   8.439584e-16   1.518433e-12   1.802292e-11   8.530146e-12   1.692582e-08        2.886586e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   41: Time  4.100000e-02
+     Iteration     Z-momentum            Tdr            Tke     Y-momentum     X-momentum     Continuity Force Coefficient 1 
+           607   1.529714e-11   8.357927e-16   1.517039e-12   1.788765e-11   8.030951e-12   1.885082e-08        2.886095e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   42: Time  4.200000e-02
+           608   1.847147e-11   8.278687e-16   1.515686e-12   1.721453e-11   8.526713e-12   1.601178e-08        2.883686e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   43: Time  4.300000e-02
+           609   1.595914e-11   8.202008e-16   1.514382e-12   1.709981e-11   7.595630e-12   1.947706e-08        2.882463e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   44: Time  4.400000e-02
+           610   1.726083e-11   8.127377e-16   1.513121e-12   1.751188e-11   8.496820e-12   1.778962e-08        2.883377e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   45: Time  4.500000e-02
+           611   1.657041e-11   8.054506e-16   1.511908e-12   1.863298e-11   8.288631e-12   1.868184e-08        2.882885e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   46: Time  4.600000e-02
+           612   1.877850e-11   7.983268e-16   1.510722e-12   1.757018e-11   8.854378e-12   1.895434e-08        2.881834e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   47: Time  4.700000e-02
+           613   1.601927e-11   7.914173e-16   1.509577e-12   1.725975e-11   7.758115e-12   1.635300e-08        2.880991e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   48: Time  4.800000e-02
+           614   1.844197e-11   7.846680e-16   1.508486e-12   1.780413e-11   8.523304e-12   1.969197e-08        2.880416e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   49: Time  4.900000e-02
+           615   1.506492e-11   7.780283e-16   1.507454e-12   1.807997e-11   7.732923e-12   1.705567e-08        2.880196e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   50: Time  5.000000e-02
+           616   2.024386e-11   7.715148e-16   1.506437e-12   1.792383e-11   8.732192e-12   1.880355e-08        2.879836e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   51: Time  5.100000e-02
+     Iteration     Z-momentum            Tdr            Tke     Y-momentum     X-momentum     Continuity Force Coefficient 1 
+           617   1.645579e-11   7.651383e-16   1.505442e-12   1.743010e-11   7.502970e-12   1.788565e-08        2.878715e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   52: Time  5.200000e-02
+           618   1.942897e-11   7.588725e-16   1.504493e-12   1.832248e-11   8.454452e-12   1.757548e-08        2.877185e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   53: Time  5.300000e-02
+           619   1.618116e-11   7.526899e-16   1.503594e-12   1.819632e-11   7.629903e-12   1.965928e-08        2.877500e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   54: Time  5.400000e-02
+           620   1.891365e-11   7.465710e-16   1.502730e-12   1.850987e-11   8.635477e-12   1.672907e-08        2.878303e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   55: Time  5.500000e-02
+           621   1.721921e-11   7.405218e-16   1.501880e-12   1.733722e-11   7.317678e-12   1.745378e-08        2.876279e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   56: Time  5.600000e-02
+           622   1.793058e-11   7.345965e-16   1.501053e-12   1.809781e-11   8.192427e-12   1.842390e-08        2.874634e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   57: Time  5.700000e-02
+           623   1.739055e-11   7.286999e-16   1.500293e-12   1.768587e-11   7.347165e-12   1.734693e-08        2.875137e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   58: Time  5.800000e-02
+           624   1.958565e-11   7.228093e-16   1.499586e-12   1.814666e-11   8.562573e-12   1.943066e-08        2.875536e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   59: Time  5.900000e-02
+           625   1.450248e-11   7.170334e-16   1.498921e-12   1.700605e-11   7.081597e-12   1.556135e-08        2.873543e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   60: Time  6.000000e-02
+           626   1.821779e-11   7.113035e-16   1.498287e-12   1.802341e-11   8.098547e-12   1.970384e-08        2.873002e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   61: Time  6.100000e-02
+     Iteration     Z-momentum            Tdr            Tke     Y-momentum     X-momentum     Continuity Force Coefficient 1 
+           627   1.361486e-11   7.055853e-16   1.497678e-12   1.840312e-11   7.292128e-12   1.608934e-08        2.873291e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   62: Time  6.200000e-02
+           628   1.989137e-11   6.999125e-16   1.497111e-12   1.760215e-11   8.189487e-12   1.832094e-08        2.872332e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   63: Time  6.300000e-02
+           629   1.465306e-11   6.942546e-16   1.496595e-12   1.772349e-11   7.090740e-12   1.709937e-08        2.871350e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   64: Time  6.400000e-02
+           630   1.816234e-11   6.886153e-16   1.496105e-12   1.723340e-11   7.589054e-12   1.794057e-08        2.871329e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   65: Time  6.500000e-02
+           631   1.595540e-11   6.830038e-16   1.495626e-12   1.863481e-11   7.192752e-12   1.823903e-08        2.870640e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   66: Time  6.600000e-02
+           632   1.735427e-11   6.774673e-16   1.495167e-12   1.681036e-11   7.541494e-12   1.694456e-08        2.869213e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   67: Time  6.700000e-02
+           633   1.720616e-11   6.718787e-16   1.494753e-12   1.849797e-11   7.272968e-12   1.876725e-08        2.869319e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   68: Time  6.800000e-02
+           634   1.658408e-11   6.662926e-16   1.494374e-12   1.791891e-11   7.556749e-12   1.697170e-08        2.869868e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   69: Time  6.900000e-02
+           635   1.825820e-11   6.607365e-16   1.494005e-12   1.870291e-11   7.035068e-12   1.780833e-08        2.868305e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   70: Time  7.000000e-02
+           636   1.744783e-11   6.552560e-16   1.493648e-12   1.753917e-11   7.706114e-12   1.696894e-08        2.866660e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   71: Time  7.100000e-02
+     Iteration     Z-momentum            Tdr            Tke     Y-momentum     X-momentum     Continuity Force Coefficient 1 
+           637   1.714021e-11   6.497310e-16   1.493311e-12   1.765903e-11   6.872283e-12   1.744305e-08        2.866958e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   72: Time  7.200000e-02
+           638   1.717039e-11   6.441591e-16   1.493006e-12   1.802531e-11   7.697538e-12   1.828824e-08        2.867871e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   73: Time  7.300000e-02
+           639   1.588879e-11   6.386627e-16   1.492725e-12   1.865289e-11   7.018087e-12   1.757387e-08        2.865901e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   74: Time  7.400000e-02
+           640   1.819977e-11   6.332128e-16   1.492455e-12   1.766191e-11   7.750928e-12   1.796155e-08        2.864402e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   75: Time  7.500000e-02
+           641   1.581658e-11   6.276854e-16   1.492186e-12   1.865456e-11   7.523469e-12   1.649538e-08        2.865002e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   76: Time  7.600000e-02
+           642   1.805929e-11   6.221127e-16   1.491930e-12   1.727716e-11   7.515544e-12   1.781244e-08        2.865447e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   77: Time  7.700000e-02
+           643   1.521804e-11   6.165958e-16   1.491704e-12   1.887740e-11   7.323719e-12   1.740531e-08        2.864108e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   78: Time  7.800000e-02
+           644   1.764595e-11   6.110869e-16   1.491503e-12   1.676688e-11   7.523906e-12   1.872118e-08        2.862600e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   79: Time  7.900000e-02
+           645   1.627332e-11   6.055354e-16   1.491296e-12   1.869526e-11   7.651938e-12   1.615203e-08        2.862339e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   80: Time  8.000000e-02
+           646   1.678321e-11   6.000066e-16   1.491083e-12   1.712137e-11   7.410443e-12   1.909981e-08        2.862527e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   81: Time  8.100000e-02
+     Iteration     Z-momentum            Tdr            Tke     Y-momentum     X-momentum     Continuity Force Coefficient 1 
+           647   1.641349e-11   5.944429e-16   1.490890e-12   1.861729e-11   7.230287e-12   1.617132e-08        2.862392e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   82: Time  8.200000e-02
+           648   1.782582e-11   5.888719e-16   1.490729e-12   1.760490e-11   7.841781e-12   1.859532e-08        2.861459e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   83: Time  8.300000e-02
+           649   1.562257e-11   5.833116e-16   1.490573e-12   1.781683e-11   6.962916e-12   1.509998e-08        2.859729e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   84: Time  8.400000e-02
+           650   1.727382e-11   5.777652e-16   1.490410e-12   1.754535e-11   7.488703e-12   1.801788e-08        2.859942e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   85: Time  8.500000e-02
+           651   1.544981e-11   5.721378e-16   1.490246e-12   1.836882e-11   6.791515e-12   1.769954e-08        2.860810e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   86: Time  8.600000e-02
+           652   1.931904e-11   5.664281e-16   1.490102e-12   1.766928e-11   7.810461e-12   1.690171e-08        2.859690e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   87: Time  8.700000e-02
+           653   1.595282e-11   5.608273e-16   1.489975e-12   1.846800e-11   7.135666e-12   1.831651e-08        2.857182e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   88: Time  8.800000e-02
+           654   1.771026e-11   5.552235e-16   1.489850e-12   1.691024e-11   7.270705e-12   1.635364e-08        2.857637e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   89: Time  8.900000e-02
+           655   1.599408e-11   5.495207e-16   1.489719e-12   1.948005e-11   7.348420e-12   1.803735e-08        2.859131e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   90: Time  9.000000e-02
+           656   1.739871e-11   5.437814e-16   1.489585e-12   1.612142e-11   7.244478e-12   1.617738e-08        2.857862e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   91: Time  9.100000e-02
+     Iteration     Z-momentum            Tdr            Tke     Y-momentum     X-momentum     Continuity Force Coefficient 1 
+           657   1.679500e-11   5.381727e-16   1.489468e-12   1.874803e-11   7.387338e-12   1.744603e-08        2.855412e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   92: Time  9.200000e-02
+           658   1.656877e-11   5.325687e-16   1.489371e-12   1.653907e-11   7.178574e-12   1.828190e-08        2.855461e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   93: Time  9.300000e-02
+           659   1.734286e-11   5.268751e-16   1.489271e-12   1.933857e-11   7.451244e-12   1.627622e-08        2.856633e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   94: Time  9.400000e-02
+           660   1.692768e-11   5.211769e-16   1.489159e-12   1.676003e-11   7.695558e-12   1.802546e-08        2.855644e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   95: Time  9.500000e-02
+           661   1.548908e-11   5.155303e-16   1.489040e-12   1.764034e-11   7.005948e-12   1.561980e-08        2.854408e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   96: Time  9.600000e-02
+           662   1.702121e-11   5.099087e-16   1.488946e-12   1.802973e-11   7.946204e-12   1.820304e-08        2.854092e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   97: Time  9.700000e-02
+           663   1.467383e-11   5.043033e-16   1.488870e-12   1.779257e-11   6.790196e-12   1.619707e-08        2.853794e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   98: Time  9.800000e-02
+           664   1.873530e-11   4.986486e-16   1.488781e-12   1.763127e-11   8.011697e-12   1.745929e-08        2.853760e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep   99: Time  9.900000e-02
+           665   1.521293e-11   4.929706e-16   1.488679e-12   1.708720e-11   6.853860e-12   1.724945e-08        2.853125e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  100: Time  1.000000e-01
+           666   1.919984e-11   4.873792e-16   1.488581e-12   1.753497e-11   7.696844e-12   1.734691e-08        2.852135e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  101: Time  1.010000e-01
+     Iteration     Z-momentum            Tdr            Tke     Y-momentum     X-momentum     Continuity Force Coefficient 1 
+           667   1.493913e-11   4.818641e-16   1.488502e-12   1.849644e-11   7.009791e-12   1.763247e-08        2.851346e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  102: Time  1.020000e-01
+           668   1.817739e-11   4.762747e-16   1.488434e-12   1.682383e-11   7.500943e-12   1.741339e-08        2.851891e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  103: Time  1.030000e-01
+           669   1.688107e-11   4.706316e-16   1.488352e-12   2.082743e-11   7.833447e-12   1.549875e-08        2.851789e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  104: Time  1.040000e-01
+           670   1.817948e-11   4.650838e-16   1.488260e-12   1.656173e-11   7.230418e-12   1.804855e-08        2.850362e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  105: Time  1.050000e-01
+           671   1.612226e-11   4.596750e-16   1.488172e-12   1.872811e-11   7.261405e-12   1.497459e-08        2.849481e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  106: Time  1.060000e-01
+           672   1.853729e-11   4.541944e-16   1.488100e-12   1.634636e-11   7.483529e-12   1.879482e-08        2.849883e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  107: Time  1.070000e-01
+           673   1.542217e-11   4.486502e-16   1.488039e-12   1.804654e-11   7.221543e-12   1.453277e-08        2.849963e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  108: Time  1.080000e-01
+           674   1.729120e-11   4.432241e-16   1.487961e-12   1.736544e-11   7.650333e-12   1.786258e-08        2.848654e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  109: Time  1.090000e-01
+           675   1.473123e-11   4.378963e-16   1.487870e-12   1.811152e-11   6.966105e-12   1.716240e-08        2.848130e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  110: Time  1.100000e-01
+           676   1.843790e-11   4.325510e-16   1.487770e-12   1.806146e-11   8.250022e-12   1.570330e-08        2.848228e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  111: Time  1.110000e-01
+     Iteration     Z-momentum            Tdr            Tke     Y-momentum     X-momentum     Continuity Force Coefficient 1 
+           677   1.588507e-11   4.271786e-16   1.487737e-12   1.730863e-11   7.071389e-12   1.762265e-08        2.847417e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  112: Time  1.120000e-01
+           678   1.650287e-11   4.218810e-16   1.487678e-12   1.748339e-11   7.618113e-12   1.467241e-08        2.847177e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  113: Time  1.130000e-01
+           679   1.547959e-11   4.166288e-16   1.487598e-12   1.758321e-11   6.953960e-12   1.858971e-08        2.846953e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  114: Time  1.140000e-01
+           680   1.686785e-11   4.114294e-16   1.487509e-12   1.729502e-11   7.680572e-12   1.533406e-08        2.845999e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  115: Time  1.150000e-01
+           681   1.614901e-11   4.063118e-16   1.487438e-12   1.742499e-11   7.192693e-12   1.706740e-08        2.845060e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  116: Time  1.160000e-01
+           682   1.610338e-11   4.011855e-16   1.487385e-12   1.736570e-11   7.219505e-12   1.758679e-08        2.845899e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  117: Time  1.170000e-01
+           683   1.580668e-11   3.960529e-16   1.487326e-12   1.856378e-11   7.242617e-12   1.496862e-08        2.846048e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  118: Time  1.180000e-01
+           684   1.770030e-11   3.910834e-16   1.487247e-12   1.719605e-11   7.328076e-12   1.763103e-08        2.843819e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  119: Time  1.190000e-01
+           685   1.477619e-11   3.862103e-16   1.487167e-12   1.722303e-11   6.906834e-12   1.377350e-08        2.842944e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  120: Time  1.200000e-01
+           686   1.817172e-11   3.812610e-16   1.487102e-12   1.777949e-11   7.261921e-12   1.921696e-08        2.844735e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  121: Time  1.210000e-01
+     Iteration     Z-momentum            Tdr            Tke     Y-momentum     X-momentum     Continuity Force Coefficient 1 
+           687   1.478154e-11   3.763389e-16   1.487052e-12   1.801762e-11   6.988780e-12   1.505704e-08        2.844718e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  122: Time  1.220000e-01
+           688   1.895768e-11   3.716141e-16   1.486992e-12   1.749776e-11   7.578403e-12   1.780705e-08        2.841622e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  123: Time  1.230000e-01
+           689   1.440490e-11   3.669568e-16   1.486916e-12   1.734758e-11   6.911163e-12   1.570209e-08        2.841096e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  124: Time  1.240000e-01
+           690   1.766294e-11   3.622484e-16   1.486838e-12   1.772480e-11   7.479068e-12   1.621245e-08        2.843480e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  125: Time  1.250000e-01
+           691   1.459024e-11   3.575723e-16   1.486780e-12   1.786100e-11   6.902460e-12   1.664194e-08        2.842720e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  126: Time  1.260000e-01
+           692   1.729804e-11   3.530738e-16   1.486736e-12   1.702399e-11   7.446583e-12   1.564277e-08        2.840512e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  127: Time  1.270000e-01
+           693   1.523933e-11   3.486540e-16   1.486677e-12   1.754598e-11   7.039168e-12   1.677818e-08        2.839725e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  128: Time  1.280000e-01
+           694   1.714661e-11   3.442254e-16   1.486599e-12   1.756622e-11   7.509294e-12   1.664246e-08        2.840961e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  129: Time  1.290000e-01
+           695   1.548312e-11   3.398606e-16   1.486527e-12   1.795574e-11   7.189240e-12   1.638962e-08        2.840660e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  130: Time  1.300000e-01
+           696   1.699034e-11   3.355896e-16   1.486476e-12   1.682062e-11   7.534158e-12   1.746235e-08        2.839802e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  131: Time  1.310000e-01
+     Iteration     Z-momentum            Tdr            Tke     Y-momentum     X-momentum     Continuity Force Coefficient 1 
+           697   1.462791e-11   3.313585e-16   1.486436e-12   1.773611e-11   7.259936e-12   1.511426e-08        2.839019e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  132: Time  1.320000e-01
+           698   1.673558e-11   3.272503e-16   1.486374e-12   1.700197e-11   7.291194e-12   1.678316e-08        2.838507e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  133: Time  1.330000e-01
+           699   1.478302e-11   3.231798e-16   1.486297e-12   1.812454e-11   7.046232e-12   1.628594e-08        2.838770e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  134: Time  1.340000e-01
+           700   1.823009e-11   3.191360e-16   1.486235e-12   1.661322e-11   7.429852e-12   1.620479e-08        2.838746e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  135: Time  1.350000e-01
+           701   1.656200e-11   3.151651e-16   1.486189e-12   1.799369e-11   7.234658e-12   1.669852e-08        2.837704e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  136: Time  1.360000e-01
+           702   1.606915e-11   3.113535e-16   1.486144e-12   1.709156e-11   7.109407e-12   1.548201e-08        2.836246e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  137: Time  1.370000e-01
+           703   1.547106e-11   3.075785e-16   1.486082e-12   1.813198e-11   6.931159e-12   1.682450e-08        2.836959e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  138: Time  1.380000e-01
+           704   1.637228e-11   3.037849e-16   1.486010e-12   1.727080e-11   7.476033e-12   1.514583e-08        2.837860e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  139: Time  1.390000e-01
+           705   1.675579e-11   3.000886e-16   1.485952e-12   1.739896e-11   6.952312e-12   1.503510e-08        2.836392e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  140: Time  1.400000e-01
+           706   1.633270e-11   2.965221e-16   1.485914e-12   1.754212e-11   7.294915e-12   1.696958e-08        2.834391e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  141: Time  1.410000e-01
+     Iteration     Z-momentum            Tdr            Tke     Y-momentum     X-momentum     Continuity Force Coefficient 1 
+           707   1.586584e-11   2.930075e-16   1.485869e-12   1.740846e-11   6.807906e-12   1.528321e-08        2.835514e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  142: Time  1.420000e-01
+           708   1.766493e-11   2.894846e-16   1.485806e-12   1.758522e-11   7.699157e-12   1.717463e-08        2.836317e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  143: Time  1.430000e-01
+           709   1.369355e-11   2.860531e-16   1.485738e-12   1.709049e-11   6.922179e-12   1.436154e-08        2.834505e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  144: Time  1.440000e-01
+           710   1.678095e-11   2.827382e-16   1.485686e-12   1.763815e-11   7.434209e-12   1.804848e-08        2.833720e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  145: Time  1.450000e-01
+           711   1.464048e-11   2.794406e-16   1.485653e-12   2.094858e-11   7.832385e-12   1.485750e-08        2.834360e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  146: Time  1.460000e-01
+           712   1.784896e-11   2.761769e-16   1.485608e-12   1.673637e-11   7.612936e-12   1.646840e-08        2.833979e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  147: Time  1.470000e-01
+           713   1.395978e-11   2.730180e-16   1.485546e-12   1.720145e-11   6.972276e-12   1.476269e-08        2.832960e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  148: Time  1.480000e-01
+           714   1.609656e-11   2.699228e-16   1.485480e-12   1.638551e-11   7.031977e-12   1.687040e-08        2.832781e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  149: Time  1.490000e-01
+           715   1.511719e-11   2.668517e-16   1.485436e-12   1.855040e-11   7.146477e-12   1.618644e-08        2.832723e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  150: Time  1.500000e-01
+           716   1.604926e-11   2.638525e-16   1.485406e-12   1.639176e-11   7.143389e-12   1.630399e-08        2.831574e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  151: Time  1.510000e-01
+     Iteration     Z-momentum            Tdr            Tke     Y-momentum     X-momentum     Continuity Force Coefficient 1 
+           717   1.612911e-11   2.609180e-16   1.485358e-12   1.821359e-11   7.156920e-12   1.623709e-08        2.831902e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  152: Time  1.520000e-01
+           718   1.623807e-11   2.580201e-16   1.485297e-12   1.760903e-11   7.284565e-12   1.604269e-08        2.832279e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  153: Time  1.530000e-01
+           719   1.679561e-11   2.551721e-16   1.485240e-12   1.818866e-11   6.919722e-12   1.594903e-08        2.831061e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  154: Time  1.540000e-01
+           720   1.672454e-11   2.523803e-16   1.485201e-12   1.691291e-11   7.389268e-12   1.601388e-08        2.830029e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  155: Time  1.550000e-01
+           721   1.586598e-11   2.496570e-16   1.485170e-12   1.741225e-11   6.819588e-12   1.647889e-08        2.830196e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  156: Time  1.560000e-01
+           722   1.659505e-11   2.469631e-16   1.485121e-12   1.756047e-11   7.396086e-12   1.571208e-08        2.831225e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  157: Time  1.570000e-01
+           723   1.542462e-11   2.443171e-16   1.485061e-12   1.829247e-11   6.858180e-12   1.702049e-08        2.829513e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  158: Time  1.580000e-01
+           724   1.717216e-11   2.417307e-16   1.485010e-12   1.684463e-11   7.397449e-12   1.524540e-08        2.828475e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  159: Time  1.590000e-01
+           725   1.638898e-11   2.391928e-16   1.484975e-12   2.114276e-11   7.809150e-12   1.560315e-08        2.829069e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  160: Time  1.600000e-01
+           726   1.557983e-11   2.366968e-16   1.484942e-12   1.643310e-11   7.143404e-12   1.587928e-08        2.829635e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  161: Time  1.610000e-01
+     Iteration     Z-momentum            Tdr            Tke     Y-momentum     X-momentum     Continuity Force Coefficient 1 
+           727   1.569680e-11   2.342531e-16   1.484894e-12   2.107859e-11   7.550688e-12   1.490076e-08        2.828548e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  162: Time  1.620000e-01
+           728   1.658042e-11   2.318381e-16   1.484833e-12   1.598760e-11   7.352177e-12   1.783861e-08        2.827393e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  163: Time  1.630000e-01
+           729   1.682413e-11   2.294649e-16   1.484786e-12   2.004949e-11   7.716949e-12   1.357926e-08        2.827134e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  164: Time  1.640000e-01
+           730   1.651408e-11   2.271638e-16   1.484755e-12   1.667401e-11   7.439570e-12   1.884887e-08        2.827642e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  165: Time  1.650000e-01
+           731   1.385260e-11   2.249149e-16   1.484722e-12   1.744925e-11   6.724525e-12   1.403748e-08        2.827913e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  166: Time  1.660000e-01
+           732   1.725024e-11   2.226651e-16   1.484671e-12   1.697935e-11   7.641189e-12   1.720472e-08        2.826732e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  167: Time  1.670000e-01
+           733   1.377024e-11   2.204413e-16   1.484610e-12   1.721162e-11   6.566216e-12   1.410085e-08        2.825576e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  168: Time  1.680000e-01
+           734   1.711892e-11   2.182861e-16   1.484571e-12   1.734768e-11   7.272402e-12   1.666150e-08        2.826098e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  169: Time  1.690000e-01
+           735   1.452524e-11   2.162071e-16   1.484545e-12   1.813882e-11   6.624782e-12   1.707170e-08        2.827027e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  170: Time  1.700000e-01
+           736   1.829609e-11   2.141486e-16   1.484509e-12   1.697454e-11   7.425564e-12   1.523181e-08        2.825701e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  171: Time  1.710000e-01
+     Iteration     Z-momentum            Tdr            Tke     Y-momentum     X-momentum     Continuity Force Coefficient 1 
+           737   1.507352e-11   2.120889e-16   1.484457e-12   1.811233e-11   6.787500e-12   1.654156e-08        2.823539e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  172: Time  1.720000e-01
+           738   1.560063e-11   2.100922e-16   1.484401e-12   1.626724e-11   6.778333e-12   1.552147e-08        2.824548e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  173: Time  1.730000e-01
+           739   1.704060e-11   2.081613e-16   1.484367e-12   2.277206e-11   7.901305e-12   1.661984e-08        2.826144e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  174: Time  1.740000e-01
+           740   1.661593e-11   2.062742e-16   1.484343e-12   1.570100e-11   7.134140e-12   1.585235e-08        2.824788e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  175: Time  1.750000e-01
+           741   1.733311e-11   2.043685e-16   1.484307e-12   2.065158e-11   7.529725e-12   1.503013e-08        2.822710e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  176: Time  1.760000e-01
+           742   1.590348e-11   2.024908e-16   1.484256e-12   1.608552e-11   7.056002e-12   1.762266e-08        2.823052e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  177: Time  1.770000e-01
+           743   1.581386e-11   2.006980e-16   1.484205e-12   1.815679e-11   6.955589e-12   1.473662e-08        2.824314e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  178: Time  1.780000e-01
+           744   1.614127e-11   1.989633e-16   1.484175e-12   1.661346e-11   7.471283e-12   1.751636e-08        2.823364e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  179: Time  1.790000e-01
+           745   1.428611e-11   1.972262e-16   1.484154e-12   1.714674e-11   6.721381e-12   1.513285e-08        2.822446e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  180: Time  1.800000e-01
+           746   1.598414e-11   1.954696e-16   1.484116e-12   1.769186e-11   7.550301e-12   1.628706e-08        2.822431e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  181: Time  1.810000e-01
+     Iteration     Z-momentum            Tdr            Tke     Y-momentum     X-momentum     Continuity Force Coefficient 1 
+           747   1.450429e-11   1.938038e-16   1.484063e-12   1.764965e-11   6.637938e-12   1.606195e-08        2.822290e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  182: Time  1.820000e-01
+           748   1.733702e-11   1.922081e-16   1.484021e-12   1.689331e-11   7.394960e-12   1.520987e-08        2.822177e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  183: Time  1.830000e-01
+           749   1.499553e-11   1.906163e-16   1.483996e-12   1.700094e-11   6.681684e-12   1.711027e-08        2.821924e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  184: Time  1.840000e-01
+           750   1.641817e-11   1.890114e-16   1.483974e-12   1.707690e-11   7.023764e-12   1.631258e-08        2.820920e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  185: Time  1.850000e-01
+           751   1.667224e-11   1.874557e-16   1.483933e-12   2.132223e-11   7.453022e-12   1.611758e-08        2.820550e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  186: Time  1.860000e-01
+           752   1.699309e-11   1.859686e-16   1.483883e-12   1.646039e-11   7.116289e-12   1.750885e-08        2.821364e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  187: Time  1.870000e-01
+           753   1.710543e-11   1.845248e-16   1.483848e-12   2.045805e-11   7.572967e-12   1.370342e-08        2.821345e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  188: Time  1.880000e-01
+           754   1.776385e-11   1.830557e-16   1.483824e-12   1.650930e-11   7.019811e-12   1.858274e-08        2.819916e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  189: Time  1.890000e-01
+           755   1.400262e-11   1.816058e-16   1.483802e-12   1.794221e-11   6.642603e-12   1.321489e-08        2.819221e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  190: Time  1.900000e-01
+           756   1.803710e-11   1.802002e-16   1.483762e-12   1.627790e-11   6.981579e-12   1.815315e-08        2.820315e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  191: Time  1.910000e-01
+     Iteration     Z-momentum            Tdr            Tke     Y-momentum     X-momentum     Continuity Force Coefficient 1 
+           757   1.340151e-11   1.788610e-16   1.483712e-12   1.750879e-11   6.694771e-12   1.386211e-08        2.820313e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  192: Time  1.920000e-01
+           758   1.739022e-11   1.775387e-16   1.483682e-12   1.735819e-11   7.224463e-12   1.710997e-08        2.818663e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  193: Time  1.930000e-01
+           759   1.374018e-11   1.761938e-16   1.483666e-12   1.819914e-11   6.686878e-12   1.702137e-08        2.818577e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  194: Time  1.940000e-01
+           760   1.737559e-11   1.748613e-16   1.483643e-12   1.750516e-11   7.585142e-12   1.442941e-08        2.819284e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  195: Time  1.950000e-01
+           761   1.498410e-11   1.735885e-16   1.483601e-12   1.727853e-11   6.779555e-12   1.703551e-08        2.818741e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  196: Time  1.960000e-01
+           762   1.487248e-11   1.723948e-16   1.483556e-12   1.684917e-11   6.927065e-12   1.415816e-08        2.818038e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  197: Time  1.970000e-01
+           763   1.544192e-11   1.711462e-16   1.483533e-12   1.805972e-11   6.930004e-12   1.850545e-08        2.818159e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  198: Time  1.980000e-01
+           764   1.575430e-11   1.698801e-16   1.483520e-12   1.674687e-11   7.204930e-12   1.537721e-08        2.817765e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  199: Time  1.990000e-01
+           765   1.595694e-11   1.686964e-16   1.483494e-12   1.760084e-11   7.002948e-12   1.632441e-08        2.816744e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  200: Time  2.000000e-01
+           766   1.565061e-11   1.675734e-16   1.483453e-12   1.703089e-11   6.875857e-12   1.730668e-08        2.817716e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  201: Time  2.010000e-01
+     Iteration     Z-momentum            Tdr            Tke     Y-momentum     X-momentum     Continuity Force Coefficient 1 
+           767   1.503256e-11   1.664155e-16   1.483414e-12   1.840771e-11   7.095465e-12   1.443957e-08        2.818145e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  202: Time  2.020000e-01
+           768   1.741845e-11   1.652116e-16   1.483395e-12   1.710842e-11   7.102737e-12   1.780095e-08        2.816295e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  203: Time  2.030000e-01
+           769   1.387070e-11   1.640655e-16   1.483384e-12   1.723773e-11   6.690529e-12   1.372988e-08        2.815357e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  204: Time  2.040000e-01
+           770   1.762945e-11   1.629719e-16   1.483359e-12   1.732705e-11   6.914973e-12   1.845665e-08        2.817090e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  205: Time  2.050000e-01
+           771   1.469939e-11   1.618661e-16   1.483317e-12   1.822905e-11   7.027977e-12   1.515358e-08        2.817493e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  206: Time  2.060000e-01
+           772   1.852463e-11   1.607399e-16   1.483285e-12   1.701817e-11   7.292509e-12   1.691569e-08        2.814706e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  207: Time  2.070000e-01
+           773   1.497247e-11   1.596349e-16   1.483269e-12   1.754404e-11   7.077543e-12   1.630399e-08        2.814260e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  208: Time  2.080000e-01
+           774   1.631787e-11   1.585564e-16   1.483259e-12   1.741850e-11   7.144813e-12   1.611323e-08        2.816779e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  209: Time  2.090000e-01
+           775   1.506553e-11   1.575009e-16   1.483231e-12   1.810590e-11   7.228128e-12   1.583266e-08        2.816624e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  210: Time  2.100000e-01
+           776   1.682693e-11   1.564271e-16   1.483191e-12   1.686627e-11   7.376879e-12   1.625690e-08        2.813862e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  211: Time  2.110000e-01
+     Iteration     Z-momentum            Tdr            Tke     Y-momentum     X-momentum     Continuity Force Coefficient 1 
+           777   1.579217e-11   1.553044e-16   1.483164e-12   1.714760e-11   7.199492e-12   1.547090e-08        2.813537e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  212: Time  2.120000e-01
+           778   1.686364e-11   1.542287e-16   1.483154e-12   1.733462e-11   7.479615e-12   1.746533e-08        2.815294e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  213: Time  2.130000e-01
+           779   1.408495e-11   1.531982e-16   1.483141e-12   1.776245e-11   7.319464e-12   1.536842e-08        2.815015e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  214: Time  2.140000e-01
+           780   1.680539e-11   1.521795e-16   1.483111e-12   1.672081e-11   7.574057e-12   1.703397e-08        2.813788e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  215: Time  2.150000e-01
+           781   1.397857e-11   1.510598e-16   1.483072e-12   1.733556e-11   7.343650e-12   1.506927e-08        2.813356e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  216: Time  2.160000e-01
+           782   1.704438e-11   1.499468e-16   1.483052e-12   1.692347e-11   7.363466e-12   1.650012e-08        2.813639e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  217: Time  2.170000e-01
+           783   1.455010e-11   1.489114e-16   1.483045e-12   1.808790e-11   7.222408e-12   1.695780e-08        2.813812e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  218: Time  2.180000e-01
+           784   1.763407e-11   1.478777e-16   1.483031e-12   1.646111e-11   7.450223e-12   1.576905e-08        2.813753e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  219: Time  2.190000e-01
+           785   1.600229e-11   1.467968e-16   1.483000e-12   1.768935e-11   7.258493e-12   1.653927e-08        2.812673e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  220: Time  2.200000e-01
+           786   1.544695e-11   1.454065e-16   1.482965e-12   1.684494e-11   7.085318e-12   1.534467e-08        2.811943e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  221: Time  2.210000e-01
+     Iteration     Z-momentum            Tdr            Tke     Y-momentum     X-momentum     Continuity Force Coefficient 1 
+           787   1.609362e-11   1.443766e-16   1.482949e-12   1.822883e-11   7.138366e-12   1.744477e-08        2.812761e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  222: Time  2.220000e-01
+           788   1.622533e-11   1.433261e-16   1.482946e-12   1.708837e-11   7.535521e-12   1.524887e-08        2.813466e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  223: Time  2.230000e-01
+           789   1.686146e-11   1.422573e-16   1.482931e-12   1.732284e-11   6.965228e-12   1.523212e-08        2.812232e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  224: Time  2.240000e-01
+           790   1.605485e-11   1.411470e-16   1.482900e-12   1.732988e-11   7.290442e-12   1.632361e-08        2.810797e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  225: Time  2.250000e-01
+           791   1.503118e-11   1.400666e-16   1.482869e-12   1.711700e-11   6.632953e-12   1.533694e-08        2.811722e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  226: Time  2.260000e-01
+           792   1.766191e-11   1.390157e-16   1.482858e-12   1.755534e-11   7.749238e-12   1.764200e-08        2.812791e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  227: Time  2.270000e-01
+           793   1.356526e-11   1.379732e-16   1.482857e-12   1.723575e-11   6.887815e-12   1.465003e-08        2.811137e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  228: Time  2.280000e-01
+           794   1.731898e-11   1.368847e-16   1.482840e-12   1.759178e-11   7.497254e-12   1.806756e-08        2.810309e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  229: Time  2.290000e-01
+           795   1.360759e-11   1.357630e-16   1.482808e-12   1.833393e-11   7.209736e-12   1.502160e-08        2.811388e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  230: Time  2.300000e-01
+           796   1.818209e-11   1.346907e-16   1.482783e-12   1.649869e-11   7.553069e-12   1.645073e-08        2.811256e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  231: Time  2.310000e-01
+     Iteration     Z-momentum            Tdr            Tke     Y-momentum     X-momentum     Continuity Force Coefficient 1 
+           797   1.373754e-11   1.336302e-16   1.482776e-12   1.749860e-11   7.000219e-12   1.538288e-08        2.810379e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  232: Time  2.320000e-01
+           798   1.617605e-11   1.325454e-16   1.482774e-12   1.635623e-11   7.029689e-12   1.727730e-08        2.810038e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  233: Time  2.330000e-01
+           799   1.466937e-11   1.314371e-16   1.482755e-12   1.845065e-11   7.112196e-12   1.549699e-08        2.810215e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  234: Time  2.340000e-01
+           800   1.645625e-11   1.303325e-16   1.482724e-12   1.632984e-11   7.253454e-12   1.667765e-08        2.809836e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  235: Time  2.350000e-01
+           801   1.613507e-11   1.292896e-16   1.482704e-12   1.789037e-11   7.051581e-12   1.537138e-08        2.809963e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  236: Time  2.360000e-01
+           802   1.626656e-11   1.282216e-16   1.482701e-12   1.722802e-11   7.287923e-12   1.659599e-08        2.810068e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  237: Time  2.370000e-01
+           803   1.571714e-11   1.271001e-16   1.482697e-12   1.802934e-11   6.749406e-12   1.582678e-08        2.809188e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  238: Time  2.380000e-01
+           804   1.657968e-11   1.259965e-16   1.482677e-12   1.658051e-11   7.357863e-12   1.518787e-08        2.808663e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  239: Time  2.390000e-01
+           805   1.570829e-11   1.249280e-16   1.482646e-12   1.734511e-11   6.712135e-12   1.703346e-08        2.809230e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  240: Time  2.400000e-01
+           806   1.698919e-11   1.238449e-16   1.482629e-12   1.722261e-11   7.350689e-12   1.528399e-08        2.809800e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  241: Time  2.410000e-01
+     Iteration     Z-momentum            Tdr            Tke     Y-momentum     X-momentum     Continuity Force Coefficient 1 
+           807   1.553013e-11   1.227740e-16   1.482631e-12   1.813831e-11   6.860006e-12   1.785370e-08        2.808267e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  242: Time  2.420000e-01
+           808   1.654858e-11   1.216722e-16   1.482625e-12   1.665312e-11   7.324487e-12   1.497967e-08        2.807534e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  243: Time  2.430000e-01
+           809   1.657979e-11   1.205774e-16   1.482602e-12   2.097492e-11   7.700868e-12   1.541851e-08        2.808602e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  244: Time  2.440000e-01
+           810   1.499753e-11   1.195420e-16   1.482574e-12   1.619818e-11   7.032132e-12   1.588803e-08        2.808932e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  245: Time  2.450000e-01
+           811   1.633594e-11   1.184562e-16   1.482562e-12   2.081849e-11   7.522524e-12   1.514854e-08        2.808233e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  246: Time  2.460000e-01
+           812   1.608752e-11   1.173803e-16   1.482564e-12   1.599468e-11   7.328593e-12   1.791475e-08        2.807072e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  247: Time  2.470000e-01
+           813   1.532702e-11   1.163097e-16   1.482558e-12   1.723297e-11   7.036434e-12   1.343683e-08        2.806853e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  248: Time  2.480000e-01
+           814   1.597009e-11   1.152501e-16   1.482535e-12   1.666054e-11   7.260151e-12   1.839509e-08        2.807629e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  249: Time  2.490000e-01
+           815   1.329857e-11   1.142174e-16   1.482509e-12   1.740928e-11   6.687071e-12   1.432365e-08        2.808130e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  250: Time  2.500000e-01
+           816   1.709289e-11   1.131529e-16   1.482503e-12   1.709879e-11   7.632568e-12   1.767122e-08        2.807150e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  251: Time  2.510000e-01
+     Iteration     Z-momentum            Tdr            Tke     Y-momentum     X-momentum     Continuity Force Coefficient 1 
+           817   1.379721e-11   1.120904e-16   1.482507e-12   1.707642e-11   6.587929e-12   1.455806e-08        2.805839e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  252: Time  2.520000e-01
+           818   1.706933e-11   1.110596e-16   1.482497e-12   1.739582e-11   7.217458e-12   1.658657e-08        2.806673e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  253: Time  2.530000e-01
+           819   1.449543e-11   1.100401e-16   1.482473e-12   1.794210e-11   6.645934e-12   1.680607e-08        2.807793e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  254: Time  2.540000e-01
+           820   1.806384e-11   1.089926e-16   1.482453e-12   1.661195e-11   7.328701e-12   1.529110e-08        2.806336e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  255: Time  2.550000e-01
+           821   1.604587e-11   1.079708e-16   1.482450e-12   2.075760e-11   7.424647e-12   1.652191e-08        2.804570e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  256: Time  2.560000e-01
+           822   1.587527e-11   1.069653e-16   1.482456e-12   1.617705e-11   6.912749e-12   1.600236e-08        2.806012e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  257: Time  2.570000e-01
+           823   1.619850e-11   1.059635e-16   1.482443e-12   2.159876e-11   7.581420e-12   1.566047e-08        2.807421e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  258: Time  2.580000e-01
+           824   1.698172e-11   1.049962e-16   1.482419e-12   1.573524e-11   7.150880e-12   1.607345e-08        2.806022e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  259: Time  2.590000e-01
+           825   1.580474e-11   1.039820e-16   1.482402e-12   1.750033e-11   6.751785e-12   1.459893e-08        2.803833e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  260: Time  2.600000e-01
+           826   1.614307e-11   1.029792e-16   1.482402e-12   1.616353e-11   6.995628e-12   1.784054e-08        2.804944e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  261: Time  2.610000e-01
+     Iteration     Z-momentum            Tdr            Tke     Y-momentum     X-momentum     Continuity Force Coefficient 1 
+           827   1.467996e-11   1.020077e-16   1.482407e-12   1.830169e-11   6.892152e-12   1.500775e-08        2.806378e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  262: Time  2.620000e-01
+           828   1.604777e-11   1.010973e-16   1.482390e-12   1.646698e-11   7.418176e-12   1.636932e-08        2.805083e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  263: Time  2.630000e-01
+           829   1.408298e-11   1.001536e-16   1.482365e-12   1.704436e-11   6.629973e-12   1.605708e-08        2.804190e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  264: Time  2.640000e-01
+           830   1.637501e-11   9.915674e-17   1.482354e-12   1.751552e-11   7.561900e-12   1.533229e-08        2.804651e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  265: Time  2.650000e-01
+           831   1.460322e-11   9.822265e-17   1.482360e-12   1.760755e-11   6.699823e-12   1.707944e-08        2.804761e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  266: Time  2.660000e-01
+           832   1.650299e-11   9.732123e-17   1.482359e-12   1.657236e-11   7.325439e-12   1.435054e-08        2.804692e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  267: Time  2.670000e-01
+           833   1.460399e-11   9.640706e-17   1.482342e-12   1.696704e-11   6.615327e-12   1.667344e-08        2.804241e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  268: Time  2.680000e-01
+           834   1.592246e-11   9.547035e-17   1.482317e-12   1.696206e-11   7.001051e-12   1.629955e-08        2.803601e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  269: Time  2.690000e-01
+           835   1.632724e-11   9.457947e-17   1.482311e-12   2.097393e-11   7.489058e-12   1.597138e-08        2.803297e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  270: Time  2.700000e-01
+           836   1.738051e-11   9.373606e-17   1.482317e-12   1.643963e-11   7.246337e-12   1.811070e-08        2.804169e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  271: Time  2.710000e-01
+     Iteration     Z-momentum            Tdr            Tke     Y-momentum     X-momentum     Continuity Force Coefficient 1 
+           837   1.634888e-11   9.282569e-17   1.482316e-12   1.985584e-11   7.422590e-12   1.318377e-08        2.804327e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  272: Time  2.720000e-01
+           838   1.763209e-11   9.193878e-17   1.482297e-12   1.637599e-11   7.016433e-12   1.841114e-08        2.803081e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  273: Time  2.730000e-01
+           839   1.298998e-11   9.108515e-17   1.482274e-12   1.748336e-11   6.462711e-12   1.315519e-08        2.802460e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  274: Time  2.740000e-01
+           840   1.822087e-11   9.025308e-17   1.482272e-12   1.648234e-11   7.156758e-12   1.867195e-08        2.803724e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  275: Time  2.750000e-01
+           841   1.355364e-11   8.941465e-17   1.482282e-12   1.734135e-11   6.714734e-12   1.405980e-08        2.803780e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  276: Time  2.760000e-01
+           842   1.740772e-11   8.861059e-17   1.482276e-12   1.736248e-11   7.202968e-12   1.699410e-08        2.802092e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  277: Time  2.770000e-01
+           843   1.402462e-11   8.779094e-17   1.482255e-12   1.799692e-11   6.712568e-12   1.673859e-08        2.801924e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  278: Time  2.780000e-01
+           844   1.701632e-11   8.697535e-17   1.482237e-12   1.719757e-11   7.499160e-12   1.425338e-08        2.803346e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  279: Time  2.790000e-01
+           845   1.506359e-11   8.620133e-17   1.482240e-12   1.711039e-11   6.839872e-12   1.740993e-08        2.803022e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  280: Time  2.800000e-01
+           846   1.455801e-11   8.544469e-17   1.482249e-12   1.687707e-11   6.916415e-12   1.436191e-08        2.801861e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  281: Time  2.810000e-01
+     Iteration     Z-momentum            Tdr            Tke     Y-momentum     X-momentum     Continuity Force Coefficient 1 
+           847   1.545053e-11   8.467262e-17   1.482241e-12   1.783746e-11   6.959483e-12   1.802291e-08        2.801901e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  282: Time  2.820000e-01
+           848   1.579737e-11   8.387038e-17   1.482217e-12   1.688420e-11   7.258608e-12   1.547272e-08        2.802116e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  283: Time  2.830000e-01
+           849   1.599454e-11   8.313425e-17   1.482207e-12   1.703629e-11   6.992228e-12   1.585606e-08        2.801359e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  284: Time  2.840000e-01
+           850   1.522502e-11   8.244575e-17   1.482210e-12   1.702390e-11   6.892026e-12   1.745638e-08        2.801910e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  285: Time  2.850000e-01
+           851   1.435464e-11   8.171982e-17   1.482217e-12   1.820775e-11   7.033576e-12   1.485138e-08        2.802412e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  286: Time  2.860000e-01
+           852   1.682299e-11   8.095791e-17   1.482205e-12   1.708427e-11   7.075320e-12   1.672049e-08        2.801035e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  287: Time  2.870000e-01
+           853   1.415971e-11   8.026631e-17   1.482183e-12   1.718553e-11   6.771741e-12   1.471616e-08        2.800370e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  288: Time  2.880000e-01
+           854   1.733177e-11   7.960981e-17   1.482174e-12   1.714277e-11   6.926943e-12   1.738172e-08        2.801930e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  289: Time  2.890000e-01
+           855   1.498296e-11   7.892973e-17   1.482182e-12   1.814528e-11   7.101397e-12   1.607232e-08        2.802153e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  290: Time  2.900000e-01
+           856   1.748603e-11   7.824891e-17   1.482187e-12   1.696714e-11   7.240206e-12   1.629933e-08        2.799891e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  291: Time  2.910000e-01
+     Iteration     Z-momentum            Tdr            Tke     Y-momentum     X-momentum     Continuity Force Coefficient 1 
+           857   1.462213e-11   7.759877e-17   1.482171e-12   1.719649e-11   6.903799e-12   1.573268e-08        2.799501e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  292: Time  2.920000e-01
+           858   1.613409e-11   7.697908e-17   1.482149e-12   1.742962e-11   7.172149e-12   1.663449e-08        2.801977e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  293: Time  2.930000e-01
+           859   1.524215e-11   7.636805e-17   1.482146e-12   1.796316e-11   7.080180e-12   1.549434e-08        2.801885e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  294: Time  2.940000e-01
+           860   1.719534e-11   7.572877e-17   1.482157e-12   1.692528e-11   7.434334e-12   1.712406e-08        2.799474e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  295: Time  2.950000e-01
+           861   1.473791e-11   7.508462e-17   1.482157e-12   1.685892e-11   7.000898e-12   1.495018e-08        2.798989e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  296: Time  2.960000e-01
+           862   1.713468e-11   7.449064e-17   1.482141e-12   1.735790e-11   7.465245e-12   1.751052e-08        2.801009e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  297: Time  2.970000e-01
+           863   1.279722e-11   7.393464e-17   1.482121e-12   1.744621e-11   7.014758e-12   1.513193e-08        2.800936e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  298: Time  2.980000e-01
+           864   1.719788e-11   7.337698e-17   1.482122e-12   1.677179e-11   7.617902e-12   1.749231e-08        2.799577e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  299: Time  2.990000e-01
+           865   1.353614e-11   7.276152e-17   1.482132e-12   1.743010e-11   7.272813e-12   1.521173e-08        2.799138e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  300: Time  3.000000e-01
+           866   1.715027e-11   7.215870e-17   1.482132e-12   1.679283e-11   7.302499e-12   1.631422e-08        2.799800e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  301: Time  3.010000e-01
+     Iteration     Z-momentum            Tdr            Tke     Y-momentum     X-momentum     Continuity Force Coefficient 1 
+           867   1.457031e-11   7.163584e-17   1.482114e-12   1.816174e-11   7.153744e-12   1.699380e-08        2.800309e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  302: Time  3.020000e-01
+           868   1.710238e-11   7.115772e-17   1.482097e-12   1.590104e-11   7.325566e-12   1.561735e-08        2.799835e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  303: Time  3.030000e-01
+           869   1.621649e-11   7.059345e-17   1.482102e-12   1.785820e-11   7.245956e-12   1.733568e-08        2.798701e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  304: Time  3.040000e-01
+           870   1.528038e-11   7.000585e-17   1.482113e-12   1.653857e-11   7.007885e-12   1.557022e-08        2.798598e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  305: Time  3.050000e-01
+           871   1.630006e-11   6.952229e-17   1.482109e-12   1.820266e-11   7.056331e-12   1.737256e-08        2.799539e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  306: Time  3.060000e-01
+           872   1.642748e-11   6.908366e-17   1.482088e-12   1.696942e-11   7.531165e-12   1.529297e-08        2.800044e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  307: Time  3.070000e-01
+           873   1.713566e-11   6.857029e-17   1.482078e-12   1.700161e-11   6.879623e-12   1.502215e-08        2.798661e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  308: Time  3.080000e-01
+           874   1.591512e-11   6.800834e-17   1.482083e-12   1.735364e-11   7.273425e-12   1.669696e-08        2.797748e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  309: Time  3.090000e-01
+           875   1.497800e-11   6.752162e-17   1.482094e-12   1.711199e-11   6.563048e-12   1.571102e-08        2.798864e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  310: Time  3.100000e-01
+           876   1.717196e-11   6.712250e-17   1.482086e-12   1.749351e-11   7.670624e-12   1.681322e-08        2.799914e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  311: Time  3.110000e-01
+     Iteration     Z-momentum            Tdr            Tke     Y-momentum     X-momentum     Continuity Force Coefficient 1 
+           877   1.439674e-11   6.666290e-17   1.482065e-12   1.715185e-11   6.934375e-12   1.527299e-08        2.798072e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  312: Time  3.120000e-01
+           878   1.728715e-11   6.613864e-17   1.482059e-12   1.733426e-11   7.385117e-12   1.738187e-08        2.797678e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  313: Time  3.130000e-01
+           879   1.513265e-11   6.565010e-17   1.482068e-12   2.099543e-11   7.791070e-12   1.551449e-08        2.798608e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  314: Time  3.140000e-01
+           880   1.706024e-11   6.522009e-17   1.482076e-12   1.622360e-11   7.478914e-12   1.655567e-08        2.798701e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  315: Time  3.150000e-01
+           881   1.366055e-11   6.480947e-17   1.482063e-12   1.699586e-11   6.865947e-12   1.449289e-08        2.797983e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  316: Time  3.160000e-01
+           882   1.584197e-11   6.435641e-17   1.482043e-12   1.619070e-11   6.975815e-12   1.801571e-08        2.797792e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  317: Time  3.170000e-01
+           883   1.496255e-11   6.388592e-17   1.482039e-12   1.839350e-11   7.094400e-12   1.497970e-08        2.797862e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  318: Time  3.180000e-01
+           884   1.664192e-11   6.344244e-17   1.482051e-12   1.648684e-11   7.257065e-12   1.774235e-08        2.797513e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  319: Time  3.190000e-01
+           885   1.509412e-11   6.306905e-17   1.482054e-12   1.760307e-11   6.918933e-12   1.485770e-08        2.797977e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  320: Time  3.200000e-01
+           886   1.602301e-11   6.268316e-17   1.482041e-12   1.730841e-11   7.219701e-12   1.655764e-08        2.798075e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  321: Time  3.210000e-01
+     Iteration     Z-momentum            Tdr            Tke     Y-momentum     X-momentum     Continuity Force Coefficient 1 
+           887   1.488821e-11   6.222197e-17   1.482022e-12   1.782302e-11   6.614648e-12   1.586551e-08        2.797187e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  322: Time  3.220000e-01
+           888   1.679827e-11   6.173917e-17   1.482023e-12   1.677678e-11   7.367042e-12   1.553767e-08        2.797098e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  323: Time  3.230000e-01
+           889   1.573430e-11   6.139170e-17   1.482036e-12   1.747920e-11   6.773285e-12   1.767834e-08        2.797802e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  324: Time  3.240000e-01
+           890   1.691462e-11   6.105535e-17   1.482037e-12   1.711456e-11   7.316309e-12   1.512072e-08        2.797920e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  325: Time  3.250000e-01
+           891   1.562679e-11   6.061071e-17   1.482020e-12   1.818259e-11   6.867590e-12   1.799195e-08        2.796430e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  326: Time  3.260000e-01
+           892   1.608685e-11   6.015291e-17   1.482005e-12   1.638622e-11   7.232978e-12   1.491056e-08        2.796347e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  327: Time  3.270000e-01
+           893   1.688608e-11   5.978398e-17   1.482009e-12   2.110085e-11   7.760172e-12   1.638039e-08        2.797567e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  328: Time  3.280000e-01
+           894   1.535004e-11   5.948294e-17   1.482022e-12   1.629535e-11   7.100721e-12   1.610999e-08        2.797707e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  329: Time  3.290000e-01
+           895   1.659027e-11   5.907138e-17   1.482020e-12   2.085690e-11   7.543179e-12   1.529741e-08        2.796758e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  330: Time  3.300000e-01
+           896   1.656694e-11   5.862167e-17   1.482005e-12   1.596270e-11   7.403064e-12   1.790481e-08        2.795899e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  331: Time  3.310000e-01
+     Iteration     Z-momentum            Tdr            Tke     Y-momentum     X-momentum     Continuity Force Coefficient 1 
+           897   1.549144e-11   5.823097e-17   1.481992e-12   1.710367e-11   7.036933e-12   1.338705e-08        2.796262e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  332: Time  3.320000e-01
+           898   1.629782e-11   5.788437e-17   1.481997e-12   1.669466e-11   7.369124e-12   1.894792e-08        2.796886e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  333: Time  3.330000e-01
+           899   1.299380e-11   5.754658e-17   1.482011e-12   1.733666e-11   6.649795e-12   1.468800e-08        2.797322e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  334: Time  3.340000e-01
+           900   1.745048e-11   5.715593e-17   1.482005e-12   1.708254e-11   7.753469e-12   1.736829e-08        2.796472e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  335: Time  3.350000e-01
+           901   1.412484e-11   5.672897e-17   1.481986e-12   1.708897e-11   6.698524e-12   1.499672e-08        2.795252e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  336: Time  3.360000e-01
+           902   1.773480e-11   5.635582e-17   1.481980e-12   1.701415e-11   7.306055e-12   1.628602e-08        2.796256e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  337: Time  3.370000e-01
+           903   1.440656e-11   5.606685e-17   1.481989e-12   1.783254e-11   6.668117e-12   1.729363e-08        2.797510e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  338: Time  3.380000e-01
+           904   1.760398e-11   5.571412e-17   1.481999e-12   1.643859e-11   7.354105e-12   1.566084e-08        2.796091e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  339: Time  3.390000e-01
+           905   1.582558e-11   5.527835e-17   1.481988e-12   2.048823e-11   7.364089e-12   1.572884e-08        2.794408e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  340: Time  3.400000e-01
+           906   1.610599e-11   5.489499e-17   1.481969e-12   1.613106e-11   6.971485e-12   1.693101e-08        2.795810e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  341: Time  3.410000e-01
+     Iteration     Z-momentum            Tdr            Tke     Y-momentum     X-momentum     Continuity Force Coefficient 1 
+           907   1.663359e-11   5.461479e-17   1.481965e-12   2.132364e-11   7.630218e-12   1.502734e-08        2.797587e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  342: Time  3.420000e-01
+           908   1.737782e-11   5.428623e-17   1.481975e-12   1.586961e-11   7.319589e-12   1.711757e-08        2.796026e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  343: Time  3.430000e-01
+           909   1.521667e-11   5.386081e-17   1.481983e-12   1.744364e-11   6.827794e-12   1.430380e-08        2.793984e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  344: Time  3.440000e-01
+           910   1.640629e-11   5.346111e-17   1.481972e-12   1.626338e-11   7.090664e-12   1.766551e-08        2.795491e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  345: Time  3.450000e-01
+           911   1.449879e-11   5.317414e-17   1.481952e-12   1.795250e-11   6.853483e-12   1.556222e-08        2.796902e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  346: Time  3.460000e-01
+           912   1.645141e-11   5.287810e-17   1.481954e-12   1.688180e-11   7.598609e-12   1.633018e-08        2.795438e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  347: Time  3.470000e-01
+           913   1.470888e-11   5.251202e-17   1.481968e-12   1.716145e-11   6.858915e-12   1.706625e-08        2.794536e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  348: Time  3.480000e-01
+           914   1.610120e-11   5.209845e-17   1.481970e-12   1.747992e-11   7.643657e-12   1.482040e-08        2.795500e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  349: Time  3.490000e-01
+           915   1.512724e-11   5.174022e-17   1.481957e-12   1.750904e-11   6.837776e-12   1.731376e-08        2.795821e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  350: Time  3.500000e-01
+           916   1.553794e-11   5.146133e-17   1.481940e-12   1.643275e-11   7.319761e-12   1.402049e-08        2.795183e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  351: Time  3.510000e-01
+     Iteration     Z-momentum            Tdr            Tke     Y-momentum     X-momentum     Continuity Force Coefficient 1 
+           917   1.529379e-11   5.113877e-17   1.481946e-12   1.727739e-11   6.945952e-12   1.753303e-08        2.795042e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  352: Time  3.520000e-01
+           918   1.577884e-11   5.073304e-17   1.481960e-12   1.721347e-11   7.217482e-12   1.642554e-08        2.794860e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  353: Time  3.530000e-01
+           919   1.510094e-11   5.034865e-17   1.481959e-12   1.807503e-11   6.946332e-12   1.604566e-08        2.794391e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  354: Time  3.540000e-01
+           920   1.768215e-11   5.006847e-17   1.481942e-12   1.680418e-11   7.361247e-12   1.831472e-08        2.795450e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  355: Time  3.550000e-01
+           921   1.523808e-11   4.980077e-17   1.481932e-12   1.771389e-11   7.116729e-12   1.293441e-08        2.795612e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  356: Time  3.560000e-01
+           922   1.828574e-11   4.940219e-17   1.481938e-12   1.707617e-11   7.246453e-12   1.932985e-08        2.794415e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  357: Time  3.570000e-01
+           923   1.284834e-11   4.901064e-17   1.481953e-12   1.766882e-11   6.597769e-12   1.347598e-08        2.793709e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  358: Time  3.580000e-01
+           924   1.897232e-11   4.870773e-17   1.481948e-12   1.687539e-11   7.403712e-12   1.858425e-08        2.795203e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  359: Time  3.590000e-01
+           925   1.376325e-11   4.844104e-17   1.481930e-12   1.759193e-11   6.852612e-12   1.440113e-08        2.795568e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  360: Time  3.600000e-01
+           926   1.852744e-11   4.809168e-17   1.481925e-12   1.734164e-11   7.457671e-12   1.669985e-08        2.793760e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  361: Time  3.610000e-01
+     Iteration     Z-momentum            Tdr            Tke     Y-momentum     X-momentum     Continuity Force Coefficient 1 
+           927   1.379948e-11   4.769911e-17   1.481933e-12   1.799172e-11   6.758691e-12   1.716545e-08        2.793631e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  362: Time  3.620000e-01
+           928   1.700914e-11   4.737405e-17   1.481943e-12   1.714004e-11   7.648467e-12   1.454734e-08        2.795167e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  363: Time  3.630000e-01
+           929   1.474158e-11   4.708262e-17   1.481937e-12   1.723307e-11   6.901839e-12   1.665045e-08        2.794839e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  364: Time  3.640000e-01
+           930   1.535052e-11   4.676222e-17   1.481919e-12   1.688245e-11   7.203879e-12   1.508974e-08        2.793872e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  365: Time  3.650000e-01
+           931   1.578170e-11   4.641803e-17   1.481915e-12   1.766683e-11   6.946079e-12   1.765638e-08        2.794002e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  366: Time  3.660000e-01
+           932   1.660384e-11   4.607602e-17   1.481928e-12   1.687137e-11   7.594820e-12   1.626114e-08        2.794303e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  367: Time  3.670000e-01
+           933   1.539369e-11   4.575014e-17   1.481934e-12   1.719138e-11   7.040774e-12   1.598011e-08        2.793766e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  368: Time  3.680000e-01
+           934   1.567035e-11   4.553394e-17   1.481925e-12   1.703088e-11   7.143333e-12   1.699020e-08        2.794163e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  369: Time  3.690000e-01
+           935   1.426583e-11   4.528135e-17   1.481906e-12   1.790353e-11   6.961536e-12   1.555508e-08        2.794605e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  370: Time  3.700000e-01
+           936   1.759805e-11   4.494589e-17   1.481907e-12   1.720727e-11   7.412697e-12   1.656699e-08        2.793530e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  371: Time  3.710000e-01
+     Iteration     Z-momentum            Tdr            Tke     Y-momentum     X-momentum     Continuity Force Coefficient 1 
+           937   1.478721e-11   4.458945e-17   1.481922e-12   1.731542e-11   6.835417e-12   1.572418e-08        2.793066e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  372: Time  3.720000e-01
+           938   1.721879e-11   4.434130e-17   1.481925e-12   1.707675e-11   7.087712e-12   1.698876e-08        2.794553e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  373: Time  3.730000e-01
+           939   1.524599e-11   4.407490e-17   1.481913e-12   1.787232e-11   6.881985e-12   1.597185e-08        2.794629e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  374: Time  3.740000e-01
+           940   1.666175e-11   4.369246e-17   1.481897e-12   1.684616e-11   7.182213e-12   1.621323e-08        2.792609e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  375: Time  3.750000e-01
+           941   1.540137e-11   4.335571e-17   1.481901e-12   1.740891e-11   6.922237e-12   1.627196e-08        2.792471e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  376: Time  3.760000e-01
+           942   1.611216e-11   4.308937e-17   1.481916e-12   1.772589e-11   7.221527e-12   1.711736e-08        2.794704e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  377: Time  3.770000e-01
+           943   1.586168e-11   4.283361e-17   1.481916e-12   1.776452e-11   6.893815e-12   1.524484e-08        2.795010e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  378: Time  3.780000e-01
+           944   1.715007e-11   4.247911e-17   1.481902e-12   1.715813e-11   7.386907e-12   1.731192e-08        2.792551e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  379: Time  3.790000e-01
+           945   1.490794e-11   4.215375e-17   1.481889e-12   1.662271e-11   6.891601e-12   1.467224e-08        2.791932e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  380: Time  3.800000e-01
+           946   1.711163e-11   4.188069e-17   1.481897e-12   1.760647e-11   7.431165e-12   1.832469e-08        2.793955e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  381: Time  3.810000e-01
+     Iteration     Z-momentum            Tdr            Tke     Y-momentum     X-momentum     Continuity Force Coefficient 1 
+           947   1.296901e-11   4.161485e-17   1.481912e-12   1.737067e-11   6.869573e-12   1.525837e-08        2.794302e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  382: Time  3.820000e-01
+           948   1.713323e-11   4.133748e-17   1.481910e-12   1.691419e-11   7.432667e-12   1.734360e-08        2.793048e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  383: Time  3.830000e-01
+           949   1.419004e-11   4.100998e-17   1.481893e-12   1.761873e-11   7.298647e-12   1.533560e-08        2.792465e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  384: Time  3.840000e-01
+           950   1.727377e-11   4.069394e-17   1.481886e-12   1.664219e-11   7.166232e-12   1.599450e-08        2.793161e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  385: Time  3.850000e-01
+           951   1.459275e-11   4.041870e-17   1.481895e-12   1.811145e-11   7.017749e-12   1.730249e-08        2.793919e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  386: Time  3.860000e-01
+           952   1.615615e-11   4.017634e-17   1.481907e-12   1.594966e-11   6.995169e-12   1.585881e-08        2.793388e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  387: Time  3.870000e-01
+           953   1.627921e-11   3.988180e-17   1.481901e-12   1.808047e-11   7.260156e-12   1.677483e-08        2.792240e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  388: Time  3.880000e-01
+           954   1.546142e-11   3.954891e-17   1.481884e-12   1.663206e-11   6.912684e-12   1.610701e-08        2.792287e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  389: Time  3.890000e-01
+           955   1.692616e-11   3.928399e-17   1.481880e-12   1.814551e-11   7.014024e-12   1.701334e-08        2.793550e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  390: Time  3.900000e-01
+           956   1.638977e-11   3.910453e-17   1.481892e-12   1.695510e-11   7.385467e-12   1.590288e-08        2.793683e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  391: Time  3.910000e-01
+     Iteration     Z-momentum            Tdr            Tke     Y-momentum     X-momentum     Continuity Force Coefficient 1 
+           957   1.668016e-11   3.884216e-17   1.481901e-12   1.716006e-11   6.804182e-12   1.518540e-08        2.792405e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  392: Time  3.920000e-01
+           958   1.578308e-11   3.850294e-17   1.481891e-12   1.736805e-11   7.185940e-12   1.595232e-08        2.791832e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  393: Time  3.930000e-01
+           959   1.495869e-11   3.823126e-17   1.481873e-12   1.727473e-11   6.481307e-12   1.642992e-08        2.792893e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  394: Time  3.940000e-01
+           960   1.755743e-11   3.801629e-17   1.481873e-12   1.750966e-11   7.644809e-12   1.640087e-08        2.793703e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  395: Time  3.950000e-01
+           961   1.469502e-11   3.775520e-17   1.481889e-12   1.737746e-11   6.952458e-12   1.611878e-08        2.792115e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  396: Time  3.960000e-01
+           962   1.709149e-11   3.744474e-17   1.481893e-12   1.729698e-11   7.356163e-12   1.719352e-08        2.791954e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  397: Time  3.970000e-01
+           963   1.514328e-11   3.717173e-17   1.481882e-12   2.105560e-11   7.796094e-12   1.518528e-08        2.792856e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  398: Time  3.980000e-01
+           964   1.692422e-11   3.692996e-17   1.481866e-12   1.601351e-11   7.400992e-12   1.693716e-08        2.792942e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  399: Time  3.990000e-01
+           965   1.398588e-11   3.667876e-17   1.481870e-12   1.742796e-11   6.982501e-12   1.471872e-08        2.792273e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  400: Time  4.000000e-01
+           966   1.640303e-11   3.641551e-17   1.481884e-12   1.630242e-11   7.095397e-12   1.869373e-08        2.792141e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  401: Time  4.010000e-01
+     Iteration     Z-momentum            Tdr            Tke     Y-momentum     X-momentum     Continuity Force Coefficient 1 
+           967   1.487734e-11   3.615776e-17   1.481888e-12   1.840944e-11   7.101812e-12   1.457337e-08        2.792163e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  402: Time  4.020000e-01
+           968   1.725195e-11   3.590892e-17   1.481874e-12   1.644610e-11   7.370525e-12   1.792737e-08        2.792159e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  403: Time  4.030000e-01
+           969   1.461012e-11   3.567522e-17   1.481861e-12   1.750002e-11   6.871078e-12   1.456254e-08        2.792473e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  404: Time  4.040000e-01
+           970   1.640380e-11   3.544387e-17   1.481868e-12   1.720965e-11   7.325787e-12   1.731689e-08        2.792676e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  405: Time  4.050000e-01
+           971   1.481269e-11   3.519153e-17   1.481884e-12   1.802235e-11   6.650811e-12   1.600217e-08        2.791782e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  406: Time  4.060000e-01
+           972   1.712057e-11   3.493434e-17   1.481881e-12   1.672869e-11   7.434025e-12   1.535726e-08        2.791561e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  407: Time  4.070000e-01
+           973   1.626777e-11   3.469979e-17   1.481867e-12   1.763028e-11   6.858849e-12   1.779458e-08        2.792801e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  408: Time  4.080000e-01
+           974   1.713893e-11   3.449140e-17   1.481858e-12   1.682510e-11   7.327168e-12   1.479944e-08        2.792810e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  409: Time  4.090000e-01
+           975   1.601407e-11   3.424960e-17   1.481867e-12   1.832736e-11   6.969176e-12   1.853859e-08        2.791144e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  410: Time  4.100000e-01
+           976   1.585946e-11   3.399162e-17   1.481880e-12   1.649095e-11   7.243578e-12   1.518779e-08        2.791205e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  411: Time  4.110000e-01
+     Iteration     Z-momentum            Tdr            Tke     Y-momentum     X-momentum     Continuity Force Coefficient 1 
+           977   1.735807e-11   3.377079e-17   1.481876e-12   2.104593e-11   7.773234e-12   1.582196e-08        2.792625e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  412: Time  4.120000e-01
+           978   1.548778e-11   3.358193e-17   1.481860e-12   1.634695e-11   7.151648e-12   1.648111e-08        2.792672e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  413: Time  4.130000e-01
+           979   1.614711e-11   3.334513e-17   1.481855e-12   1.793017e-11   6.966399e-12   1.503554e-08        2.791568e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  414: Time  4.140000e-01
+           980   1.640006e-11   3.309517e-17   1.481866e-12   1.623625e-11   7.350094e-12   1.827125e-08        2.791192e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  415: Time  4.150000e-01
+           981   1.516522e-11   3.288158e-17   1.481877e-12   1.735074e-11   7.125470e-12   1.355373e-08        2.791439e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  416: Time  4.160000e-01
+           982   1.586738e-11   3.269102e-17   1.481868e-12   1.681716e-11   7.325532e-12   1.810034e-08        2.791917e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  417: Time  4.170000e-01
+           983   1.341182e-11   3.248960e-17   1.481852e-12   1.743206e-11   6.719993e-12   1.548127e-08        2.792388e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  418: Time  4.180000e-01
+           984   1.755698e-11   3.225660e-17   1.481850e-12   1.730185e-11   7.765364e-12   1.690147e-08        2.791688e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  419: Time  4.190000e-01
+           985   1.461938e-11   3.203798e-17   1.481865e-12   1.717878e-11   6.843434e-12   1.588735e-08        2.790604e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  420: Time  4.200000e-01
+           986   1.701048e-11   3.183288e-17   1.481871e-12   1.715543e-11   7.292710e-12   1.612555e-08        2.791664e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  421: Time  4.210000e-01
+     Iteration     Z-momentum            Tdr            Tke     Y-momentum     X-momentum     Continuity Force Coefficient 1 
+           987   1.439943e-11   3.164036e-17   1.481861e-12   1.768759e-11   6.654452e-12   1.682460e-08        2.792820e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  422: Time  4.220000e-01
+           988   1.733122e-11   3.144820e-17   1.481844e-12   1.644435e-11   7.264316e-12   1.618145e-08        2.791611e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  423: Time  4.230000e-01
+           989   1.634354e-11   3.124439e-17   1.481847e-12   2.072039e-11   7.448152e-12   1.576453e-08        2.789704e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  424: Time  4.240000e-01
+           990   1.666083e-11   3.104578e-17   1.481862e-12   1.640611e-11   7.052778e-12   1.771995e-08        2.791352e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  425: Time  4.250000e-01
+           991   1.604801e-11   3.084680e-17   1.481866e-12   2.121022e-11   7.501789e-12   1.450326e-08        2.793197e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  426: Time  4.260000e-01
+           992   1.784836e-11   3.067174e-17   1.481856e-12   1.600103e-11   7.321924e-12   1.715122e-08        2.791690e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  427: Time  4.270000e-01
+           993   1.409095e-11   3.046721e-17   1.481840e-12   1.729314e-11   6.597614e-12   1.397999e-08        2.789450e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  428: Time  4.280000e-01
+           994   1.696372e-11   3.027591e-17   1.481846e-12   1.651681e-11   7.155672e-12   1.822728e-08        2.790976e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  429: Time  4.290000e-01
+           995   1.448506e-11   3.009503e-17   1.481862e-12   1.827218e-11   6.862509e-12   1.600007e-08        2.792834e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  430: Time  4.300000e-01
+           996   1.691095e-11   2.992857e-17   1.481863e-12   1.679493e-11   7.602014e-12   1.604150e-08        2.791160e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  431: Time  4.310000e-01
+     Iteration     Z-momentum            Tdr            Tke     Y-momentum     X-momentum     Continuity Force Coefficient 1 
+           997   1.504058e-11   2.974270e-17   1.481847e-12   1.735305e-11   6.842502e-12   1.736309e-08        2.790306e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  432: Time  4.320000e-01
+           998   1.624836e-11   2.953730e-17   1.481838e-12   1.710961e-11   7.589267e-12   1.427705e-08        2.791194e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  433: Time  4.330000e-01
+           999   1.546981e-11   2.935114e-17   1.481846e-12   1.784791e-11   6.882332e-12   1.810418e-08        2.791920e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  434: Time  4.340000e-01
+          1000   1.541823e-11   2.920600e-17   1.481861e-12   1.646436e-11   7.276149e-12   1.401449e-08        2.791083e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  435: Time  4.350000e-01
+          1001   1.545056e-11   2.902539e-17   1.481859e-12   1.727224e-11   6.829690e-12   1.706858e-08        2.790687e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  436: Time  4.360000e-01
+          1002   1.603671e-11   2.883852e-17   1.481841e-12   1.703693e-11   7.183854e-12   1.663258e-08        2.790954e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  437: Time  4.370000e-01
+          1003   1.569463e-11   2.866184e-17   1.481837e-12   1.807195e-11   6.862134e-12   1.540412e-08        2.790613e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  438: Time  4.380000e-01
+          1004   1.769914e-11   2.851482e-17   1.481847e-12   1.687608e-11   7.335516e-12   1.869015e-08        2.791271e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  439: Time  4.390000e-01
+          1005   1.419933e-11   2.836008e-17   1.481860e-12   1.750954e-11   6.869816e-12   1.284673e-08        2.791630e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  440: Time  4.400000e-01
+          1006   1.806125e-11   2.817267e-17   1.481852e-12   1.705532e-11   7.123889e-12   1.856014e-08        2.790496e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  441: Time  4.410000e-01
+     Iteration     Z-momentum            Tdr            Tke     Y-momentum     X-momentum     Continuity Force Coefficient 1 
+          1007   1.330465e-11   2.799093e-17   1.481835e-12   1.777426e-11   6.645349e-12   1.408525e-08        2.790069e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  442: Time  4.420000e-01
+          1008   1.901056e-11   2.784688e-17   1.481832e-12   1.692060e-11   7.357244e-12   1.809720e-08        2.791206e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  443: Time  4.430000e-01
+          1009   1.574384e-11   2.768810e-17   1.481848e-12   2.007850e-11   7.437942e-12   1.495052e-08        2.791704e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  444: Time  4.440000e-01
+          1010   1.763625e-11   2.752174e-17   1.481855e-12   1.709543e-11   7.366612e-12   1.650027e-08        2.790210e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  445: Time  4.450000e-01
+          1011   1.407737e-11   2.737268e-17   1.481845e-12   1.771304e-11   6.798821e-12   1.661120e-08        2.789880e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  446: Time  4.460000e-01
+          1012   1.648705e-11   2.721220e-17   1.481828e-12   1.701471e-11   7.545453e-12   1.503935e-08        2.791371e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  447: Time  4.470000e-01
+          1013   1.526130e-11   2.705688e-17   1.481830e-12   1.727252e-11   7.027683e-12   1.629737e-08        2.791413e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  448: Time  4.480000e-01
+          1014   1.551075e-11   2.689449e-17   1.481845e-12   1.698740e-11   7.190697e-12   1.593178e-08        2.790300e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  449: Time  4.490000e-01
+          1015   1.556145e-11   2.675522e-17   1.481851e-12   1.754181e-11   6.965317e-12   1.704326e-08        2.790114e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  450: Time  4.500000e-01
+          1016   1.674168e-11   2.659944e-17   1.481839e-12   1.696063e-11   7.585473e-12   1.618477e-08        2.790680e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  451: Time  4.510000e-01
+     Iteration     Z-momentum            Tdr            Tke     Y-momentum     X-momentum     Continuity Force Coefficient 1 
+          1017   1.445299e-11   2.644056e-17   1.481824e-12   1.686115e-11   6.915215e-12   1.584990e-08        2.790333e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  452: Time  4.520000e-01
+          1018   1.602666e-11   2.630427e-17   1.481830e-12   1.747965e-11   7.265240e-12   1.742046e-08        2.790810e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  453: Time  4.530000e-01
+          1019   1.415157e-11   2.617199e-17   1.481846e-12   1.794421e-11   7.012843e-12   1.602403e-08        2.791069e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  454: Time  4.540000e-01
+          1020   1.750352e-11   2.600174e-17   1.481847e-12   1.716972e-11   7.381673e-12   1.592834e-08        2.790140e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  455: Time  4.550000e-01
+          1021   1.525693e-11   2.585460e-17   1.481834e-12   1.744709e-11   6.966121e-12   1.606862e-08        2.789821e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  456: Time  4.560000e-01
+          1022   1.676895e-11   2.573337e-17   1.481823e-12   1.680146e-11   6.991808e-12   1.620459e-08        2.790942e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  457: Time  4.570000e-01
+          1023   1.694913e-11   2.560825e-17   1.481831e-12   2.078571e-11   7.545968e-12   1.648359e-08        2.791243e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  458: Time  4.580000e-01
+          1024   1.622941e-11   2.543321e-17   1.481846e-12   1.680948e-11   7.244377e-12   1.585035e-08        2.789232e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  459: Time  4.590000e-01
+          1025   1.556186e-11   2.528837e-17   1.481845e-12   1.720517e-11   6.819544e-12   1.577803e-08        2.789319e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  460: Time  4.600000e-01
+          1026   1.631835e-11   2.517472e-17   1.481828e-12   1.771591e-11   7.285383e-12   1.712430e-08        2.791557e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  461: Time  4.610000e-01
+     Iteration     Z-momentum            Tdr            Tke     Y-momentum     X-momentum     Continuity Force Coefficient 1 
+          1027   1.608425e-11   2.505609e-17   1.481822e-12   1.748901e-11   6.774541e-12   1.446703e-08        2.791448e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  462: Time  4.620000e-01
+          1028   1.736285e-11   2.488432e-17   1.481832e-12   1.714913e-11   7.406810e-12   1.766905e-08        2.789305e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  463: Time  4.630000e-01
+          1029   1.369953e-11   2.474780e-17   1.481845e-12   1.649406e-11   6.697893e-12   1.438208e-08        2.788905e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  464: Time  4.640000e-01
+          1030   1.743961e-11   2.463021e-17   1.481840e-12   1.762897e-11   7.465865e-12   1.772403e-08        2.790888e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  465: Time  4.650000e-01
+          1031   1.261372e-11   2.448954e-17   1.481822e-12   1.744880e-11   6.829545e-12   1.548090e-08        2.791023e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  466: Time  4.660000e-01
+          1032   1.803534e-11   2.436182e-17   1.481821e-12   1.691309e-11   7.520852e-12   1.695484e-08        2.789931e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  467: Time  4.670000e-01
+          1033   1.395659e-11   2.423265e-17   1.481835e-12   1.775228e-11   7.297390e-12   1.570288e-08        2.789437e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  468: Time  4.680000e-01
+          1034   1.685638e-11   2.409961e-17   1.481843e-12   1.651882e-11   7.127268e-12   1.570290e-08        2.789954e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  469: Time  4.690000e-01
+          1035   1.443688e-11   2.396243e-17   1.481834e-12   1.822548e-11   7.025065e-12   1.651660e-08        2.790948e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  470: Time  4.700000e-01
+          1036   1.609261e-11   2.384017e-17   1.481816e-12   1.571680e-11   7.000703e-12   1.615746e-08        2.790426e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  471: Time  4.710000e-01
+     Iteration     Z-momentum            Tdr            Tke     Y-momentum     X-momentum     Continuity Force Coefficient 1 
+          1037   1.670272e-11   2.373570e-17   1.481819e-12   1.825999e-11   7.289570e-12   1.651463e-08        2.789119e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  472: Time  4.720000e-01
+          1038   1.552527e-11   2.360530e-17   1.481835e-12   1.645513e-11   6.922960e-12   1.660681e-08        2.789289e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  473: Time  4.730000e-01
+          1039   1.669318e-11   2.346376e-17   1.481840e-12   1.819273e-11   7.002760e-12   1.661533e-08        2.790668e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  474: Time  4.740000e-01
+          1040   1.631540e-11   2.334354e-17   1.481828e-12   1.687885e-11   7.368813e-12   1.546401e-08        2.790967e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  475: Time  4.750000e-01
+          1041   1.613645e-11   2.325015e-17   1.481814e-12   1.702287e-11   6.698677e-12   1.524484e-08        2.789166e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  476: Time  4.760000e-01
+          1042   1.785940e-11   2.309249e-17   1.481819e-12   1.857222e-11   8.081374e-12   1.617591e-08        2.789009e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  477: Time  4.770000e-01
+          1043   1.528345e-11   2.297696e-17   1.481835e-12   1.719723e-11   6.504634e-12   1.669156e-08        2.790463e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  478: Time  4.780000e-01
+          1044   1.750944e-11   2.287866e-17   1.481838e-12   1.761359e-11   7.624385e-12   1.580863e-08        2.790832e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  479: Time  4.790000e-01
+          1045   1.527758e-11   2.276056e-17   1.481824e-12   1.728486e-11   6.986590e-12   1.603853e-08        2.789009e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  480: Time  4.800000e-01
+          1046   1.643367e-11   2.261541e-17   1.481813e-12   1.707924e-11   7.198683e-12   1.657394e-08        2.789081e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  481: Time  4.810000e-01
+     Iteration     Z-momentum            Tdr            Tke     Y-momentum     X-momentum     Continuity Force Coefficient 1 
+          1047   1.587001e-11   2.249146e-17   1.481821e-12   2.131184e-11   7.859141e-12   1.575872e-08        2.790393e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  482: Time  4.820000e-01
+          1048   1.649498e-11   2.239259e-17   1.481837e-12   1.614823e-11   7.349504e-12   1.670843e-08        2.790127e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  483: Time  4.830000e-01
+          1049   1.604780e-11   2.227462e-17   1.481836e-12   1.974438e-11   7.551014e-12   1.412015e-08        2.789404e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  484: Time  4.840000e-01
+          1050   1.617224e-11   2.214097e-17   1.481822e-12   1.614726e-11   7.120287e-12   1.853668e-08        2.789617e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  485: Time  4.850000e-01
+          1051   1.671466e-11   2.201577e-17   1.481815e-12   2.043485e-11   7.629481e-12   1.373995e-08        2.789710e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  486: Time  4.860000e-01
+          1052   1.692759e-11   2.193319e-17   1.481822e-12   1.634382e-11   7.446628e-12   1.812124e-08        2.789321e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  487: Time  4.870000e-01
+          1053   1.372438e-11   2.180599e-17   1.481838e-12   1.693363e-11   6.570713e-12   1.408385e-08        2.789891e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  488: Time  4.880000e-01
+          1054   1.636546e-11   2.169935e-17   1.481833e-12   1.719173e-11   7.307746e-12   1.667681e-08        2.790024e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  489: Time  4.890000e-01
+          1055   1.439542e-11   2.158212e-17   1.481816e-12   1.783839e-11   6.552803e-12   1.579739e-08        2.789030e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  490: Time  4.900000e-01
+          1056   1.767572e-11   2.147963e-17   1.481813e-12   1.670855e-11   7.317055e-12   1.490680e-08        2.789068e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  491: Time  4.910000e-01
+     Iteration     Z-momentum            Tdr            Tke     Y-momentum     X-momentum     Continuity Force Coefficient 1 
+          1057   1.560471e-11   2.134740e-17   1.481826e-12   1.733165e-11   6.583344e-12   1.766028e-08        2.790286e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  492: Time  4.920000e-01
+          1058   1.675250e-11   2.125260e-17   1.481836e-12   1.676152e-11   7.139543e-12   1.465862e-08        2.790215e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  493: Time  4.930000e-01
+          1059   1.536520e-11   2.114487e-17   1.481827e-12   1.838541e-11   6.699586e-12   1.758380e-08        2.788475e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  494: Time  4.940000e-01
+          1060   1.599258e-11   2.104192e-17   1.481810e-12   1.635589e-11   7.024990e-12   1.548822e-08        2.788714e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  495: Time  4.950000e-01
+          1061   1.728439e-11   2.091469e-17   1.481812e-12   2.114798e-11   7.707790e-12   1.549925e-08        2.790331e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  496: Time  4.960000e-01
+          1062   1.568725e-11   2.080718e-17   1.481824e-12   1.626734e-11   6.999944e-12   1.661151e-08        2.790269e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  497: Time  4.970000e-01
+          1063   1.665753e-11   2.071626e-17   1.481833e-12   2.065803e-11   7.380779e-12   1.447856e-08        2.788933e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  498: Time  4.980000e-01
+          1064   1.609792e-11   2.059532e-17   1.481823e-12   1.579260e-11   7.147944e-12   1.734837e-08        2.788614e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  499: Time  4.990000e-01
+          1065   1.472329e-11   2.049406e-17   1.481807e-12   1.705528e-11   6.741307e-12   1.385893e-08        2.789384e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  500: Time  5.000000e-01
+          1066   1.560007e-11   2.039486e-17   1.481811e-12   1.670238e-11   7.121879e-12   1.765186e-08        2.789406e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  501: Time  5.010000e-01
+     Iteration     Z-momentum            Tdr            Tke     Y-momentum     X-momentum     Continuity Force Coefficient 1 
+          1067   1.379170e-11   2.030805e-17   1.481827e-12   1.766464e-11   6.646597e-12   1.569532e-08        2.789768e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  502: Time  5.020000e-01
+          1068   1.746350e-11   2.018195e-17   1.481831e-12   1.712953e-11   7.570635e-12   1.627753e-08        2.789391e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  503: Time  5.030000e-01
+          1069   1.457444e-11   2.007834e-17   1.481817e-12   1.698472e-11   6.609397e-12   1.547011e-08        2.788560e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  504: Time  5.040000e-01
+          1070   1.645839e-11   1.999062e-17   1.481805e-12   1.665481e-11   6.969200e-12   1.586440e-08        2.789072e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  505: Time  5.050000e-01
+          1071   1.456045e-11   1.988241e-17   1.481813e-12   1.781858e-11   6.572727e-12   1.691119e-08        2.790360e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  506: Time  5.060000e-01
+          1072   1.731012e-11   1.977713e-17   1.481830e-12   1.650806e-11   7.097676e-12   1.637536e-08        2.789387e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  507: Time  5.070000e-01
+          1073   1.635253e-11   1.965759e-17   1.481829e-12   2.041293e-11   7.342193e-12   1.496074e-08        2.787502e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  508: Time  5.080000e-01
+          1074   1.668043e-11   1.959532e-17   1.481816e-12   1.643212e-11   6.855902e-12   1.784919e-08        2.789074e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  509: Time  5.090000e-01
+          1075   1.611502e-11   1.947864e-17   1.481808e-12   2.103710e-11   7.436391e-12   1.349889e-08        2.790885e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  510: Time  5.100000e-01
+          1076   1.757651e-11   1.939308e-17   1.481816e-12   1.602236e-11   7.072907e-12   1.741219e-08        2.789349e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  511: Time  5.110000e-01
+     Iteration     Z-momentum            Tdr            Tke     Y-momentum     X-momentum     Continuity Force Coefficient 1 
+          1077   1.398761e-11   1.927212e-17   1.481830e-12   1.724865e-11   6.553231e-12   1.349686e-08        2.787348e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  512: Time  5.120000e-01
+          1078   1.643528e-11   1.918835e-17   1.481827e-12   1.629470e-11   6.771219e-12   1.736119e-08        2.788744e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  513: Time  5.130000e-01
+          1079   1.606496e-11   1.908469e-17   1.481811e-12   2.142258e-11   7.598116e-12   1.567976e-08        2.790754e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  514: Time  5.140000e-01
+          1080   1.701246e-11   1.900478e-17   1.481808e-12   1.650231e-11   7.426557e-12   1.511305e-08        2.789090e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  515: Time  5.150000e-01
+          1081   1.501951e-11   1.891753e-17   1.481820e-12   1.685569e-11   6.753568e-12   1.738036e-08        2.787839e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  516: Time  5.160000e-01
+          1082   1.510912e-11   1.880217e-17   1.481830e-12   1.685127e-11   7.270992e-12   1.392998e-08        2.789095e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  517: Time  5.170000e-01
+          1083   1.520983e-11   1.869760e-17   1.481823e-12   1.782417e-11   6.928102e-12   1.705505e-08        2.789741e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  518: Time  5.180000e-01
+          1084   1.506488e-11   1.859158e-17   1.481807e-12   1.643946e-11   7.035363e-12   1.437042e-08        2.789150e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  519: Time  5.190000e-01
+          1085   1.560144e-11   1.852795e-17   1.481806e-12   1.724522e-11   6.942593e-12   1.638079e-08        2.788438e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  520: Time  5.200000e-01
+          1086   1.600927e-11   1.842766e-17   1.481822e-12   1.717793e-11   7.127582e-12   1.679943e-08        2.788722e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  521: Time  5.210000e-01
+     Iteration     Z-momentum            Tdr            Tke     Y-momentum     X-momentum     Continuity Force Coefficient 1 
+          1087   1.498660e-11   1.832793e-17   1.481828e-12   1.802892e-11   7.081113e-12   1.496926e-08        2.788737e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  522: Time  5.220000e-01
+          1088   1.723148e-11   1.823246e-17   1.481819e-12   1.678890e-11   7.268330e-12   1.774012e-08        2.789330e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  523: Time  5.230000e-01
+          1089   1.379386e-11   1.816535e-17   1.481803e-12   1.743606e-11   6.984634e-12   1.309608e-08        2.789194e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  524: Time  5.240000e-01
+          1090   1.822183e-11   1.804628e-17   1.481807e-12   1.722920e-11   7.245655e-12   1.806358e-08        2.788610e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  525: Time  5.250000e-01
+          1091   1.462908e-11   1.795468e-17   1.481823e-12   2.032790e-11   7.353573e-12   1.429957e-08        2.788423e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  526: Time  5.260000e-01
+          1092   1.898894e-11   1.788246e-17   1.481826e-12   1.667422e-11   7.496682e-12   1.744138e-08        2.789073e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  527: Time  5.270000e-01
+          1093   1.581393e-11   1.779094e-17   1.481814e-12   1.969549e-11   7.474191e-12   1.446015e-08        2.789333e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  528: Time  5.280000e-01
+          1094   1.730227e-11   1.769009e-17   1.481802e-12   1.679398e-11   7.369086e-12   1.621903e-08        2.788408e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  529: Time  5.290000e-01
+          1095   1.402349e-11   1.759371e-17   1.481808e-12   1.799135e-11   7.101018e-12   1.657734e-08        2.788114e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  530: Time  5.300000e-01
+          1096   1.739896e-11   1.752864e-17   1.481825e-12   1.710320e-11   7.807878e-12   1.525987e-08        2.789351e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  531: Time  5.310000e-01
+     Iteration     Z-momentum            Tdr            Tke     Y-momentum     X-momentum     Continuity Force Coefficient 1 
+          1097   1.468550e-11   1.742617e-17   1.481827e-12   1.705670e-11   7.047197e-12   1.532564e-08        2.789271e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  532: Time  5.320000e-01
+          1098   1.670683e-11   1.733230e-17   1.481812e-12   1.709020e-11   7.485295e-12   1.594065e-08        2.788558e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  533: Time  5.330000e-01
+          1099   1.506547e-11   1.722961e-17   1.481804e-12   1.730900e-11   7.045924e-12   1.604088e-08        2.788270e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  534: Time  5.340000e-01
+          1100   1.757305e-11   1.716609e-17   1.481813e-12   1.709758e-11   7.929249e-12   1.647627e-08        2.788721e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  535: Time  5.350000e-01
+          1101   1.386855e-11   1.705439e-17   1.481829e-12   1.681767e-11   6.968420e-12   1.563395e-08        2.788613e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  536: Time  5.360000e-01
+          1102   1.635083e-11   1.697576e-17   1.481826e-12   1.724999e-11   7.467667e-12   1.653458e-08        2.789098e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  537: Time  5.370000e-01
+          1103   1.440740e-11   1.691915e-17   1.481809e-12   1.801791e-11   7.178416e-12   1.618592e-08        2.788996e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  538: Time  5.380000e-01
+          1104   1.804041e-11   1.681785e-17   1.481806e-12   1.673751e-11   7.571801e-12   1.472164e-08        2.788073e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  539: Time  5.390000e-01
+          1105   1.541033e-11   1.671976e-17   1.481818e-12   1.735322e-11   7.002101e-12   1.630714e-08        2.788343e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  540: Time  5.400000e-01
+          1106   1.580787e-11   1.661961e-17   1.481830e-12   1.654639e-11   6.988960e-12   1.567479e-08        2.789250e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  541: Time  5.410000e-01
+     Iteration     Z-momentum            Tdr            Tke     Y-momentum     X-momentum     Continuity Force Coefficient 1 
+          1107   1.686702e-11   1.658763e-17   1.481822e-12   2.058924e-11   7.520480e-12   1.549558e-08        2.789244e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  542: Time  5.420000e-01
+          1108   1.587695e-11   1.647180e-17   1.481805e-12   1.674015e-11   7.314217e-12   1.580251e-08        2.787370e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  543: Time  5.430000e-01
+          1109   1.613810e-11   1.638763e-17   1.481804e-12   1.708251e-11   6.817871e-12   1.473860e-08        2.787929e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  544: Time  5.440000e-01
+          1110   1.614716e-11   1.628927e-17   1.481819e-12   1.781653e-11   7.342602e-12   1.720996e-08        2.789655e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  545: Time  5.450000e-01
+          1111   1.553301e-11   1.624185e-17   1.481827e-12   1.709676e-11   6.631570e-12   1.377632e-08        2.789467e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  546: Time  5.460000e-01
+          1112   1.699075e-11   1.611358e-17   1.481817e-12   1.731196e-11   7.388568e-12   1.685297e-08        2.787660e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  547: Time  5.470000e-01
+          1113   1.353751e-11   1.604228e-17   1.481802e-12   1.619761e-11   6.584239e-12   1.427813e-08        2.787432e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  548: Time  5.480000e-01
+          1114   1.724234e-11   1.597130e-17   1.481804e-12   1.784532e-11   7.470130e-12   1.714443e-08        2.789137e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  549: Time  5.490000e-01
+          1115   1.294942e-11   1.589701e-17   1.481821e-12   1.735501e-11   6.847193e-12   1.566785e-08        2.789079e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  550: Time  5.500000e-01
+          1116   1.729047e-11   1.580805e-17   1.481825e-12   1.680400e-11   7.382418e-12   1.622810e-08        2.788351e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  551: Time  5.510000e-01
+     Iteration     Z-momentum            Tdr            Tke     Y-momentum     X-momentum     Continuity Force Coefficient 1 
+          1117   1.528749e-11   1.570374e-17   1.481814e-12   2.022060e-11   7.839487e-12   1.481024e-08        2.787849e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  552: Time  5.520000e-01
+          1118   1.569337e-11   1.566071e-17   1.481800e-12   1.624523e-11   7.009716e-12   1.533560e-08        2.788206e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  553: Time  5.530000e-01
+          1119   1.579986e-11   1.556166e-17   1.481806e-12   2.064937e-11   7.590537e-12   1.591163e-08        2.789179e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  554: Time  5.540000e-01
+          1120   1.580873e-11   1.547183e-17   1.481821e-12   1.560056e-11   7.053695e-12   1.621310e-08        2.788878e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  555: Time  5.550000e-01
+          1121   1.768460e-11   1.538895e-17   1.481825e-12   2.017421e-11   7.641118e-12   1.520309e-08        2.787409e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  556: Time  5.560000e-01
+          1122   1.573675e-11   1.533184e-17   1.481813e-12   1.635918e-11   7.038960e-12   1.643092e-08        2.787540e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  557: Time  5.570000e-01
+          1123   1.618840e-11   1.523505e-17   1.481802e-12   1.748322e-11   6.688154e-12   1.573488e-08        2.789493e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  558: Time  5.580000e-01
+          1124   1.847642e-11   1.516233e-17   1.481810e-12   1.791012e-11   8.241037e-12   1.594316e-08        2.789351e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  559: Time  5.590000e-01
+          1125   1.545404e-11   1.509781e-17   1.481827e-12   1.667847e-11   6.426059e-12   1.501191e-08        2.787391e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  560: Time  5.600000e-01
+          1126   1.801586e-11   1.500617e-17   1.481824e-12   1.847380e-11   7.961789e-12   1.524402e-08        2.787138e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  561: Time  5.610000e-01
+     Iteration     Z-momentum            Tdr            Tke     Y-momentum     X-momentum     Continuity Force Coefficient 1 
+          1127   1.508625e-11   1.492026e-17   1.481811e-12   1.728252e-11   6.315109e-12   1.665475e-08        2.789322e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  562: Time  5.620000e-01
+          1128   1.752635e-11   1.483939e-17   1.481803e-12   1.712922e-11   7.391765e-12   1.434521e-08        2.789446e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  563: Time  5.630000e-01
+          1129   1.587180e-11   1.480197e-17   1.481814e-12   2.002285e-11   7.337436e-12   1.584883e-08        2.787366e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  564: Time  5.640000e-01
+          1130   1.516315e-11   1.469232e-17   1.481827e-12   1.655318e-11   6.898293e-12   1.578833e-08        2.787354e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  565: Time  5.650000e-01
+          1131   1.558405e-11   1.462648e-17   1.481822e-12   2.089805e-11   7.564937e-12   1.468227e-08        2.789040e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  566: Time  5.660000e-01
+          1132   1.609568e-11   1.452829e-17   1.481805e-12   1.578953e-11   7.059462e-12   1.665744e-08        2.788902e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  567: Time  5.670000e-01
+          1133   1.624672e-11   1.446423e-17   1.481803e-12   1.974782e-11   7.442620e-12   1.311865e-08        2.787800e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  568: Time  5.680000e-01
+          1134   1.606615e-11   1.436010e-17   1.481815e-12   1.602024e-11   6.920235e-12   1.883727e-08        2.788027e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  569: Time  5.690000e-01
+          1135   1.551961e-11   1.430713e-17   1.481826e-12   2.030789e-11   7.436680e-12   1.302056e-08        2.788411e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  570: Time  5.700000e-01
+          1136   1.683002e-11   1.424952e-17   1.481818e-12   1.614916e-11   7.205059e-12   1.745380e-08        2.787822e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  571: Time  5.710000e-01
+     Iteration     Z-momentum            Tdr            Tke     Y-momentum     X-momentum     Continuity Force Coefficient 1 
+          1137   1.325889e-11   1.417050e-17   1.481801e-12   1.690135e-11   6.403934e-12   1.385229e-08        2.788307e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  572: Time  5.720000e-01
+          1138   1.657599e-11   1.409512e-17   1.481802e-12   1.718946e-11   7.171061e-12   1.635835e-08        2.788894e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  573: Time  5.730000e-01
+          1139   1.443335e-11   1.399351e-17   1.481819e-12   1.790025e-11   6.452300e-12   1.586540e-08        2.787697e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  574: Time  5.740000e-01
+          1140   1.723430e-11   1.397144e-17   1.481824e-12   1.662797e-11   7.103555e-12   1.431479e-08        2.787627e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  575: Time  5.750000e-01
+          1141   1.536521e-11   1.386377e-17   1.481812e-12   1.733093e-11   6.513833e-12   1.686606e-08        2.788665e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  576: Time  5.760000e-01
+          1142   1.554468e-11   1.380735e-17   1.481798e-12   1.648415e-11   6.775502e-12   1.421622e-08        2.789001e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  577: Time  5.770000e-01
+          1143   1.695642e-11   1.370853e-17   1.481804e-12   2.174253e-11   7.546240e-12   1.713424e-08        2.787135e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  578: Time  5.780000e-01
+          1144   1.560204e-11   1.366496e-17   1.481821e-12   1.622360e-11   6.964988e-12   1.542495e-08        2.787342e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  579: Time  5.790000e-01
+          1145   1.760340e-11   1.355574e-17   1.481823e-12   2.071938e-11   7.653360e-12   1.493907e-08        2.789000e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  580: Time  5.800000e-01
+          1146   1.541808e-11   1.350129e-17   1.481812e-12   1.612374e-11   6.880615e-12   1.621207e-08        2.789053e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  581: Time  5.810000e-01
+     Iteration     Z-momentum            Tdr            Tke     Y-momentum     X-momentum     Continuity Force Coefficient 1 
+          1147   1.640480e-11   1.343574e-17   1.481800e-12   2.048934e-11   7.411063e-12   1.384555e-08        2.787500e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  582: Time  5.820000e-01
+          1148   1.591181e-11   1.336464e-17   1.481807e-12   1.588661e-11   7.118477e-12   1.754144e-08        2.787201e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  583: Time  5.830000e-01
+          1149   1.461765e-11   1.327723e-17   1.481824e-12   1.696871e-11   6.824721e-12   1.366072e-08        2.788259e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  584: Time  5.840000e-01
+          1150   1.535190e-11   1.319823e-17   1.481823e-12   1.664454e-11   7.057880e-12   1.683040e-08        2.788269e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  585: Time  5.850000e-01
+          1151   1.386315e-11   1.318865e-17   1.481805e-12   1.777075e-11   6.842491e-12   1.551777e-08        2.788331e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  586: Time  5.860000e-01
+          1152   1.736469e-11   1.307588e-17   1.481801e-12   1.688325e-11   7.515819e-12   1.516034e-08        2.787945e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  587: Time  5.870000e-01
+          1153   1.430599e-11   1.300456e-17   1.481812e-12   1.695684e-11   6.818436e-12   1.554226e-08        2.787509e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  588: Time  5.880000e-01
+          1154   1.567097e-11   1.291327e-17   1.481825e-12   1.661698e-11   6.943036e-12   1.550098e-08        2.788021e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  589: Time  5.890000e-01
+          1155   1.426012e-11   1.287871e-17   1.481819e-12   1.788914e-11   6.924452e-12   1.604888e-08        2.788890e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  590: Time  5.900000e-01
+          1156   1.737505e-11   1.279587e-17   1.481802e-12   1.647337e-11   7.272908e-12   1.634290e-08        2.788212e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  591: Time  5.910000e-01
+     Iteration     Z-momentum            Tdr            Tke     Y-momentum     X-momentum     Continuity Force Coefficient 1 
+          1157   1.634332e-11   1.271866e-17   1.481801e-12   2.002594e-11   7.410486e-12   1.417436e-08        2.786525e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  592: Time  5.920000e-01
+          1158   1.709809e-11   1.268889e-17   1.481813e-12   1.650804e-11   7.118524e-12   1.810794e-08        2.787752e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  593: Time  5.930000e-01
+          1159   1.528193e-11   1.260099e-17   1.481823e-12   2.108881e-11   7.615417e-12   1.299138e-08        2.789544e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  594: Time  5.940000e-01
+          1160   1.796241e-11   1.253412e-17   1.481814e-12   1.604506e-11   7.360076e-12   1.665074e-08        2.788262e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  595: Time  5.950000e-01
+          1161   1.320300e-11   1.242445e-17   1.481797e-12   1.725745e-11   6.836705e-12   1.330869e-08        2.786195e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  596: Time  5.960000e-01
+          1162   1.748201e-11   1.240734e-17   1.481800e-12   1.652238e-11   7.259492e-12   1.700311e-08        2.787698e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  597: Time  5.970000e-01
+          1163   1.526810e-11   1.231258e-17   1.481817e-12   2.096753e-11   7.646650e-12   1.563388e-08        2.789448e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  598: Time  5.980000e-01
+          1164   1.745610e-11   1.226902e-17   1.481822e-12   1.654972e-11   7.849730e-12   1.454942e-08        2.788023e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  599: Time  5.990000e-01
+          1165   1.459608e-11   1.216940e-17   1.481811e-12   1.712040e-11   7.032979e-12   1.672532e-08        2.786537e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+TimeStep  600: Time  6.000000e-01
+          1166   1.536049e-11   1.212539e-17   1.481796e-12   1.687053e-11   7.650604e-12   1.354016e-08        2.787987e-08 
+Stopping criterion PISO Residual Reduction satisfied.
+Stopping criterion Maximum Steps satisfied.
+Auto save: bluntbody_unsteady@01166.sim
+Saving: bluntbody_unsteady@01166.sim
+Object state saved to bluntbody_unsteady@01166.sim (5.4364MB in 0.061774s).
+Design STAR-CCM+ simulation completed
+Server process exited with code : 0

@@ -1,0 +1,1 @@
+alter table job drop column is_user_failed;

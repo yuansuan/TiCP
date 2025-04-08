@@ -1,0 +1,39 @@
+import { Story, Preview } from '@storybook/addon-docs/blocks'
+
+# RichTextEditor 富文本编辑器
+
+RichTextEditor 是基于 [braft-editor](https://github.com/margox/braft-editor) 实现的富文本编辑组件。
+
+## 代码演示
+
+### 基本使用
+
+使用 defaultValue 属性设置默认值，并通过 onChange 监听编辑器的内容变更。defaultValue 必须是 **EditorState**，可以使用 createEditorState 创建 EditorState。
+
+<Preview withSource='none'>
+  <Story id='components-richtexteditor--basic' />
+</Preview>
+
+### 受控编辑器
+
+使用 value 异步或动态修改编辑器内容。value 必须是 **EditorState**，可以使用 createEditorState 创建 EditorState。
+
+<Preview withSource='none'>
+  <Story id='components-richtexteditor--controlled' />
+</Preview>
+
+### 动态控制编辑器高度
+
+编辑器内容的高度会随着输入内容的增加而增加，为了达到最好的滚动条效果，可以使用 autoHeight 动态控制编辑器内容区域的最大高度。（请保证编辑器的父组件高度是自适应的）
+
+<Preview withSource='none'>
+  <Story id='components-richtexteditor--max-height' />
+</Preview>
+
+## API
+
+| 参数       | 说明                 | 类型    | 默认值 |
+| ---------- | -------------------- | ------- | ------ |
+| autoHeight | 编辑器内容高度自适应 | boolean | false  |
+
+其他属性请参考 [braft-editor 属性](https://www.yuque.com/braft-editor/be/gz44tn#pdgpzw)

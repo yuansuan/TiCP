@@ -1,0 +1,1 @@
+ALTER TABLE `sc_job` ADD COLUMN `scheduler_submit_flags` text COMMENT '输入文件 json' AFTER `command`;

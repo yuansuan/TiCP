@@ -1,0 +1,43 @@
+networks:
+  ticp-network:
+    driver: bridge
+services:
+  psp-be:
+    container_name: psp-be
+    environment:
+    - YS_MODE=prod
+    image: harbor.yuansuan.cn/ticp/psp-be:202504071549
+    logging:
+      driver: json-file
+      options:
+        max-file: '20'
+        max-size: 50m
+    networks:
+    - ticp-network
+    ports:
+    - 32432:32432
+    - 22340:22340
+    privileged: true
+    restart: always
+    volumes:
+    - /Users/apple/code/TiCP/devops/config/psp/psp-be:/opt/yuansuan/psp/config
+    - /home/data/psp-be/logs:/opt/yuansuan/psp/logs/
+  psp-fe:
+    container_name: psp-fe
+    environment:
+    - YS_MODE=prod
+    image: harbor.yuansuan.cn/ticp/psp-fe:202504071420
+    logging:
+      driver: json-file
+      options:
+        max-file: '20'
+        max-size: 50m
+    networks:
+    - ticp-network
+    ports:
+    - 22341:8088
+    privileged: true
+    restart: always
+    volumes:
+    - /home/data/psp-fe/logs:/opt/yuansuan/psp/logs/
+version: '3.8'

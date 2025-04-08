@@ -1,0 +1,97 @@
+syntax = "proto3";
+
+package company;
+option go_package = "github.com/yuansuan/ticp/iPaaS/sso/protos/platform/company";
+
+import "google/protobuf/timestamp.proto";
+
+
+// 盒子状态
+enum BoxStatus {
+    // 未知
+    BOX_UNKNOWN = 0;
+    // 正常
+    BOX_NORMAL = 1;
+    // 删除
+    BOX_DELETED = 2;
+}
+
+message Box {
+    string id = 1;
+    string company_id = 2;
+    // 盒子序列号
+    string box_serial_number = 3;
+    // 盒子域名
+    string box_domain = 4;
+    // 状态 1正常 2删除
+    BoxStatus status = 5;
+    // 备注
+	string remark = 6;
+    // 修改者用户ID
+    string modify_uid = 7;
+    // 修改者姓名
+    string modify_name = 8;
+    // 更新时间
+    google.protobuf.Timestamp update_time = 9;
+    // 创建者用户ID
+    string create_uid = 10;
+    // 创建者姓名
+    string create_name = 11;
+    // 创建时间
+    google.protobuf.Timestamp create_time = 12;
+}
+
+
+// 获取企业盒子请求
+message GetCompanyBoxListRequest {
+    // 盒子状态
+    BoxStatus status = 1;
+    // 企业ID
+    // @inject_tag: `validate:"is_ysid,required"`
+    string company_id = 2;
+}
+
+// 获取企业盒子结果
+message GetCompanyBoxListResponse {
+    repeated Box list = 1;
+}
+
+// 企业盒子修改请求
+message CompanyBoxModifyRequest {
+    // 盒子ID
+    // @inject_tag: `validate:"is_ysid,required"`
+    string box_id = 1;
+    // 企业ID
+    // @inject_tag: `validate:"is_ysid"`
+    string company_id = 2;
+    // 盒子序列号
+    string box_serial_number = 3;
+    // 盒子域名
+    string box_domain = 4;
+    // 盒子状态 1正常 2删除
+    BoxStatus status = 5;
+    // 备注
+	string remark = 6;
+    // 修改者用户ID
+    string modify_uid = 7;
+    // 修改者姓名
+    string modify_name = 8;
+    
+}
+
+// 企业盒子修改结果
+message CompanyBoxModifyResponse {
+    // success 成功 ； fail 失败
+    string msg = 1;
+}
+    
+// 通过域名获取盒子请求
+message GetCompanyBoxByDomainRequest {
+    // @inject_tag: `validate:"required"`
+    string box_domain = 1;
+}
+
+// 通过域名获取盒子请求
+message GetCompanyBoxByDomainResponse {
+    Box box_info = 1;
+}

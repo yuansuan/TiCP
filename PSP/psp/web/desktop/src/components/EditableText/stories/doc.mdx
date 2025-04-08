@@ -1,0 +1,121 @@
+import { Story, Preview } from '@storybook/addon-docs/blocks'
+
+# EditableText 可编辑文本
+
+EditableText 可编辑文本组件，提供了文本编辑/查看切换、保存和取消保存的功能。
+
+## 代码演示
+
+### 基本使用
+
+使用 defaultValue 属性设置默认值，并通过 onConfirm 确认文本编辑。超出长度的文字会以省略号显示，可以通过控制容器组件的宽度或 style 属性设置文字可显示的最大长度。
+
+<Preview withSource='none'>
+  <Story id='components-editabletext--basic' />
+</Preview>
+
+### 单位
+
+使用 unit 属性可以插入单位信息
+
+<Preview withSource='none'>
+  <Story id='components-editabletext--unit' />
+</Preview>
+
+### 自定义编辑图标
+
+使用 EditIcon 属性自定义编辑图标。将鼠标移至编辑图标上面会出现提示信息。
+
+<Preview withSource='none'>
+  <Story id='components-editabletext--custom-edit-icon' />
+</Preview>
+
+### 自定义 text
+
+使用 Text 属性自定义显示文本。将鼠标移至下列组件上面会出现增强提示。
+
+<Preview withSource='none'>
+  <Story id='components-editabletext--custom-text' />
+</Preview>
+
+### 初始化配置
+
+使用 defaultEditing 属性设置组件默认进入编辑状态；使用 defaultShowEdit 属性设置编辑按钮默认不显示，鼠标悬浮再显示。
+
+<Preview withSource='none'>
+  <Story id='components-editabletext--default' />
+</Preview>
+
+### error
+
+在 beforeCancel 和 beforeConfirm 中返回 string 或 Promise.reject(string)，可以启用错误提示
+
+<Preview withSource='none'>
+  <Story id='components-editabletext--error' />
+</Preview>
+
+### 禁止输入
+
+使用 filter 属性过滤非法的输入内容。支持正则表达式和过滤函数两种方式。
+
+<Preview withSource='none'>
+  <Story id='components-editabletext--filter' />
+</Preview>
+
+### 帮助信息
+
+使用 help 属性配置帮助信息。
+
+<Preview withSource='none'>
+  <Story id='components-editabletext--help' />
+</Preview>
+
+### Hover
+
+设置 defaultShowEdit 属性可以将 EditableText 设置为鼠标悬浮显示编辑按钮的状态。
+
+<Preview withSource='none'>
+  <Story id='components-editabletext--hover' />
+</Preview>
+
+### 外部组件触发编辑操作
+
+1. 可以使用 ref 获取到 EditableText 的引用，并调用 ref.edit 触发编辑操作；
+2. 可以使用 EditableText.useModel 创建自定义 model 并传入 model props 控制 EditableText；
+
+<Preview withSource='none'>
+  <Story id='components-editabletext--trigger' />
+</Preview>
+
+### 输入验证
+
+使用 beforeConfirm 和 beforeCancel 可以拦截确认和取消操作；返回 true 表示验证成功，返回 false 表示验证失败；异步逻辑通过返回 Promise 实现。
+
+<Preview withSource='none'>
+  <Story id='components-editabletext--validation' />
+</Preview>
+
+## API
+
+| 参数            | 说明                                                            | 类型                                                                                                                                                      | 默认值 |
+| --------------- | --------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ |
+| style           | 组件样式                                                        | CSSProperties                                                                                                                                             | -      |
+| inputProps      | 编辑输入框属性                                                  | [请参考 antd input 文档](https://ant.design/components/input-cn/)                                                                                         | -      |
+| onClick         | 文本点击事件                                                    | (event: React.MouseEvent) => void                                                                                                                         | -      |
+| defaultEditing  | 编辑框默认处于编辑状态                                          | boolean                                                                                                                                                   | false  |
+| defaultShowEdit | 默认显示编辑图标，如果设置为 false，则在鼠标悬浮的时候显示      | boolean                                                                                                                                                   | false  |
+| showEdit        | 是否显示编辑图标                                                | boolean                                                                                                                                                   | true   |
+| defaultValue    | 文本默认值                                                      | string                                                                                                                                                    | -      |
+| beforeConfirm   | 确认编辑验证，返回 false 可以阻止编辑操作                       | (value: string) => boolean &#124; string &#124; Promise&lt;string &#124; void&gt;                                                                         | -      |
+| onConfirm       | 确认编辑事件                                                    | (value: string) => void                                                                                                                                   | -      |
+| beforeCancel    | 取消编辑验证，返回 false 可以阻止取消操作                       | (value: string) => boolean &#124; string &#124; Promise&lt;string &#124; void&gt;                                                                         | -      |
+| onCancel        | 取消编辑事件                                                    | (value: string) => void                                                                                                                                   | -      |
+| filter          | 输入过滤                                                        | RegExp &#124; ((item: string) => string)                                                                                                                  | -      |
+| help            | 显示编辑帮助信息                                                | string                                                                                                                                                    | -      |
+| EditIcon        | 自定义编辑图标                                                  | React.ReactNode                                                                                                                                           | -      |
+| Text            | 自定义显示文本                                                  | (value: string) => React.ReactNode                                                                                                                        | -      |
+| model           | 自定义组件 model，可以使用 EditableText.useModel 创建一个 model | { editing: boolean, error:string, setEditing: (param:boolean) => void, value: string, setValue: (param:string) => void, setError:(param:string) => void } | -      |
+| unit            | 单位                                                            | string                                                                                                                                                    | -      |
+
+获取 EditableText 的 ref 引用可以直接调用 edit 方法触发组件的编辑事件<br/>
+使用 EditableText.useModel 可以创建一个自定义 model

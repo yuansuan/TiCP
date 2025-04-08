@@ -1,0 +1,64 @@
+import { Story, Preview } from '@storybook/addon-docs/blocks'
+
+# SearchSelect 可筛选的 Select 组件
+
+SearchSelect 基于 [Antd Select](https://ant.design/components/select-cn/) 封装，新增如下属性：
+
+1. 默认启用筛选功能；
+2. 通过 **options** 属性自动渲染 Select.Option；
+3. 通过 **filter** 属性自定义筛选行为；
+4. 通过 **caseSensitive** 属性设置默认筛选是否大小写敏感；（默认大小写敏感）
+5. 通过 **renderOptions** 自定义选项渲染行为；
+
+## 代码演示
+
+### 基本使用
+
+使用 options 传入要选择的元素，默认根据 name 属性筛选。
+
+<Preview withSource='none'>
+  <Story id='components-searchselect--basic' />
+</Preview>
+
+### 大小写敏感
+
+使用 CaseSensitive 属性控制默认搜索逻辑是否大小写敏感。
+
+<Preview withSource='none'>
+  <Story id='components-searchselect--case-sensitive' />
+</Preview>
+
+### 自定义筛选行为
+
+使用 filter 属性传入筛选函数可以自定义筛选行为，下面的例子实现了大小写不敏感的筛选。
+
+<Preview withSource='none'>
+  <Story id='components-searchselect--custom-filter' />
+</Preview>
+
+### 自定义选项渲染
+
+使用 renderOptions 属性可以自定义 options 的渲染。
+
+<Preview withSource='none'>
+  <Story id='components-searchselect--render-options' />
+</Preview>
+
+## API
+
+| 参数           | 说明                       | 类型                                                       | 默认值 |
+| -------------- | -------------------------- | ---------------------------------------------------------- | ------ |
+| options        | Select 选项                | Array&lt;IOption &#124; [string &#124; number, string]&gt; | -      |
+| caseSensitive? | 默认筛选功能是否大小写敏感 | boolean                                                    | true   |
+| filter?        | 自定义筛选                 | (key: string, item: IOption) => boolean                    | -      |
+| renderOptions? | 自定义选项渲染             | (options: Array&lt;IOption&gt;) => React.ReactNode         | -      |
+
+其他属性请参考 [Antd Select 属性](https://ant.design/components/select-cn/)
+
+### IOptions
+
+| 属性         | 说明         | 类型                 |
+| ------------ | ------------ | -------------------- |
+| key          | 选项 id      | string &#124; number |
+| name         | 选项名称     | string               |
+| [key:string] | 任意扩展属性 | any                  |

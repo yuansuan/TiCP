@@ -1,0 +1,8 @@
+local:
+  settings:
+    app_key:
+    app_secret:
+    api_endpoint:
+    hpc_endpoint:
+    user_id:
+    zone:

@@ -1,0 +1,114 @@
+app:
+  name: job
+  ver: 1.0.0
+
+  host: 0.0.0.0
+  port: 8899
+
+  # load config from etcd?
+  load_remote_config: false
+
+  # db migration
+  db_migration:
+    # 开启auto migrate，接下来的force_migrate和version才会生效
+    auto_migrate: true
+    # 可选配置，默认为true，为false时，当你数据库没有{app_name}_version表时，不会执行你配置的sql文件，但会把version表更新到你sql的最新版
+    force_migrate: false
+    # up代表执行到sql最新版本，数字表示变化到指定版本
+    version: up
+
+  middleware:
+    logger:
+      log_dir: ./log
+
+    tracing:
+      startup: false
+      details:
+        enabled: true
+        request: true
+        response: false
+      database:
+        enabled: true
+        binding: true
+      jaeger:
+        endpoint: http://0.0.0.0:14268/api/traces
+
+    monitor:
+      _startup: false
+      # listen: 0.0.0.0:9999
+
+    mysql:
+      default:
+        _startup: true
+        dsn: "wukong_user:wukong6655@tcp(mysql:3306)/wukong?charset=utf8&parseTime=true&loc=Local"
+
+    redis:
+      default:
+        _startup: true
+        addr: 10.0.4.48:6379
+
+    grpc:
+      server:
+        default:
+          addr: ":11211"
+          _startup: true
+          #write_buffer_size: 32768
+          #read_buffer_size: 32769
+          #initial_window_size: 65536
+          #initial_conn_window_size: 65537
+          #max_recv_msg_size: 65538
+          #max_send_msg_size: 65539
+          #max_concurrent_streams: 100
+          #connection_timeout: 100000
+          #max_header_list_size: 1024
+          #keepalive_max_connection_idle: 60000
+          #keepalive_max_connection_age: 61000
+          #keepalive_max_connection_age_grace: 62000
+          #keepalive_time: 63000
+          #keepalive_timeout: 64000
+          #keepalive_enforcement_policy_min_time: 240000
+          #keepalive_enforcement_policy_permit_without_stream: true
+
+      client:
+        idgen:
+          addr: "10.0.4.48:11211"
+          naming: false
+          timeout_per_request: "5s"
+          with_insecure: true
+
+        hydra_lcp:
+          addr: "10.0.4.48:11211"
+          naming: false
+          timeout_per_request: "5s"
+          with_insecure: true
+
+        license_server:
+          addr: "10.0.4.48:11211"
+          naming: false
+          timeout_per_request: "5s"
+          with_insecure: true
+
+        default: # self
+          addr: ":11211"
+          # golang duration format, such as "300ms", "-1.5h" or "2h45m".
+          # Valid time units are "ns", "us" (or "µs"), "ms", "s", "m", "h".
+          timeout_per_request: "5s"
+          with_insecure: true
+
+    cache:
+      default:
+        name: default
+        backend_type: redis
+
+    etcd:
+      startup: false
+      endpoints: [ "10.0.4.48:2379" ]
+      tls: false
+
+    apm:
+      apm_server_url: "http://0.0.0.0:8200"
+
+    kafka:
+      startup: true
+      cluster_addr:
+        - "10.0.4.48:9092"

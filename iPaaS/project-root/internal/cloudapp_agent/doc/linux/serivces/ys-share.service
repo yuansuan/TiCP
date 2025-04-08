@@ -1,0 +1,12 @@
+[Unit]
+Description=ys-share
+Wants=ys-cloudapp.target
+After=ys-cloudapp.target
+
+[Service]
+ExecStart=bash /etc/ys-share/start-share.sh
+User=root
+Group=root
+
+[Install]
+WantedBy=ys-cloudapp.target

@@ -1,0 +1,102 @@
+[
+  {
+    "title": "状态详情",
+    "icon": null,
+    "partitionNum": 4,
+    "children": [
+      {
+        "key": "description",
+        "text": "作业描述",
+        "share": 3
+      },
+      {
+        "key": "submitTime",
+        "text": "建立时间"
+      },
+      {
+        "key": "updateTime",
+        "text": "最后更新时间"
+      },
+      {
+        "key": "execHost",
+        "text": "执行节点"
+      },
+      {
+        "key": "clusterName",
+        "text": "服务节点"
+      },
+      {
+        "key": "priority",
+        "text": "优先级",
+        "share": 2
+      },
+      {
+        "key": "exitStatus",
+        "text": "退出状态"
+      },
+      {
+        "key": "rerunable_str",
+        "text": "可重新执行"
+      }
+    ]
+  },
+  {
+    "title": "提交参数",
+    "icon": null,
+    "partitionNum": 4,
+    "children": [
+      {
+        "key": "userName",
+        "text": "提交用户",
+        "share": 4
+      },
+      {
+        "key": "command",
+        "text": "作业命令"
+      },
+      {
+        "key": "queue",
+        "text": "队列"
+      },
+      {
+        "key": "project",
+        "text": "工程",
+        "share": 2
+      },
+      {
+        "key": "resReq",
+        "text": "资源需求",
+        "share": 2
+      },
+      {
+        "key": "outputFilePath",
+        "text": "输出文件",
+        "share": 2
+      }
+    ]
+  },
+  {
+    "title": "资源使用",
+    "icon": null,
+    "partitionNum": 4,
+    "children": [
+      {
+        "key": "numExecProcs",
+        "text": "核数"
+      },
+      {
+        "key": "cpuTime",
+        "text": "核时",
+        "share": 3
+      },
+      {
+        "key": "mem",
+        "text": "内存"
+      },
+      {
+        "key": "runTime",
+        "text": "执行时间"
+      }
+    ]
+  }
+]

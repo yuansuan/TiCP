@@ -1,0 +1,13 @@
+.vscode/
+
+/.idea/
+
+/log/
+
+
+go.work
+
+go.work.sum
+
+
+/example/

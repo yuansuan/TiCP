@@ -1,0 +1,121 @@
+[{
+    "title": "状态和跟踪",
+    "icon": null,
+    "partitionNum": 4,
+    "children": [{
+        "key": "jobId",
+        "text": "本地作业ID"
+      },
+      {
+        "key": "clusterName",
+        "text": "本地集群"
+      },
+      {
+        "key": "submissionHost",
+        "text": "提交主机"
+      },
+      {
+        "key": "execHost",
+        "text": "作业运行机器"
+      },
+      {
+        "key": "askHost",
+        "text": "机器要求"
+      },
+      {
+        "key": "priority",
+        "text": "作业优先级"
+      },
+      {
+        "key": "exitStatus",
+        "text": "退出代码"
+      }
+    ]
+  },
+  {
+    "title": "提交参数",
+    "icon": null,
+    "partitionNum": 4,
+    "children": [{
+        "key": "command",
+        "text": "作业命令",
+        "share": 4
+      },
+      {
+        "key": "project",
+        "text": "项目"
+      },
+      {
+        "key": "queue",
+        "text": "作业所在队列"
+      },
+      {
+        "key": "userName",
+        "text": "提交用户"
+      },
+      {
+        "key": "numExecProcs",
+        "text": "处理器需求"
+      },
+      {
+        "key": "jobDir",
+        "text": "工作目录",
+        "share": 4
+      },
+      {
+        "key": "inFile",
+        "text": "输入文件",
+        "share": 2
+      },
+      {
+        "key": "outputFilePath",
+        "text": "输出文件",
+        "share": 2
+      }
+    ]
+  },
+  {
+    "title": "资源信息",
+    "icon": null,
+    "partitionNum": 4,
+    "children": [{
+        "key": "resReq",
+        "text": "资源使用"
+      },
+      {
+        "key": "nthreads",
+        "text": "线程数目"
+      },
+      {
+        "key": "pgid",
+        "text": "进程组号"
+      },
+      {
+        "key": "pid",
+        "text": "进程号"
+      }
+    ]
+  },
+  {
+    "title": "时间",
+    "icon": null,
+    "partitionNum": 4,
+    "children": [{
+        "key": "endTime",
+        "text": "结束时间"
+      },
+      {
+        "key": "runTime",
+        "text": "已经运行时间"
+      },
+      {
+        "key": "remainingTime",
+        "text": "预计剩余时间"
+      },
+      {
+        "key": "estimatedRunTime",
+        "text": "预计运行时间"
+      }
+    ]
+  }
+]

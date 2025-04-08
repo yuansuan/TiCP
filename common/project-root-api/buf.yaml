@@ -1,0 +1,17 @@
+version: v1beta1
+name: buf.build/xmeng/euclid
+build:
+  roots:
+    - .
+deps:
+  - buf.build/beta/googleapis
+  - buf.build/beta/protoc-gen-validate
+  - buf.build/grpc-ecosystem/grpc-gateway
+lint:
+  use:
+    - BASIC
+  except:
+    - PACKAGE_AFFINITY
+breaking:
+  use:
+    - FILE

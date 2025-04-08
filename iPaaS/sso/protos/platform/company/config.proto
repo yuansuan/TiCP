@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+package company;
+option go_package = "github.com/yuansuan/ticp/iPaaS/sso/protos/platform/company";
+
+import "google/protobuf/empty.proto";
+
+
+service CompanyUserConfigService {
+    rpc Get(Relation) returns (CompanyUserConfig) {}
+
+    rpc AddOrUpdate(AddOrUpdateRequest) returns (google.protobuf.Empty) {}
+    rpc Delete(DeleteRequest) returns (google.protobuf.Empty) {}
+}
+
+
+message Relation {
+    // @inject_tag: `validate:"is_ysid,required"`
+    string company_id = 1;
+    // @inject_tag: `validate:"is_ysid,required"`
+    string user_id = 2;
+}
+
+message CompanyUserConfig {
+    map<string,string> configs = 2;
+}
+
+message AddOrUpdateRequest {
+    Relation relation = 1;
+    map<string,string> configs = 2;
+}
+
+message DeleteRequest {
+    Relation relation = 1;
+    repeated string keys = 2;
+}
+
+service CompanyConfigService {
+    rpc Get(GetRequest) returns (GetResponse) {}
+    rpc Set(SetRequest) returns (google.protobuf.Empty) {}
+}
+
+message GetRequest {
+    // @inject_tag: `validate:"is_ysid,required"`
+    string company_id = 1;
+
+    string key = 2;
+}
+
+message GetResponse {
+    string value = 1;
+}
+
+message SetRequest {
+    // @inject_tag: `validate:"is_ysid,required"`
+    string company_id = 1;
+
+    string key = 2;
+
+    string value = 3;
+}

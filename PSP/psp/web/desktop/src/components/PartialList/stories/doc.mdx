@@ -1,0 +1,58 @@
+import { Story, Preview } from '@storybook/addon-docs/blocks'
+
+# PartialList 部分列表
+
+PartialList 可以接收一组数据，在指定宽度内只显示一部分数据，其余数据通过附加组件显示。
+
+## 代码演示
+
+### 基本使用
+
+使用 items 传入要显示的元素，组件默认根据父容器自适应最大宽度，且默认监听 window.onresize。
+
+<Preview withSource='none'>
+  <Story id='components-partiallist--basic' />
+</Preview>
+
+### 控制最大宽度
+
+使用 maxWidth 可以控制组件的最大宽度。
+
+<Preview withSource='none'>
+  <Story id='components-partiallist--controlled' />
+</Preview>
+
+### 自定义附加组件
+
+使用 Additional 属性可以定义附加组件。
+
+<Preview withSource='none'>
+  <Story id='components-partiallist--custom-additional' />
+</Preview>
+
+### 自定义附加元素
+
+使用 addtionalItemMapper 属性可以定义附加元素的样式和行为。
+
+<Preview withSource='none'>
+  <Story id='components-partiallist--custom-additional-item' />
+</Preview>
+
+### 自定义列表元素
+
+使用 itemMapper 属性可以定义列表元素的样式和行为。
+
+<Preview withSource='none'>
+  <Story id='components-partiallist--custom-item' />
+</Preview>
+
+## API
+
+| 参数                 | 说明                                         | 类型                                                                        | 默认值 |
+| -------------------- | -------------------------------------------- | --------------------------------------------------------------------------- | ------ |
+| items\*              | 列表元素数组                                 | Array&lt;string &#124; number&gt;                                           | -      |
+| itemMapper           | 列表元素映射器，用于自定义列表元素样式和行为 | (item: string &#124; number) => string &#124; number &#124; React.ReactNode | -      |
+| additionalItemMapper | 附加元素映射器，用于自定义附加元素样式和行为 | (item: string &#124; number) => string &#124; number &#124; React.ReactNode |
+| maxWidth             | 控制列表最大宽度                             | number                                                                      | -      |
+| style                | 自定义组件样式                               | React.CSSProperties                                                         | -      |
+| Additional           | 自定义附加组件                               | React.FunctionComponent&lt;{ visibleIndex?: number }&gt;                    | -      |

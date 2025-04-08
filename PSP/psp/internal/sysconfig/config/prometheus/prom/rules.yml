@@ -1,0 +1,55 @@
+groups:
+  - name: psp-alert-rule
+    rules:
+      - alert: 作业
+        expr: topk(1, max_over_time(psp_monitor_status_job{name="Failed"}[24h])) > 10
+        for: 10s
+        labels:
+          modeltype: JobFailNumMore
+          enable: "1"
+        annotations:
+          description: "求解的作业在24小时内失败超过10个，当前失败数为: {{ $value }}个"
+          value: "{{ $value }}个"
+          condition: ">10"
+      - alert: 磁盘
+        expr: psp_monitor_disk_usage{name="disk_monitor_percent"} > 80
+        for: 60s
+        labels:
+          modeltype: DiskUsageHigh
+          enable: "1"
+        annotations:
+          description: "存储使用率超过80%, 当前使用率为: {{ $value }}%"
+          value: "{{ $value }}%"
+          condition: ">80%"
+      - alert: 调度器节点
+        expr: psp_monitor_scheduler{name="scheduler_status",node_name="dflq-ys"} > 1
+        for: 10s
+        labels:
+          modeltype: NodeDownOverlong
+          enable: "1"
+        annotations:
+          description: "[{{ .Labels.node_name }}]调度器节点下线且超过60s未上线"
+      - alert: 调度器节点
+        expr: psp_monitor_scheduler{name="scheduler_status",node_name="dflq-node1"} > 1
+        for: 10s
+        labels:
+          modeltype: NodeDownOverlong
+          enable: "1"
+        annotations:
+          description: "[{{ .Labels.node_name }}]调度器节点下线且超过60s未上线"
+      - alert: 监控采集服务
+        expr: absent(psp_agent_cpu{host_name="dflq-ys",name="node_status"}) == 1
+        for: 10s
+        labels:
+          modeltype: AgentServiceDownOverlong
+          enable: "1"
+        annotations:
+          description: "[{{ .Labels.host_name }}]节点的监控采集服务下线且超过60s未上线"
+      - alert: 监控采集服务
+        expr: absent(psp_agent_cpu{host_name="pbs-master",name="node_status"}) == 1
+        for: 10s
+        labels:
+          modeltype: AgentServiceDownOverlong
+          enable: "1"
+        annotations:
+          description: "[{{ .Labels.host_name }}]节点的监控采集服务下线且超过60s未上线"

@@ -1,0 +1,1 @@
+ALTER TABLE `tableA` DROP COLUMN `alter_add_column`;

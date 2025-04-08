@@ -1,0 +1,70 @@
+app:
+  name: project
+  ver: 1.0.0
+  host: 0.0.0.0
+  port: 8889
+
+  middleware:
+    monitor:
+      _startup: true
+      #here to set pspd_ip:9101
+      listen: ":9101"
+      metric: "/metrics"
+      #here to set prometheus_ip:9090
+      prometheus_server_endpoint: "http://localhost:9090"
+
+    mysql:
+      default:
+        _startup: true
+        encrypt: false
+        dsn: "root:password@tcp(localhost:3306)/xx?charset=utf8&parseTime=true&loc=Local"
+
+    grpc:
+      server:
+        default:
+          _startup: true
+          addr: :1114
+          max_recv_msg_size: 4194304
+          max_send_msg_size: 2147483647
+
+      client:
+        rbac:
+          addr: ":1114"
+          naming: false
+          timeout_per_request: "300s"
+          with_insecure: true
+        user:
+          #finding by etcd: key= /cluster/hellworld
+          addr: ":1113"
+          naming: false
+          timeout_per_request: "300s"
+          with_insecure: true
+        notification:
+          addr: ":1114"
+          naming: false
+          timeout_per_request: "300s"
+          with_insecure: true
+        storage:
+          addr: ":1114"
+          naming: false
+          timeout_per_request: "300s"
+          with_insecure: true
+        notice:
+          addr: ":1114"
+          naming: false
+          timeout_per_request: "300s"
+          with_insecure: true
+        approve:
+          addr: ":1114"
+          naming: false
+          timeout_per_request: "300s"
+          with_insecure: true
+
+        default:
+          addr: :1114
+
+          # golang duration format, such as "300ms", "-1.5h" or "2h45m".
+          # Valid time units are "ns", "us" (or "µs"), "ms", "s", "m", "h".
+          timeout_per_request: "300s"
+
+          with_insecure: true

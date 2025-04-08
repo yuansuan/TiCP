@@ -1,0 +1,45 @@
+import { Story, Preview } from '@storybook/addon-docs/blocks'
+
+# Mask 遮罩控件
+
+Mask 遮罩控件用于快速生成一个绝对布局的遮罩层。
+
+## 代码演示
+
+### 基本使用
+
+将 Mask 放入一个设置了 position 的父容器中是一个常用的场景。
+
+<Preview withSource='none'>
+  <Story id='components-mask--basic' />
+</Preview>
+
+### Loading
+
+可以使用 Mask.Spin 快速生成一个加载遮罩层。出于用户体验优化方面考虑，Mask.Spin 会在 500 ms 以后渐显。
+
+<Preview withSource='none'>
+  <Story id='components-mask--loading' />
+</Preview>
+
+### 主题
+
+设置 theme 属性可以控制 Mask 的主题，当前支持 white 和 black 两种主题（背景颜色透明度为 0.6）。
+
+<Preview withSource='none'>
+  <Story id='components-mask--theme' />
+</Preview>
+
+## API
+
+| 参数      | 说明         | 类型                               | 默认值 |
+| --------- | ------------ | ---------------------------------- | ------ |
+| style     | 遮罩样式     | React.CSSProperties                | -      |
+| theme     | 主题         | 'white' &#124; 'black'             | -      |
+| animation | 遮罩动画控制 | EffectTiming & { name: Keyframes } | -      |
+
+### Mask.Spin
+
+| 参数      | 说明     | 类型                                                | 默认值 |
+| --------- | -------- | --------------------------------------------------- | ------ |
+| spinProps | 遮罩样式 | [SpinProps](https://ant.design/components/spin-cn/) | -      |

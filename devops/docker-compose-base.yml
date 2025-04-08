@@ -1,0 +1,111 @@
+networks:
+  ticp-network:
+    driver: bridge
+services:
+  alertmanager:
+    container_name: alertmanager
+    image: harbor.yuansuan.cn/ticp/alertmanager:v0.27.0
+    ports:
+    - 9094:9093
+    restart: always
+    volumes:
+    - /Users/apple/code/TiCP/devops/config/base/alertmanager.yml:/etc/alertmanager/alertmanager.yml
+    - /Users/apple/code/TiCP/devops/config/base/emailalarm.tmpl:/etc/alertmanager/emailalarm.tmpl
+    - /home/data/alertmanager:/alertmanager
+  etcd:
+    command:
+    - /usr/local/bin/etcd
+    - --name=ticp-etcd
+    - --data-dir=/etcd-data
+    - --listen-client-urls=http://0.0.0.0:2379
+    - --advertise-client-urls=http://0.0.0.0:2379
+    - --listen-peer-urls=http://0.0.0.0:2380
+    - --initial-advertise-peer-urls=http://0.0.0.0:2380
+    - --initial-cluster=ticp-etcd=http://0.0.0.0:2380
+    - --initial-cluster-token=etcd-cluster
+    - --initial-cluster-state=new
+    container_name: etcd
+    image: harbor.yuansuan.cn/ticp/etcd:v3.5.19
+    networks:
+    - ticp-network
+    ports:
+    - 2379:2379
+    - 2380:2380
+    restart: always
+    volumes:
+    - /home/data/etcd:/etcd-data
+  idgen:
+    container_name: idgen
+    environment:
+    - YS_MODE=prod
+    image: harbor.yuansuan.cn/ticp/idgen:202503211511
+    logging:
+      driver: json-file
+      options:
+        max-file: '20'
+        max-size: 50m
+    networks:
+    - ticp-network
+    ports:
+    - 11211:11211
+    restart: always
+    volumes:
+    - /Users/apple/code/TiCP/devops/config/base/idgen:/workspace/idgen/config
+    - /home/data/idgen/logs:/workspace/idgen/log
+  kafka:
+    container_name: kafka
+    environment:
+    - KAFKA_CFG_NODE_ID=1
+    - KAFKA_CFG_PROCESS_ROLES=controller,broker
+    - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=1@kafka:9093
+    - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093
+    - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092
+    - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
+    - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
+    - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=PLAINTEXT
+    - ALLOW_PLAINTEXT_LISTENER=yes
+    image: harbor.yuansuan.cn/ticp/kafka:3.5.0
+    networks:
+    - ticp-network
+    ports:
+    - 9092:9092
+    restart: always
+    volumes:
+    - /home/data/kafka:/bitnami/kafka
+  mysql:
+    container_name: mysql
+    environment:
+    - MYSQL_DATABASE=ticp
+    - MYSQL_USER=ticp_user
+    - MYSQL_PASSWORD=ticp6655
+    - MYSQL_ROOT_PASSWORD=root6655
+    image: harbor.yuansuan.cn/ticp/mysql:8.0
+    networks:
+    - ticp-network
+    ports:
+    - 3306:3306
+    restart: always
+    volumes:
+    - /home/data/mysql:/var/lib/mysql
+    - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+  prometheus:
+    container_name: prometheus
+    image: harbor.yuansuan.cn/ticp/prometheus:v2.51.2
+    networks:
+    - ticp-network
+    ports:
+    - 9090:9090
+    restart: always
+    volumes:
+    - /Users/apple/code/TiCP/devops/config/base/prometheus.yml:/etc/prometheus/prometheus.yml
+    - /home/data/prometheus:/prometheus
+  redis:
+    container_name: redis
+    image: harbor.yuansuan.cn/ticp/redis:6.0
+    networks:
+    - ticp-network
+    ports:
+    - 6379:6379
+    restart: always
+    volumes:
+    - /home/data/redis:/data

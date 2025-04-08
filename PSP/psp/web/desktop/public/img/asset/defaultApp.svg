@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="233px" height="108px" viewBox="0 0 233 108" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.2 (67145) - http://www.bohemiancoding.com/sketch -->
+    <title>编组 4</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <filter x="-8.6%" y="-70.6%" width="117.1%" height="241.2%" filterUnits="objectBoundingBox" id="filter-1">
+            <feGaussianBlur stdDeviation="4" in="SourceGraphic"></feGaussianBlur>
+        </filter>
+    </defs>
+    <g id="页面" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="1.选择计算资源" transform="translate(-759.000000, -204.000000)">
+            <g id="编组-7" transform="translate(123.000000, 190.000000)">
+                <g id="ABAQUS复制-2" transform="translate(618.666667, 0.000000)">
+                    <g id="默认" transform="translate(17.000000, 14.000000)">
+                        <g id="编组-4">
+                            <rect id="矩形" fill-rule="nonzero" x="0.666666667" y="0" width="232" height="108"></rect>
+                            <text id="LOGO" font-family="HelveticaNeue-Bold, Helvetica Neue" font-size="40" font-weight="bold" fill="#CCD6E5">
+                                <tspan x="42" y="73">LOGO</tspan>
+                            </text>
+                            <rect id="矩形" fill="#CCD6E5" x="165" y="44" width="24" height="5"></rect>
+                            <rect id="矩形复制" fill="#CCD6E5" x="165" y="56" width="24" height="5"></rect>
+                            <rect id="矩形复制-2" fill="#CCD6E5" x="165" y="68" width="24" height="5"></rect>
+                            <path d="M116.574074,97.2 C155.234007,97.2 185.833333,95.2179784 185.833333,88.7 C185.833333,82.1820216 154.493266,80.2 115.833333,80.2 C77.1734008,80.2 45.8333333,81.5803307 45.8333333,88.7 C45.8333333,95.8196693 77.9141416,97.2 116.574074,97.2 Z" id="椭圆形" fill-opacity="0.6" fill="#CCD6E5" fill-rule="nonzero" opacity="0.495186942" filter="url(#filter-1)"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

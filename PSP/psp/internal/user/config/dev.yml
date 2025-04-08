@@ -1,0 +1,86 @@
+app:
+  name: user-management
+  ver: 1.0.0
+
+  host: 0.0.0.0
+  port: 8889
+
+    # load config from etcd?
+  load_remote_config: false
+
+  network_if_name: ""
+
+  middleware:
+    logger:
+      log_dir: ./log
+
+    monitor:
+      _startup: false
+      listen: ":9101"
+      metric: "/metrics"
+
+    mysql:
+      default:
+        _startup: true
+        dsn: "root:password@tcp(localhost:3306)/xx?charset=utf8&parseTime=true&loc=Local"
+    redis:
+      default:
+        _startup: true
+        addr: :6379
+    grpc:
+      server:
+        default:
+          _startup: true
+          #type: static or naming
+          addr: :1113 # service name
+          #write_buffer_size: 32768
+          #read_buffer_size: 32769
+          #initial_window_size: 65536
+          #initial_conn_window_size: 65537
+          #max_recv_msg_size: 65538
+          #max_send_msg_size: 65539
+          #max_concurrent_streams: 100
+          #connection_timeout: 100000
+          #max_header_list_size: 1024
+          #keepalive_max_connection_idle: 60000
+          #keepalive_max_connection_age: 61000
+          #keepalive_max_connection_age_grace: 62000
+          #keepalive_time: 63000
+          #keepalive_timeout: 64000
+          #keepalive_enforcement_policy_min_time: 240000
+          #keepalive_enforcement_policy_permit_without_stream: true
+
+      client:
+        rbac:
+          addr: ":1118"
+          naming: false
+          timeout_per_request: "5s"
+          with_insecure: true
+        sysconfig:
+          addr: ":1114"
+          naming: false
+          timeout_per_request: "5s"
+          with_insecure: true
+        storage:
+          addr: ":1114"
+          naming: false
+          timeout_per_request: "5s"
+          with_insecure: true
+        approve:
+          addr: ":1114"
+          naming: false
+          timeout_per_request: "300s"
+          with_insecure: true
+
+        default:
+          addr: :1111
+          timeout_per_request: "5s"
+
+          with_insecure: true
+    cache:
+      default:
+        name: default
+        backend_type: redis
+
+    apm:
+      apm_server_url: "http://:8200"

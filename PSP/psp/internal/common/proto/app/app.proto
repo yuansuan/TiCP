@@ -1,0 +1,120 @@
+syntax = "proto3";
+
+package app;
+
+option go_package = "yuansuan.cn/psp/internal/common/proto/app";
+
+service AppService {
+  rpc GetAppInfoById (GetAppInfoByIdRequest) returns (GetAppInfoByIdResponse);
+  rpc GetAppInfoByOutAppId (GetAppInfoByOutAppIdRequest) returns (GetAppInfoByOutAppIdResponse);
+  rpc GetAppInfoByPrams (GetAppInfoByPramsRequest) returns (GetAppInfoByPramsResponse);
+  rpc GetAppTotalNum (GetAppTotalNumRequest) returns (GetAppTotalNumResponse);
+  rpc CheckLicenseManagerIdUsed (CheckLicenseManagerIdUsedRequest) returns (CheckLicenseManagerIdUsedResponse);
+}
+
+message GetAppTotalNumRequest {}
+
+message GetAppTotalNumResponse {
+  int64 total = 1;
+}
+
+message GetAppInfoByIdRequest {
+  string app_id = 1;
+}
+
+message GetAppInfoByIdResponse {
+  App app = 1;
+}
+
+message GetAppInfoByOutAppIdRequest {
+  string out_app_id = 1;
+}
+
+message GetAppInfoByOutAppIdResponse {
+  App app = 1;
+}
+
+message GetAppInfoByPramsRequest {
+  string type = 1;
+  string version = 2;
+  string compute_type = 3;
+}
+
+message GetAppInfoByPramsResponse {
+  App app = 1;
+}
+
+message App {
+  string id = 1;
+  string out_app_id = 2;
+  string cloud_out_app_id = 3;
+  string name = 4;
+  string type = 5;
+  string state = 6;
+  string version = 7;
+  string description = 8;
+  string script = 9;
+  string icon = 10;
+  HelpDoc help_doc = 11;
+  SubForm sub_form = 12;
+  string compute_type = 13;
+  bool enable_residual = 14;
+  string residual_log_parser = 15;
+  bool enable_snapshot = 16;
+  repeated KeyValue scheduler_param = 17;
+}
+
+message SubForm {
+  repeated Section section = 1;
+}
+
+message Section {
+  string name = 1;
+  repeated Field field = 2;
+}
+
+message Field {
+  string  id = 1;
+  string label = 2;
+  string help = 3;
+  string type = 4;
+  bool required = 5;
+  bool hidden = 6;
+  string default_value = 7;
+  repeated string default_values = 8;
+  string value = 9;
+  repeated string values = 10;
+  string action = 11;
+  repeated string options = 12;
+  string post_text = 13;
+  string file_from_type = 14;
+  bool is_master_slave = 15;
+  string master_include_keywords = 16;
+  string master_include_extensions = 17;
+  string master_slave = 18;
+  string options_from = 19;
+  string options_script = 20;
+  string custom_json_value_string = 21;
+  bool is_support_master = 22;
+  string master_file = 23;
+  bool is_support_workdir = 24;
+  string workdir = 25;
+}
+
+message HelpDoc {
+  string type = 1;
+  string value = 2;
+}
+
+message KeyValue {
+  string key = 1;
+  string value = 2;
+}
+
+message CheckLicenseManagerIdUsedRequest {
+  string license_manager_id = 1;
+}
+
+message CheckLicenseManagerIdUsedResponse {
+  bool isUsed = 1;
+}

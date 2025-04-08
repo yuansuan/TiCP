@@ -1,0 +1,290 @@
+import { Story, Preview } from '@storybook/addon-docs/blocks'
+
+# Table 表格
+
+基于[rsuite-table](https://github.com/rsuite/rsuite-table)封装，用于展示行列数据。
+
+## 特性
+
+- 支持虚拟滚动，可用于展现大量结构化的数据；
+- 支持排序、分类、分页、自定义操作等复杂行为；
+- 插件机制；
+
+## 代码演示
+
+### 基本使用
+
+简单的表格，最后一列是各种操作。
+
+<Preview withSource='none'>
+  <Story id='components-table--basic' />
+</Preview>
+
+### 列合并
+
+表格列合并。
+
+<Preview withSource='none'>
+  <Story id='components-table--colspan' />
+</Preview>
+
+### 自定义表格
+
+自定义表格列；自定义表格列顺序。定义 tableId 和 defaultConfig 启用表格自定义功能。
+
+<Preview withSource='none'>
+  <Story id='components-table--customizable' />
+</Preview>
+
+### 筛选
+
+对某一列数据进行筛选，使用列的 selector 属性来指定需要筛选的列
+
+<Preview withSource='none'>
+  <Story id='components-table--filterable' />
+</Preview>
+
+### 固定表格列
+
+使用 fixed 属性可以固定表格列。
+
+<Preview withSource='none'>
+  <Story id='components-table--fixed-column' />
+</Preview>
+
+### 百分比宽度
+
+支持向表格列宽传入百分比字符串，请确保定义了表格总宽度。这时候如果向表格列宽传入具体的数值，其余表格列会根据剩余宽度自适应。如果存在表格列宽是未定义的，会自动均分剩余宽度。
+
+<Preview withSource='none'>
+  <Story id='components-table--percent-width' />
+</Preview>
+
+### 可伸缩列
+
+设置 resizable 属性配置列可伸缩。（设置 flexGrow 属性的列无法启用可伸缩属性）
+
+<Preview withSource='none'>
+  <Story id='components-table--resizable' />
+</Preview>
+
+### 表格行事件监听
+
+设置表格行事件监听，支持单击、双击、右键、鼠标移入和鼠标移出事件。
+
+<Preview withSource='none'>
+  <Story id='components-table--row-event' />
+</Preview>
+
+### 可选择
+
+第一列是联动的选择框。
+
+<Preview withSource='none'>
+  <Story id='components-table--selectable' />
+</Preview>
+
+### 排序
+
+对某一列数据进行排序，使用列的 sorter 属性来指定需要排序的列。
+
+<Preview withSource='none'>
+  <Story id='components-table--sortable' />
+</Preview>
+
+### 树形表格
+
+在 data 中使用 children 属性组织树形结构，使用 isTree 属性启用树形表格。
+
+<Preview withSource='none'>
+  <Story id='components-table--tree' />
+</Preview>
+
+### 嵌套表格
+
+在 props 中使用 expandedRowKeys，rowExpandedHeight，onRowClick，renderRowExpanded 属性，启用嵌套表格。
+
+<Preview withSource='none'>
+  <Story id='components-table--expanded' />
+</Preview>
+
+### 虚拟滚动
+
+高效渲染大量数据，设置 virtualized 属性启用虚拟滚动。
+
+<Preview withSource='none'>
+  <Story id='components-table--virtualized' />
+</Preview>
+
+## API
+
+### Table
+
+| 参数          | 说明                                 | 类型                                                                                                                                                                                                                                                                                              | 默认值 |
+| ------------- | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ |
+| tableId       | 表格键值：用于表格自定义设置本地缓存 | string                                                                                                                                                                                                                                                                                            | --     |
+| defaultConfig | 表格默认自定义配置                   | Array&lt;{ key: string; active?: boolean } &#124; string&gt;                                                                                                                                                                                                                                      | --     |
+| props         | 表格属性，对应 rsuite-table 属性     | ITableProps                                                                                                                                                                                                                                                                                       | --     |
+| columns\*     | 表格列配置                           | Array&lt;IColumn&gt;                                                                                                                                                                                                                                                                              | --     |
+| plugins       | 表格插件                             | Array&lt;ITablePlugin&gt;                                                                                                                                                                                                                                                                         | --     |
+| onRow         | 注册行点击事件                       | (rowData: object, rowIndex: number) => Partial&lt;{ onClick: (rowData: object, rowIndex: number) => void, onContextMenu: (rowData: object, rowIndex: number) => void, onMouseOver: (rowData: object, rowIndex: number) => void , onDoubleClick: (rowData: object, rowIndex: number) => void }&gt; | --     |
+
+### ITableProps
+
+| 参数                     | 说明                                               | 类型                                                                              | 默认值 |
+| ------------------------ | -------------------------------------------------- | --------------------------------------------------------------------------------- | ------ |
+| affixHeader              | 将表格头固定在页面的某个位置                       | boolean &#124; number                                                             | --     |
+| affixHorizontalScrollbar | 将表格的横向滚动条固定在页面的某个位置             | boolean &#124; number                                                             | --     |
+| autoHeight               | 根据表格内容自动设置表格高度                       | boolean                                                                           | false  |
+| bodyRef                  | A ref attached to the table body element           | (ref: HTMLElement) => void                                                        | --     |
+| bordered                 | 显示表格边框                                       | boolean                                                                           | false  |
+| cellBordered             | 显示单元格边框                                     | boolean                                                                           | false  |
+| data\*                   | 表格数据                                           | Array&lt;Object&gt;                                                               | --     |
+| defaultExpandAllRows     | 默认展开所有行                                     | boolean                                                                           | false  |
+| defaultExpandedRowKeys   | 默认展开指定的行                                   | Array&lt;string&gt;                                                               | []     |
+| defaultSortType          | Sort type                                          | enum: 'desc', 'asc'                                                               | --     |
+| expandedRowKeys          | 控制展开的表格行                                   | Array&lt;string&gt;                                                               | --     |
+| headerHeight             | 表格头高度                                         | number                                                                            | 40     |
+| height                   | 表格高度                                           | number                                                                            | 200    |
+| hover                    | The row of the table has a mouseover effect        | boolean                                                                           | true   |
+| isTree                   | 树表格                                             | boolean                                                                           | false  |
+| loading                  | 显示加载中图标                                     | boolean                                                                           | false  |
+| locale                   | 设置空表格/加载中提示                              | { emptyMessage: string; loading: string }                                         | --     |
+| minHeight                | 表格最小高度                                       | number                                                                            | 0      |
+| onDataUpdated            | Callback after table data update.                  | (nextData: object[], scrollTo: (coord: { x: number; y: number }) => void) => void | --     |
+| onExpandChange           | 监听树形表格展开事件                               | (expanded: boolean, rowData: object) => void                                      | --     |
+| onScroll                 | 监听表格滚动事件                                   | (scrollX: object, scrollY: object) => void                                        | --     |
+| renderEmpty              | 自定义空表格内容                                   | (info: React.ReactNode) => React.ReactNode                                        | --     |
+| renderLoading            | 自定义 Loading                                     | (loading: React.ReactNode) => React.ReactNode                                     | --     |
+| renderRowExpanded        | 自定义行展开的内容                                 | (rowDate?: Object) => React.ReactNode                                             | --     |
+| renderTreeToggle         | 自定义树形表格的展开内容                           | (icon: React.ReactNode, rowData: object) => React.ReactNode                       | --     |
+| rowClassName             | string, ((rowData: object) => string)              | 扩展行类名                                                                        | --     |
+| rowExpandedHeight        | 设置展开行高度                                     | number                                                                            | 100    |
+| rowHeight                | 行高                                               | number &#124; (rowData: object) => number                                         | 46     |
+| rowKey                   | 行键值                                             | string                                                                            | 'key'  |
+| rtl                      | Right to left                                      | boolean                                                                           | true   |
+| shouldUpdateScroll       | Whether to update the scroll bar after data update | boolean                                                                           | true   |
+| showHeader               | 显示表格 Header                                    | boolean                                                                           | true   |
+| virtualized              | 启用虚拟滚动                                       | boolean                                                                           | false  |
+| width                    | 表格宽度                                           | number                                                                            | --     |
+
+### IColumn
+
+| 参数     | 说明           | 类型                                                                                                                    | 默认值 |
+| -------- | -------------- | ----------------------------------------------------------------------------------------------------------------------- | ------ |
+| props    | 列属性         | IColumnProps                                                                                                            | -      |
+| header\* | 列 header      | string &#124; (() => React.ReactNode)                                                                                   | --     |
+| name     | 列名称         | string                                                                                                                  | --     |
+| cell     | 单元格内容     | { props?: Partial&lt;{dataKey: string, rowData: any, rowIndex: number}&gt;, render?: (props?: any) => React.ReactNode } | --     |
+| dataKey  | 列对应数据键值 | string                                                                                                                  | --     |
+| sorter   | 列排序配置     | (option?: { sortType: string; sortKey: string }) => void                                                                | --     |
+| filter   | 列筛选配置     | IColumnFilter                                                                                                           | --     |
+
+### IColumnProps
+
+| 参数      | 说明                 | 类型                                             | 默认值 |
+| --------- | -------------------- | ------------------------------------------------ | ------ |
+| align     | 列对齐方式           | 'center' &#124; 'left' &#124; 'right'            | 'left' |
+| colSpan   | 合并表格列           | number                                           | 1      |
+| fixed     | 固定表格列           | boolean &#124; 'left' &#124; 'right'             | false  |
+| flexGrow  | 表格列宽度按比例伸缩 | number                                           | --     |
+| minWidth  | 表格最小宽度         | number                                           | 0      |
+| onResize  | 监听表格列伸缩事件   | (columnWidth?: number, dataKey?: string) => void | --     |
+| resizable | 设置表格可伸缩       | boolean                                          | false  |
+| treeCol   | 树形表格列           | boolean                                          | false  |
+| width     | 列宽度               | number                                           | --     |
+
+### IColumnFilter
+
+| 参数               | 说明             | 类型                                                                                                | 默认值 |
+| ------------------ | ---------------- | --------------------------------------------------------------------------------------------------- | ------ |
+| items              | 可过滤选项       | Array&lt;{key:string, name:string}&gt;                                                              | --     |
+| selectedKeys       | 控制选中的过滤项 | string[]                                                                                            | --     |
+| updateSelectedKeys | 更新选中的过滤项 | (keys: string[]) => void                                                                            | --     |
+| onChange           | 监听过滤项变更   | (selectedKeys: string[], info?: { node?: {key: string, name: string}; checked: boolean }) => void } | --     |
+
+## 插件机制
+
+Table 组件提供了 Plugin 机制，支持开发者自定义表格扩展功能。
+
+### 内置插件
+
+| 插件                 | 说明                                                 | 对应属性               |
+| -------------------- | ---------------------------------------------------- | ---------------------- |
+| StyleCellPlugin      | 单元格修饰插件：支持单元格省略、定义 title、默认样式 | --                     |
+| CustomizblePlugin    | 自定义表格插件：用于自定义表格列，自定义表格列顺序   | tableId, defaultConfig |
+| RowEventPlugin       | 行事件插件：支持表格行事件监听                       | onRow                  |
+| SelectablePlugin     | 表格可选择插件：支持表格列的单选、全选、全不选       | rowSelection           |
+| SelectorFilterPlugin | 表格可筛选插件：支持表格列筛选功能                   | column: filter         |
+| SortablePlugin       | 表格可排序插件：支持表格列排序功能                   | column: sorter         |
+| PercentWidthPlugin   | 表格百分比宽度插件：支持使用百分比宽度布局           | column: props: width   |
+| PlaceholderPlugin    | 表格默认值插件：当表格内容为空时显示 --              | --                     |
+
+### rowSelection
+
+| 参数                | 说明               | 类型                                         | 默认值 |
+| ------------------- | ------------------ | -------------------------------------------- | ------ |
+| props               | 选择列属性         | IColumnProps                                 | --     |
+| defaultSelectedKeys | 默认选中状态       | string[]                                     | --     |
+| selectedRowKeys     | 选中状态列受控     | string[]                                     | --     |
+| selectedKeys        | 同 selectedRowKeys | string[]                                     | --     |
+| onSelect            | 单列选中/反选事件  | (rowKey?: string, checked?: boolean) => void | --     |
+| onSelectAll         | 列全选事件         | (keys?: string[]) => void                    | --     |
+| onSelectInvert      | 列全反选事件       | () => void                                   | --     |
+| onChange            | 选中状态变更事件   | (kyes: string[]) => void                     | --     |
+
+### 自定义插件
+
+可通过 plugins 属性向 table 注入自定义插件。
+
+### 插件开发
+
+插件有函数式插件和对象式插件两种类型：
+
+1. 对象式插件需要实现 apply 方法，Table 在调用插件的 apply 方法时会向插件传递 table 实例和其他属性：
+
+```jsx
+class CustomPlugin {
+  apply({ hooks }, props) {
+    // 在每次 Table 初始化时修改参数
+    hooks.init.tap('customPlugin on mount', (context) => {
+      // context.props 中包含了你传递给 Table 的属性
+      const { columns } = context.props
+      // 在这里你可以对 context 做任何的修改
+      ...
+      // 修改完成后返回 context
+      return context
+    })
+
+    // 在每次 Table 渲染前修改参数
+    hooks.beforeRender.tap('customPlugin before render', (context) => { ... })
+    // useLayoutEffect
+    hooks.useLayoutEffect.tap('customPlugin useLayoutEffect', (context) => { ... })
+    // useEffect
+    hooks.useEffect.tap('customPlugin useEffect', (context) => { ... })
+  }
+}
+```
+
+2. 函数式插件更加简洁：
+
+```jsx
+function CustomPlugin({ hooks }, props) {
+  // 在每次 Table 初始化时修改参数
+  hooks.init.tap('customPlugin on mount', (context) => {
+    // context.props 中包含了你传递给 Table 的属性
+    const { columns } = context.props
+    // 在这里你可以对 context 做任何的修改
+    ...
+    // 修改完成后返回 context
+    return context
+  })
+
+  // 在每次 Table 渲染前修改参数
+  hooks.beforeRender.tap('customPlugin before render', (context) => { ... })
+  // useLayoutEffect
+  hooks.useLayoutEffect.tap('customPlugin useLayoutEffect', (context) => { ... })
+  // useEffect
+  hooks.useEffect.tap('customPlugin useEffect', (context) => { ... })
+}
+```

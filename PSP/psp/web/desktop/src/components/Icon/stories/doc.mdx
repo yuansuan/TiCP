@@ -1,0 +1,48 @@
+import { Story, Preview } from '@storybook/addon-docs/blocks'
+
+# Icon 图标
+
+基于[Antd Icon](https://ant.design/components/icon-cn/)封装，增加了 disabled 属性。
+
+## IconFont
+
+Icon 图标默认只支持 [common](https://www.iconfont.cn/manage/index?spm=a313x.7781069.1998910419.11&manage_type=myprojects&projectId=1364348) 项目下的图标，要扩展图标集，请使用 [@ys/iconfont-webpack-plugin](http://10.0.1.25:4873/-/web/detail/@ys/iconfont-webpack-plugin) 配置。
+
+## 代码演示
+
+### 基本使用
+
+使用 &lt;Icon /&gt; 标签声明组件：指定图标对应的 type 属性控制图标类型；spin 属性控制图标旋转；rotate 属性控制图标倾斜度；disabled 属性或 className="disbaled" 禁用图标事件。
+
+<Preview withSource='none'>
+  <Story id='components-icon--basic' />
+</Preview>
+
+### 自定义样式
+
+可以使用 fontSize 自定义图标大小；使用 color 自定义图标颜色。
+
+<Preview withSource='none'>
+  <Story id='components-icon--custom' />
+</Preview>
+
+## API
+
+### Icon
+
+| 参数      | 说明                                                                                   | 类型                                          | 默认值 |
+| --------- | -------------------------------------------------------------------------------------- | --------------------------------------------- | ------ |
+| type      | 图标类型。遵循图标的命名规范                                                           | string                                        | -      |
+| style     | 设置图标的样式，例如 fontSize 和 color                                                 | CSSProperties                                 | -      |
+| disabled  | 禁用图标事件                                                                           | boolean                                       | false  |
+| component | 控制如何渲染图标，通常是一个渲染根标签为 &lt;svg&gt; 的 React 组件，会使 type 属性失效 | ComponentType&lt;CustomIconComponentProps&gt; | -      |
+
+### CustomIconComponentProps
+
+| 参数      | 说明                  | 类型                 | 默认值         |
+| --------- | --------------------- | -------------------- | -------------- |
+| width     | svg 元素宽度          | string &#124; number | '1em'          |
+| height    | svg 元素高度          | string &#124; number | '1em'          |
+| fill      | svg 元素填充的颜色    | string               | 'currentColor' |
+| className | 计算后的 svg 类名     | string               | -              |
+| style     | 计算后的 svg 元素样式 | CSSProperties        | -              |

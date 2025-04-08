@@ -1,0 +1,16 @@
+app:
+  db_migration:
+    auto_migrate: true
+    force_migrate: false
+    version: up
+  host: 0.0.0.0
+  middleware:
+    logger:
+      log_dir: ./log
+    mysql:
+      default:
+        _startup: true
+        dsn: ticp_user:ticp6655@tcp(10.0.4.48:3306)/ticp?charset=utf8&parseTime=true&loc=Local
+  name: storage
+  port: 8898
+  ver: 1.0.0

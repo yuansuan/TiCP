@@ -1,0 +1,2 @@
+ALTER TABLE job
+ADD COLUMN alloc_type VARCHAR(50) COMMENT '分配核数的方式';

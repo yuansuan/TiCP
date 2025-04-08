@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="56px" height="56px" viewBox="0 0 56 56" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 63 (92445) - https://sketch.com -->
+    <title>观看</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="56" height="56"></rect>
+    </defs>
+    <g id="观看" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g>
+            <mask id="mask-2" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <g id="矩形"></g>
+            <g mask="url(#mask-2)" id="观看icon">
+                <g transform="translate(7.000000, 7.000000)">
+                    <g transform="translate(0.428571, 0.428571)">
+                        <circle id="椭圆形" stroke="#FFFFFF" stroke-width="2" cx="20.5714286" cy="20.5714286" r="19.5714286"></circle>
+                        <path d="M23.2397049,15.7651971 C23.0444428,15.569935 22.7885205,15.4723039 22.5325982,15.4723039 C22.2766758,15.4723039 22.0207535,15.569935 21.8254914,15.7651971 L13.7080543,23.8826342 C13.5630473,24.0276412 13.4661274,24.2137236 13.4304291,24.4156634 C13.3823589,24.6875896 13.4490594,24.9532569 13.5957589,25.1629602 C13.7424585,25.3726634 13.9691572,25.5264027 14.2410834,25.574473 L24.4497918,27.3175889 C24.721718,27.2695187 24.9484167,27.1157794 25.0951163,26.9060761 C25.2418158,26.6963729 25.3085163,26.4307056 25.2604461,26.1587794 L23.5173301,16.2982263 C23.4816318,16.0962865 23.3847119,15.9102041 23.2397049,15.7651971 Z" id="矩形" stroke="#FFFFFF" stroke-width="2" fill="#FFFFFF" transform="translate(18.514286, 20.571429) rotate(-45.000000) translate(-18.514286, -20.571429) "></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,25 @@
+ldap:
+  enable: true
+  server: ldaps://:636
+  base_dn: dc=ys,dc=com
+  # 是否启用tls，通常为 plain, ssl，starttls, 默认为plain
+  encryption: "plain"
+  # 一个有read权限的账号验证通过后搜索用户输入的用户名是否存在
+  admin_bind_dn: CN=caeapp,CN=Users,DC=DFLZM,DC=COM
+  admin_bind_password:
+  # 唯一ID属性，通常为 sAMAccountName, uid 或者cn， 默认为 sAMAccountName
+  uid: ""
+  # 限制能登录user的查询语句，如 (objectclass=user) 。默认为空，表示允许所有 ad 账户登录
+  userfilter: "(objectClass=user)"
+  extra_attrs:
+    # 用户唯一id，AD域:cn，LDAP: cn or uid
+    uid_key: cn
+    # 邮箱
+    email_key: mail
+    # 中文姓名
+    real_name_key: displayName
+    # 手机号
+    mobile_key: mobile
+
+openapi:
+  enable: false

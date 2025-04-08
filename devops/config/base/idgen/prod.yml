@@ -1,0 +1,23 @@
+app:
+  host: 0.0.0.0
+  load_remote_config: false
+  middleware:
+    etcd:
+      endpoints:
+      - etcd:2379
+      startup: true
+      tls: false
+    grpc:
+      server:
+        default:
+          _startup: true
+          addr: :11211
+    logger:
+      log_dir: ./log
+    monitor:
+      _startup: false
+      listen: :9090
+      metric: /metrics
+  name: idgen
+  port: 8899
+  ver: 1.0.0

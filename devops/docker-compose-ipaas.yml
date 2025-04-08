@@ -1,0 +1,43 @@
+networks:
+  ticp-network:
+    driver: bridge
+services:
+  job:
+    container_name: job
+    environment:
+    - YS_MODE=prod
+    image: harbor.yuansuan.cn/ticp/job:202503281053
+    logging:
+      driver: json-file
+      options:
+        max-file: '20'
+        max-size: 50m
+    networks:
+    - ticp-network
+    ports:
+    - 8893:8899
+    - 11214:11211
+    restart: always
+    volumes:
+    - /home/data/job/logs:/workspace/job/log
+    - /Users/apple/code/TiCP/devops/config/ipaas/job:/workspace/job/config
+  license:
+    container_name: license
+    environment:
+    - YS_MODE=prod
+    image: harbor.yuansuan.cn/ticp/license:202503211513
+    logging:
+      driver: json-file
+      options:
+        max-file: '20'
+        max-size: 50m
+    networks:
+    - ticp-network
+    ports:
+    - 8894:8899
+    - 11213:11211
+    restart: always
+    volumes:
+    - /Users/apple/code/TiCP/devops/config/ipaas/license:/workspace/license/config
+    - /home/data/license/logs:/workspace/license/log
+version: '3.8'

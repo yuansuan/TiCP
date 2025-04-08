@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="278px" height="281px" viewBox="0 0 278 281" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 63 (92445) - https://sketch.com -->
+    <title>手机模型</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="300" height="299"></rect>
+        <path d="M66,33 L234,33 C256.09139,33 274,50.90861 274,73 L274,299 L274,299 L26,299 L26,73 C26,50.90861 43.90861,33 66,33 Z" id="path-3"></path>
+        <filter x="-9.1%" y="-8.5%" width="118.1%" height="116.9%" filterUnits="objectBoundingBox" id="filter-4">
+            <feOffset dx="0" dy="0" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="7.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.866666667   0 0 0 0 0.866666667   0 0 0 0 0.866666667  0 0 0 1 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <linearGradient x1="11.0771343%" y1="12.9230053%" x2="73.0514515%" y2="87.2169301%" id="linearGradient-5">
+            <stop stop-color="#FFAC36" offset="0%"></stop>
+            <stop stop-color="#FFE070" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="仪表盘" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="仪表盘-二维码提示" transform="translate(-711.000000, -274.000000)">
+            <g id="手机模型" transform="translate(700.000000, 256.000000)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <g id="矩形"></g>
+                <g id="矩形" mask="url(#mask-2)">
+                    <use fill="black" fill-opacity="1" filter="url(#filter-4)" xlink:href="#path-3"></use>
+                    <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-3"></use>
+                </g>
+                <path d="M228,43.000297 C246.777681,43.000297 262,58.2226155 262,77.000297 L262,299 L37,299 L37,77.000297 C37,58.2226155 52.2223185,43.000297 71,43.000297 L89.2847404,43.0001318 C91.2600219,53.2431835 100.272745,60.9799238 111.09248,60.9799238 L111.09248,60.9799238 L189.495755,60.9799238 C200.315491,60.9799238 209.328213,53.2431835 211.303495,43.0001318 L228,43.000297 Z" id="形状结合" fill="#F1F5FC" mask="url(#mask-2)"></path>
+                <g id="编组-23" mask="url(#mask-2)" fill="#E7ECF5">
+                    <g transform="translate(106.000000, 44.000000)">
+                        <rect id="矩形" x="14" y="0" width="74" height="8" rx="4"></rect>
+                        <circle id="椭圆形" cx="4" cy="4" r="4"></circle>
+                    </g>
+                </g>
+                <g id="通知图" mask="url(#mask-2)">
+                    <g transform="translate(245.500000, 73.500000) rotate(-330.000000) translate(-245.500000, -73.500000) translate(227.000000, 59.000000)">
+                        <g id="铃铛" transform="translate(5.866025, 0.964102)">
+                            <ellipse id="椭圆形" fill="#FF9D00" cx="13.3939394" cy="25.2777778" rx="2.75757576" ry="2.33333333"></ellipse>
+                            <ellipse id="椭圆形" stroke="#FF9D00" cx="13" cy="1.94444444" rx="1.46969697" ry="1.44444444"></ellipse>
+                            <path d="M13,25.6666667 L12.7850212,25.6666667 C5.70447432,25.6536356 0,25.0078433 0,24.2130744 C0,23.8791599 0.340139254,23.143482 1.08639934,21.8726442 C1.56547989,21.0567977 2.15811527,20.4193282 2.86430548,19.9602356 L2.94629291,19.908055 L2.94666667,11.6437767 C2.94666667,6.18367553 7.34268893,1.73656313 12.8333303,1.55960744 L13.000045,1.55555556 C18.568054,1.64682584 23.0533333,6.12852299 23.0533333,11.6437767 L23.0537071,19.908055 C23.7961294,20.3705559 24.4160939,21.025419 24.9136007,21.8726442 L25.0387185,22.0872788 C25.6979755,23.2270307 26,23.8984242 26,24.2130744 C26,24.9998956 20.4090447,25.6407048 13.426978,25.6658974 L13,25.6666667 Z" id="路径" fill="url(#linearGradient-5)"></path>
+                        </g>
+                        <g id="编组-13" transform="translate(29.271470, 0.549038)" stroke-linecap="round">
+                            <path d="M1.25629641,3.45819768 C2.0850172,4.27595564 2.38948031,5.31386074 2.16968575,6.57191299" id="路径-23" stroke="#FF9341" stroke-width="0.5" transform="translate(1.747547, 5.015055) rotate(-10.000000) translate(-1.747547, -5.015055) "></path>
+                            <path d="M3.48759469,0.123247463 C5.76720148,2.05610369 6.55779059,4.66801109 5.85936203,7.95896966" id="路径-23备份" stroke="#FF9341" stroke-width="0.5" transform="translate(4.796328, 4.041109) rotate(-2.000000) translate(-4.796328, -4.041109) "></path>
+                        </g>
+                        <g id="编组-13" transform="translate(4.120835, 4.924682) scale(-1, 1) translate(-4.120835, -4.924682) translate(0.620835, 0.924682)" stroke-linecap="round">
+                            <path d="M1.25629641,3.45819768 C2.0850172,4.27595564 2.38948031,5.31386074 2.16968575,6.57191299" id="路径-23" stroke="#FF9341" stroke-width="0.5" transform="translate(1.747547, 5.015055) rotate(-10.000000) translate(-1.747547, -5.015055) "></path>
+                            <path d="M3.48759469,0.123247463 C5.76720148,2.05610369 6.55779059,4.66801109 5.85936203,7.95896966" id="路径-23备份" stroke="#FF9341" stroke-width="0.5" transform="translate(4.796328, 4.041109) rotate(-2.000000) translate(-4.796328, -4.041109) "></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

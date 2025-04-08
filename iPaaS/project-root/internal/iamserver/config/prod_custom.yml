@@ -1,0 +1,20 @@
+
+
+admin_ak_id: ""
+admin_ak_secret: ""
+
+allow_add_users:
+  - 58X9H8Yakw1
+
+ys_api_server:
+  job:
+  account_bill:
+  cloud_app:
+  lic_manager:
+  merchandise:
+  cad_converter:
+
+# assume role 允许的最大时间，单位小时，默认4小时
+max_assume_role_time: 4
+# 清理审计日志的时间间隔，单位天，默认3天
+clean_audit_log_interval: 3

@@ -1,0 +1,55 @@
+import { theme } from '@ys/utils/constant'
+import { Meta } from '@storybook/addon-docs/blocks'
+import { CodeEditor } from '..'
+
+<Meta title='Guides/theme' />
+
+# theme 主题
+
+1. @ys/components 中的大部份组件是基于 antd 组件封装的，所以可以通过 [antd 主题定制](https://ant.design/docs/react/customize-theme-cn) 设置主题样式。
+
+```tsx
+// webpack: add less loader
+const { antTheme } = require('@ys/utils/constant)
+
+...
+{
+  test: /\.less$/,
+  use: [
+    devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+    'css-loader',
+    {
+      loader: 'less-loader',
+      options: {
+        modifyVars: antTheme,
+        javascriptEnabled: true,
+      },
+    },
+  ],
+}
+...
+```
+
+2. 但是还有一部分组件并没有依赖 antd（例如：Table），所以要统一组件库的主题样式还需要再多做一步工作。
+
+```tsx
+import { ThemeProvider } from 'styled-components'
+import { theme } from '@ys/utils/constant'
+
+ReactDOM.render(
+  <ThemeProvider theme={theme}>
+    <App />
+  </ThemeProvider>,
+  mountNode
+)
+```
+
+3. Modal 弹窗是动态挂载到 DOM 上的，当需要定制 Modal 的主题时，请使用 Modal.theme 属性进行配置。
+
+@ys/components 的自定义组件使用 styled-components 定义组件样式，所以可以使用 **ThemeProvider** 定义主题。
+
+## theme variables
+
+<div style={{ height: 550 }}>
+  <CodeEditor language="yaml" readOnly value={JSON.stringify(theme, null, 2)} />
+</div>

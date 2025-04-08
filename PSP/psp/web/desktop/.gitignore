@@ -1,0 +1,10 @@
+.DS_Store
+node_modules
+dist
+
+*.log
+Cargo.toml
+Cargo.lock
+main.rs
+target
+.idea

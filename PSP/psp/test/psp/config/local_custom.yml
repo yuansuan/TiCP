@@ -1,0 +1,149 @@
+# 系统全局配置
+main:
+  # Swagger API 文档配置
+  # 系统业务 API 文档, 作为开发阶段前后端沟通的辅助工具
+  # 注意: 正式部署版本不应开启或者不包含该部分内容
+  # 访问方式: http://ip:port/swagger/index.html
+  # host 为 pspd 执行程序部署的 ip
+  # port 为系统开放可访问的端口
+  swagger:
+    enable: false
+    host: 127.0.0.1
+    port: 32432
+
+  # 3D 可视化服务配置
+  # 用于控制系统是否加载可视化功能(包括后端路由接口、定时任务; 前端菜单入口、图标展示等)
+  # 若开启该服务, 请确认 Paas 平台已部署可视化所依赖的服务
+  enable_visual: true
+
+# 计算应用配置
+app:
+  # 同步删除计算应用配置
+  # 注意: 在部署环境中应[开启], 避免脏数据的影响
+  # 在开发环境时, 涉及的数据表在 Paas 数据库是共用的, 为降低影响添加
+  delete_paas_app: false
+
+# 权限控制服务
+rbac:
+  # 基于 casbin 框架的基本模型定义文件路径, 一般无需修改
+  rbac_config_path: config/rbac_model.conf
+
+  # 开启 API 接口认证, 服务内置配置, 无需修改
+  enable_api_authorize: false
+
+# 计算作业配置
+job:
+  # 同步作业信息定时任务配置
+  sync_data:
+    enable: true
+    interval: 5
+
+  # 上传作业文件的临时存储目录
+  tmp_upload: .tmp_upload
+
+  # 线上作业队列名称, 可自定义其他名称
+  cloud_queue: cloud
+
+  # 计算作业工作目录配置
+  work_dir:
+    # 设置工作目录名称格式
+    # default: 通过 "format" 格式化时间产生
+    # random: 随机字符串
+    type: default
+    # 当 type 为 default 时, 格式化时间产生工作目录
+    format: "200601/02150405"
+    # 设置作业空间的文件目录
+    workspace: workspace
+
+# 3D 可视化配置
+visual:
+  # 可视化开启的区域信息配置
+  # 在 Paas 平台获取, 需要和其定义的保持一致才可以正常使用
+  zone: az-shanghai
+
+  # 可视化会话数据定时任务配置
+  sync_data:
+    enable: true
+    interval: 2
+
+# 账单服务配置
+billing:
+  # 系统内部通过定时任务同步云端账单信息
+  sync:
+    # 增量同步支付账单信息
+    payment:
+      enable: true
+      interval: 60
+      pull_page_size: 30
+    # 全量同步退款账单信息
+    refund:
+      enable: true
+      interval: 300
+      pull_page_size: 50
+    # 全量同步并校验所有账单信息
+    full_payment:
+      enable: true
+      sync_time: 23:00
+      pull_page_size: 100
+
+# Paas OpenAPI 账号配置
+# 账号信息通过 Paas 平台获取
+openapi:
+  # 本地 OpenAPI 账号配置是必须配置的
+  local:
+    settings:
+      app_key:
+      app_secret:
+      api_endpoint:
+      hpc_endpoint:
+      user_id:
+      zone:
+
+# 文件存储配置
+storage:
+  # 本地存储文件根路径配置, 配置的文件路径需要 777 权限
+  local_root_path: /home/yuansuan/data/4TiSBX39DtN
+
+  # 文件列表中用于过滤特殊文件, 使用正向正则表达式配置
+  filter_hide_file_regex: ^[.|_]
+
+  # 作业文件上传的临时目录, 无需修改
+  white_path_list:
+    - /.tmp_upload
+
+# 服务网关配置
+gateway:
+  # 登录校验白名单
+  # 不配置::[method]则匹配所有 Method 类型
+  white_url_list:
+    - /api/v1/auth/login::POST
+    - /api/v1/auth/license::POST
+    - /api/v1/auth/license/machineID::GET
+
+  # Token 失效时间(单位:分钟)
+  token_expire: 120
+
+# 监控服务配置
+monitor:
+  # 设置在该服务中每次命令在 Paas 平台执行的超时时间
+  timeout: 30
+  # 机器节点信息同步定时任务配置
+  sync_data:
+    enable: true
+    interval: 60
+
+user:
+  ldap:
+    enable: false
+    server: ldap://10.0.203.224:389
+    base_dn: dc=ys,dc=com
+    # 用户DN格式，AD域：cn=%v,ou=devops,dc=ys,dc=com，LDAP：uid=%v,ou=Users,dc=ys,dc=com，其中%v用于代替用户名，不需要修改
+    extra_attrs:
+      # 用户唯一id，AD域:cn，LDAP: cn or uid
+      uid_key: cn
+      # 邮箱
+      email_key: mail
+      # 中文姓名
+      real_name_key: displayName
+      # 手机号
+      mobile_key: mobile

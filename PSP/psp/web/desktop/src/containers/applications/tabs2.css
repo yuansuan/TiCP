@@ -1,0 +1,463 @@
+.aboutApp {
+    --bg1: #f3f3f3;
+    --bg2: #fff;
+    top: calc(50% - 210px);
+    left: calc(50% - 14rem);
+    width: 28rem;
+    height: auto;
+    color: var(--dark-txt);
+    background: var(--bg1);
+    overflow: hidden;
+    font-size: 14px
+}
+
+.aboutApp a {
+    color: var(--clrPrm);
+    font-weight: 500
+}
+
+.aboutApp .content {
+    background: var(--bg2)
+}
+
+.aboutApp .okbtn {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    border-top: 1px solid var(--comp-txt)
+}
+
+.aboutApp .okbtn div {
+    background: var(--clrPrm);
+    color: var(--alt-txt);
+    border: 1px solid rgba(0, 0, 0, 0);
+    font-weight: 500;
+    padding: 6px 24px;
+    border-radius: 4px;
+    cursor: pointer
+}
+
+.aboutApp .okbtn div[data-allow=false] {
+    background: var(--bg2);
+    color: var(--sat-txt);
+    border: 1px solid;
+    cursor: not-allowed
+}
+
+body[data-theme=dark] .aboutApp {
+    --bg1: #202020;
+    --bg2: #2b2b2b
+}
+
+.calcApp {
+    min-width: 320px;
+    min-height: 500px
+}
+
+.calcApp[data-size=mini] {
+    top: 4%;
+    left: 8%;
+    width: 320px;
+    height: 500px
+}
+
+.calcHis {
+    display: none;
+    transition: all ease-in-out 200ms;
+    position: relative;
+    box-sizing: border-box
+}
+
+.calcApp[data-size=full] .calcHis {
+    width: 260px;
+    display: flex
+}
+
+.histCont {
+    position: relative;
+    flex-grow: 1;
+    margin-right: 2px;
+    overflow-y: scroll
+}
+
+.hct {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    box-sizing: border-box;
+    padding-right: 10px
+}
+
+.valCont {
+    box-sizing: border-box;
+    height: 25%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 0 32px;
+    color: var(--dark-txt)
+}
+
+.vlcCont {
+    white-space: nowrap;
+    font-size: 360%
+}
+
+.eqCont {
+    font-size: .8em;
+    color: var(--sat-txt)
+}
+
+.msrVal {
+    display: flex;
+    padding: 16px 0;
+    font-size: .64em;
+    color: var(--sat-txt)
+}
+
+.msrVal div {
+    margin: 0 24px
+}
+
+.msrVal div:nth-child(n+3) {
+    color: var(--txt-col);
+    font-weight: 600
+}
+
+.opcont {
+    height: 70%;
+    display: grid;
+    flex-grow: 1;
+    position: relative;
+    box-sizing: border-box;
+    grid-template-rows: repeat(6, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    margin: 4px;
+    gap: 2px
+}
+
+.opcont[data-err=true] .oper {
+    background: var(--err-bg);
+    color: var(--err-txt);
+    pointer-events: none
+}
+
+.opcont[data-err=true] .oper:nth-child(3) {
+    background: var(--bg3);
+    color: var(--dark-txt);
+    pointer-events: auto
+}
+
+.oper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    border: solid 1px rgba(0, 0, 0, .1);
+    background: var(--bg2);
+    color: var(--dark-txt);
+    font-size: 90%;
+    cursor: pointer;
+    border-radius: 4px
+}
+
+.oper * {
+    pointer-events: none
+}
+
+.oper:hover {
+    background: var(--bg3)
+}
+
+.oper:nth-child(-n+8),
+.oper:nth-child(4n) {
+    background: var(--bg3);
+    color: var(--dark-txt)
+}
+
+.oper:nth-child(-n+8):hover,
+.oper:nth-child(4n):hover {
+    background: var(--bg2)
+}
+
+.oper:last-child {
+    background: var(--clrPrm);
+    color: var(--bg1)
+}
+
+.oper:last-child:hover {
+    background: var(--clrPrm);
+    filter: brightness(0.9)
+}
+
+.oper:nth-child(4n) {
+    font-size: 1.8em
+}
+
+.oper:nth-child(4) {
+    font-size: 1em;
+    color: var(--dark-txt)
+}
+
+.oper:nth-child(8) {
+    font-size: 1.2em
+}
+
+.oper:nth-child(12) {
+    font-family: monospace
+}
+
+.opow sup {
+    margin-top: -8px
+}
+
+.crossOp {
+    font-family: monospace
+}
+
+.canvaCont {
+    position: relative;
+    flex-grow: 1;
+    z-index: 0
+}
+
+.clickCont {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center
+}
+
+.paintTool {
+    min-width: 60px;
+    height: 60px;
+    background: #fefefe;
+    display: flex;
+    box-shadow: 0 0 8px 2px rgba(0, 0, 0, .25);
+    padding: 0 12px
+}
+
+.ptool {
+    position: relative;
+    width: 48px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 4px;
+    transition: all 50ms ease-in-out
+}
+
+.ptool[data-active=true] {
+    background: #ddd
+}
+
+.ptool[data-active=true]::before {
+    content: "";
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 6px;
+    height: 6px;
+    border-radius: 10px;
+    background: #222
+}
+
+.ptool:hover {
+    background: #eee
+}
+
+.ptool svg {
+    margin-top: 36%;
+    max-height: 72%
+}
+
+.ptool img {
+    margin-top: 36%;
+    width: 56%
+}
+
+.dsbar {
+    background: #282a2f;
+    position: relative
+}
+
+.servCont {
+    padding: 0 12px;
+    height: -moz-max-content;
+    height: max-content;
+    overflow-y: scroll;
+    position: absolute
+}
+
+.servCont .dsIcon,
+.servCont .svIcon {
+    height: 48px;
+    background: #36393f;
+    border-radius: 24px;
+    margin-bottom: 8px;
+    transition: all 200ms ease-in-out;
+    cursor: pointer
+}
+
+.servCont .dsIcon img,
+.servCont .svIcon img {
+    border-radius: 24px
+}
+
+.servCont .dsIcon::after,
+.servCont .svIcon::after {
+    content: "";
+    width: 4px;
+    height: 0;
+    position: absolute;
+    left: -12px;
+    background: #fefefe;
+    z-index: 1;
+    border-radius: 0 6px 6px 0;
+    transition: all 200ms ease-in-out
+}
+
+.servCont .dsIcon:hover,
+.servCont .dsIcon:nth-child(3),
+.servCont .svIcon:hover,
+.servCont .svIcon:nth-child(3) {
+    background: none;
+    border-radius: 16px
+}
+
+.servCont .dsIcon:hover img,
+.servCont .dsIcon:nth-child(3) img,
+.servCont .svIcon:hover img,
+.servCont .svIcon:nth-child(3) img {
+    border-radius: 16px
+}
+
+.servCont .dsIcon:hover::after,
+.servCont .dsIcon:nth-child(3)::after,
+.servCont .svIcon:hover::after,
+.servCont .svIcon:nth-child(3)::after {
+    height: 20px
+}
+
+.servCont .dsIcon:hover:nth-child(1),
+.servCont .dsIcon:nth-child(3):nth-child(1),
+.servCont .svIcon:hover:nth-child(1),
+.servCont .svIcon:nth-child(3):nth-child(1) {
+    background: #5865f2
+}
+
+.servCont .dsIcon:nth-child(3)::after,
+.servCont .svIcon:nth-child(3)::after {
+    height: 40px
+}
+
+.servCont hr {
+    width: 60%;
+    border-style: solid;
+    border-color: #36393f
+}
+
+.joincont {
+    position: absolute;
+    bottom: 0;
+    padding: 4px 12px;
+    padding-bottom: 6px;
+    margin: 8px;
+    text-align: center;
+    background: #36393f;
+    border-radius: 24px;
+    transition: all 200ms ease-in-out
+}
+
+.joincont:hover {
+    transform: scale(1.1)
+}
+
+.joincont a {
+    color: #ede4e4
+}
+
+.wnServer::before {
+    content: "";
+    position: absolute;
+    width: 48px;
+    height: 48px;
+    /* background-image: url("./apps/assets/server.jpg"); */
+    background-size: cover;
+    border-radius: 16px;
+    z-index: 1
+}
+
+.wnServer:hover::before {
+    display: none
+}
+
+.camcont {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row-reverse
+}
+
+.camcont .camctrl {
+    width: 100px;
+    display: grid;
+    place-items: center
+}
+
+.camcont .camctrl .cmicon {
+    background: #fefefe;
+    margin: 10px;
+    border-radius: 50%;
+    border: 4px solid #aaa
+}
+
+.camcont .camctrl .cmicon:active {
+    background: #888;
+    border-width: 3px
+}
+
+.camcont .camctrl .cmicon:active .uicon {
+    border: none;
+    transform: scale(0.9)
+}
+
+.camcont .camctrl .cmicon .uicon {
+    width: 64px;
+    height: 64px;
+    border: 3px solid #000;
+    border-radius: 50%
+}
+
+.camcont .camctrl canvas {
+    position: absolute;
+    bottom: 16px;
+    background: #444;
+    border: solid 2px #ccc;
+    box-sizing: border-box;
+    width: 48px;
+    height: 48px
+}
+
+.camcont .vidcont {
+    flex-grow: 1;
+    height: 100%;
+    overflow: hidden
+}
+
+.camcont .vidwrap {
+    position: relative;
+    width: 100%;
+    height: 100%
+}
+
+.camcont video {
+    width: 100%;
+    height: 100%;
+    transform: scaleX(-1)
+}

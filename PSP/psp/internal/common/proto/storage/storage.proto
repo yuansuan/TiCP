@@ -1,0 +1,222 @@
+syntax = "proto3";
+
+package storage;
+option go_package = "yuansuan.cn/psp/internal/common/proto/storage";
+
+import "ptype/page.proto";
+
+service Storage {
+    rpc List (ListReq) returns (ListResp);
+    rpc CreateDir (CreateDirReq) returns (CreateDirResp);
+    rpc Exist (ExistReq) returns (ExistResp);
+    rpc Mv (MvReq) returns (MvResp);
+    rpc Rm (RmReq) returns (RmResp);
+    rpc Realpath (RealpathReq) returns (RealpathResp);
+    rpc SubmitUploadHpcFileTask (SubmitUploadHpcFileTaskReq) returns (SubmitUploadHpcFileTaskResp);
+    rpc GetUploadHpcFileTaskStatus (GetUploadHpcFileTaskStatusReq) returns (GetUploadHpcFileTaskStatusResp);
+    rpc InitUserHome (InitUserHomeReq) returns (InitUserHomeResp);
+    rpc Link(LinkReq) returns (LinkResp);
+    rpc SymLink(SymLinkReq) returns (SymLinkResp);
+    rpc HardLink(HardLinkReq) returns (HardLinkResp);
+    rpc GetLocalRootPathConfig(GetLocalRootPathConfigReq) returns (GetLocalRootPathConfigResp);
+    rpc Read(ReadReq) returns (stream ReadResp);
+
+}
+
+message ReadReq {
+    string path = 1;
+    string user_name = 2;
+    bool cross = 3;
+    bool is_cloud = 4;
+}
+
+message ReadResp {
+    bytes chunk = 1;
+}
+
+
+message GetLocalRootPathConfigReq {
+}
+
+message GetLocalRootPathConfigResp {
+    string localRootPath = 1;
+}
+
+message HardLinkReq {
+    repeated string srcFilePaths = 1;
+    repeated string srcDirPaths = 2;
+    repeated string filterPaths = 3;
+    string currentPath = 4;
+    string dstPath = 5;
+    bool overwrite = 6;
+    bool cross = 7;
+    bool isCloud = 8;
+    string userName = 9;
+}
+
+message HardLinkResp {
+}
+
+message SymLinkReq {
+    string srcPath = 1;
+    string dstPath = 2;
+    bool overwrite = 3;
+    bool cross = 4;
+    bool isCloud = 5;
+    string userName = 6;
+}
+
+message SymLinkResp {
+}
+
+
+message LinkReq {
+    repeated string filePaths = 1;
+    string dstPath = 2;
+    bool overwrite = 3;
+    bool cross = 4;
+    bool isCloud = 5;
+    string userName = 6;
+}
+
+message LinkResp {
+}
+
+
+enum UploadTaskStatusEnum {
+    SUCCESS   = 0;
+    Uploading = 1;
+    Failure   = 2;
+}
+
+message InitUserHomeReq {
+    string user_name = 1;
+}
+
+message InitUserHomeResp {
+}
+
+message GetUploadHpcFileTaskStatusReq {
+    string task_key = 1;
+}
+
+message GetUploadHpcFileTaskStatusResp {
+    UploadTaskStatusEnum status = 1;
+    int64 total_size = 2;
+    int64 current_size = 3;
+}
+
+message SubmitUploadHpcFileTaskReq {
+    repeated string src_file_paths = 1;
+    repeated string src_dir_paths = 2;
+    string dest_dir_path = 3;
+    string current_path = 4;
+    bool overwrite = 5;
+    string user_name = 6;
+    bool cross = 7;
+}
+
+message SubmitUploadHpcFileTaskResp {
+    string task_key = 1;
+}
+
+message RealpathReq {
+    bool is_cloud = 1;
+    string relativePath = 2;
+}
+
+message RealpathResp {
+    string realpath = 1;
+}
+
+message ListOfRecurReq {
+    repeated string paths = 1;
+    string user_name = 2;
+}
+
+message ListOfRecurRsp {
+    repeated file files = 1;
+}
+
+
+message InitUserHomeDirReq {
+    string user_name = 1;
+}
+
+// EmptyResp ...
+message EmptyResp {}
+
+message ExistReq {
+    repeated string paths = 1;
+    string user_name = 2;
+    bool cross = 3;
+    bool is_cloud = 4;
+}
+
+message ExistResp {
+    repeated bool isExist = 1;
+}
+
+
+message CreateDirReq {
+     string path = 1;
+    string user_name = 2;
+    bool cross = 3;
+    bool is_cloud = 4;
+}
+
+message CreateDirResp {
+
+}
+
+
+
+message MvReq {
+    string srcpath = 1;
+    string dstpath = 2;
+    bool overwrite = 3;
+    bool is_cloud = 4;
+}
+
+message MvResp {
+
+}
+
+
+message RmReq {
+    repeated string paths = 1;
+    string user_name = 2;
+    bool cross = 3;
+    bool is_cloud = 4;
+}
+
+message RmResp {
+
+}
+
+
+message file {
+    string name = 1;
+    string mode = 2;
+    int64 size = 3;
+    int64 m_date = 4;
+    string type = 5;
+    bool is_dir = 6;
+    bool is_sym_link = 7;
+    string path = 8;
+    bool is_text = 9;
+}
+
+message ListReq {
+    string path = 1;
+    string user_name = 2;
+    bool cross = 3;
+    bool is_cloud = 4;
+    bool show_hide_file = 5;
+    repeated string filter_regexp_list = 6;
+    ptype.PageReq page = 7;
+}
+
+message ListResp {
+    repeated file files = 1;
+}

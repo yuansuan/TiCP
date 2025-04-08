@@ -1,0 +1,58 @@
+{
+    "edge_count": 3,
+    "edges": {
+        "children": [
+            {
+                "dt_list": [
+                    "20180924"
+                ],
+                "first_time": "20180923",
+                "id": "865861041290197",
+                "id_type": "android_imei"
+            },
+            {
+                "dt_list": [
+                    "20180830"
+                ],
+                "first_time": "2018-08-30 17:28:26",
+                "id": "4500550345983.356.1535621304833",
+                "id_type": "ustat"
+            },
+            {
+                "dt_list": [
+                    "20180924"
+                ],
+                "first_time": "20170706",
+                "id": "864410038445157",
+                "id_type": "android_imei"
+            }
+        ],
+        "id": "6529148870",
+        "id_type": "uid"
+    },
+    "first_time": "20170706",
+    "node_count": 4,
+    "nodes": [
+        {
+            "id_list": [
+                "6529148870"
+            ],
+            "id_type": "uid"
+        },
+        {
+            "id_list": [
+                "864410038445157",
+                "865861041290197"
+            ],
+            "id_type": "android_imei"
+        },
+        {
+            "id_list": [
+                "4500550345983.356.1535621304833"
+            ],
+            "id_type": "ustat"
+        }
+    ],
+    "unify_id": "6529148870_u"
+}
+

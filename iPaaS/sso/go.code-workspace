@@ -1,0 +1,27 @@
+{
+	"folders": [
+		{
+			"path": ".",
+			"name": "sso",
+		}
+	],
+	"settings": {
+		"terminal.integrated.env.osx": {
+			"GOPROXY": "http://10.0.1.58:6666,https://goproxy.cn,direct",
+		},
+		"go.toolsEnvVars": {
+			"GOPROXY": "http://10.0.1.58:6666,https://goproxy.cn,direct",
+		},
+		"go.useLanguageServer": true,
+		"go.autocompleteUnimportedPackages": true,
+		"go.gotoSymbol.includeImports": true,
+		"protoc": {
+			"options": [
+				"--proto_path=protos/v3",
+				"--proto_path=protos/v2",
+				"--proto_path=${workspaceRoot}/src/"
+			]
+		},
+		"makefile.extensionOutputFolder": "./.vscode"
+	}
+}

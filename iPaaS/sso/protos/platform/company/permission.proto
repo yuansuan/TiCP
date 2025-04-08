@@ -1,0 +1,110 @@
+syntax = "proto3";
+
+package company;
+option go_package = "github.com/yuansuan/ticp/iPaaS/sso/protos/platform/company";
+
+import "google/protobuf/timestamp.proto";
+import "protos/platform/ptype/page.proto";
+
+enum PermissionStatus {
+    PERMISSION_UNKOWN = 0;
+    // 正常
+    PERMISSION_NORMAL = 1;
+    // 删除
+    PERMISSION_DELETED = 2;
+}
+
+// 权限
+message Permission {
+    string id = 1;
+    string name = 2;
+    string code = 3;
+    string remark = 4;
+    PermissionStatus status = 5;
+    string create_uid = 6;
+    string create_name = 7;
+    string modify_uid = 8;
+    string modify_name = 9;
+    google.protobuf.Timestamp update_time = 10;
+    google.protobuf.Timestamp create_time = 11;
+}
+
+
+service PermissionService {
+    // 创建权限
+    rpc CreatePermission (CreatePermissionRequest) returns (CreatePermissionResponse) {}
+
+    // 修改权限
+    rpc ModifyPermission (ModifyPermissionRequest) returns (ModifyPermissionResponse) {}
+
+    // 获取权限列表
+    rpc GetPermissionList (GetPermissionListRequest) returns (GetPermissionListResponse) {}
+}
+
+// 创建权限请求
+message CreatePermissionRequest {
+    // 权限名称
+    // @inject_tag: `validate:"required"`
+    string name = 1;
+    // 企业ID
+    // @inject_tag: `validate:"required"`
+    string code = 2;
+    // 备注
+    string remark = 3;
+    // 创建者用户ID
+    // @inject_tag: `validate:"is_ysid,required"`
+    string create_uid = 4;
+    // 创建者姓名
+    // @inject_tag: `validate:"required"`
+    string create_name = 5;
+}
+
+// 创建权限结果
+message CreatePermissionResponse {
+    // 权限ID
+    string permission_id = 1;
+}
+
+// 修改权限请求
+message ModifyPermissionRequest {
+    // 权限ID
+    // @inject_tag: `validate:"is_ysid,required"`
+    string permission_id = 1;
+    // 权限名称
+    string name = 2;
+    // 权限code
+    string code = 3;
+    // 备注
+    string remark = 4;
+    // 状态
+    PermissionStatus status = 5;
+    // 创建者用户ID
+    // @inject_tag: `validate:"is_ysid,required"`
+    string modify_uid = 6;
+    // 创建者姓名
+    // @inject_tag: `validate:"required"`
+    string modify_name = 7;
+}
+
+// 修改权限结果
+message ModifyPermissionResponse {
+    string msg = 1;
+}
+
+// 获取权限列表请求
+message GetPermissionListRequest {
+    // 权限名称
+    string name = 1;
+    // 权限code
+    string code = 2;
+    // 状态
+    PermissionStatus status = 3;
+    // @inject_tag: `validate:"required"`
+    ptype.Page page = 4;
+}
+
+// 获取权限列表结果
+message GetPermissionListResponse {
+    repeated Permission list = 1;
+    ptype.PageCtx page_ctx = 2;
+}

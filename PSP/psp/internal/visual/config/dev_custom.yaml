@@ -1,0 +1,17 @@
+zone: az-shanghai
+sync_data:
+  enable: true
+  data_interval: 10
+  status_interval: 5
+mount_directory:
+  limit_num: 5
+  drive_names: [X, Y, Z, V, W]
+  linux_mount_root_path: /mnt
+  enable_public_directory: false
+session_notification_check:
+  interval: 600 # 每隔多少秒检查一次
+  daily_time: 9 # 每天几点检查(24时)
+  min_time: 0 # 每天几分检查(60分钟)
+
+# 适配本地启动
+local: true

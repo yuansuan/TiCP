@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package notice;
+
+service Notice {
+  // 发送websocket消息
+  rpc SendWebsocketMessage(WebsocketMessage) returns (NoticeEmpty);
+  // 发送邮件
+  rpc SendEmail(SendEmailRequest) returns (SendEmailResponse);
+}
+
+message WebsocketMessage {
+  string user_id = 1;
+  string type = 2;
+  string content = 3;
+}
+
+message NoticeEmpty {}
+
+message SendEmailRequest {
+  string receiver = 1;
+  string email_template = 2;
+  string json_data = 3;
+}
+
+message  SendEmailResponse {}

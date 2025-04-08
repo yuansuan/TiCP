@@ -1,0 +1,134 @@
+app:
+  scheduler_resource_path: config/mapping/scheduler_resource.yaml
+approve:
+  three_person_management_enable: false
+gateway:
+  token_expire: 120
+  white_url_list:
+  - /api/v1/auth/login::POST
+  - /api/v1/auth/license::POST
+  - /api/v1/auth/license/machineID::GET
+  - /metrics::GET
+  - /ws/v1/notice/consumer
+job:
+  cloud_queue: cloud
+  platform_regexp: -(\d+)[a-zA-Z]-
+  sync_data:
+    enable: true
+    interval: 5
+  tmp_upload: .tmp_upload
+  work_dir:
+    format: 200601/02150405
+    type: default
+    workspace: workspace
+logger:
+  backup_count: 50
+  log_dir: /opt/yuansuan/psp/logs/psp_info.log
+  max_age: 90
+  max_size: 100
+main:
+  compute_type_names:
+    local: "\u672C\u5730"
+  enable_visual: true
+  swagger:
+    enable: false
+    host: 127.0.0.1
+    port: 32432
+monitor:
+  hidden_node: null
+  hostname_mapping:
+    enable: false
+    path: config/mapping/hostname
+  node_classification:
+    classification_rule: hostname_prefix
+    nodes:
+    - classify_tag: master
+      label: "\u7BA1\u7406\u8282\u70B9"
+      type: mgt_node
+    - classify_tag: cn
+      label: "\u8BA1\u7B97\u8282\u70B9"
+      type: compute_node
+  scheduler:
+    cmd_path: /usr/bin/
+    conf_path: null
+    default_queue: workq
+    mount_path: /home
+    res_available_platform: resources_available.platform
+    type: slurm
+  sync_data:
+    enable: true
+    interval: 60
+  timeout: 30
+  unavailable_status: down,offline,idle*
+openapi:
+  local:
+    settings:
+      api_endpoint: http://10.0.202.216:8899
+      app_key: 0JF260C1Y64HL2KRHK51
+      app_secret: LG5MpzRkEHpz5qhWvUaEm9wfaEKZlTF5xAaT15dc
+      hpc_endpoint: http://10.0.4.48:8001
+      user_id: 5qNaSfvEEVE
+      zone: az-yuansuan
+project:
+  project_check:
+    daily_time: 9
+    enable: true
+    interval: 60
+  selector_list_limit:
+    enable: true
+    max_months: 12
+rbac:
+  enable_api_authorize: false
+  rbac_config_path: psp/config/rbac_model.conf
+storage:
+  filter_hide_file_regex: ^[.|_]
+  hpc_upload_config:
+    block_size: 5
+    concurrency_limit: 5
+    retry_count: 3
+    retry_delay: 1
+    wait_resume_time: 10
+  local_root_path: /data/5qd4J7N2iKo
+  only_read_path_list:
+  - public
+  - workspace
+  - workspace/personal
+  public_folder_enable: false
+  white_path_list:
+  - /.tmp_upload
+system:
+  alert_manager:
+    alert_manager_config_path: /home/wukong/config/base
+    alert_manager_url: http://10.0.4.48:9094
+user:
+  ldap:
+    admin_bind_dn: CN=caeapp,CN=Users,DC=DFLZM,DC=COM
+    admin_bind_password: null
+    base_dn: dc=ys,dc=com
+    enable: false
+    encryption: plain
+    server: ldaps://1234yskj:636
+    uid: sAMAccountName
+    userfilter: (objectClass=user)
+  openapi:
+    enable: false
+visual:
+  mount_directory:
+    drive_names:
+    - X
+    - Y
+    - Z
+    - V
+    - W
+    enable_public_directory: false
+    limit_num: 5
+    linux_mount_root_path: /mnt
+  session_notification_check:
+    daily_time: 9
+    interval: 600
+    min_time: 0
+  sync_data:
+    data_interval: 10
+    enable: true
+    status_interval: 5
+  zone: az-shanghai

@@ -1,0 +1,15 @@
+FROM harbor.yuansuan.cn/ticp/golang:1.24
+
+ARG BUILDPATH
+ARG MODULENAME
+
+WORKDIR /workspace/
+ENV LOG_LVL="info"
+
+ADD $MODULENAME $BUILDPATH/
+ADD config $BUILDPATH/config
+
+ENV COMMAND=$BUILDPATH/$MODULENAME
+WORKDIR $BUILDPATH
+
+ENTRYPOINT ["/bin/sh", "-c", "$COMMAND"]

@@ -1,0 +1,14 @@
+[Unit]
+Description=ys-agent
+Wants=ys-cloudapp.target
+After=ys-cloudapp.target
+
+[Service]
+ExecStart=/etc/ys-agent/ys-agent
+User=root
+Group=root
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=ys-cloudapp.target

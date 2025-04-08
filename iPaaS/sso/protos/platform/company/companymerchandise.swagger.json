@@ -1,0 +1,283 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "protos/platform/company/companymerchandise.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "CompanyMerchandiseService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {},
+  "definitions": {
+    "companyAddCompanyMerchandiseResponse": {
+      "type": "object"
+    },
+    "companyBatchAddCompanyMerchandiseResponse": {
+      "type": "object"
+    },
+    "companyCompanyBundleMerchandiseQueryResponse": {
+      "type": "object",
+      "properties": {
+        "companyMerchandises": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/companyCompanyMerchandise"
+          },
+          "title": "数据列表"
+        },
+        "pageCtx": {
+          "$ref": "#/definitions/ptypePageCtx",
+          "title": "@inject_tag: `validate:\"required\"`"
+        }
+      },
+      "title": "企业商品查询结果"
+    },
+    "companyCompanyMerchandise": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "companyId": {
+          "type": "string",
+          "title": "企业ID，\"1\" 表示个人用户商品"
+        },
+        "companyName": {
+          "type": "string"
+        },
+        "merchandiseId": {
+          "type": "string"
+        },
+        "merchandiseName": {
+          "type": "string"
+        },
+        "outResourceType": {
+          "type": "string",
+          "format": "int64"
+        },
+        "outResourceId": {
+          "type": "string"
+        },
+        "licenseType": {
+          "type": "string"
+        },
+        "licenseActive": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string",
+          "format": "int64"
+        },
+        "createUid": {
+          "type": "string",
+          "title": "创建者用户id"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "创建时间"
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "更新时间"
+        },
+        "productId": {
+          "type": "string",
+          "title": "所属产品"
+        }
+      },
+      "title": "企业商品"
+    },
+    "companyCompanyMerchandiseLicense": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "@inject_tag: `validate:\"is_ysid\"`"
+        },
+        "companyId": {
+          "type": "string",
+          "title": "@inject_tag: `validate:\"is_ysid\"`"
+        },
+        "merchandiseId": {
+          "type": "string",
+          "title": "@inject_tag: `validate:\"is_ysid\"`"
+        },
+        "appRuntimeId": {
+          "type": "string",
+          "title": "@inject_tag: `validate:\"is_ysid\"`"
+        },
+        "license": {
+          "type": "string"
+        },
+        "isActive": {
+          "type": "string"
+        },
+        "creatorId": {
+          "type": "string",
+          "title": "@inject_tag: `validate:\"is_ysid\"`"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "companyCompanyMerchandiseQueryOrderBy": {
+      "type": "string",
+      "enum": [
+        "ORDERBY_UPDATETIME_UNKNOWN",
+        "ORDERBY_UPDATETIME_DESC",
+        "ORDERBY_UPDATETIME_ASC"
+      ],
+      "default": "ORDERBY_UPDATETIME_UNKNOWN",
+      "description": "- ORDERBY_UPDATETIME_DESC: 更新时间降序\n - ORDERBY_UPDATETIME_ASC: 更新时间升序",
+      "title": "企业商品查询排序"
+    },
+    "companyCompanyMerchandiseQueryResponse": {
+      "type": "object",
+      "properties": {
+        "companyMerchandises": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/companyCompanyMerchandise"
+          },
+          "title": "数据列表"
+        },
+        "pageCtx": {
+          "$ref": "#/definitions/ptypePageCtx",
+          "title": "@inject_tag: `validate:\"required\"`"
+        }
+      },
+      "title": "企业商品查询结果"
+    },
+    "companyCompanyMerchandiseState": {
+      "type": "string",
+      "enum": [
+        "STATE_UNKNOWN",
+        "STATE_ONLINE",
+        "STATE_OFFLINE"
+      ],
+      "default": "STATE_UNKNOWN",
+      "description": "- STATE_UNKNOWN: 未知\n - STATE_ONLINE: 启用\n - STATE_OFFLINE: 停用",
+      "title": "企业商品状态"
+    },
+    "companyGetCompanyPriceApplicationMerchandiseResponse": {
+      "type": "object",
+      "properties": {
+        "isAvaliable": {
+          "type": "boolean"
+        },
+        "companyMerchandises": {
+          "$ref": "#/definitions/companyCompanyMerchandise"
+        }
+      },
+      "title": "获取企业/个人已生效价格商品结果"
+    },
+    "companyGetCompanyPriceMerchandiseResponse": {
+      "type": "object",
+      "properties": {
+        "companyMerchandises": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/companyCompanyMerchandise"
+          }
+        }
+      },
+      "title": "获取企业/个人已生效价格商品结果"
+    },
+    "companyUpdateCompanyMerchandiseStateResponse": {
+      "type": "object"
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "protoconstsResourceType": {
+      "type": "string",
+      "enum": [
+        "UNKNOWN",
+        "COMPUTE_APP",
+        "VISUAL_APP",
+        "CLOUD_STORAGE",
+        "SC_TERMINAL_APP",
+        "IBV_SOFTWARE",
+        "IBV_HARDWARE",
+        "STANDARD_COMPUTE_APP",
+        "BUNDLE_VISUAL_APP_ALL"
+      ],
+      "default": "UNKNOWN",
+      "description": "- COMPUTE_APP: 计算软件\n - VISUAL_APP: 可视化软件\n - CLOUD_STORAGE: 云存储\n - SC_TERMINAL_APP: 超算命令行软件\n - IBV_SOFTWARE: 云应用 2.0 硬件/软件\n - STANDARD_COMPUTE_APP: 标准计算应用\n - BUNDLE_VISUAL_APP_ALL: 计费套餐\n可视化全局套餐(包含所有可视化应用)",
+      "title": "资源类型"
+    },
+    "ptypePage": {
+      "type": "object",
+      "properties": {
+        "index": {
+          "type": "string",
+          "format": "int64",
+          "title": "@inject_tag: `validate:\"gte=1\"`"
+        },
+        "size": {
+          "type": "string",
+          "format": "int64",
+          "title": "@inject_tag: `validate:\"gt=0,max=1000\"`"
+        }
+      }
+    },
+    "ptypePageCtx": {
+      "type": "object",
+      "properties": {
+        "index": {
+          "type": "string",
+          "format": "int64"
+        },
+        "size": {
+          "type": "string",
+          "format": "int64"
+        },
+        "total": {
+          "type": "string",
+          "format": "int64",
+          "title": "total record number, not page number"
+        }
+      }
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,47 @@
+services:
+  nginx:
+    container_name: nginx
+    image: harbor.yuansuan.cn/ticp/nginx:1.0
+    network_mode: host
+    ports:
+    - 8001:8001
+    restart: always
+    volumes:
+    - /Users/apple/code/TiCP/devops/config/ipaas/nginx/nginx.conf:/etc/nginx/nginx.conf
+    - /Users/apple/code/TiCP/devops/config/ipaas/nginx/conf.d/root.conf:/etc/nginx/conf.d/root.conf
+    - /home/data/nginx/logs:/var/log/nginx
+  standard-compute:
+    container_name: standard-compute
+    image: harbor.yuansuan.cn/ticp/standard-compute:202503261317
+    logging:
+      driver: json-file
+      options:
+        max-file: '20'
+        max-size: 50m
+    network_mode: host
+    restart: always
+    volumes:
+    - /home/data/standard-compute/logs:/workspace/standard-compute/log
+    - /home/apps:/home/apps
+    - /tmp:/tmp
+    - /Users/apple/code/TiCP/devops/config/ipaas/standard-compute:/workspace/standard-compute/config
+    - /usr:/usr
+    - /var/run/munge:/var/run/munge
+    - /etc/slurm:/etc/slurm
+    - /home/test2:/home/test2
+  storage:
+    container_name: storage
+    environment:
+    - YS_MODE=prod
+    image: harbor.yuansuan.cn/ticp/storage:202503271441
+    logging:
+      driver: json-file
+      options:
+        max-file: '20'
+        max-size: 50m
+    network_mode: host
+    restart: always
+    volumes:
+    - /Users/apple/code/TiCP/devops/config/ipaas/storage:/workspace/storage/config
+    - /home/test2:/home/test2
+    - /home/data/storage/logs:/workspace/storage/log

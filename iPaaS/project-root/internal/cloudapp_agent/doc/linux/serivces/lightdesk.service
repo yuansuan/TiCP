@@ -1,0 +1,18 @@
+[Unit]
+Description=lightdesk
+Wants=ys-cloudapp.target
+After=ys-cloudapp.target
+
+[Service]
+WorkingDirectory=/home/ecpuser
+Environment=DISPLAY=:0
+Environment=XAUTHORITY=/home/ecpuser/.Xauthority
+ExecStartPre=pulseaudio --start
+ExecStart=/etc/lightdesk/start.sh
+User=ecpuser
+Group=ecp
+Restart=always
+RestartSec=1
+
+[Install]
+WantedBy=ys-cloudapp.target

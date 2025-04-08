@@ -1,0 +1,125 @@
+syntax = "proto3";
+
+package project;
+option go_package = "yuansuan.cn/psp/internal/common/proto/project";
+
+import "google/protobuf/timestamp.proto";
+
+service Project {
+  // GetMemberProjectsByUserId 根据成员id获取所属项目列表
+  rpc GetMemberProjectsByUserId (GetMemberProjectsByUserIdRequest) returns (GetMemberProjectsByUserIdResponse) {}
+
+  // ExistsProjectMember 指定项目是否存在userID 用户
+  rpc ExistsProjectMember (ExistsProjectMemberRequest) returns (ExistsProjectMemberResponse) {}
+
+  // GetProjectDetailById 根据projectId 获取项目详情
+  rpc GetProjectDetailById(GetProjectDetailByIdRequest) returns (GetProjectByIdResponse) {}
+
+  // GetProjectsDetailByIds 根据projectIds 批量获取多个项目详情
+  rpc GetProjectsDetailByIds(GetProjectsDetailByIdsRequest) returns (GetProjectsByIdsResponse) {}
+
+  // CheckUserOperatorProjectsPermission 根据用户 ID 检查是否可以管理项目
+  rpc CheckUserOperatorProjectsPermission(CheckUserOperatorProjectsPermissionRequest) returns (CheckUserOperatorProjectsPermissionResponse) {}
+
+  // GetProjectMemberByProjectIdAndUserId 根据项目id 和 用户id 查询项目成员信息
+  rpc GetProjectMemberByProjectIdAndUserId(GetProjectMemberByProjectIdAndUserIdRequest) returns (GetProjectMemberByProjectIdAndUserIdResponse){}
+
+  // GetProjectsIdByTimePeriod 根据起始时间和终止时间查询项目
+  rpc GetProjectsIdByTimePeriod(GetProjectsIdByTimePeriodRequest) returns (GetProjectsIdByTimePeriodResponse){}
+
+  // GetRunningProjectIdsByTime 查询某个时间点正在运行的项目列表
+  rpc GetRunningProjectIdsByTime(GetRunningProjectIdsByTimeRequest) returns (GetRunningProjectIdsByTimeResponse){}
+}
+
+message GetMemberProjectsByUserIdRequest {
+  string user_id = 1;
+  // 返回是否包括个人项目: default
+  bool include_default = 2;
+}
+
+message GetMemberProjectsByUserIdResponse {
+  repeated MemberProjectObject projects = 1;
+}
+message MemberProjectObject {
+  string project_id = 1;
+  string project_name = 2;
+  string link_path = 3;
+  string state = 4;
+}
+
+message ExistsProjectMemberRequest {
+  string user_id = 1;
+  string project_id = 2;
+}
+
+message ExistsProjectMemberResponse {
+  bool is_exist = 1;
+}
+
+message GetProjectDetailByIdRequest {
+  string project_id = 1;
+}
+
+message GetProjectsDetailByIdsRequest {
+  repeated string project_ids = 1;
+  bool include_member_count = 2;
+}
+
+message GetProjectsIdByTimePeriodRequest {
+  int64  start_time = 1;
+  int64  end_time = 2;
+}
+
+message GetProjectsIdByTimePeriodResponse {
+  repeated GetProjectIdByTimePeriodResponse projects = 1;
+}
+
+message GetProjectByIdResponse {
+  string project_id = 1;
+  string project_name = 2;
+  string state = 3;
+  string project_owner = 4;
+  string file_path = 5;
+  google.protobuf.Timestamp start_time = 6;
+  google.protobuf.Timestamp end_time = 7;
+  google.protobuf.Timestamp create_time = 8;
+  int64 member_count = 9;
+}
+
+message GetProjectIdByTimePeriodResponse {
+  int64 project_id = 1;
+  google.protobuf.Timestamp end_time = 2;
+}
+
+message GetProjectsByIdsResponse {
+  repeated GetProjectByIdResponse projects = 1;
+}
+
+message CheckUserOperatorProjectsPermissionRequest {
+  string user_id = 1;
+}
+
+message CheckUserOperatorProjectsPermissionResponse {
+  bool pass = 1;
+}
+
+message GetProjectMemberByProjectIdAndUserIdRequest {
+  string project_id = 1;
+  string user_id = 2;
+}
+
+message GetProjectMemberByProjectIdAndUserIdResponse {
+  string id = 1;
+  string project_id = 2;
+  string user_id = 3;
+  string file_path = 4;
+  google.protobuf.Timestamp create_time = 5;
+}
+
+message GetRunningProjectIdsByTimeRequest {
+  google.protobuf.Timestamp time_point = 5;
+}
+
+message GetRunningProjectIdsByTimeResponse {
+  repeated int64 project_ids = 1;
+}

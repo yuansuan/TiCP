@@ -1,0 +1,2 @@
+ALTER TABLE `sc_job`
+ADD COLUMN alloc_type VARCHAR(50);

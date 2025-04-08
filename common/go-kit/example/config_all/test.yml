@@ -1,0 +1,125 @@
+app:
+  name: helloworld
+  ver: 1.0.0
+
+  host: 0.0.0.0
+  port: 8899
+
+  # load config from etcd?
+  load_remote_config: true
+
+  network_if_name: ""
+
+  middleware:
+    logger:
+      log_dir: ./log
+
+    monitor:
+      _startup: true
+      # here to set path and port for prometheus
+      listen: ":9101"
+      metric: "/metrics"
+
+    mysql:
+      default:
+        _startup: true
+        dsn: "root:password@tcp(localhost:3306)/xx?charset=utf8&parseTime=true&loc=Local"
+
+    redis:
+      default:
+        _startup: true
+        addr: 0.0.0.0:6379
+        password: 1234yskj
+        #db: 0
+        #max_retries: 1
+        #min_retry_backoff: 8
+        #max_retry_backoff: 512
+        #dial_timeout: 5000
+        #read_timeout: 3000
+        #write_timeout: 4000
+        #pool_size: 10
+        #min_idle_conns: 0
+        #max_conn_age: 0
+        #pool_timeout: 4000
+        #idle_timeout: 180000
+        #idle_check_frequency: 60000
+
+    grpc:
+      server:
+        default:
+          addr: ":11211"
+          _startup: true
+          #write_buffer_size: 32768
+          #read_buffer_size: 32769
+          #initial_window_size: 65536
+          #initial_conn_window_size: 65537
+          #max_recv_msg_size: 65538
+          #max_send_msg_size: 65539
+          #max_concurrent_streams: 100
+          #connection_timeout: 100000
+          #max_header_list_size: 1024
+          #keepalive_max_connection_idle: 60000
+          #keepalive_max_connection_age: 61000
+          #keepalive_max_connection_age_grace: 62000
+          #keepalive_time: 63000
+          #keepalive_timeout: 64000
+          #keepalive_enforcement_policy_min_time: 240000
+          #keepalive_enforcement_policy_permit_without_stream: true
+
+      client:
+        default:
+          addr: "helloworld:11211"
+
+          # golang duration format, such as "300ms", "-1.5h" or "2h45m".
+          # Valid time units are "ns", "us" (or "µs"), "ms", "s", "m", "h".
+          timeout_per_request: "5s"
+
+          with_insecure: true
+          ##复杂配置
+
+          #with_write_buffer_size: 32768
+          #with_initial_window_size: 65536
+          #with_initial_conn_window_size: 65536
+          #with_max_msg_size: 2147483647
+          #with_backoff_max_delay: 10
+          #with_block: true
+          #with_timeout: 0
+          ##返回临时请求错误，但自己不是临时请求设置为true
+          #fail_on_non_temp_dial_error: true
+          #with_user_agent: grpc-demo-app
+          ##with_insecure: true时有效
+          #with_authority: demo-app
+          #with_channelz_parent_id: 1
+          #with_disable_service_config: true
+          ##禁止重试(默认关闭)
+          #with_disable_retry: true
+          #with_max_header_list_size: 1024
+          ##关闭健康检查
+          #with_disable_health_check: true
+          ##keepalive配置
+          #keepalive_time: 70000
+          #keepalive_timeout: 80000
+          #keepalive_permit_without_stream: true
+
+    cache:
+      default:
+        name: default
+        backend_type: redis
+
+    etcd:
+      startup: true
+      endpoints: ["etcd-cluster-client.storage:2379"]
+      tls: false
+
+    elasticsearch:
+      default: 
+        _startup: true
+        addresses: 
+        - "http://127.0.0.1:9200"
+        #username:
+        #password:
+
+    temporal:
+      _startup: true
+      host: "10.0.1.118:7233"
+      namespace: "temporal"

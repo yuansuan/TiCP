@@ -1,0 +1,1 @@
+ALTER TABLE `sc_job` ADD COLUMN `cores_per_node` bigint(20) unsigned NOT NULL DEFAULT 0 COMMENT '单机核数' AFTER `request_cores`;

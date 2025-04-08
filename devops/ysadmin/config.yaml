@@ -1,0 +1,13 @@
+current_environment: dev
+environments:
+  dev:
+    compute_access_key_id: 0JF260C1Y64HL2KRHK51
+    compute_access_key_secret: LG5MpzRkEHpz5qhWvUaEm9wfaEKZlTF5xAaT15dc
+    compute_ys_id: 5qNaSfvEEVE
+    endpoint: http://10.0.202.216:8899
+    iam_admin_access_key_id: admin
+    iam_admin_access_key_secret: admin===>>yskj1234
+    iam_endpoint: http://10.0.202.216:8899
+    storage_access_key_id: RB6O2J6D91TA0NXZIF6J
+    storage_access_key_secret: mjH8DmRTcY9ObIMRZi2rzw+diS+1EikFeyKqdqGa
+    storage_ys_id: 58X9H8Yakw1

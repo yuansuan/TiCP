@@ -1,0 +1,27 @@
+ak: 0JF260C1Y64HL2KRHK51
+as: LG5MpzRkEHpz5qhWvUaEm9wfaEKZlTF5xAaT15dc
+bill_enabled: false
+change_license: true
+long_running_job_threshold: 806400
+mongo:
+  database: null
+  enable: false
+  host: null
+  password: null
+  port: null
+  username: null
+monitor_chart_max_file_size: 1073741824
+openapi_endpoint: http://iamserver:8899
+residual_max_file_size: 1073741824
+selector_weights:
+  QueuePrioritySelector: 10
+  ResourceCount: 1
+  StorageFirst: 10000
+  ZonePrioritySelector: 10
+self_ys_id: 5qNaSfvEEVE
+webhook_url: null
+zones:
+  az-yuansuan:
+    cloud_app_enable: true
+    hpc_endpoint: http://10.0.4.48:8001
+    storage_endpoint: http://10.0.4.48:8001

@@ -1,0 +1,28 @@
+
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+package proto;
+option go_package = "github.com/yuansuan/ticp/project-root-api/proto/zone";
+
+//go:generate protoc -I. --go_out=plugins=grpc:.
+
+
+// Zone implements a zone rpc service.
+service ZoneService{
+	rpc ListZones(ListZoneRequest) returns (ListZoneResponse) {}
+}
+
+
+message ListZoneRequest {}
+
+message ListZoneResponse {
+    map<string, Zone> zones = 1;
+}
+
+message Zone {
+    string hpc_endpoint = 1;
+    string storage_endpoint = 2;
+    bool cloud_app_enable = 3;
+}

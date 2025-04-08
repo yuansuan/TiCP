@@ -1,0 +1,261 @@
+syntax = "proto3";
+
+package rbac;
+option go_package = "yuansuan.cn/psp/internal/common/proto/rbac";
+
+import "google/protobuf/empty.proto";
+
+// P is have user Permission
+// S is user Self objects (like user self permissions)
+
+service RoleManager {
+    rpc GetRole(RoleID) returns (Role) {}                     // P
+    rpc GetRoles(RoleIDs) returns (Roles) {}                     // P
+    rpc GetRoleByName(RoleName) returns (Role) {}
+    // ROLE <-> PERM
+    rpc AddRolePerms(RolePerms) returns (google.protobuf.Empty) {}    // P, can't edit admin type, can't internal permission
+    rpc UpdateRolePerms(RolePerms) returns (google.protobuf.Empty) {} // P, can't edit admin type, can't internal permission
+    rpc RemoveRolePerms(RolePerms) returns (google.protobuf.Empty) {} // P, only can edit custom type
+
+    rpc internalAddRolePerms(RolePerms) returns (google.protobuf.Empty) {}    // for internal use only
+    rpc internalRemoveRolePerms(RolePerms) returns (google.protobuf.Empty) {} // for internal use only
+
+    // ROLE <-> OBJECT
+    rpc AddObjectRoles(ObjectRoles) returns (google.protobuf.Empty) {}          // P, can't add normal user to user group
+    rpc ListObjectsRoles(ListObjectsRolesReq) returns (ListObjectsRolesResp) {} // S or P
+    rpc UpdateObjectRoles(ObjectRoles) returns (google.protobuf.Empty) {}       // P, can't add normal user to user group, can't remove normal user from user
+    rpc RemoveObjectRoles(ObjectRoles) returns (google.protobuf.Empty) {}       // P, can't remove normal user from user
+
+    rpc GetRoleByObjectID(ObjectID) returns (Roles) {}
+    rpc AddRole(AddRoleReq) returns (google.protobuf.Empty) {}                     // P
+    rpc UpdateRole(UpdateRoleReq) returns (google.protobuf.Empty) {}                     // P
+    rpc DelRole(RoleID) returns (google.protobuf.Empty) {}                     // P
+    rpc SetLdapUserDefRole(RoleID) returns (google.protobuf.Empty) {}
+
+}
+
+service PermissionManager {
+    // AddPermission : don't pass id, will ignore
+    rpc AddPermission(Resource) returns (Resource) {}                 // (only by micro service?) can't add internal, (maybe check by module permission bind)
+    rpc GetPermission(PermissionID) returns (Resource) {}               //
+    rpc GetPermissions(PermissionIDs) returns (Permissions) {}               //
+    rpc GetResourcePerm(ResourceIdentity) returns (Resource) {}         //
+    // UpdatePermission : identify by Permission.ID, and update other fields
+    rpc UpdatePermission(Resource) returns (google.protobuf.Empty) {}   // can't change type
+    rpc DeletePermission(PermissionID) returns (google.protobuf.Empty) {} // only delete custom permission
+    rpc ListPermission(ListQuery) returns (Permissions) {}                //
+
+    // PERM <-> OBJECT
+    // 获取所有者的权限列表
+    // 和ListObjectPermissions区别主要在于可通过resource_type筛选
+    rpc ListObjectResources(ListObjectResourcesRequest) returns (Permissions) {}         // S or P
+    rpc ListObjectPermissions(ObjectID) returns (Permissions) {}                         // S or P
+
+    // if permission not found, ErrRBACPermNotFound(60100) will return
+    // 权限校验
+    rpc CheckResourcesPerm(CheckResourcesPermRequest) returns (PermCheckResponse) {}     // S or P
+    rpc CheckSelfPermissions(SimpleResources) returns (PermCheckResponse) {}
+    // 获取拥有指定权限的所有者列表
+    rpc GetObjectsByResource(ResourceID) returns (ObjectIDs) {}
+}
+
+message AddRoleReq {
+    string name = 1;
+    string comment = 2;
+    repeated int64 perms = 3;
+}
+
+message UpdateRoleReq {
+    int64 id = 1;
+    string name = 2;
+    string comment = 3;
+    repeated int64 perms = 4;
+}
+
+message ListQuery {
+    string name_filter = 1;
+
+    int64 page = 2;
+    // return all records when page_size <= 0
+    // think three times before use
+    int64 page_size = 3;
+    bool desc = 4;
+    string order_by = 5;
+}
+
+enum RoleType {
+    CUSTOM = 0;
+    ROLE_SUPER_ADMIN = 1;
+}
+
+message RoleName {
+    string name = 1;
+}
+
+message RoleIDs {
+    repeated int64 ids = 1;
+}
+
+message RoleID {
+    int64 id = 1;
+}
+
+message Role {
+    // id will be ignored when adding
+    int64 id = 1;
+    string name = 2;
+    string comment = 3;
+    RoleType type = 4;
+    repeated int64 perms = 5;
+}
+
+message Roles {
+    repeated Role roles = 1;
+    int64 total = 2;
+}
+
+message RoleDetail {
+    Role role = 1;
+
+    repeated Resource perms = 2;
+    repeated ObjectID objects = 3;
+}
+
+message RolePerms {
+    RoleID role = 1;
+    repeated int64 perms = 2;
+}
+
+enum ObjectType {
+    USER = 0;
+}
+
+message ObjectID {
+    string id = 1;
+    ObjectType type = 2;
+}
+
+message ObjectIDs {
+    repeated ObjectID ids = 1;
+}
+
+message ObjectRoles {
+    ObjectID id = 1;
+    repeated int64 roles = 2;
+}
+
+message ListObjectsRolesReq {
+    repeated ObjectID ids = 1;
+    bool need_implicit_roles = 2;
+}
+
+// ObjectRoles is connection of object and role, just id to id
+// role info is in roles
+// all role id in ObjectRoles will have role info in roles
+message ListObjectsRolesResp {
+    repeated ObjectRoles object_roles_list = 1;
+    repeated ObjectRoles object_implicit_roles_list = 3;
+
+    repeated Role roles = 2;
+}
+
+message PermissionID {
+    int64 id = 1;
+}
+
+message PermissionIDs {
+    repeated int64 ids = 1;
+}
+
+// one of resource_name or resource_id should be set
+// if resource have id, like resource stored in db, set resource_id
+// if resource don't have id or id in db is not int64, set resource_name
+// (resource_type, resource_name, resource_id) is unique. one resource type should only
+// use (resource_type, resource_name) or (resource_type, resource_id)
+message Resource {
+    // id will be ignored when adding
+    int64 id = 1;
+    // name is like "sys_view_all_job", "internal_modify_user", if empty set ""
+    string display_name = 2;
+    string action = 3;
+    // resource_type is resource type, like: job_sub_app, remote_app, internal, system, shared_path
+    string resource_type = 4;
+    // display_name is permission name for display
+    string resource_name = 5;
+    // -1 false 1-true
+    int32 custom = 6;
+    // if empty set 0
+    int64 resource_id = 7;
+    // if empty set 0
+    int64 parent_id = 8;
+}
+
+message Permissions {
+    repeated Resource perms = 1;
+    int64 total = 2;
+}
+
+message CheckPermissionsRequest {
+    ObjectID id = 1;
+
+    repeated int64 permission_ids = 2;
+}
+
+message ListObjectResourcesRequest {
+    ObjectID id = 1;
+    repeated string resource_type = 2;
+}
+
+message ResourceID {
+    string type = 1;
+    int64 id = 2;
+}
+
+message ResourceName {
+    string type = 1;
+    string name = 2;
+    string action = 3;
+}
+
+
+// For Gopher:
+//  make ResourceIdentity by
+//  ```
+//  import (
+//      rbacCommon "yuansuan.cn/onpremise/rbac/common"
+//  )
+//  ResourceIdentityByName(res_type, res_name)
+//  ResourceIdentityByID(res_type, res_id)
+//  ResourceIdentity(res_type, res_name or res_id)
+//  ResourceIdentities(res_type1, res_name1, res_type2, res_id2, ...)
+//  ```
+message ResourceIdentity {
+    oneof identity {
+        ResourceID id = 1;
+        ResourceName name = 2;
+    }
+}
+
+message CheckResourcesPermRequest {
+    ObjectID id = 1;
+
+    repeated ResourceIdentity resources = 2;
+}
+
+message SimpleResource {
+    string resource_type = 2;
+    // omit when resource_name is set
+    int64 resource_id = 3;
+    // if resource_name is "" will use resource_id
+    string resource_name = 4;
+    string resource_action = 5;
+}
+
+message SimpleResources {
+    repeated SimpleResource resources = 1;
+}
+
+message PermCheckResponse {
+    bool pass = 1;
+}
+

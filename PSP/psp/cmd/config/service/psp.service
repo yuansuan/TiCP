@@ -1,0 +1,26 @@
+#
+# Copyright (C) 2020 LambdaCal Inc.
+#
+# The system service configuration for PSP daemons management
+#
+# You can do 'systemctl [start | enable | stop] [serviceName].service' operations on this service
+#
+
+[Unit]
+Description=YuanSuan PSP service management
+
+After=mysqld.service
+
+[Service]
+Type=simple
+
+Restart=no
+
+# Start the PSP services
+ExecStart=@YS_TOP@/psp/bin/psp.service.sh start
+
+# Stop the PSP services before stop the service daemon
+ExecStopPost=@YS_TOP@/psp/bin/psp.service.sh stop
+
+[Install]
+WantedBy=multi-user.target

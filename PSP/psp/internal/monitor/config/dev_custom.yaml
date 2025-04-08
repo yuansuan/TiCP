@@ -1,0 +1,44 @@
+sync_data:
+  enable: true
+  interval: 60
+
+# 超时时间
+timeout: 30
+
+scheduler:
+  # 调度器类型 slurm or pbspro
+  type: slurm
+
+  # cmd_path默认为空
+  # 如果是pbspro调度器环境：配置pbsnodes可执行文件的全路径，如：/opt/pbs/bin/
+  # 如果是slurm调度器环境：配置scontrol可执行文件的全路径，如：/usr/bin/
+  cmd_path:
+  # pbspro调度器配置文件路径（若是slurm则忽略该配置，默认为空），pbs.conf文件的全路径，如：/etc/pbs.conf
+  conf_path:
+  # 存储挂载路径（获取存储信息），多个挂在路径用","分隔
+  mount_path: /home
+  # 默认队列名称
+  default_queue: workq
+  # 隐藏队列，配置方式：队列名称，如workq，多个队列用","分隔，如workq,workq1
+  hidden_queue: workq
+  # 调度器资源名 resources_available.platform
+  res_available_platform: resources_available.platform
+
+# 标签描述：隐藏节点，配置方式：节点名称，如master，多个节点用","分隔，如master,node1
+hidden_node:
+# 节点不可用状态，多个状态用","分隔
+unavailable_status: down
+
+#节点分类
+node_classification:
+  classification_rule: hostname_prefix
+  nodes:
+    - classify_tag: master
+      label: 管理节点
+      type: mgt_node
+    - classify_tag: cn
+      label: 计算节点
+      type: compute_node
+hostname_mapping:
+  enable: false # 是否开启 hostname 映射
+  path: config/mapping/hostname #映射文件路径

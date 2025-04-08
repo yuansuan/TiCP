@@ -1,0 +1,32 @@
+package main
+
+import (
+	"fmt"
+	"yuansuan.cn/psp/internal/user/consts"
+	"yuansuan.cn/psp/internal/user/service/impl"
+)
+
+// main
+//
+// 使用方法:
+// 1、在 config/license.yaml 中修改对应的 [机器标识] 和 [过期时间]
+// 2、在当前目录下执行 go generate 等待执行结束
+// 3、生成好的系统许可证: config/license.yaml
+// 4、不要修改源码中的该文件: config/license.yaml
+func main() {
+	license, err := impl.OperatorLicenseSetting(nil, false)
+	if err != nil {
+		panic(err)
+	}
+
+	data := fmt.Sprintf("%v<%v>%v<%v", license.MachineID, license.Name, license.Version, license.Expiry)
+	key := impl.EncryptData(data, consts.EncryptHashSha512)
+	license.Key = key
+
+	_, err = impl.OperatorLicenseSetting(license, true)
+	if err != nil {
+		panic(err)
+	}
+
+	println("license generate success!")
+}

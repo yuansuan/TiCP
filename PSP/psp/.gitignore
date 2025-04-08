@@ -1,0 +1,12 @@
+.idea/*
+.DS_Store
+.vscode
+/web/build/*
+internal/*/log
+node_modules
+dist/
+internal/*/docs
+make-license
+cmd/docs/*
+/go.work.sum
+/go.work

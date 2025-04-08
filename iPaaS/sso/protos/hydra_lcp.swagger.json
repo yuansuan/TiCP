@@ -1,0 +1,499 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "protos/hydra_lcp.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "HydraLcpService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {},
+  "definitions": {
+    "hydra_lcpAddUserResp": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        }
+      }
+    },
+    "hydra_lcpCheckExternalUserExistReply": {
+      "type": "object",
+      "properties": {
+        "isExist": {
+          "type": "boolean"
+        }
+      }
+    },
+    "hydra_lcpDeactivateOffiaccountNotificationResp": {
+      "type": "object",
+      "properties": {
+        "updateNum": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "hydra_lcpGetExternalUserInfoReply": {
+      "type": "object",
+      "properties": {
+        "ysid": {
+          "type": "string"
+        },
+        "userName": {
+          "type": "string"
+        }
+      }
+    },
+    "hydra_lcpGetJsConfigResp": {
+      "type": "object",
+      "properties": {
+        "appId": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "int64"
+        },
+        "nonceStr": {
+          "type": "string"
+        },
+        "signature": {
+          "type": "string"
+        }
+      }
+    },
+    "hydra_lcpGetJsTicketResp": {
+      "type": "object",
+      "properties": {
+        "ticket": {
+          "type": "string"
+        }
+      }
+    },
+    "hydra_lcpGetOffiaccountAKResp": {
+      "type": "object",
+      "properties": {
+        "accessToken": {
+          "type": "string"
+        }
+      }
+    },
+    "hydra_lcpGetOffiaccountBalanceSubListResp": {
+      "type": "object",
+      "properties": {
+        "OffiaccountBindings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/hydra_lcpOffiaccountBinding"
+          }
+        },
+        "pageCtx": {
+          "$ref": "#/definitions/ptypePageCtx"
+        }
+      }
+    },
+    "hydra_lcpGetOffiaccountReplyRuleListResp": {
+      "type": "object",
+      "properties": {
+        "OffiaccountReplyRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/hydra_lcpOffiaccountReplyRule"
+          }
+        },
+        "pageCtx": {
+          "$ref": "#/definitions/ptypePageCtx"
+        }
+      }
+    },
+    "hydra_lcpJobToNotify": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "jobId": {
+          "type": "string"
+        },
+        "status": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "hydra_lcpNotificationContent": {
+      "type": "object",
+      "properties": {
+        "first": {
+          "type": "string"
+        },
+        "keyword1": {
+          "type": "string"
+        },
+        "keyword2": {
+          "type": "string"
+        },
+        "keyword3": {
+          "type": "string"
+        },
+        "keyword4": {
+          "type": "string"
+        },
+        "remark": {
+          "type": "string"
+        }
+      }
+    },
+    "hydra_lcpOffiaccountBinding": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "@inject_tag: `validate:\"is_ysid\"`"
+        },
+        "platform": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string",
+          "title": "@inject_tag: `validate:\"is_ysid\"`"
+        },
+        "createBy": {
+          "type": "string",
+          "title": "@inject_tag: `validate:\"is_ysid\"`"
+        },
+        "updateBy": {
+          "type": "string",
+          "title": "@inject_tag: `validate:\"is_ysid\"`"
+        },
+        "companyId": {
+          "type": "string",
+          "title": "@inject_tag: `validate:\"is_ysid\"`"
+        },
+        "companyIds": {
+          "type": "string"
+        },
+        "wechatOpenid": {
+          "type": "string"
+        },
+        "wechatUnionid": {
+          "type": "string"
+        },
+        "wechatNickname": {
+          "type": "string"
+        },
+        "wechatHeadimgurl": {
+          "type": "string"
+        },
+        "wechatLanguage": {
+          "type": "string"
+        },
+        "userGender": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "userCity": {
+          "type": "string"
+        },
+        "notificationType": {
+          "type": "string",
+          "title": "job or balance"
+        },
+        "notificationActivated": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "isSubscribed": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "subscribeScene": {
+          "type": "string"
+        },
+        "subscribeTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "unsubscribeTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "activateTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "deactivateTime": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "hydra_lcpOffiaccountMenu": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "@inject_tag: `validate:\"is_ysid\"`"
+        },
+        "appId": {
+          "type": "string"
+        },
+        "button": {
+          "type": "string"
+        },
+        "creatorId": {
+          "type": "string"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "hydra_lcpOffiaccountReplyRule": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "@inject_tag: `validate:\"is_ysid\"`"
+        },
+        "ruleName": {
+          "type": "string"
+        },
+        "keywords": {
+          "type": "string"
+        },
+        "replyList": {
+          "type": "string"
+        },
+        "replyMode": {
+          "type": "string"
+        },
+        "isActive": {
+          "type": "string"
+        },
+        "creatorId": {
+          "type": "string"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "hydra_lcpSendOffiaccountNotificationResp": {
+      "type": "object",
+      "properties": {
+        "notificationId": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "hydra_lcpSendSmsResp": {
+      "type": "object",
+      "properties": {
+        "isSucceed": {
+          "type": "boolean"
+        }
+      }
+    },
+    "hydra_lcpSetJobToNotifyStatusResp": {
+      "type": "object",
+      "properties": {
+        "updateNum": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "hydra_lcpSuperVerificationCodeForOmsResp": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        }
+      }
+    },
+    "hydra_lcpUserInfo": {
+      "type": "object",
+      "properties": {
+        "ysid": {
+          "type": "string",
+          "title": "@inject_tag: `validate:\"is_ysid\"`"
+        },
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "wechatUnionId": {
+          "type": "string"
+        },
+        "wechatOpenId": {
+          "type": "string"
+        },
+        "wechatNickName": {
+          "type": "string"
+        },
+        "realName": {
+          "type": "string"
+        },
+        "userName": {
+          "type": "string"
+        },
+        "displayUserName": {
+          "type": "string"
+        },
+        "headimgUrl": {
+          "type": "string"
+        },
+        "userChannel": {
+          "type": "string"
+        },
+        "userSource": {
+          "type": "string"
+        },
+        "userReferer": {
+          "type": "string"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "company": {
+          "type": "string"
+        }
+      }
+    },
+    "hydra_lcpUserInfoBatch": {
+      "type": "object",
+      "properties": {
+        "userInfo": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/hydra_lcpUserInfo"
+          }
+        }
+      }
+    },
+    "hydra_lcpUserInfoList": {
+      "type": "object",
+      "properties": {
+        "userInfo": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/hydra_lcpUserInfo"
+          }
+        },
+        "total": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "hydra_lcpVerifyPhoneCodeResp": {
+      "type": "object",
+      "properties": {
+        "isSucceed": {
+          "type": "boolean"
+        },
+        "token": {
+          "type": "string"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "ptypePage": {
+      "type": "object",
+      "properties": {
+        "index": {
+          "type": "string",
+          "format": "int64",
+          "title": "@inject_tag: `validate:\"gte=1\"`"
+        },
+        "size": {
+          "type": "string",
+          "format": "int64",
+          "title": "@inject_tag: `validate:\"gt=0,max=1000\"`"
+        }
+      }
+    },
+    "ptypePageCtx": {
+      "type": "object",
+      "properties": {
+        "index": {
+          "type": "string",
+          "format": "int64"
+        },
+        "size": {
+          "type": "string",
+          "format": "int64"
+        },
+        "total": {
+          "type": "string",
+          "format": "int64",
+          "title": "total record number, not page number"
+        }
+      }
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

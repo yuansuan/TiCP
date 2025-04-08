@@ -1,0 +1,269 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "protos/platform/company/role.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "RoleService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {},
+  "definitions": {
+    "companyCreateCompanyRoleResponse": {
+      "type": "object",
+      "properties": {
+        "roleId": {
+          "type": "string",
+          "title": "角色ID"
+        }
+      },
+      "title": "创建企业用户角色结果"
+    },
+    "companyCreateSysRoleResponse": {
+      "type": "object",
+      "properties": {
+        "roleId": {
+          "type": "string",
+          "title": "角色ID"
+        }
+      }
+    },
+    "companyGetCompanyRoleListResponse": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/companyRole"
+          }
+        },
+        "pageCtx": {
+          "$ref": "#/definitions/ptypePageCtx"
+        }
+      },
+      "title": "获取企业角色列表结果"
+    },
+    "companyGetPermissionByRoleIDResponse": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/companyPermission"
+          }
+        }
+      },
+      "title": "通过角色ID获取角色所属权限结果"
+    },
+    "companyGetSysRoleListResponse": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/companyRole"
+          }
+        },
+        "pageCtx": {
+          "$ref": "#/definitions/ptypePageCtx"
+        }
+      },
+      "title": "获取企业角色列表结果"
+    },
+    "companyGrantPermissionToRoleResponse": {
+      "type": "object",
+      "properties": {
+        "msg": {
+          "type": "string",
+          "title": "success 成功 ； fail 失败"
+        }
+      },
+      "title": "给角色赋权限"
+    },
+    "companyModifyRoleResponse": {
+      "type": "object",
+      "properties": {
+        "msg": {
+          "type": "string",
+          "title": "success 成功 ； fail 失败"
+        }
+      },
+      "title": "修改角色结果"
+    },
+    "companyPermission": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        },
+        "remark": {
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/companyPermissionStatus"
+        },
+        "createUid": {
+          "type": "string"
+        },
+        "createName": {
+          "type": "string"
+        },
+        "modifyUid": {
+          "type": "string"
+        },
+        "modifyName": {
+          "type": "string"
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "title": "权限"
+    },
+    "companyPermissionStatus": {
+      "type": "string",
+      "enum": [
+        "PERMISSION_UNKOWN",
+        "PERMISSION_NORMAL",
+        "PERMISSION_DELETED"
+      ],
+      "default": "PERMISSION_UNKOWN",
+      "title": "- PERMISSION_NORMAL: 正常\n - PERMISSION_DELETED: 删除"
+    },
+    "companyRole": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "角色ID"
+        },
+        "name": {
+          "type": "string",
+          "title": "角色名秒"
+        },
+        "companyId": {
+          "type": "string",
+          "title": "企业ID"
+        },
+        "type": {
+          "type": "integer",
+          "format": "int32",
+          "title": "角色类型： 1 内置 2 自定义"
+        },
+        "status": {
+          "$ref": "#/definitions/companyRoleStatus",
+          "title": "状态"
+        },
+        "createUid": {
+          "type": "string"
+        },
+        "createName": {
+          "type": "string"
+        },
+        "modifyUid": {
+          "type": "string"
+        },
+        "modifyName": {
+          "type": "string"
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "companyRoleStatus": {
+      "type": "string",
+      "enum": [
+        "ROLE_UNKOWN",
+        "ROLE_NORMAL",
+        "ROLE_DELETED"
+      ],
+      "default": "ROLE_UNKOWN",
+      "title": "- ROLE_NORMAL: 正常\n - ROLE_DELETED: 删除"
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "ptypePage": {
+      "type": "object",
+      "properties": {
+        "index": {
+          "type": "string",
+          "format": "int64",
+          "title": "@inject_tag: `validate:\"gte=1\"`"
+        },
+        "size": {
+          "type": "string",
+          "format": "int64",
+          "title": "@inject_tag: `validate:\"gt=0,max=1000\"`"
+        }
+      }
+    },
+    "ptypePageCtx": {
+      "type": "object",
+      "properties": {
+        "index": {
+          "type": "string",
+          "format": "int64"
+        },
+        "size": {
+          "type": "string",
+          "format": "int64"
+        },
+        "total": {
+          "type": "string",
+          "format": "int64",
+          "title": "total record number, not page number"
+        }
+      }
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

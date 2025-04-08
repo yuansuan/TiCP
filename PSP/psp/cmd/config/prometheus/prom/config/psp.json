@@ -1,0 +1,11 @@
+[
+  {
+    "targets": [
+      "localhost:9101"
+    ],
+    "labels": {
+      "instance": "psp-monitor",
+      "service": "psp-monitor"
+    }
+  }
+]

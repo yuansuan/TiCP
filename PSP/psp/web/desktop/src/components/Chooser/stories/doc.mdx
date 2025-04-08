@@ -1,0 +1,62 @@
+import { Story, Preview } from '@storybook/addon-docs/blocks'
+
+# Chooser 元素选择组件
+
+Chooser 可以接收一组筛选数据，并允许根据筛选结果触发行为。
+
+## 代码演示
+
+### 基本使用
+
+使用 items 传入要选择的元素，onChange 监听选中事件。
+
+<Preview withSource='none'>
+  <Story id='components-chooser--basic' />
+</Preview>
+
+### 控制选中项
+
+使用 selectedKeys 和 updateSelectedKeys 属性可以控制选中的选项。
+
+<Preview withSource='none'>
+  <Story id='components-chooser--controlled' />
+</Preview>
+
+### 自定义选项
+
+使用 itemMapper 属性可以自定义选项的样式和行为。
+
+<Preview withSource='none'>
+  <Story id='components-chooser--custom' />
+</Preview>
+
+### 自定义搜索逻辑
+
+Chooser 组件的搜索默认模糊匹配元素的 name 字段，可以使用 filter 属性自定义搜索的逻辑。下面的例子精确匹配元素的 name 字段。
+
+<Preview withSource='none'>
+  <Story id='components-chooser--filter' />
+</Preview>
+
+## API
+
+| 参数                | 说明               | 类型                                                                                                  | 默认值 |
+| ------------------- | ------------------ | ----------------------------------------------------------------------------------------------------- | ------ |
+| items\*             | 列表元素项         | Array&lt;INode &#124; [string &#124; number, string]&gt;                                              | -      |
+| itemMapper          | 列表元素映射器     | (item: INode) => React.ReactNode                                                                      | -      |
+| style               | 自定义选择器样式   | React.CSSProperties                                                                                   | -      |
+| searchable          | 是否支持搜索       | boolean                                                                                               | true   |
+| searchInputProps    | 搜索框属性         | [请参考 antd input 文档](https://ant.design/components/input-cn/)                                     | -      |
+| selectedKeys        | 控制选中的元素项   | Array&lt;string &#124; number&gt;                                                                     | -      |
+| defaultSelectedKeys | 默认选中项         | Array&lt;string &#124; number&gt;                                                                     | -      |
+| updateSelectedKeys  | 更新选中项         | (keys: Array&lt;string &#124; number&gt;) => void                                                     | -      |
+| onChange            | 监听选中项的变更   | ( selectedKeys: Array&lt;string &#124; number&gt;, info?: { node?: INode; checked: boolean }) => void | -      |
+| filter              | 自定义搜索函数函数 | (item: INode, keywords: string) => boolean                                                            | -      |
+
+### INode
+
+| 属性         | 说明         | 类型                 |
+| ------------ | ------------ | -------------------- |
+| key          | 选项 id      | string &#124; number |
+| name         | 选项名称     | string               |
+| [key:string] | 任意扩展属性 | any                  |

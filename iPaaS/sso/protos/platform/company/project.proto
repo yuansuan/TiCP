@@ -1,0 +1,484 @@
+syntax = "proto3";
+
+package company;
+option go_package = "github.com/yuansuan/ticp/iPaaS/sso/protos/platform/company";
+
+import "google/protobuf/timestamp.proto";
+import "protos/platform/ptype/page.proto";
+
+// 项目（工作空间）
+message Project {
+    string id = 1;
+    // 项目类型： 1个人项目；2企业项目
+    int32 type = 2;
+    // 企业ID
+    string company_id = 3;
+    // 用户ID
+    string user_id = 4;
+    // 项目状态
+    ProjectStatus status = 5;
+    // 项目名
+    string name = 6;
+    string remark = 7;
+    // 是否默认项目
+    bool is_default = 8;
+    string modify_uid = 9;
+    google.protobuf.Timestamp update_time = 12;
+    string create_uid = 13;
+    google.protobuf.Timestamp create_time = 14;
+    //资金账户ID
+    string account_id = 15;
+    // 产品ID
+    string product_id = 16;
+    // 项目icon
+    string project_icon = 17;
+
+    // 盒子域名
+    // 如果不为空 覆盖 GetUserInfo 接口上盒子domain信息
+    string box_domain = 18;
+    // 消费限额
+    int64 consume_limit_amount = 19;
+    // 是否允许在高于消费限额的情况下提交任务
+    bool allow_submit_job_over_limit = 20;
+    bool consume_limit_enabled = 21;
+    // 项目属主ID
+    string owner_uid = 22;
+    // 存储配额 
+    //! 弃用↓
+    int64 storage_quota = 23; 
+}
+
+// 项目成员
+message ProjectUser {
+    string user_id = 1;
+    // 姓名
+    string real_name = 3;
+    // 电话
+    string phone = 4;
+    // email
+    string email = 5;
+    // 创建时间
+    google.protobuf.Timestamp join_time = 7;
+    // 用户名
+    string user_name = 8;
+    // 显示用户名
+    string display_user_name = 9;
+}
+
+// 项目状态
+enum ProjectStatus {
+    // 未知
+    PROJECT_UNKNOWN = 0;
+    // 正常
+    PROJECT_NORMAL = 1;
+    // 删除
+    PROJECT_DELETED = 2;
+}
+
+// 项目类型
+enum ProjectType {
+    // 未知
+    PROJECT_TYPE_UNKNOWN = 0;
+    // 个人项目
+    PROJECT_TYPE_PERSON = 1;
+    // 企业项目
+    PROJECT_TYPE_COMPANY = 2;
+}
+
+// ProjectService service definition.
+service ProjectService {
+    // 获取用户参与的个人项目列表（个人身份登录时使用）
+    rpc GetUserProjectList (GetUserProjectListRequest) returns (GetUserProjectListResponse) {}
+
+    // 获取用户参与的企业项目列表 （企业身份登录时使用）
+    rpc GetUserJoinCompanyProjectList (GetUserJoinCompanyProjectListRequest) returns (GetUserJoinCompanyProjectListResponse) {}
+
+    // 获取企业项目列表（企业管理员身份登录时使用）
+    rpc GetCompanyProjectList (GetCompanyProjectListRequest) returns (GetCompanyProjectListResponse) {}
+
+    // 获取项目详情
+    rpc GetProject (GetProjectRequest) returns (GetProjectResponse) {}
+
+    // 验证用户是否访问指定项目权限
+    rpc CheckUserAccessRightOnProject (CheckUserAccessRightOnProjectRequest) returns (CheckUserAccessRightOnProjectResponse) {}
+
+    // 获取项目成员列表
+    rpc GetProjectUserList (GetProjectUserListRequest) returns (GetProjectUserListResponse) {}
+
+    // 新增项目
+    rpc CreateProject(CreateProjectRequest) returns (CreateProjectResponse) {}
+
+    // 删除项目
+    rpc DeleteProject(DeleteProjectRequest) returns (DeleteProjectResponse) {}
+
+    // 修改项目
+    rpc ModifyProject(ModifyProjectRequest) returns (ModifyProjectResponse) {}
+
+    // 删除项目成员
+    rpc DelUserFromProject(DelUserFromProjectRequest) returns (DelUserFromProjectResponse) {}
+
+    // 添加项目成员
+    rpc AddUserToProject(AddUserToProjectRequest) returns (AddUserToProjectResponse) {}
+
+    // 获取项目下所有用户数量
+    rpc GetTotalNumberOfUserInProject (GetTotalNumberOfUserInProjectRequest) returns (GetTotalNumberOfUserInProjectResponse) {}
+
+    // 获取实体盒子对应的所有项目
+    rpc GetProjectListByBox( GetProjectListByBoxRequest ) returns (GetProjectListByBoxResponse) {}
+
+    // 获取项目列表（oms使用）
+    rpc GetProjectList( GetProjectListRequest ) returns (GetProjectListResponse) {}
+}
+
+service ProjectReadOnlyService {
+    // 验证用户是否访问指定项目权限
+    rpc CheckUserAccessRightOnProject (CheckUserAccessRightOnProjectRequest) returns (CheckUserAccessRightOnProjectResponse) {}
+    // 获取实体盒子对应的所有项目
+    rpc GetProjectListByBox( GetProjectListByBoxRequest ) returns (GetProjectListByBoxResponse) {}
+    // 获取项目详情
+    rpc GetProject (GetProjectRequest) returns (GetProjectResponse) {}
+}
+
+
+// 获取用户参与的个人项目列表请求
+message GetUserProjectListRequest {
+    // 用户ID
+    // @inject_tag: `validate:"is_ysid,required"`
+    string user_id = 1;
+
+    // 项目状态
+    ProjectStatus status = 2;
+    // @inject_tag: `validate:"required"`
+    ptype.Page page = 3;
+
+    // @inject_tag: `validate:"is_ysid"`
+    string product_id=4;
+}
+
+// 获取用户参与的个人项目列表结果
+message GetUserProjectListResponse {
+    repeated Project list = 1;
+    ptype.PageCtx page_ctx = 2;
+}
+
+// 获取用户项目列表请求
+message GetCompanyProjectListRequest {
+    // 企业ID
+    // @inject_tag: `validate:"is_ysid,required"`
+    string company_id = 1;
+    // 项目状态
+    ProjectStatus status = 2;
+    // @inject_tag: `validate:"required"`
+    ptype.Page page = 3;
+
+    // @inject_tag: `validate:"is_ysid"`
+    string product_id=4;
+}
+
+// 获取用户项目列表结果
+message GetCompanyProjectListResponse {
+    repeated Project list = 1;
+    ptype.PageCtx page_ctx = 2;
+}
+
+// 获取项目请求
+message GetProjectRequest {
+    // @inject_tag: `validate:"is_ysid,required"`
+    string project_id = 1;
+    // @inject_tag: `validate:"is_ysid"`
+    string product_id=2;
+}
+
+// 获取项目结果
+message GetProjectResponse {
+    Project project = 1;
+}
+
+// 验证用户是否访问指定项目权限请求
+message CheckUserAccessRightOnProjectRequest {
+    // 用户ID
+    // @inject_tag: `validate:"is_ysid,required"`
+    string user_id = 1;
+    // 项目ID
+    // @inject_tag: `validate:"is_ysid,required"`
+    string project_id = 2;
+}
+
+// 验证用户是否访问指定项目权限结果
+message CheckUserAccessRightOnProjectResponse {
+    // true 有权限  false 无权限
+    bool result = 1;
+}
+
+// 获取项目成员列表请求
+message GetProjectUserListRequest {
+    // @inject_tag: `validate:"is_ysid,required"`
+    string project_id = 1;
+    // @inject_tag: `validate:"is_ysid"`
+    string company_id = 2;
+    // 姓名和手机号搜索KEY
+    string key = 3;
+    // @inject_tag: `validate:"required"`
+    ptype.Page page = 4;
+    // 成员用户ID
+    repeated string user_ids = 5;
+
+    // @inject_tag: `validate:"is_ysid"`
+    string product_id=6;
+}
+
+// 获取项目成员列表结果
+message GetProjectUserListResponse {
+    repeated ProjectUser list = 1;
+    ptype.PageCtx page_ctx = 2;
+}
+
+// 修改项目信息请求
+message ModifyProjectRequest {
+    // 项目ID
+    // @inject_tag: `validate:"is_ysid,required"`
+    string project_id = 1;
+    // 用户ID，个人项目必传
+    // @inject_tag: `validate:"is_ysid"`
+    string user_id = 2;
+    // 企业ID，企业项目必传
+    // @inject_tag: `validate:"is_ysid"`
+    string company_id = 3;
+    // 项目说明
+    string remark = 4;
+    // 项目ICON
+    string project_icon = 5;
+    // 操作人uid
+    // @inject_tag: `validate:"required"`
+    string op_user_id = 6;
+    // 项目名称
+    string name = 7;
+    // @inject_tag: `validate:"required"`
+    ProjectType project_type = 8;
+
+    // @inject_tag: `validate:"is_ysid"`
+    string product_id=9;
+    // 消费限额
+    // @inject_tag: `validate:"gte=0"`
+    int64 consume_limit_amount = 10;
+    // 是否允许在高于消费限额的情况下提交任务
+    bool allow_submit_job_over_limit = 11;
+    // 是否启用消费限额
+    bool consume_limit_enabled = 12;
+    // 项目属主ID
+    // @inject_tag: `validate:"is_ysid"`
+    string owner_uid = 13;
+    // 存储配额
+    int64 storage_quota = 14;
+    // 盒子域名
+    string box_domain = 15;
+}
+
+// 修改项目信息结果
+message ModifyProjectResponse {
+    // success 成功 ； fail 失败
+    string msg = 1;
+}
+
+// 获取项目下所有用户数量请求
+message GetTotalNumberOfUserInProjectRequest {
+    // 项目ID
+    // @inject_tag: `validate:"is_ysid,required"`
+    string project_id = 1;
+}
+
+// 获取项目下所有用户数量结果
+message GetTotalNumberOfUserInProjectResponse {
+    // 总数
+    int64 total = 1;
+}
+
+// 新增项目请求
+message CreateProjectRequest {
+    // 用户ID，个人项目必传
+    // @inject_tag: `validate:"is_ysid"`
+    string user_id = 1;
+    // 企业ID，企业项目必传
+    // @inject_tag: `validate:"is_ysid"`
+    string company_id = 2;
+    // 空间说明
+    string remark = 3;
+    // 空间ICON uri
+    // @inject_tag: `validate:"required"`
+    string project_icon = 4;
+    // 项目名称
+    // @inject_tag: `validate:"required"`
+    string name = 5;
+    // 操作人ID
+    // @inject_tag: `validate:"is_ysid,required"`
+    string op_user_id = 6;
+    // 资金账户ID (当前逻辑，企业传企业的资金账户ID；个人传个人的资金账户ID)
+    // @inject_tag: `validate:"is_ysid,required"`
+    string account_id = 7;
+    // 项目类型 1个人； 2企业
+    ProjectType project_type = 8;
+
+    // @inject_tag: `validate:"is_ysid"`
+    string product_id=9;
+    // 消费限额
+    // @inject_tag: `validate:"gte=0"`
+    int64 consume_limit_amount = 10;
+    // 是否允许在高于消费限额的情况下提交任务
+    bool allow_submit_job_over_limit = 11;
+    // 是否启用消费限额
+    bool consume_limit_enabled = 12;
+}
+
+// 新增项目结果
+message CreateProjectResponse {
+    Project data = 1;
+}
+
+// 删除项目成员请求
+message DelUserFromProjectRequest {
+    // 项目ID
+    // @inject_tag: `validate:"is_ysid,required"`
+    string project_id = 1;
+    // 企业ID， 个人项目不传
+    string company_id = 2;
+    // 删除用户ID
+    //  @inject_tag `validate:"required"`
+    repeated string delete_user_ids = 3;
+    // @inject_tag: `validate:"is_ysid,required"`
+    string op_user_id = 4;
+    // @inject_tag: `validate:"is_ysid"`
+    string product_id=5;
+}
+
+// 删除项目成员结果
+message DelUserFromProjectResponse {
+    // 删除成功用户数
+    int32 deleted_num = 1;
+}
+
+// 添加项目成员请求
+message AddUserToProjectRequest {
+    // 项目ID
+    // @inject_tag: `validate:"is_ysid,required"`
+    string project_id = 1;
+    // 企业ID， 个人项目不传
+    string company_id = 2;
+    // 添加用户ID
+    //  @inject_tag `validate:"required"`
+    repeated string add_user_ids = 3;
+    // @inject_tag: `validate:"is_ysid,required"`
+    string op_user_id = 4;
+    // @inject_tag: `validate:"is_ysid"`
+    string product_id=5;
+}
+
+// 添加项目成员结果
+message AddUserToProjectResponse {
+    // 添加成功用户数
+    int32 added_num = 1;
+}
+
+// 删除项目请求
+message DeleteProjectRequest {
+    // 项目ID
+    // @inject_tag: `validate:"is_ysid,required"`
+    string project_id = 1;
+    // 企业ID， 企业项目必填
+    // @inject_tag: `validate:"is_ysid"`
+    string company_id = 2;
+    // 用户ID， 个人项目必填
+    // @inject_tag: `validate:"is_ysid"`
+    string user_id = 3;
+    // 操作人用户ID
+    // @inject_tag: `validate:"is_ysid,required"`
+    string op_user_id = 4;
+    // 项目类型 1个人； 2企业
+    // @inject_tag: `validate:"required"`
+    ProjectType project_type = 5;
+
+    // @inject_tag: `validate:"is_ysid"`
+    string product_id=6;
+}
+
+// 删除项目结果
+message DeleteProjectResponse {
+    // success 成功 ； fail 失败
+    string msg = 1;
+
+    //是否存在运行的作业
+    bool is_run_job=2;
+
+    //是否存在打开的应用
+    bool is_open_app=3;
+}
+
+// 获取用户参与的企业项目列表请求
+message GetUserJoinCompanyProjectListRequest{
+    // 用户ID
+    // @inject_tag: `validate:"is_ysid,required"`
+    string user_id = 1;
+    // 企业ID
+    // @inject_tag: `validate:"is_ysid,required"`
+    string company_id = 2;
+    // 项目状态
+    ProjectStatus status = 3;
+    // @inject_tag: `validate:"required"`
+    ptype.Page page = 4;
+
+    // @inject_tag: `validate:"is_ysid"`
+    string product_id=5;
+}
+
+// 获取用户参与的企业项目列表结果
+message GetUserJoinCompanyProjectListResponse {
+    repeated Project list = 1;
+    ptype.PageCtx page_ctx = 2;
+}
+
+// 获取实体盒子对应的所有项目请求
+message GetProjectListByBoxRequest {
+    // @inject_tag: `validate:"required"`
+    ptype.Page page = 1;
+}
+
+// 获取实体盒子对应的所有项目结果
+message GetProjectListByBoxResponse {
+    repeated ProjectLiteInfo list = 1;
+    ptype.PageCtx page_ctx = 2;
+}
+
+// 简化项目信息
+message ProjectLiteInfo {
+    // 项目ID
+    string id = 1;
+    // 项目ID
+    string name = 2;
+    // 企业ID
+    string company_id = 3;
+    // 创建用户ID
+    string create_uid = 4;
+    // 创建时间
+    google.protobuf.Timestamp create_time = 5;
+    // 项目属主ID
+    string owner_uid = 6;
+
+}
+
+// 获取项目列表请求
+message GetProjectListRequest {
+    // 企业ID
+    // @inject_tag: `validate:"is_ysid"`
+    string company_id = 1;
+    // 项目名搜索关键字
+    string key = 2;
+    // @inject_tag: `validate:"required"`
+    ptype.Page page = 3;
+    // @inject_tag: `validate:"is_ysid"`
+    string product_id=4;
+}
+
+// 获取项目列表结果
+message GetProjectListResponse {
+    repeated ProjectLiteInfo list = 1;
+    ptype.PageCtx page_ctx = 2;
+}

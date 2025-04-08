@@ -1,0 +1,2 @@
+rbac_config_path: config/rbac_model.conf
+enable_api_authorize: false

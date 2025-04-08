@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+package job;
+option go_package = "github.com/yuansuan/ticp/project-root-api/proto/job";
+
+message Residual {
+    repeated ResidualVar vars = 1;
+    repeated string available_xvar = 2;
+}
+
+message ResidualVar {
+    repeated double values = 1;
+    string name = 2;
+}
+
+service ResidualStore {
+    rpc SetResidual (SetResidualRequest) returns (google.protobuf.Empty) {}
+    // by JobRuntime ID
+    rpc GetResidual (GetResidualRequest) returns (GetResidualReply) {}
+}
+
+message SetResidualRequest {
+    // @inject_tag: `validate:"is_ysid,required"`
+    string job_runtime_id = 1;
+    // @inject_tag: `validate:"required"`
+    Residual residual = 2;
+}
+
+message GetResidualRequest {
+    // @inject_tag: `validate:"is_ysid,required"`
+    string job_runtime_id = 1;
+}
+
+message GetResidualReply {
+    Residual residual = 2;
+}

@@ -1,0 +1,31 @@
+storage_type: local
+auth_enabled: false
+local:
+  root_path: /home/test2
+  link_type: hard-link
+iam_server_url: "http://10.0.202.216:8899"
+access_key_id: "0JF260C1Y64HL2KRHK51"
+access_key_secret: "LG5MpzRkEHpz5qhWvUaEm9wfaEKZlTF5xAaT15dc"
+tmp_file_cleanup:
+  uploading_file_expire_duration: 240
+  uploading_file_clean_interval: 1
+  compressing_file_expire_duration: 240
+  compressingFileCleanInterval: 1
+quota:
+  storage_usage_update_interval: 300
+  default_user_storage_limit: 500
+  max_user_storage_limit: 10240
+  max_system_storage_limit: 1048576
+  system_storage_limit_warning_buffer_size: 100
+operation_log:
+  operation_log_clean_interval: 300
+  max_user_operation_log_count: 10000
+shared_host:
+share_register_address:
+timeout_cleanup:
+  enabled: false
+  mode: "indirect"
+  cleanup_interval: #分钟
+  timeout_duration: #分钟
+  cleanup_paths: #数组 /{userid}
+  tmp_path: # indirect模式下才生效

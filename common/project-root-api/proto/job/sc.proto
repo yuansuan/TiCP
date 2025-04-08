@@ -1,0 +1,71 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+package job;
+option go_package = "github.com/yuansuan/ticp/project-root-api/proto/job";
+
+service SC {
+    rpc AddSC(AddSCRequest) returns (google.protobuf.Empty) {}
+    rpc UpdateSC(UpdateSCRequest) returns (google.protobuf.Empty) {}
+    rpc DeleteSC(DeleteSCRequest) returns (google.protobuf.Empty) {}
+
+    rpc GetSCAvailableResource (GetSCAvailableResourceRequest) returns (GetSCAvailableResourceResponse) {}
+    rpc GetZoneSCList(google.protobuf.Empty) returns (GetZoneSCListResponse) {}
+}
+
+message AddSCRequest {
+    string sc_id = 1;
+    string sc_name = 2;
+    string tier_name = 3;
+}
+
+message UpdateSCRequest {
+    string sc_id = 1;
+    string sc_name = 2;
+    string tier_name = 3;
+}
+
+message DeleteSCRequest {
+    string sc_id = 1;
+}
+
+// 资源类型
+enum ResourceType {
+    UNKNOWN = 0;
+    // 可用节点数
+    NODE = 1;
+    // 可用核数
+    CORES = 2;
+    // 可用作业数
+    TASK = 3;
+    // 可用作业数
+    APP_LIC = 4;
+}
+
+message GetSCAvailableResourceRequest {
+    // 超算id
+    // @inject_tag: `validate:"required"`
+    string sc_id = 1;
+    // 软件
+    string app_type = 2;
+    // 资源类型
+    // @inject_tag: `validate:"required"`
+    ResourceType resource_type = 3;
+}
+
+message GetSCAvailableResourceResponse {
+    // 可用资源计数
+    int64 available_count =1;
+    // 是否成功获取
+    bool is_success =2;
+}
+
+message ZoneSCInfo {
+    string zone = 1;
+    string sc_id = 2;
+}
+
+message GetZoneSCListResponse {
+    repeated ZoneSCInfo zones = 1;
+}

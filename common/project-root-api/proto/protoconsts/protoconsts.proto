@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package protoconsts;
+option go_package = "github.com/yuansuan/ticp/project-root-api/proto/protoconsts";
+
+
+// 用量刷新规则
+enum RefreshType {
+    TYPE_NO = 0;
+    TYPE_DAILY = 1;
+    TYPE_MONTHLY = 30;
+    TYPE_YEARLY = 365;
+    TYPE_FIXDATE = 9999;
+}
+
+// 资源类型
+enum ResourceType {
+    UNKNOWN = 0;
+    // 计算软件
+    COMPUTE_APP = 1;
+    // 可视化软件
+    VISUAL_APP = 2;
+    // 云存储
+    CLOUD_STORAGE = 3;
+    // 超算命令行软件
+    SC_TERMINAL_APP = 4;
+
+    // 云应用 2.0 硬件/软件
+    IBV_SOFTWARE = 5;
+    IBV_HARDWARE = 6;
+
+    // 标准计算应用
+    STANDARD_COMPUTE_APP = 7;
+
+    // 云应用[硬件+软件]标记
+    IBV_SOFTWARE_AND_HARDWARE = 8;
+
+    // 计费套餐
+    // 可视化全局套餐(包含所有可视化应用)
+    BUNDLE_VISUAL_APP_ALL = 101;
+
+    // 3D云应用套餐（购买套餐）
+    CLOUD_APP_COMBO = 102;
+
+    //3D云应用使用套餐
+    CLOUD_APP_COMBO_USAGE = 103;
+}

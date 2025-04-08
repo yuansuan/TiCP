@@ -1,0 +1,14 @@
+{{ define "emailalarm.html" }}
+<table border="1" style="border-collapse: collapse; width: 100%; margin-top: 10px; margin-bottom: 10px;">
+  <tr style="background-color: #f2f2f2;">
+    <td style="padding: 8px; text-align: left; font-weight: bold;">报警项</td>
+    <td style="padding: 8px; text-align: left; font-weight: bold;">详细描述</td>
+  </tr>
+  {{ range $i, $alert := .Alerts }}
+    <tr>
+      <td style="padding: 8px; text-align: left;">{{ index $alert.Labels "alertname" }}</td>
+      <td style="padding: 8px; text-align: left;">{{ index $alert.Annotations "description" }}</td>
+    </tr>
+  {{ end }}
+</table>
+{{ end }}

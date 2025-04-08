@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+package approve;
+
+option go_package = "yuansuan.cn/psp/internal/common/proto/approve";
+
+import "google/protobuf/timestamp.proto";
+import "ptype/page.proto";
+import "google/protobuf/empty.proto";
+
+// The approve management service definition
+service AuditLogManagement {
+
+  // Save audit log info
+  rpc SaveAuditLogInfo (SaveAuditLogRequest) returns (AuditLogEmptyReply) {}
+
+
+}
+
+service ApproveManagement {
+
+  rpc CheckUnhandledApprove (CheckUnhandledApproveRequest) returns (CheckUnhandledApproveResponse) {}
+
+
+}
+
+message CheckUnhandledApproveRequest {
+  string userId = 1;
+}
+
+message CheckUnhandledApproveResponse {
+  bool unhandled = 1;
+}
+
+// SaveAuditLogRequest SaveAuditLogRequest
+message SaveAuditLogRequest {
+  string UserId = 1;
+  string Username = 2;
+  string IpAddress = 3;
+  OperateTypeEnum OperateType = 4;
+  string OperateContent = 5;
+}
+
+
+// AuditLogEmptyReply AuditLogEmptyReply
+message AuditLogEmptyReply {}
+
+enum OperateTypeEnum {
+  UNKNOWN = 0;
+  FILE_MANAGER = 1;// 文件管理
+  USER_MANAGER = 2;// 用户管理
+  RBAC_MANAGER = 3;// 权限管理
+  JOB_MANAGER = 4;// 作业管理
+  APP_MANAGER = 5;// 计算应用
+  NODE_MANAGER = 6;// 集群管理
+  LICENSE_MANAGER = 7;// 许可证管理
+  PROJECT_MANAGER = 8;// 项目管理
+  VIS_MANAGER = 9;// 3D云应用
+  SECURITY_APPROVAL = 10;// 安全审批
+
+}

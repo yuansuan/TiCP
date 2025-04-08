@@ -1,0 +1,75 @@
+cloud_app:
+  signal_server_address:
+  signal_host:
+  web_client:
+    base_url:
+  zones:
+    # 已废弃
+    az-yuansuan:
+      cloud: "tencent"
+      tencent:
+        # 腾讯云API调用凭证
+        secret_id:
+        secret_key:
+        # 配置开通服务器所在的区域，参考官方文档配置
+        region: ap-shanghai
+        # 用于配置在开通服务器时设置的cluster标签，用于筛选不同公有云可视化集群的机器
+        cluster: cloudApp-prod
+        # 配置VPC的选择器，用于自动选择可用区的验证和排序
+        vpc_selector:
+          vis: test
+        # 配置机型的调度优先级，未配置默认优先级为0
+        zone_affinity:
+          GN7: # 带显卡机器优先选择上海4区
+            ap-shanghai-4: 7
+        # 安全组
+        security_group_ids: [ "sg-f2a54t6o" ]
+        # 系统磁盘默认大小
+        system_disk_size: 100
+    az-jinan:
+      cloud:
+      access_origin:
+      guacd_address:
+      shanhe:
+        secret_id:
+        secret_key:
+        region: jn1
+        endpoint:
+        cluster:
+        vx_nets: [ "vxnet-15wc6zf" ]
+    az-zhigu:
+      cloud: "openstack"
+      access_origin:
+      guacd_address: "127.0.0.1:4822"
+      openstack:
+        auth:
+          identity_endpoint:
+          credential_id:
+          credential_secret:
+        compute:
+          nova_endpoint:
+          micro_version: "2.93"
+        network:
+          name: "public"
+          uuid: "10a8f1ec-51de-4d34-8b73-4353bb290998"
+        tags:
+          - "cloudApp-prod"
+    az-wuxi:
+      cloud: "openstack"
+      #8888 -> 444
+      access_origin:
+      guacd_address: "127.0.0.1:4822"
+      openstack:
+        auth:
+          identity_endpoint:
+          credential_id:
+          credential_secret:
+        network:
+          name: "public"
+          uuid: "542aa392-7622-48cd-b9e8-13ea752418da"
+        compute:
+          #openstack endpoint list
+          nova_endpoint:
+          micro_version: "2.93"
+        tags:
+          - "cloudApp-prod"

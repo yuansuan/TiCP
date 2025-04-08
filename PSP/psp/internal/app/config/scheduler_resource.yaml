@@ -1,0 +1,26 @@
+resources:
+  example:
+    type: static
+    data:
+      - key: A
+        value: [A]
+      - key: AE
+        value: [A, B, C, D, E]
+  platform:
+    type: dynamic
+    resolver: resource_cpu
+    key_suffix: "|Free:%v|Total:%v"
+    data:
+      - key: ssax
+        value: [1, 2, 3, 4, 5]
+      - key: aaaq
+        value: [2, 4, 6, 8, 10]
+  queue:
+    type: dynamic
+    resolver: resource_cpu
+    key_suffix: "|Free:%v|Total:%v"
+    data:
+      - key: queue1
+        value: [1, 2, 3, 4, 5]
+      - key: queue2
+        value: [2, 4, 6, 8, 10]

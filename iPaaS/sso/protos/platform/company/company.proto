@@ -1,0 +1,754 @@
+syntax = "proto3";
+
+
+package company;
+option go_package = "github.com/yuansuan/ticp/iPaaS/sso/protos/platform/company";
+
+import "protos/platform/company/user.proto";
+import "google/protobuf/timestamp.proto";
+import "protos/platform/ptype/page.proto";
+import "protos/platform/company/role.proto";
+import "protos/platform/company/box.proto";
+import "protos/platform/company/permission.proto";
+import "validate/validate.proto";
+
+// CompanyService service definition.
+service CompanyService {
+  // 创建企业
+  rpc Create (CreateRequest) returns (CreateResponse) {}
+  // 修改企业
+  rpc Modify (ModifyRequest) returns (ModifyResponse) {}
+  // 查询企业
+  rpc GetCompany (GetCompanyRequest) returns (Company) {}
+  // 企业列表查询
+  rpc CompanyList (CompanyListRequest) returns (CompanyListResponse) {}
+
+  // 企业用户查询
+  rpc UserQuery (UserQueryRequest) returns (UserQueryResponse) {}
+
+  // 创建企业盒子
+  rpc CreateCompanyBox (CreateCompanyBoxRequest) returns (CreateCompanyBoxResponse) {}
+
+  // 获取企业用户邀请列表
+  rpc GetCompanyInviteList(GetCompanyInviteListRequest) returns (GetCompanyInviteListResponse) {}
+
+  // 获取用户被邀请列表
+  rpc GetUserInviteList(GetUserInviteListRequest) returns (GetUserInviteListResponse) {}
+
+  // 企业用户信息修改
+  rpc CompanyUserModify (CompanyUserModifyRequest) returns (CompanyUserModifyResponse) {}
+
+  // 获取企业盒子
+  rpc GetCompanyBoxList (GetCompanyBoxListRequest) returns (GetCompanyBoxListResponse) {}
+
+  // 企业盒子修改
+  rpc CompanyBoxModify (CompanyBoxModifyRequest) returns (CompanyBoxModifyResponse) {}
+
+  // 验证用户是否已加入企业
+  rpc CheckUserAlreadyJoinCompany (CheckUserAlreadyJoinCompanyRequest) returns (CheckUserAlreadyJoinCompanyResponse) {}
+
+  // 企业用户设置角色
+  rpc SetRoleForCompanyUser (SetRoleForCompanyUserRequest) returns (SetRoleForCompanyUserResponse) {}
+
+  // 更新超级管理员用户
+  rpc UpdateSuperAdminUser (UpdateSuperAdminUserRequest) returns (UpdateSuperAdminUserResponse) {}
+
+  // 添加用户到企业
+  rpc AddUserToCompany (AddUserToCompanyRequest) returns (AddUserToCompanyResponse) {}
+
+  // 通过域名获取企业盒子
+  rpc GetCompanyBoxByDomain (GetCompanyBoxByDomainRequest) returns (GetCompanyBoxByDomainResponse) {}
+
+  // 获取用户加入企业信息
+  rpc GetUserJoinCompany (GetUserJoinCompanyRequest) returns (GetUserJoinCompanyResponse) {}
+
+  // 获取企业用户操作权限列表（不分页）
+  rpc GetCompanyUserPermissionList (GetCompanyUserPermissionListRequest) returns (GetCompanyUserPermissionListResponse) {}
+
+  // 获取企业订购的商品列表（不分页）
+  rpc GetCompanyProductList (GetCompanyProductListRequest) returns (GetCompanyProductListResponse) {}
+
+  // 为企业添加产品
+  rpc AddProductToCompany (AddProductToCompanyRequest) returns (AddProductToCompanyResponse) {}
+
+  // 移除企业产品
+  rpc RemoveProductFromCompany (RemoveProductFromCompanyRequest) returns (RemoveProductFromCompanyResponse) {}
+
+  //  检查企业是否开通产品
+  rpc CheckCompanyProduct (CheckCompanyProductRequest) returns (CheckCompanyProductResponse) {}
+
+  // 获取企业看板数据
+  rpc GetCompanyDashborad (GetCompanyDashboradRequest) returns (GetCompanyDashboardResponse) {}
+
+  // 获取企业管理员
+  rpc GetCompanyAdmins (GetCompanyAdminsRequest) returns (GetCompanyAdminsResponse) {}
+
+  // 删除企业用户
+  rpc DeleteCompanyUser (DeleteCompanyUserRequest) returns (DeleteCompanyUserResponse) {}
+
+  // 新增文件操作日志
+  rpc AddOperateFileLog (AddOperateFileLogRequest) returns (AddOperateFileLogResponse) {}
+
+  // 查询文件操作日志
+  rpc QueryOperateFileLog (QueryOperateFileLogRequest) returns (QueryOperateFileLogResponse) {}
+}
+
+// 用户状态
+enum CompanyUserStatus {
+  // 未知
+  UNKNOWN = 0;
+  // 正常
+  NORMAL = 1;
+  // 删除
+  DELETED = 2;
+}
+
+// 企业状态
+enum CompanyStatus {
+  // 未知
+  COMPANY_UNKNOWN = 0;
+  // 正常
+  COMPANY_NORMAL = 1;
+  // 删除
+  COMPANY_DELETED = 2;
+}
+
+// 开启部门管理状态
+enum OpenDepartMentMangeStatus {
+  // 未知
+  DEPARTMENT_MANAGE_STATUS_UNKNOWN = 0;
+  // 开启
+  DEPARTMENT_MANAGE_STATUS_OPEN = 1;
+  // 关闭
+  DEPARTMENT_MANAGE_STATUS_CLOSE = 2;
+}
+
+// 企业看板警告代码
+enum CompanyAlertCode {
+  // 未知状态
+  ALERT_UNKNOWN = 0;
+  // 正常状态
+  ALERT_NORMAL = 1;
+  // 橙色警告
+  ALERT_ORANGE = 2;
+  // 红色警告
+  ALERT_RED = 3;
+}
+
+// 企业标签
+enum CompanyLabel {
+  // 未知
+  LABEL_UNKNOWN = 0;
+  // 正式
+  LABEL_FORMAL = 1;
+  // 试用
+  LABEL_TRIAL = 2;
+  // 废弃
+  LABEL_ABANDONED = 3;
+}
+
+message Company {
+  // 企业ID
+  string id = 1;
+  // 企业名称
+  string name = 2;
+  // 营业执照注册号
+  string biz_code = 3;
+  // @inject_tag: `validate:"min=1,max=2"`
+  int32 is_ys_cloud = 4;
+  // 联系人
+  string contact = 5;
+  // 联系人电话
+  string phone = 6;
+  // 备注
+  string remark = 7;
+  // 企业状态
+  CompanyStatus status = 8;
+  string account_id = 9;
+  // 修改者用户uid
+  string modify_uid = 10;
+  // 修改者姓名
+  string modify_name = 11;
+  // 更新时间
+  google.protobuf.Timestamp update_time = 12;
+  //创建者用户id
+  string create_uid = 13;
+  //创建者姓名
+  string create_name = 14;
+  // 创建时间
+  google.protobuf.Timestamp create_time = 15;
+  // 域名
+  string domain = 16;
+  // 是否开启部门管理功能
+  OpenDepartMentMangeStatus is_open_department_manage = 17;
+  // 最大项目数量
+  int64 max_projects = 18;
+  // 存储配额
+  int64 storage_quota = 19;
+  // 超级管理员ID
+  string super_admin_id = 20;
+  // 平台ID
+  string product_id = 21;
+  // 企业标签
+  CompanyLabel label = 22;
+}
+
+message CreateRequest {
+  // 企业名称
+  // @inject_tag: `validate:"required"`
+  string name = 1;
+  // 营业执照注册号
+  string biz_code = 2;
+  // 超级管理员姓名
+  // @inject_tag: `validate:"required"`
+  string contact = 3;
+  // 超级管理员电话
+  // @inject_tag: `validate:"required"`
+  string phone = 4;
+  // 备注
+  string remark = 5;
+  //创建者用户id
+  // @inject_tag: `validate:"is_ysid,required"`
+  string create_uid = 6;
+  //创建者姓名
+  // @inject_tag: `validate:"required"`
+  string create_name = 7;
+  // 企业授信额度
+  int64 credit_quota = 8;
+  // @inject_tag: `validate:"is_ysid"`
+  string product_id = 9;
+  // 域名
+  string domain = 10;
+  // 是否开启部门管理功能
+  OpenDepartMentMangeStatus is_open_department_manage = 11;
+
+  //增加存储配额
+  int64 storage_quota = 12;
+  // 盒子域名
+  // @inject_tag: `validate:"required"`
+  string  box_domain = 13;
+  // 序列号
+  // @inject_tag: `validate:"required"`
+  string  box_serial_number = 14;
+  // 备注
+  string box_remark = 15;
+  // 标签
+  int64 label = 16;
+}
+
+message CreateResponse {
+  // 公司ID
+  string company_id = 1;
+  // 超级管理员ID
+  string super_admin_id = 2;
+}
+
+message ModifyRequest {
+  // @inject_tag: `validate:"is_ysid,required"`
+  string company_id = 1;
+  // 企业名称
+  // @inject_tag: `validate:"required"`
+  string name = 2;
+  // 营业执照注册号
+  string biz_code = 3;
+  // 超级管理员姓名
+  string contact = 4;
+  // 超级管理员电话
+  string phone = 5;
+  // 备注
+  string remark = 6;
+  // 企业状态
+  // @inject_tag: `validate:"required"`
+  CompanyStatus status = 7;
+  // 修改者用户id
+  // @inject_tag: `validate:"is_ysid,required"`
+  string modify_uid = 8;
+  // 修改者姓名
+  // @inject_tag: `validate:"required"`
+  string modify_name = 9;
+  // 域名
+  string domain = 10;
+  // 是否开启部门管理功能
+  OpenDepartMentMangeStatus is_open_department_manage = 11;
+  // 最大项目数量
+  int64 max_projects = 12;
+
+  //增加存储配额
+  int64 storage_quota = 13;
+
+  // 超管ID
+  string super_admin_id = 14;
+  // 验证码(修改手机号必填)
+  string captcha = 15;
+
+  // @inject_tag: `validate:"is_ysid"`
+  string product_id = 16;
+  // 标签
+  int64 label = 17;
+}
+
+message ModifyResponse {
+  // success 成功 ； fail 失败
+  string msg = 1;
+}
+
+// 企业用户查询排序
+enum CompanyUserQueryOrderBy {
+  ORDERBY_NULL = 0;
+  // 加入时间倒序
+  ORDERBY_JOINTIME_DESC = 1;
+  // 加入时间正序
+  ORDERBY_JOINTIME_ASC = 2;
+  // 最近登录时间倒序
+  ORDERBY_LASTLOGINTIME_DESC = 3;
+  // 最近登录时间正序
+  ORDERBY_LASTLOGINTIME_ASC = 4;
+}
+
+// 企业查询排序
+enum CompanyQueryOrderBy {
+  // 默认为ID倒序
+  COMPANY_ORDERBY_NULL = 0;
+  // 企业ID正序
+  COMPANY_ORDERBY_IDASC = 1;
+  // 企业ID倒序
+  COMPANY_ORDERBY_IDDESC = 2;
+}
+
+// 企业用户
+message CompanyUser {
+  string user_id = 1;
+  // 企业ID
+  string company_id = 2;
+  // 姓名
+  string real_name = 3;
+  // 电话
+  string phone = 4;
+  // email
+  string email = 5;
+  // 用户状态
+  CompanyUserStatus status = 6;
+  // 角色信息
+  repeated company.Role role_list = 7;
+  // 创建时间
+  google.protobuf.Timestamp create_time = 8;
+  // 更新时间
+  google.protobuf.Timestamp update_time = 9;
+  // 最后登录时间
+  google.protobuf.Timestamp last_login_time = 10;
+  // 用户名
+  string user_name = 11;
+  // 显示用户名
+  string display_user_name = 12;
+
+}
+
+// 企业用户查询请求
+message UserQueryRequest {
+  // 搜索关键字，全匹配用户手机号和姓名
+  string key = 1;
+  // 企业ID
+  // @inject_tag: `validate:"is_ysid"`
+  string company_id = 2;
+  // 用户状态
+  CompanyUserStatus status = 3;
+  // 结果排序
+  CompanyUserQueryOrderBy order_by = 4;
+  // @inject_tag: `validate:"required"`
+  ptype.Page page = 5;
+}
+
+// 企业用户查询结果
+message UserQueryResponse {
+  // 数据列表
+  repeated CompanyUser list = 1;
+  // @inject_tag: `validate:"required"`
+  ptype.PageCtx page_ctx = 2;
+}
+
+// 创建企业盒子请求
+message CreateCompanyBoxRequest {
+  // 企业ID
+  // @inject_tag: `validate:"is_ysid,required"`
+  string company_id = 1;
+  // 盒子序列号
+  // @inject_tag: `validate:"required"`
+  string box_serial_number = 2;
+  // 盒子通信域名
+  // @inject_tag: `validate:"required"`
+  string box_domain = 3;
+  // 盒子说明
+  string remark = 4;
+  // 创建者用户ID
+  // @inject_tag: `validate:"required"`
+  string create_uid = 5;
+  // 创建者姓名
+  // @inject_tag: `validate:"required"`
+  string create_name = 6;
+}
+
+// 创建企业盒子结果
+message CreateCompanyBoxResponse {
+  // 盒子ID
+  string company_box_id = 1;
+}
+
+// 获取企业用户邀请列表请求
+message GetCompanyInviteListRequest {
+  // 企业ID
+  // @inject_tag: `validate:"is_ysid,required"`
+  string company_id = 1;
+  // 用户邀请状态
+  company.InviteUserStatus status = 2;
+  // @inject_tag: `validate:"required"`
+  ptype.Page page = 3;
+}
+
+// 获取企业用户邀请列表结果
+message GetCompanyInviteListResponse {
+  repeated company.InviteUser list = 1;
+  ptype.PageCtx page_ctx = 2;
+}
+
+// 用户被邀请列表请求
+message GetUserInviteListRequest {
+  // 用户ID
+  // @inject_tag: `validate:"is_ysid,required"`
+  string user_id = 1;
+  // 用户邀请状态
+  company.InviteUserStatus status = 2;
+  // @inject_tag: `validate:"required"`
+  ptype.Page page = 3;
+}
+
+// 用户被邀请列表结果
+message GetUserInviteListResponse {
+  repeated company.InviteUser list = 1;
+  ptype.PageCtx page_ctx = 2;
+}
+
+// 单个企业请求
+message GetCompanyRequest {
+  // 企业ID
+  // @inject_tag: `validate:"is_ysid"`
+  string company_id = 1;
+}
+
+// 企业列表请求
+message CompanyListRequest {
+  // 企业ID
+  // @inject_tag: `validate:"is_ysid"`
+  string company_id = 1;
+  // 企业状态
+  CompanyStatus status = 2;
+  // 企业名称关键字
+  string name = 3;
+  // @inject_tag: `validate:"required"`
+  ptype.Page page = 4;
+  // 排序
+  CompanyQueryOrderBy order_by = 5;
+  // @inject_tag: `validate:"is_ysid"`
+  string product_id = 6;
+  // 企业标签
+  CompanyLabel label = 7;
+}
+
+// 企业列表结果 
+message CompanyListResponse {
+  repeated Company list = 1;
+  ptype.PageCtx page_ctx = 2;
+}
+
+// 企业用户信息修改请求
+message CompanyUserModifyRequest {
+  // @inject_tag: `validate:"is_ysid,required"`
+  string user_id = 1;
+  // 用户状态
+  // @inject_tag: `validate:"required"`
+  CompanyUserStatus status = 2;
+  // 企业ID
+  // @inject_tag: `validate:"is_ysid,required"`
+  string company_id = 3;
+}
+
+// 企业用户信息修改结果
+message CompanyUserModifyResponse {
+  // success 成功 ； fail 失败
+  string msg = 1;
+}
+
+// 验证用户是否已加入企业请求
+message CheckUserAlreadyJoinCompanyRequest {
+  // 用户ID
+  // @inject_tag: `validate:"is_ysid,required"`
+  string user_id = 1;
+  // 企业ID
+  // @inject_tag: `validate:"is_ysid,required"`
+  string company_id = 2;
+}
+
+// 验证用户是否已加入企业结果
+message CheckUserAlreadyJoinCompanyResponse {
+  // true 已加入  false 没有加入
+  bool result = 1;
+}
+
+// 企业用户设置角色请求
+message SetRoleForCompanyUserRequest {
+  // 企业ID
+  // @inject_tag: `validate:"is_ysid,required"`
+  string company_id = 1;
+  // 用户ID
+  // @inject_tag: `validate:"is_ysid,required"`
+  string user_id = 2;
+  // @inject_tag: `validate:"required"`
+  repeated string roles = 3;
+  // 操作者用户ID
+  // @inject_tag: `validate:"is_ysid,required"`
+  string operator_uid = 4;
+  // 操作者姓名
+  string operator_name = 5;
+}
+
+// 企业用户设置角色结果
+message SetRoleForCompanyUserResponse {
+  // success 成功 ； fail 失败
+  string msg = 1;
+}
+
+// 添加用户到企业请求
+message AddUserToCompanyRequest {
+  // @inject_tag: `validate:"is_ysid,required"`
+  string user_id = 1;
+  // @inject_tag: `validate:"is_ysid,required"`
+  string company_id = 2;
+  bool is_admin = 3;
+}
+
+// 添加用户到企业结果
+message AddUserToCompanyResponse {
+  // success 成功 ； fail 失败
+  string msg = 1;
+}
+
+// 获取用户加入企业信息请求
+message GetUserJoinCompanyRequest {
+  // @inject_tag: `validate:"is_ysid,required"`
+  string user_id = 1;
+}
+
+// 获取用户加入企业信息结果
+message GetUserJoinCompanyResponse {
+  repeated Company list = 1;
+}
+
+// 获取企业用户操作权限列表请求
+message GetCompanyUserPermissionListRequest {
+  // 企业ID
+  // @inject_tag: `validate:"is_ysid,required"`
+  string company_id = 1;
+  // 用户ID
+  // @inject_tag: `validate:"is_ysid,required"`
+  string user_id = 2;
+}
+
+// 获取企业用户操作权限列表结果
+message GetCompanyUserPermissionListResponse {
+  repeated Permission list = 1;
+}
+
+message GetCompanyProductListRequest {
+  string company_id = 1;
+}
+
+message GetCompanyProductListResponse {
+  repeated string product_list = 1;
+}
+
+message AddProductToCompanyRequest {
+  string company_id = 1;
+  string product_id = 2;
+}
+
+message AddProductToCompanyResponse {
+  string msg = 1;
+}
+
+message RemoveProductFromCompanyRequest {
+  string company_id = 1;
+  string product_id = 2;
+}
+
+message RemoveProductFromCompanyResponse {
+  string msg = 1;
+}
+
+message CheckCompanyProductRequest {
+  string company_id = 1;
+  string product_id = 2;
+}
+
+message CheckCompanyProductResponse {
+  bool has = 1;
+}
+
+message GetCompanyDashboradRequest{
+  // 企业名称 模糊匹配
+  string name = 1;
+  // 企业余额， 小于
+  int64 balance = 2;
+  // 企业授信额度， 小于
+  int64 credit = 3;
+  // 企业剩余空间， 小于
+  int64 storage_remain = 4;
+  // 可选，警告类型， 不选则显示全部，使用本参数时需禁用分页
+  repeated CompanyAlertCode alert_code = 5;
+  ptype.Page page = 6;
+}
+
+message CompanyDashboardInfo{
+  //企业ID
+  string id = 1;
+  //企业名称
+  string name = 2;
+  // 企业状态
+  CompanyStatus status = 3;
+  // 余额
+  int64 balance = 4;
+  // 授信额度
+  int64 credit = 5;
+  // 已用存储空间
+  int64 storage_used = 6;
+  // 可用存储空间
+  int64 storage_total = 7;
+  // 存储空间过期时间
+  google.protobuf.Timestamp storage_expire = 8;
+  // 警告类型
+  CompanyAlertCode alert_code = 9;
+}
+message GetCompanyDashboardResponse{
+  // 数据列表
+  repeated CompanyDashboardInfo list = 1;
+  // @inject_tag: `validate:"required"`
+  ptype.PageCtx page_ctx = 2;
+}
+
+
+message GetCompanyAdminsRequest{
+  //企业ID
+  string id = 1;
+}
+
+message GetCompanyAdminsResponse{
+  repeated User users = 1;
+}
+
+message UpdateSuperAdminUserRequest {
+  // @inject_tag: `validate:"is_ysid,required"`
+  string user_id = 1;
+  // @inject_tag: `validate:"is_ysid,required"`
+  string company_id = 2;
+}
+
+message UpdateSuperAdminUserResponse {
+  // success 成功 ； fail 失败
+  string msg = 1;
+}
+
+message DeleteCompanyUserRequest{
+  // @inject_tag: `validate:"is_ysid,required"`
+  string user_id = 1;
+  // @inject_tag: `validate:"is_ysid,required"`
+  string company_id = 2;
+}
+
+message DeleteCompanyUserResponse {
+  // success 成功 ； fail 失败
+  string msg = 1;
+  // @inject_tag: `validate:"required"`
+  bool is_run_job = 2;
+  // @inject_tag: `validate:"required"`
+  bool is_open_app = 3;
+}
+
+message AddOperateFileLogRequest {
+  OperateType op_type = 1 ;
+  string op_user_id = 2 [(validate.rules).string.min_len = 1];
+  string company_id = 3 [(validate.rules).string.min_len = 1];
+  string project_id = 4 [(validate.rules).string.min_len = 1];
+  repeated OperateInfo op_info = 5;
+}
+
+message OperateInfo {
+  string storage_size = 1 [(validate.rules).string.min_len = 1];
+  string file_name = 2 [(validate.rules).string.min_len = 1];
+  FileType file_type = 3;
+}
+
+message AddOperateFileLogResponse {
+  // success 成功 ； fail 失败
+  string msg = 1;
+}
+
+message QueryOperateFileLogRequest {
+  string file_name = 1;
+  google.protobuf.Timestamp begin_time = 2 [(validate.rules).timestamp.required = true];
+  google.protobuf.Timestamp end_time = 3 [(validate.rules).timestamp.required = true];
+  // 用户电话
+  string phone = 4;
+  string company_id = 5 [(validate.rules).string.min_len = 1];
+  string project_id = 6 [(validate.rules).string.min_len = 1];
+  ptype.Page page = 7 [(validate.rules).message.required = true];
+}
+
+message QueryOperateFileLogResponse {
+  // 数据列表
+  repeated OperateDetailLog log = 1;
+  // @inject_tag: `validate:"required"`
+  ptype.PageCtx page_ctx = 2;
+}
+
+message OperateDetailLog {
+  // 操作记录id
+  string id = 1;
+  // 文件名
+  string file_name = 2;
+  // 操作人名字
+  string op_user_name = 3;
+  //电话
+  string op_user_phone = 8;
+  // 文件类型
+  FileType file_type = 4;
+  // 操作类型
+  OperateType op_type = 5;
+  // 存储大小
+  string storage_size = 6;
+  // 操作时间
+  google.protobuf.Timestamp op_time = 7;
+}
+
+enum FileType{
+  // 未知
+  FILE_UNKNOWN = 0;
+  //普通文件
+  FILE = 1;
+  //文件夹
+  FOLDER = 2;
+  //批量操作
+  BATCH=3;
+}
+
+enum OperateType{
+  //未知
+  OP_UNKNOWN = 0;
+  //上传
+  UPLOAD = 1;
+  //下载
+  DOWNLOAD = 2;
+  //删除
+  DELETE = 3;
+  //重命名
+  RENAME = 4;
+  // 添加文件夹
+  ADD_FOLDER = 5;
+}

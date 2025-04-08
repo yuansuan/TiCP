@@ -1,0 +1,511 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+import "proto/account_bill/account.proto";
+import "proto/protoconsts/protoconsts.proto";
+import "proto/ptype/page.proto";
+
+package account_bill;
+option go_package = "github.com/yuansuan/ticp/project-root-api/proto/account_bill";
+
+
+// BillingService service definition.
+service BillingService {
+    // 计费单创建
+    rpc BillingCreate (BillingCreateRequest) returns (BillingCreateReply) {}
+    // 计费单创建 企业价格不存在则使用个人商品价格
+    rpc BillingCreateV2 (BillingCreateRequest) returns (BillingCreateReply) {}
+    // 计费单查询
+    rpc BillingGet (BillingGetRequest) returns (BillingGetReply) {}
+    // 计费单更新
+    rpc BillingMessage (BillingMessageRequest) returns (BillingMessageReply) {}
+
+    // 账单总览（API调用）
+    rpc BillingOverview (BillingOverviewRequest) returns (BillingOverviewResponse) {}
+    // 账单明细（API调用）
+    rpc BillingQuery (BillingQueryRequest) returns (BillingQueryResponse) {}
+
+    // 账单总览（运营后台调用）
+    rpc PlatformBillingOverview (PlatformBillingOverviewRequest) returns (PlatformBillingOverviewResponse) {}
+    // 账单明细（运营后台调用）
+    rpc PlatformBillingQuery (PlatformBillingQueryRequest) returns (PlatformBillingQueryResponse) {}
+    // 账单统计（运营后台调用）
+    rpc PlatformBillingStat (PlatformBillingStatRequest) returns (PlatformBillingStatResponse) {}
+
+    // 根据外部业务ID获取计费信息
+    rpc GetBillingByOutBizs (GetBillingByOutBizsRequest) returns (GetBillingByOutBizsResponse) {}
+
+    // 查询一段时间内用户消费 包含已冻结资金
+    rpc UserCost(UserCostRequest) returns (UserCostResponse) {}
+
+    // 按ProjectID查询消耗总金额
+    rpc GetProjectCost(ProjectCostRequest) returns (ProjectCostResponse) {}
+
+    // 获取企业最近N天的消费总额和平均消费金额
+    rpc GetCompanyLastFewDaysCost(GetCompanyLastFewDaysCostRequest) returns (GetCompanyLastFewDaysCostResponse) {}
+
+    // 根据账单ID查询计费信息
+    rpc ListBillingByIds (ListBillingByIdsRequest) returns (ListBillingByIdsResponse) {}
+}
+
+
+
+// 计费状态
+enum BillingStatus {
+    STATUS_UNKNOWN     = 0;
+    // 未结算
+    STATUS_NOT_ACCOUNT = 1;
+    // 已结算
+    STATUS_ACCOUNT     = 2;
+    // 已取消
+    STATUS_CANCELLED   = 3;
+}
+
+// 单价类型
+enum UnitPriceType {
+    UNKNOWN_TYPE = 0;
+    // 按量
+    REAL_QUATITY_TYPE = 1;
+    // 包月
+    MONTHLY_TYPE = 2;
+    // 包小时
+    HOURLY_TYPE = 3;
+}
+
+message Billing {
+    // @inject_tag: `validate:"is_ysid"`
+    string id = 1;
+    // 用户ID
+    // @inject_tag: `validate:"is_ysid"`
+    string user_id = 2;
+    // 企业ID
+    // @inject_tag: `validate:"is_ysid"`
+    string company_id = 3;
+    // 扣款账户ID
+    // @inject_tag: `validate:"is_ysid"`
+    string account_id = 4;
+    // 冻结金额(未出账单)
+    int64 freeze_amount = 5;
+    // 业务单ID
+    // @inject_tag: `validate:"is_ysid"`
+    string out_biz_id = 6;
+    // 业务资源类型
+    protoconsts.ResourceType out_resource_type = 7;
+    // 计费名称
+    string name = 8;
+    // 备注（研发）
+    string remark = 9;
+    // 商品价格ID
+    // @inject_tag: `validate:"is_ysid"`
+    string merchandise_price_id = 10;
+    // 商品数量
+    double merchandise_quantity = 11;
+    // 计费金额
+    int64 amount = 12;
+    // 计费状态： 1 未出账  2 已出账  3 已取消
+    BillingStatus status = 13;
+    // 创建时间
+    google.protobuf.Timestamp create_time = 14;
+    // 更新时间
+    google.protobuf.Timestamp update_time = 15;
+    // 用户名
+    string user_name = 16;
+    // 产品单价
+    int64 merchandise_price_unit = 17;
+    // 产品单价描述
+    string merchandise_price_des = 18;
+    // 外部资源ID
+    // @inject_tag: `validate:"is_ysid"`
+    string out_resource_id = 19;
+    // 产品描述(计费明细 json字符串,start_time:开始时间; end_time:结束时间;
+    // cpus:核数; cpu_time:运行时长,单位秒; app_name:软件名称)
+    string billing_desc = 20;
+    // 账期（消费年月）
+    string billing_month = 21;
+    // 产品名称
+    string product_name = 22;
+    // 账单生成时间 （消费时间）
+    google.protobuf.Timestamp billing_time = 23;
+    // 优惠金额
+    int64 discount_amount = 24;
+    // 实际支付金额
+    int64 real_amount = 25;
+    // 项目ID
+    string project_id = 26;
+    // 商品ID
+    // @inject_tag: `validate:"is_ysid"`
+    string merchandise_id = 27;
+    // 产品ID
+    // @inject_tag: `validate:"is_ysid"`
+    string product_id = 28;
+    // 部门ID
+    // @inject_tag: `validate:"is_ysid"`
+    string department_id = 29;
+    // 退款金额
+    int64 refund_amount = 30;
+    // 套餐收费方式 按量 或者包年包月 或者按小时
+    UnitPriceType chargeType = 32;
+}
+
+
+message BillingCreateRequest {
+    // @inject_tag: `validate:"is_ysid"`
+    string company_id = 1;
+    // @inject_tag: `validate:"is_ysid,required"`
+    string user_id = 2;
+    // @inject_tag: `validate:"is_ysid,required"`
+    string account_id = 3;
+
+    // 外部资源ID app_runtime_id
+    // @inject_tag: `validate:"is_ysid,required"`
+    string out_biz_id = 6;
+    // @inject_tag: `validate:"max=64"`
+    string name = 8;
+    string remark = 9;
+    string desc = 10;
+    // 商品数量
+    double merchandise_quantity = 11;
+    // 单价类型
+    UnitPriceType unit_price_type = 12;
+    // 项目（空间）ID
+    // @inject_tag: `validate:"is_ysid"`
+    string project_id = 13;
+    // 用户名
+    string user_name = 14;
+    // 部门ID
+    // @inject_tag: `validate:"is_ysid"`
+    string department_id = 15;
+
+    // @inject_tag: `validate:"required"`
+    google.protobuf.Timestamp time = 50;
+    // 商品ID
+    // @inject_tag: `validate:"is_ysid,required"`
+    string merchandise_id =51;
+}
+
+message BillingCreateReply {
+    Billing billing = 1;
+    Account account = 2;
+}
+
+message BillingGetRequest {
+    // @inject_tag: `validate:"is_ysid"`
+    string billing_id = 1;
+}
+
+message BillingGetReply {
+    Billing bill = 1;
+}
+
+enum BillingMessageType {
+    MESSAGE_UNKNOWN = 0;
+    MESSAGE_UPDATE  = 1;
+    MESSAGE_CONFIRM = 2;
+    MESSAGE_CANCELL = 3;
+}
+
+message BillingMessageRequest {
+    // @inject_tag: `validate:"is_ysid"`
+    string billing_id = 1;
+    // @inject_tag: `validate:"required"`
+    BillingMessageType message_type = 2;
+
+    string remark = 8;
+    // 计费详情，json 字符串
+    string billing_desc = 9;
+    double merchandise_quantity = 10;
+}
+
+message BillingMessageReply {
+    Billing billing = 1;
+    account_bill.Account account = 2;
+}
+
+// 账单总览数据
+message BillingOverview {
+    // @inject_tag: `validate:"is_ysid"`
+    string company_id = 1;
+    // 账单金额（原价）
+    int64 amount = 4;
+    // 产品
+    protoconsts.ResourceType resource_type = 5;
+    // 账期
+    string billing_month = 6;
+    // 优惠金额
+    int64 discount_amount = 7;
+    // 实际支付金额
+    int64 real_amount = 8;
+    // 退款金额
+    int64 refund_amount = 9;
+}
+
+// 账单总览（API调用）请求
+message BillingOverviewRequest {
+    // 企业ID
+    // @inject_tag: `validate:"is_ysid"`
+    string company_id = 1;
+    // 账期
+    // @inject_tag: `validate:"required"`
+    string billing_month = 2;
+    // @inject_tag: `validate:"is_ysid"`
+    string product_id=3;
+}
+
+// 账单总览（API调用）结果
+message BillingOverviewResponse {
+    repeated BillingOverview list = 1;
+}
+
+// 账单明细（API调用）请求
+message BillingQueryRequest {
+    // 企业ID
+    // @inject_tag: `validate:"is_ysid,required"`
+    string company_id = 1;
+    // 账期
+    string billing_month = 2;
+    // @inject_tag: `validate:"required"`
+    ptype.Page page = 3;
+    // 用户ID
+    // @inject_tag: `validate:"is_ysid"`
+    string user_id = 4;
+    // 用户姓名
+    string user_name = 5;
+    // 商品ID
+    // @inject_tag: `validate:"is_ysid"`
+    string merchandise_id = 6;
+    // @inject_tag: `validate:"is_ysid"`
+    string product_id=7;
+    // 账单类型
+    protoconsts.ResourceType type = 8;
+    // 项目（空间）ID
+    // @inject_tag: `validate:"is_ysid"`
+    string project_id = 9;
+    // 部门ID
+    // @inject_tag: `validate:"is_ysid"`
+    string department_id = 10;
+    // 账单类型，支持多个
+    repeated protoconsts.ResourceType types = 11;
+
+    // 多个账期
+    repeated string billing_months = 12;
+}
+
+// 账单明细（API调用）结果
+message BillingQueryResponse {
+    repeated Billing list = 1;
+    ptype.PageCtx page_ctx = 2;
+    int64 total_amount = 3;
+    int64 total_refund_amount = 4;
+}
+
+// 账单总览数据(运营后台调用)
+message PlatformBillingOverview {
+    // @inject_tag: `validate:"is_ysid"`
+    string company_id = 1;
+    // 产品
+    protoconsts.ResourceType  resource_type = 2;
+
+    // 账单金额（原价）
+    int64 amount = 3;
+    // 优惠金额
+    int64 discount_amount = 4;
+    // 实际支付金额
+    int64 real_amount = 5;
+    // 退款金额
+    int64 refund_amount = 6;
+}
+
+// 平台账单总览（运营后台调用）请求
+message PlatformBillingOverviewRequest {
+    // 企业ID,为空查所有企业用户，为“1”查所有个人用户
+    // @inject_tag: `validate:"is_ysid"`
+    string company_id = 1;
+
+    // 账单类型： 1 已出账单（账单状态为：已出、取消）； 2 未出账单
+    // @inject_tag: `validate:"required"`
+    int32 billing_type = 2;
+
+    // billing_type = 1时， 使用billing_time
+    // billing_type = 2时， 使用create_time
+    // 开始时间 (>= start_time)
+    // @inject_tag: `validate:"required"`
+    google.protobuf.Timestamp start_time = 3;
+    // 结束时间 (< end_time)
+    // @inject_tag: `validate:"required"`
+    google.protobuf.Timestamp end_time = 4;
+
+    // 资源类型
+    protoconsts.ResourceType resource_type = 5;
+
+    ptype.Page page = 6;
+    // @inject_tag: `validate:"is_ysid"`
+    string product_id=7;
+
+    // 为空查所有用户/不关心
+    // @inject_tag: `validate:"is_ysid"`
+    string user_id =8;
+}
+
+// 账单总览（运营后台调用）结果
+message PlatformBillingOverviewResponse {
+    repeated PlatformBillingOverview list = 1;
+    ptype.PageCtx page_ctx = 2;
+}
+
+// 账单明细（运营后台调用）请求
+message PlatformBillingQueryRequest {
+    // 企业ID,为空查所有企业用户，为“1”查所有个人用户
+    // @inject_tag: `validate:"is_ysid"`
+    string company_id = 1;
+
+    // 外部业务单ID
+    // @inject_tag: `validate:"is_ysid"`
+    string out_biz_id = 2;
+
+    // 账单类型： 1 已出账单（账单状态为：已出、取消）； 2 未出账单
+    // @inject_tag: `validate:"required"`
+    int32 billing_type = 3;
+
+    // billing_type = 1时， 使用billing_time
+    // billing_type = 2时， 使用create_time
+    // 开始时间 (>= start_time)
+    // @inject_tag: `validate:"required"`
+    google.protobuf.Timestamp start_time = 4;
+    // 结束时间 (< end_time)
+    // @inject_tag: `validate:"required"`
+    google.protobuf.Timestamp end_time = 5;
+
+    // 资源类型
+    protoconsts.ResourceType resource_type = 6;
+    // @inject_tag: `validate:"required"`
+    ptype.Page page = 7;
+
+    // @inject_tag: `validate:"is_ysid"`
+    string product_id=8;
+
+    // 为空查所有用户/不关心
+    // @inject_tag: `validate:"is_ysid"`
+    string user_id =9;
+}
+
+// 账单明细（运营后台调用）结果
+message PlatformBillingQueryResponse {
+    repeated Billing list = 1;
+    ptype.PageCtx page_ctx = 2;
+}
+
+// 账单统计（运营后台调用）请求
+message PlatformBillingStatRequest {
+    // 企业ID,为空查所有企业用户，为“1”查所有个人用户
+    // @inject_tag: `validate:"is_ysid"`
+    string company_id = 1;
+
+    // 外部业务单ID
+    // @inject_tag: `validate:"is_ysid"`
+    string out_biz_id = 2;
+
+    // 账单类型： 1 已出账单（账单状态为：已出、取消）； 2 未出账单
+    // @inject_tag: `validate:"required"`
+    int32 billing_type = 3;
+
+    // billing_type = 1时， 使用billing_time
+    // billing_type = 2时， 使用create_time
+    // 开始时间 (>= start_time)
+    // @inject_tag: `validate:"required"`
+    google.protobuf.Timestamp start_time = 4;
+    // 结束时间 (< end_time)
+    // @inject_tag: `validate:"required"`
+    google.protobuf.Timestamp end_time = 5;
+
+    // 资源类型
+    protoconsts.ResourceType resource_type = 6;
+
+    // @inject_tag: `validate:"is_ysid"`
+    string product_id=7;
+
+    // 为空查所有用户/不关心
+    // @inject_tag: `validate:"is_ysid"`
+    string user_id =8;
+}
+
+// 账单统计（运营后台调用）结果
+message PlatformBillingStatResponse {
+    // 账单总金额
+    int64 total_amount = 1;
+    // 优惠总金额
+    int64 total_discount_amount = 2;
+    // 实付总金额
+    int64 total_real_amount = 3;
+    // 未结算总金额
+    int64 total_not_billing_amount = 4;
+    // 退款总金额
+    int64 total_refund_amount = 5;
+}
+
+// 根据外部业务ID获取计费信息 请求
+message GetBillingByOutBizsRequest {
+    // @inject_tag: `validate:"required"`
+    // 业务id
+    repeated string out_biz_ids = 1;
+}
+
+// 根据外部业务ID获取计费信息 结果
+message GetBillingByOutBizsResponse {
+    repeated Billing list = 1;
+}
+
+message UserCostRequest {
+    // @inject_tag: `validate:"is_ysid,required"`
+    string user_id = 1;
+    // @inject_tag: `validate:"is_ysid,required"`
+    string account_id = 2;
+    // 开始时间
+    google.protobuf.Timestamp start_time = 3;
+}
+
+message UserCostResponse {
+    int64 cost = 1;
+    int64 freeze = 2;
+}
+
+message ProjectCostRequest {
+    // @inject_tag: `validate:"is_ysid,required"`
+    string project_id = 1;
+    bool compute_freeze_amount = 2;
+}
+
+message ProjectCostResponse {
+    int64 cost = 1;
+    int64 freeze_amount = 2;
+}
+
+
+// 获取企业最近N天的消费总额和平均消费金额请求参数
+message GetCompanyLastFewDaysCostRequest {
+    // @inject_tag: `validate:"is_ysid"`
+    string product_id = 1;
+    // 企业ID
+    // @inject_tag: `validate:"is_ysid,required"`
+    string company_id = 2;
+    // 统计最近天数
+    // @inject_tag: `validate:"min=1,required"`
+    int64 day_num = 3;
+
+}
+
+// 获取企业最近N天的消费总额和平均消费金额返回结果
+message GetCompanyLastFewDaysCostResponse {
+    int64 total_amount = 1;
+    int64 average_amount = 2;
+}
+
+message ListBillingByIdsRequest {
+    // @inject_tag: `validate:"is_ysid,required"`
+    string company_id = 1;
+    // @inject_tag: `validate:"required"`
+    repeated string billing_ids = 2;
+}
+
+message ListBillingByIdsResponse {
+    repeated Billing list = 1;
+}

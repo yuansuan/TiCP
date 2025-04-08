@@ -1,0 +1,27 @@
+{
+  "Id": "4Uj2CAfPbzE",
+  "ManagerId": "4VqtawvoMij",
+  "Provider": "无锡超算",
+  "MacAddr": "00:00:00:00:00:00",
+  "ToolPath": "/home/yuansuan/lic_tool/lmutil",
+  "LicenseUrl": "115.159.149.167",
+  "Port": 29000,
+  "licenseProxies": {
+    "http://10.0.10.3:8080": {
+      "Url": "1.1.1.1",
+      "Port": 29000
+    }
+  },
+  "LicenseNum": "4E30 AFEF CB5D D27D 353F 5B3D 7D",
+  "Weight": 100,
+  "BeginTime": "2021-11-06 00:05:35",
+  "EndTime": "2025-11-07 00:05:35",
+  "Auth": true,
+  "LicenseEnvVar": "CDLMD_LICENSE_FILE",
+  "LicenseType": 2,
+  "HpcEndpoint": "http://10.0.10.3:8080",
+  "AllowableHpcEndpoints": [
+    "http://10.0.10.3:8080"
+  ],
+  "CollectorType": "flex"
+}

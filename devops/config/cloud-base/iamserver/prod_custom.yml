@@ -1,0 +1,11 @@
+admin_ak_id: admin
+admin_ak_secret: admin===>>yskj1234
+allow_add_users:
+- 58X9H8Yakw1
+clean_audit_log_interval: 3
+max_assume_role_time: 4
+ys_api_server:
+  account_bill: http://10.0.202.216:8891
+  cloud_app: null
+  job: http://10.0.202.216:8893
+  lic_manager: http://10.0.202.216:8894

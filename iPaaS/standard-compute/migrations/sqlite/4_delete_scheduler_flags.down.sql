@@ -1,0 +1,1 @@
+alter table job drop column scheduler_submit_flags;

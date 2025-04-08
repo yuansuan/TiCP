@@ -1,0 +1,191 @@
+syntax = "proto3";
+
+package company;
+option go_package = "github.com/yuansuan/ticp/iPaaS/sso/protos/platform/company";
+
+import "google/protobuf/timestamp.proto";
+import "protos/platform/ptype/page.proto";
+import "protos/platform/company/permission.proto";
+
+
+enum RoleStatus {
+    ROLE_UNKOWN = 0;
+    // 正常
+    ROLE_NORMAL = 1;
+    // 删除
+    ROLE_DELETED = 2;
+}
+
+message Role {
+    // 角色ID
+    string id = 1;
+    // 角色名秒
+    string name = 2;
+    // 企业ID
+    string company_id = 3;
+    // 角色类型： 1 内置 2 自定义
+    int32 type = 4;
+    // 状态 
+    RoleStatus status = 5;
+    string create_uid = 6;
+    string create_name = 7;
+    string modify_uid = 8;
+    string modify_name = 9;
+    google.protobuf.Timestamp update_time = 10;
+    google.protobuf.Timestamp create_time = 11;
+}
+
+service RoleService {
+    // 创建系统角色 （运营后台使用）
+    rpc CreateSysRole (CreateSysRoleRequest) returns (CreateSysRoleResponse) {}
+
+    // 创建企业角色
+    rpc CreateCompanyRole (CreateCompanyRoleRequest) returns (CreateCompanyRoleResponse) {}
+
+    // 修改角色
+    rpc ModifyRole (ModifyRoleRequest) returns (ModifyRoleResponse) {}
+
+    // 获取企业角色列表
+    rpc GetCompanyRoleList (GetCompanyRoleListRequest) returns (GetCompanyRoleListResponse) {}
+
+    // 获取系统角色列表
+    rpc GetSysRoleList (GetSysRoleListRequest) returns (GetSysRoleListResponse) {}
+
+    // 给角色赋权限
+    rpc GrantPermissionToRole (GrantPermissionToRoleRequest) returns (GrantPermissionToRoleResponse) {}
+
+    // 通过角色ID获取角色所属权限
+    rpc GetPermissionByRoleID (GetPermissionByRoleIDRequest) returns (GetPermissionByRoleIDResponse) {}
+}
+
+message CreateSysRoleRequest {
+    // 角色名称
+    // @inject_tag: `validate:"required"`
+    string name = 1;
+    // 创建者用户ID
+    // @inject_tag: `validate:"is_ysid,required"`
+    string create_uid = 2;
+    // 创建者姓名
+    // @inject_tag: `validate:"required"`
+    string create_name = 3;
+}
+
+message CreateSysRoleResponse {
+    // 角色ID
+    string role_id = 1;
+}
+
+// 创建企业用户角色请求
+message CreateCompanyRoleRequest {
+    // 角色名称
+    // @inject_tag: `validate:"required"`
+    string name = 1;
+    // 企业ID
+    // @inject_tag: `validate:"is_ysid,required"`
+    string company_id = 2;
+    // 创建者用户ID
+    // @inject_tag: `validate:"is_ysid,required"`
+    string create_uid = 3;
+    // 创建者姓名
+    // @inject_tag: `validate:"required"`
+    string create_name = 4;
+}
+
+// 创建企业用户角色结果
+message CreateCompanyRoleResponse {
+    // 角色ID
+    string role_id = 1;
+}
+
+// 修改角色请求
+message ModifyRoleRequest {
+    // 角色ID
+    // @inject_tag: `validate:"required"`
+    string role_id = 1;
+    // 角色名称
+    string name = 2;
+    // 状态
+    RoleStatus status = 3;
+    // 修改者用户ID
+    // @inject_tag: `validate:"is_ysid,required"`
+    string modify_uid = 4;
+    // 修改者姓名
+    // @inject_tag: `validate:"required"`
+    string modify_name = 5;
+}
+
+// 修改角色结果
+message ModifyRoleResponse {
+    // success 成功 ； fail 失败
+    string msg = 1;
+}
+
+
+// 获取企业角色列表请求
+message GetCompanyRoleListRequest {
+    // 角色名称
+    string name = 1;
+    // 企业ID
+    // @inject_tag: `validate:"is_ysid,required"`
+    string company_id = 2;
+    // 状态
+    RoleStatus status = 3;
+    // @inject_tag: `validate:"required"`
+    ptype.Page page = 4;
+}
+
+// 获取企业角色列表结果
+message GetCompanyRoleListResponse {
+    repeated Role list = 1;
+    ptype.PageCtx page_ctx = 2;
+}
+
+
+// 获取企业角色列表请求
+message GetSysRoleListRequest {
+    // 角色名称
+    string name = 1;
+    // 状态
+    RoleStatus status = 2;
+    // @inject_tag: `validate:"required"`
+    ptype.Page page = 3;
+}
+
+// 获取企业角色列表结果
+message GetSysRoleListResponse {
+    repeated Role list = 1;
+    ptype.PageCtx page_ctx = 2;
+}
+
+// 给角色赋权限
+message GrantPermissionToRoleRequest {
+    // 角色ID
+    // @inject_tag: `validate:"is_ysid,required"`
+    string role_id = 1;
+    // @inject_tag: `validate:"required"`
+    repeated string permissions = 2;
+    // 创建者用户ID
+    // @inject_tag: `validate:"is_ysid,required"`
+    string create_uid = 3;
+    // 创建者姓名
+    // @inject_tag: `validate:"required"`
+    string create_name = 4;
+}
+
+// 给角色赋权限
+message GrantPermissionToRoleResponse {
+    // success 成功 ； fail 失败
+    string msg = 1;
+}
+
+// 通过角色ID获取角色所属权限请求
+message GetPermissionByRoleIDRequest {
+    // 角色ID
+    // @inject_tag: `validate:"is_ysid,required"`
+    string role_id = 1;
+}
+
+// 通过角色ID获取角色所属权限结果
+message GetPermissionByRoleIDResponse {
+    repeated company.Permission list = 1;
+}

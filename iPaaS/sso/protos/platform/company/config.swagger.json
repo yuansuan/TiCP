@@ -1,0 +1,83 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "protos/platform/company/config.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "CompanyUserConfigService"
+    },
+    {
+      "name": "CompanyConfigService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {},
+  "definitions": {
+    "companyCompanyUserConfig": {
+      "type": "object",
+      "properties": {
+        "configs": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "companyGetResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "companyRelation": {
+      "type": "object",
+      "properties": {
+        "companyId": {
+          "type": "string",
+          "title": "@inject_tag: `validate:\"is_ysid,required\"`"
+        },
+        "userId": {
+          "type": "string",
+          "title": "@inject_tag: `validate:\"is_ysid,required\"`"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

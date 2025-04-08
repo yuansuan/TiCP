@@ -1,0 +1,1 @@
+ALTER TABLE job ADD COLUMN cores_per_node INTEGER NOT NULL DEFAULT 0 AFTER request_cores;

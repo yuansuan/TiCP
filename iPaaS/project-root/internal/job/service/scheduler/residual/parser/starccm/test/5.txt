@@ -1,0 +1,650 @@
+cn23
+Starting local server: /THL5/software/STAR-CCM+10.02/STAR-CCM+10.02.010/star/bin/starccm+ -machinefile hostfile-1130656 -np 28 -rsh "ssh" -server
+Starting STAR-CCM+ parallel server
+IBM Platform MPI licensed for CD-adapco.
+Host 0 -- ip 121.16.21.24 -- ranks 0 - 27
+
+ host | 0
+======|======
+    0 : SHM
+
+ Prot -  All Intra-node communication is: SHM
+
+MPI Distribution : Platform Computing MPI-08.3.0.6
+Host 0 -- cn23 -- Ranks 0-27
+Process rank 0 cn23 32567
+Total number of processes : 28
+
+STAR-CCM+ 10.02.010 (linux-x86_64-2.5/gnu4.8)
+License build date: 20 November 2014
+This version of the code requires license version 2015.02 or greater.
+Checking license file: /THL5/software/STAR-CCM+10.02/license.dat
+1 copy of ccmpsuite checked out from /THL5/software/STAR-CCM+10.02/license.dat
+Feature ccmpsuite expires in 3650000 days
+Fri Mar 23 10:05:28 2018
+
+Server::start -host cn23:47827
+Playing macro: /THL5/home/wujian/job_test/1025888.1025967/test_v9.java
+Note: test_v9.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+
+Loading module: CadModeler
+Loading module: MeshingSurfaceRepair
+Started Parasolid modeler version 27.00.192
+Saving: /THL5/home/wujian/job_test/1025888.1025967/laminar_pipe.sim
+Simulation saved to /THL5/home/wujian/job_test/1025888.1025967/laminar_pipe.sim (147.55KB in 0.094797s).
+No coincident faces or edges found.
+Loading module: StarResurfacer
+Loading module: StarDualMesher
+Loading module: MetricsModel
+Loading module: MotionModel
+Loading module: MaterialModel
+Reading material property database "/THL5/software/STAR-CCM+10.02/STAR-CCM+10.02.010/star/props.mdb"...
+Loading module: SegregatedFlowModel
+Initializing meshing pipeline...
+  Transferring geometry for meshing.
+No parts-based mesh operations to execute
+Executing region-based surface meshers...
+Preparing surface for surface meshing in regions: Region 1
+Projecting to CAD geometry
+----------------------------------------
+Executing Surface Remesher
+----------------------------------------
+
+Face Quality    Faces    Percent
+  < 0.001           0       0.0
+  < 0.01           90      50.0
+  < 0.05           90      50.0
+  < 0.1            90      50.0
+  < 0.2            90      50.0
+  < 0.3           180     100.0
+  < 0.4           180     100.0
+  < 0.5           180     100.0
+  < 0.6           180     100.0
+  < 0.7           180     100.0
+  < 0.8           180     100.0
+  < 0.9           180     100.0
+  < 1.0           180     100.0
+Worst quality is 0.009279
+initial number of faces: 180
+
+starting: Apply Global Limits
+
+   Face Quality    Faces    Percent
+     < 0.001           0       0.0
+     < 0.01            0       0.0
+     < 0.05            0       0.0
+     < 0.1           296       8.5
+     < 0.2           812      23.3
+     < 0.3          3464      99.5
+     < 0.4          3480     100.0
+     < 0.5          3480     100.0
+     < 0.6          3480     100.0
+     < 0.7          3480     100.0
+     < 0.8          3480     100.0
+     < 0.9          3480     100.0
+     < 1.0          3480     100.0
+   Worst quality is 0.05488
+
+starting: Improve Grading
+
+   Face Quality    Faces    Percent
+     < 0.001           0       0.0
+     < 0.01            0       0.0
+     < 0.05            0       0.0
+     < 0.1             0       0.0
+     < 0.2             0       0.0
+     < 0.3             0       0.0
+     < 0.4            55       0.3
+     < 0.5           382       2.2
+     < 0.6           583       3.3
+     < 0.7           712       4.1
+     < 0.8          1083       6.2
+     < 0.9          6804      38.9
+     < 1.0         17498     100.0
+   Worst quality is 0.333
+
+starting: Improve Quality
+
+   Post-processing
+   no intersections found
+   0 faces with quality below 0.05
+
+Face Quality    Faces    Percent
+  < 0.001           0       0.0
+  < 0.01            0       0.0
+  < 0.05            0       0.0
+  < 0.1             0       0.0
+  < 0.2             0       0.0
+  < 0.3             0       0.0
+  < 0.4             0       0.0
+  < 0.5             0       0.0
+  < 0.6             0       0.0
+  < 0.7             2       0.0
+  < 0.8            20       0.2
+  < 0.9         12468      97.9
+  < 1.0         12732     100.0
+Worst quality is 0.6932
+final number of faces: 12732
+Aligned mesh created for 1 surface out of a total of 3 surfaces.
+----------------------------------------
+Surface Remesher Completed: CPU Time: 1.34, Wall Time: 2.66, Memory: 897.32 MB
+----------------------------------------
+Fixing surface
+
+   Surface Fixing Iteration 1:
+
+   Surface Fixing Iteration 2:
+0 close proximity(<0.05) faces
+   done SurfaceFixer CPU Time: 0.00, Wall Time: 0.06, Memory: 895.72 MB
+Surface Meshing Pipeline Completed: CPU Time: 1.48, Wall Time: 4.47, Memory: 895.72 MB
+Initializing meshing pipeline...
+  All Geometry up to date.
+No parts-based mesh operations to execute
+Executing region-based surface meshers...
+Surface remesher up to date, skipping...
+No solution currently computed -- clearing volume mesh.
+Preparing surface for volume meshing in regions: Region 1
+Orienting surface
+Surface is valid for volume meshing.
+determineIfGenerationIsParallel, Memory: 895.72 MB
+ Mesh Generation is pseudo-parallel
+done, (determineIfGenerationIsParallel), CPU Time: 0.00, Wall Time: 0.00, Memory: 895.72 MB
+Global Max Facetype = 3
+Setting tet mesher options, Memory: 895.72 MB
+done, (Setting tet mesher options), CPU Time: 0.00, Wall Time: 0.03, Memory: 895.72 MB
+Dualization will be executed without special face collapsing
+Poly Meshing with prisms, Memory: 895.72 MB
+User set distribution function to be  GEOMETRIC PROGRESSION
+ Considering 0 initial sharp edges
+ Surface # vertices = 6368
+ Surface # faces    = 12732
+----------------------------------------
+Executing Prism Layer Subsurface
+----------------------------------------
+Input surface contains 12732 faces, and 6368 vertices
+Initializing subsurface
+   done, CPU Time: 0.00, Wall Time: 0.05, Memory: 897.54 MB
+Assuming valid input surface
+Preprocessing
+   done, CPU Time: 0.00, Wall Time: 0.03, Memory: 897.54 MB
+Computing vertex normals
+   done, CPU Time: 0.01, Wall Time: 0.01, Memory: 897.54 MB
+Computing initial vertex magnitudes based on user specification
+   done, CPU Time: 0.00, Wall Time: 0.00, Memory: 897.54 MB
+Computing surface proximity
+   done, CPU Time: 0.04, Wall Time: 0.04, Memory: 897.54 MB
+Constraining boundary vertices
+   done, CPU Time: 0.00, Wall Time: 0.00, Memory: 897.54 MB
+
+Iteration 1:
+-------------
+Initializing final vertex normals
+Smoothing 6228 vertex normals (10 iterations)
+Creating subsurface (updating 6228 of 6228 active vertices)
+Checking 12384 face-based validity metrics
+Checking vertex intersections for all vertices
+Creating new interface mappings
+
+Using edge recovery to fix prism layer boundaries...
+   72 prism layer side vertices projected onto the boundary.
+   72 prism layer side edges recovered.
+Remeshing surface near recovered edges...
+Surface remeshed.  12 faces added to surface.
+CPU Time: 0.02, Wall Time: 0.05, Memory: 897.54 MB
+Edge recovery was successful.
+CPU Time: 0.03, Wall Time: 0.12, Memory: 897.54 MB
+
+Checking true subsurface intersections for all vertices
+Checking subsurface orientation
+done, CPU Time: 0.13, Wall Time: 0.26, Memory: 897.54 MB
+
+Iterations successful
+
+Combining interface maps
+   done, CPU Time: 0.00, Wall Time: 0.00, Memory: 897.54 MB
+Marking zero layer regions
+   found 0 collapsed faces
+   found 0 edges bounding collapsed regions
+   found 0 vertices bounding collapsed regions
+   done, CPU Time: 0.00, Wall Time: 0.01, Memory: 897.54 MB
+Subsurface contains 12736 faces, and 6370 vertices
+----------------------------------------
+Prism Layer Subsurface Completed: CPU Time: 0.19, Wall Time: 0.48, Memory: 897.54 MB
+----------------------------------------
+ Found 0 zero layer special verts and 0 zero layer special edges
+ Deleting zero layers entities
+ Computing complete interface maps, Memory: 897.54 MB
+ done, (Computing complete interface maps), CPU Time: 0.06, Wall Time: 0.10, Memory: 899.37 MB
+ The surface initially contains 72 special edges
+ The surface initially contains 0 special vertices
+ initialSharpEdges            : 72
+ Considering 72 initial sharp edges
+ sharpEdges            : 72
+ sharpEdgesForDualizer : 72
+ Deleting all edges in poly surface
+ Deleting all edges in poly surface
+ Marking surface with 72 edges, assigning edge type: 7, Memory: 906.06 MB
+ done, (Marking surface with 72 edges, assigning edge type: 7), CPU Time: 0.01, Wall Time: 0.00, Memory: 906.06 MB
+ The surface now contains 72 special edges
+  number of sharp edges to define : 72
+  number of sharp edges defined : 72
+ Checking subsurface for selfintersections
+ Using existing interface maps
+ Surface has 0 selfintersecting faces
+ Subsurface is selfintersection free
+ executeDualMesher = 1
+ Enforcing bulk-bulk special edges compatibility, Memory: 900.02 MB
+  # of input special edges: 72
+ done, (Enforcing bulk-bulk special edges compatibility), CPU Time: 0.00, Wall Time: 0.00, Memory: 900.02 MB
+ Enforcing bulk-bulk special edges compatibility, Memory: 900.02 MB
+  # of input special edges: 72
+ done, (Enforcing bulk-bulk special edges compatibility), CPU Time: 0.00, Wall Time: 0.00, Memory: 900.02 MB
+ Using preset sharp edges
+ DualMesher - setPresetSharpEntities, Memory: 900.02 MB
+ done, (DualMesher - setPresetSharpEntities), CPU Time: 0.00, Wall Time: 0.00, Memory: 900.02 MB
+ presetSharpEdges : 72
+ presetSharpCornes:0
+ presetIrregularSharpCornes : 0
+----------------------------------------
+Executing Polyhedral Mesher
+----------------------------------------
+ Invoking Tet Mesher, Memory: 900.02 MB
+
+start Dt3Mesher, CPU Time: 0.00, Wall Time: 0.00, Memory: 900.02 MB
+
+Setting up surface...
+
+Checking the surface...
+  number of faces: 12736
+  done, CPU Time: 0.12, Wall Time: 0.40, Memory: 900.02 MB
+Estimating number of cells...
+  estimated number of tets: 113868
+  done, CPU Time: 0.00, Wall Time: 0.02, Memory: 900.02 MB
+  done setup, CPU Time: 0.12, Wall Time: 0.57, Memory: 900.02 MB
+
+Generating mesh...
+
+Inserting boundary points...
+  done, CPU Time: 0.53, Wall Time: 0.67, Memory: 900.12 MB
+Recovering surface...
+  done, CPU Time: 0.74, Wall Time: 1.05, Memory: 903.36 MB
+Refining mesh...
+  done, CPU Time: 1.32, Wall Time: 1.33, Memory: 906.59 MB
+Optimizing mesh...
+Optimization CYCLE 1...
+  PHASE 1~~~~quality thresh: 4.500e-01
+             LOWEST QUALITY: 1.196e-11,    0.00%  OF  8.587e-01
+             CELLS IN SCOPE:      4448,    5.90%  OF      75402
+  PHASE 3~~~~quality thresh: 4.293e-01
+             LOWEST QUALITY: 4.501e-01,   52.42%  OF  8.587e-01
+             CELLS IN SCOPE:         0,    0.00%  OF      72573
+  end CYCLE 1, CPU Time: 0.18, Wall Time: 0.19, Memory: 906.98 MB
+  done optimize, CPU Time: 0.18, Wall Time: 0.19, Memory: 906.98 MB
+  done, CPU Time: 2.83, Wall Time: 3.41, Memory: 906.98 MB
+
+end of Dt3Mesher, CPU Time: 2.95, Wall Time: 3.98, Memory: 906.98 MB
+ done, (Invoking Tet Mesher), CPU Time: 2.95, Wall Time: 3.99, Memory: 906.98 MB
+ Checking tet mesh special edges, Memory: 906.98 MB
+ done, (Checking tet mesh special edges), CPU Time: 0.00, Wall Time: 0.00, Memory: 906.98 MB
+ Tet mesh contains 72573 cells
+ building global subsets, Memory: 906.98 MB
+ done, (building global subsets), CPU Time: 0.00, Wall Time: 0.02, Memory: 907.73 MB
+ Enforce tet mesh strict face orientation, Memory: 907.73 MB
+ done, (Enforce tet mesh strict face orientation), CPU Time: 0.08, Wall Time: 0.08, Memory: 907.73 MB
+ Number of tet cells = 72573
+ Executing Dualizer, Memory: 907.73 MB
+  Number of core     cells in initial mesh : 72573
+  Number of boundary faces in initial mesh : 12736
+  Estimated number of core polyhedra       : 15360
+  presetSharpEdges           : 72
+  presetSharpCornes          : 0
+  presetIrregularSharpCornes : 0
+  Found 72 activeSharpEdges from preset edges
+  Found 0 activeSharpEdges from irregular corners
+  Found total 72 activeSharpEdges
+  Generating Polyhedral Cells, Memory: 908.34 MB
+   Starting generation, Memory: 908.34 MB
+    Preparing dual mesh, Memory: 908.34 MB
+     Creating interior vertices, Memory: 908.34 MB
+     done, (Creating interior vertices), CPU Time: 0.06, Wall Time: 0.05, Memory: 910.35 MB
+     Setting frozen cells by vertices, Memory: 910.35 MB
+      Found 0 frozen cells for optimization
+     done, (Setting frozen cells by vertices), CPU Time: 0.02, Wall Time: 0.02, Memory: 910.35 MB
+     Setting frozen cells by cells, Memory: 910.35 MB
+     done, (Setting frozen cells by cells), CPU Time: 0.00, Wall Time: 0.00, Memory: 910.35 MB
+     Maximizing cell center quality, Memory: 910.35 MB
+      Initializing cell centers, Memory: 910.35 MB
+       Max Cell Id = 90407
+      done, (Initializing cell centers), CPU Time: 0.04, Wall Time: 0.04, Memory: 911.40 MB
+      Initializing face data, Memory: 911.40 MB
+      done, (Initializing face data), CPU Time: 0.04, Wall Time: 0.06, Memory: 915.68 MB
+      Solving constrained optimization for 72573 cells ...
+       Iteration 1    Total Normalized Displacement       1.00000    Constrained 0
+       Iteration 2    Total Normalized Displacement       0.10326    Constrained 0
+       Iteration 3    Total Normalized Displacement       0.00970    Constrained 0
+     done, (Maximizing cell center quality), CPU Time: 0.18, Wall Time: 0.20, Memory: 911.53 MB
+     Transferring dual vertices, Memory: 911.53 MB
+      transferring terminated, CPU Time: 0.00, Wall Time: 0.00, Memory: 910.48 MB
+     done, (Transferring dual vertices), CPU Time: 0.00, Wall Time: 0.00, Memory: 910.48 MB
+     Initializing dual cells, Memory: 910.48 MB
+      Initializing counters, Memory: 910.81 MB
+      done, (Initializing counters), CPU Time: 0.02, Wall Time: 0.02, Memory: 911.32 MB
+      Primal mesh contains 14985 vertices
+     done, (Initializing dual cells), CPU Time: 0.02, Wall Time: 0.05, Memory: 911.76 MB
+    done, (Preparing dual mesh), CPU Time: 0.28, Wall Time: 0.34, Memory: 915.00 MB
+    Populating dual mesh, Memory: 915.00 MB
+     Creating sharp edges mid vertices on boundary, Memory: 915.00 MB
+      User defined sharp edges : 72
+     done, (Creating sharp edges mid vertices on boundary), CPU Time: 0.00, Wall Time: 0.00, Memory: 915.14 MB
+     Creating edge boundary faces, Memory: 915.14 MB
+      created 19104 dual edge boundary faces CPU Time: 0.04, Wall Time: 0.02, Memory: 915.65 MB
+     done, (Creating edge boundary faces), CPU Time: 0.04, Wall Time: 0.02, Memory: 915.65 MB
+     Creating interior faces, Memory: 915.65 MB
+      created 74821 dual faces CPU Time: 0.17, Wall Time: 0.18, Memory: 919.14 MB
+     done, (Creating interior faces), CPU Time: 0.17, Wall Time: 0.18, Memory: 919.14 MB
+     Creating boundary faces, Memory: 919.14 MB
+      created 6370 dual boundary faces CPU Time: 0.11, Wall Time: 0.12, Memory: 920.54 MB
+     done, (Creating boundary faces), CPU Time: 0.11, Wall Time: 0.12, Memory: 920.54 MB
+     Updating boundary faces, Memory: 920.54 MB
+     done, (Updating boundary faces), CPU Time: 0.04, Wall Time: 0.03, Memory: 921.12 MB
+    done, (Populating dual mesh), CPU Time: 0.36, Wall Time: 0.35, Memory: 921.12 MB
+    Dual Mesh contains 14985 cells
+   done, (Starting generation), CPU Time: 0.64, Wall Time: 0.69, Memory: 921.12 MB
+  done, (Generating Polyhedral Cells), CPU Time: 0.64, Wall Time: 0.70, Memory: 919.92 MB
+  Splitting dual interior sharp faces, Memory: 919.92 MB
+   Candidate faces = 0
+   Split faces = 0
+  done, (Splitting dual interior sharp faces), CPU Time: 0.00, Wall Time: 0.00, Memory: 919.92 MB
+  Splitting dual boundary sharp cells, Memory: 919.92 MB
+   Tolerance = 4.5834e-05
+  done, (Splitting dual boundary sharp cells), CPU Time: 0.00, Wall Time: 0.01, Memory: 919.92 MB
+  No collapsible vertices.
+ done, (Executing Dualizer), CPU Time: 0.64, Wall Time: 0.78, Memory: 919.92 MB
+ Volume mesh contains 14985 polyhedral cells
+----------------------------------------
+Polyhedral Mesher Completed: CPU Time: 3.70, Wall Time: 5.15, Memory: 917.42 MB
+----------------------------------------
+----------------------------------------
+Executing Prism Layer Extrusion
+----------------------------------------
+Marking vertices, edges and faces to extrude
+   found 0 zero layer subsurface vertices
+   done, CPU Time: 0.05, Wall Time: 0.06, Memory: 917.42 MB
+Creating extrusion layer mesh
+   default number of layers = 2
+   default stretching = 1.5
+   done, CPU Time: 0.00, Wall Time: 0.00, Memory: 917.42 MB
+ chopping percentage set to 50
+Extrusion mesh contains:
+   12456 cells
+   56052 faces
+   80964 edges
+   37368 vertices
+----------------------------------------
+Prism Layer Extrusion Completed: CPU Time: 0.14, Wall Time: 0.30, Memory: 924.61 MB
+----------------------------------------
+ Assembling core mesh and prismatic mesh, Memory: 924.61 MB
+ done, (Assembling core mesh and prismatic mesh), CPU Time: 0.04, Wall Time: 0.08, Memory: 926.76 MB
+ Assembled core+extrusion mesh contains 27441 cells.
+done, (Poly Meshing with prisms), CPU Time: 4.31, Wall Time: 6.75, Memory: 926.63 MB
+Averaging interface face vertices, Memory: 926.63 MB
+Found 0 matching group of faces
+ Averaged 0 equivalent groups of vertices
+done, (Averaging interface face vertices), CPU Time: 0.05, Wall Time: 0.04, Memory: 926.63 MB
+Checking Interface Conformality, Memory: 926.63 MB
+done, (Checking Interface Conformality), CPU Time: 0.03, Wall Time: 0.03, Memory: 932.14 MB
+Fixed 0 nearly coincident faces
+Enforcing face orientation
+Associating celltypes with regions, Memory: 926.63 MB
+ Correcting missing facetypes, Memory: 926.63 MB
+ done, (Correcting missing facetypes), CPU Time: 0.00, Wall Time: 0.00, Memory: 926.63 MB
+done, (Associating celltypes with regions), CPU Time: 0.02, Wall Time: 0.02, Memory: 926.63 MB
+Splitting concave cells, Memory: 926.63 MB
+done, (Splitting concave cells), CPU Time: 0.21, Wall Time: 0.28, Memory: 926.63 MB
+Optimizing mesh quality, Memory: 926.63 MB
+ Mesh Optimization, Memory: 926.63 MB
+  Tabu Search Optimizing, Memory: 926.63 MB
+   Quality thresholds:
+    minValidity   minQuality   minUnTwist
+       1.000000     0.000010     0.950000
+   Starting optimization on 27441 candidate cells
+   Found 0 cells that need optimization
+   Found 0 vertices that need optimization
+   No internal vertex to optimize
+  done, (Tabu Search Optimizing), CPU Time: 0.23, Wall Time: 0.24, Memory: 926.63 MB
+ done, (Mesh Optimization), CPU Time: 0.25, Wall Time: 0.29, Memory: 926.63 MB
+done, (Optimizing mesh quality), CPU Time: 0.25, Wall Time: 0.31, Memory: 926.63 MB
+Converting mesh into finite volume representation in Region Region 1
+   Converted mesh for Region 1 CPU Time: 0.07, Wall Time: 0.14, Memory: 934.02 MB
+
+ Partitioning Region 1 (27441 cells)
+Mesh conversion completed, CPU Time: 0.19, Wall Time: 0.67, Memory: 921.06 MB
+No parts-based mesh operations to execute
+No parts-based volume mesh operations to execute
+Volume Meshing Pipeline Completed: CPU Time: 5.18, Wall Time: 8.66, Memory: 921.06 MB
+	Cells: 27441	Faces: 143605	Vertices: 110293
+Saving: /THL5/home/wujian/job_test/1025888.1025967/laminar_pipe.sim
+Simulation saved to /THL5/home/wujian/job_test/1025888.1025967/laminar_pipe.sim (8.6845MB in 0.16964s).
+Re-partitioning
+27 copies of hpcdomains checked out from /THL5/software/STAR-CCM+10.02/license.dat
+Feature hpcdomains expires in 3650000 days
+     Iteration     Continuity     X-momentum     Y-momentum     Z-momentum
+             2   1.000000e+00   1.000000e+00   1.000000e+00   1.000000e+00
+             3   2.539385e-01   5.498097e-01   5.606368e-01   3.106174e-01
+             4   2.030154e-01   3.382010e-01   3.445659e-01   1.487199e-01
+             5   2.082591e-01   2.260292e-01   2.297638e-01   8.767734e-02
+             6   1.836427e-01   1.634116e-01   1.664691e-01   5.465510e-02
+             7   1.367378e-01   1.264613e-01   1.264296e-01   3.513445e-02
+             8   9.752160e-02   9.841436e-02   9.612419e-02   2.498907e-02
+             9   8.465823e-02   7.629239e-02   7.296837e-02   2.057209e-02
+            10   5.997052e-02   5.995223e-02   5.715712e-02   1.740587e-02
+     Iteration     Continuity     X-momentum     Y-momentum     Z-momentum
+            11   4.647703e-02   4.770396e-02   4.636313e-02   1.544608e-02
+            12   3.657444e-02   3.903041e-02   3.869946e-02   1.382302e-02
+            13   2.984005e-02   3.254191e-02   3.254534e-02   1.223855e-02
+            14   2.312432e-02   2.806628e-02   2.816091e-02   1.103416e-02
+            15   1.894408e-02   2.413213e-02   2.433956e-02   1.001152e-02
+            16   1.535885e-02   2.086885e-02   2.126930e-02   9.492437e-03
+            17   1.351533e-02   1.807366e-02   1.854281e-02   8.777742e-03
+            18   1.112500e-02   1.583009e-02   1.633962e-02   8.229227e-03
+            19   9.563028e-03   1.390435e-02   1.442463e-02   7.697187e-03
+            20   8.071573e-03   1.239054e-02   1.293545e-02   7.260997e-03
+     Iteration     Continuity     X-momentum     Y-momentum     Z-momentum
+            21   7.421811e-03   1.106776e-02   1.160079e-02   6.656795e-03
+            22   6.195037e-03   9.949176e-03   1.049775e-02   6.294844e-03
+            23   5.517619e-03   8.888599e-03   9.432496e-03   5.875676e-03
+            24   4.765669e-03   7.974288e-03   8.518437e-03   5.570180e-03
+            25   4.271821e-03   7.187053e-03   7.718283e-03   5.280731e-03
+            26   4.023144e-03   6.507772e-03   7.054028e-03   4.989786e-03
+            27   3.563020e-03   5.917995e-03   6.498131e-03   4.731453e-03
+            28   3.112970e-03   5.417186e-03   6.030119e-03   4.458062e-03
+            29   2.941751e-03   4.956163e-03   5.562007e-03   4.227566e-03
+            30   2.728871e-03   4.566608e-03   5.149620e-03   3.983390e-03
+     Iteration     Continuity     X-momentum     Y-momentum     Z-momentum
+            31   2.551887e-03   4.188824e-03   4.731247e-03   3.778814e-03
+            32   2.372374e-03   3.864838e-03   4.348907e-03   3.560786e-03
+            33   2.251094e-03   3.559168e-03   3.986214e-03   3.378451e-03
+            34   2.186620e-03   3.298407e-03   3.665763e-03   3.181290e-03
+            35   2.033908e-03   3.066076e-03   3.377405e-03   3.016973e-03
+            36   1.865514e-03   2.868272e-03   3.134665e-03   2.841626e-03
+            37   1.784918e-03   2.670112e-03   2.910665e-03   2.694560e-03
+            38   1.641721e-03   2.505332e-03   2.714246e-03   2.534504e-03
+            39   1.579151e-03   2.336736e-03   2.527488e-03   2.403354e-03
+            40   1.526452e-03   2.188967e-03   2.354055e-03   2.261052e-03
+     Iteration     Continuity     X-momentum     Y-momentum     Z-momentum
+            41   1.416304e-03   2.050310e-03   2.195114e-03   2.145109e-03
+            42   1.369201e-03   1.925020e-03   2.043244e-03   2.022288e-03
+            43   1.283350e-03   1.809882e-03   1.906503e-03   1.919742e-03
+            44   1.231120e-03   1.702146e-03   1.779778e-03   1.809298e-03
+            45   1.156143e-03   1.599868e-03   1.661719e-03   1.718960e-03
+            46   1.113669e-03   1.503223e-03   1.551693e-03   1.618507e-03
+            47   1.042483e-03   1.415292e-03   1.451916e-03   1.538430e-03
+            48   9.343061e-04   1.335234e-03   1.360648e-03   1.454204e-03
+            49   8.791809e-04   1.259099e-03   1.275440e-03   1.376420e-03
+            50   8.781718e-04   1.188345e-03   1.195035e-03   1.308679e-03
+     Iteration     Continuity     X-momentum     Y-momentum     Z-momentum
+            51   8.369968e-04   1.128263e-03   1.126093e-03   1.233977e-03
+            52   7.891382e-04   1.071693e-03   1.060772e-03   1.173603e-03
+            53   7.485541e-04   1.021080e-03   1.004612e-03   1.107093e-03
+            54   7.041015e-04   9.733623e-04   9.509169e-04   1.052997e-03
+            55   6.693485e-04   9.296510e-04   9.029814e-04   9.937303e-04
+            56   6.305162e-04   8.868689e-04   8.562932e-04   9.450917e-04
+            57   5.668711e-04   8.476335e-04   8.131794e-04   8.933556e-04
+            58   5.331157e-04   8.108718e-04   7.724161e-04   8.454532e-04
+            59   5.326884e-04   7.764882e-04   7.328333e-04   8.040234e-04
+            60   4.826585e-04   7.431635e-04   6.965731e-04   7.592128e-04
+     Iteration     Continuity     X-momentum     Y-momentum     Z-momentum
+            61   4.551425e-04   7.125948e-04   6.626258e-04   7.185487e-04
+            62   4.556985e-04   6.827594e-04   6.290072e-04   6.834780e-04
+            63   4.136679e-04   6.552340e-04   5.998092e-04   6.459178e-04
+            64   4.250993e-04   6.272416e-04   5.705648e-04   6.124082e-04
+            65   3.772473e-04   6.030864e-04   5.440910e-04   5.810636e-04
+            66   3.863012e-04   5.778330e-04   5.171644e-04   5.503654e-04
+            67   3.412597e-04   5.550242e-04   4.933899e-04   5.221076e-04
+            68   3.491255e-04   5.316458e-04   4.683569e-04   4.945318e-04
+            69   3.081837e-04   5.105142e-04   4.466977e-04   4.692405e-04
+            70   3.141919e-04   4.889150e-04   4.241706e-04   4.445439e-04
+     Iteration     Continuity     X-momentum     Y-momentum     Z-momentum
+            71   2.766383e-04   4.693489e-04   4.055795e-04   4.216375e-04
+            72   2.816794e-04   4.497532e-04   3.857894e-04   3.992627e-04
+            73   2.484815e-04   4.321104e-04   3.693535e-04   3.786031e-04
+            74   2.532954e-04   4.143090e-04   3.514746e-04   3.584659e-04
+            75   2.394733e-04   3.978735e-04   3.369876e-04   3.404924e-04
+            76   2.309684e-04   3.818496e-04   3.192446e-04   3.218172e-04
+            77   2.043157e-04   3.670039e-04   3.047973e-04   3.048347e-04
+            78   1.928801e-04   3.520738e-04   2.899308e-04   2.888382e-04
+            79   1.826966e-04   3.373754e-04   2.751731e-04   2.736594e-04
+            80   1.740871e-04   3.225946e-04   2.607333e-04   2.592889e-04
+     Iteration     Continuity     X-momentum     Y-momentum     Z-momentum
+            81   1.662269e-04   3.079169e-04   2.468823e-04   2.456776e-04
+            82   1.590850e-04   2.932833e-04   2.339220e-04   2.327955e-04
+            83   1.602356e-04   2.796231e-04   2.221606e-04   2.209287e-04
+            84   1.543852e-04   2.643597e-04   2.107795e-04   2.088112e-04
+            85   1.460430e-04   2.520062e-04   2.012989e-04   1.981728e-04
+            86   1.320522e-04   2.383478e-04   1.925589e-04   1.874505e-04
+            87   1.326130e-04   2.271863e-04   1.842670e-04   1.777080e-04
+            88   1.188906e-04   2.154613e-04   1.762215e-04   1.679905e-04
+            89   1.186872e-04   2.057268e-04   1.684701e-04   1.591934e-04
+            90   1.070728e-04   1.960926e-04   1.603285e-04   1.504571e-04
+     Iteration     Continuity     X-momentum     Y-momentum     Z-momentum
+            91   1.060706e-04   1.877535e-04   1.528257e-04   1.425082e-04
+            92   9.633325e-05   1.799457e-04   1.442822e-04   1.346292e-04
+            93   9.492652e-05   1.727317e-04   1.369266e-04   1.274440e-04
+            94   8.614413e-05   1.662032e-04   1.284615e-04   1.203425e-04
+            95   8.499719e-05   1.598178e-04   1.213715e-04   1.138118e-04
+            96   7.418665e-05   1.538640e-04   1.138095e-04   1.074852e-04
+            97   7.027281e-05   1.480878e-04   1.072814e-04   1.014482e-04
+            98   6.678055e-05   1.424716e-04   1.011487e-04   9.575662e-05
+            99   6.409491e-05   1.368862e-04   9.566914e-05   9.032853e-05
+           100   6.703739e-05   1.315080e-04   9.062333e-05   8.523227e-05
+     Iteration     Continuity     X-momentum     Y-momentum     Z-momentum
+           101   6.601072e-05   1.260553e-04   8.626388e-05   8.036368e-05
+           102   5.928591e-05   1.209107e-04   8.271387e-05   7.567252e-05
+           103   6.223130e-05   1.158116e-04   7.904320e-05   7.131851e-05
+           104   6.068841e-05   1.105312e-04   7.566757e-05   6.719272e-05
+           105   5.905601e-05   1.055873e-04   7.248185e-05   6.328222e-05
+           106   5.690261e-05   1.005749e-04   6.937172e-05   5.960579e-05
+           107   5.468194e-05   9.584179e-05   6.616616e-05   5.615816e-05
+           108   5.224710e-05   9.111244e-05   6.293261e-05   5.290135e-05
+           109   4.971860e-05   8.659789e-05   5.964393e-05   4.986664e-05
+           110   4.721556e-05   8.227292e-05   5.631629e-05   4.701830e-05
+     Iteration     Continuity     X-momentum     Y-momentum     Z-momentum
+           111   4.464031e-05   7.819104e-05   5.299171e-05   4.435186e-05
+           112   4.206221e-05   7.437867e-05   4.979070e-05   4.184446e-05
+           113   3.979203e-05   7.083391e-05   4.663700e-05   3.949960e-05
+           114   3.754965e-05   6.746290e-05   4.366381e-05   3.731515e-05
+           115   3.542639e-05   6.451480e-05   4.083446e-05   3.523937e-05
+           116   3.354422e-05   6.179359e-05   3.828160e-05   3.329387e-05
+           117   3.145603e-05   5.928972e-05   3.589611e-05   3.147424e-05
+           118   2.986117e-05   5.702900e-05   3.377370e-05   2.975330e-05
+           119   2.813613e-05   5.489925e-05   3.184732e-05   2.812932e-05
+           120   2.671435e-05   5.284713e-05   3.013835e-05   2.660298e-05
+     Iteration     Continuity     X-momentum     Y-momentum     Z-momentum
+           121   2.517530e-05   5.090680e-05   2.859876e-05   2.515689e-05
+           122   2.212141e-05   4.898263e-05   2.727790e-05   2.381995e-05
+           123   2.091889e-05   4.706335e-05   2.596863e-05   2.259301e-05
+           124   1.965375e-05   4.508907e-05   2.469516e-05   2.140983e-05
+           125   1.882931e-05   4.310532e-05   2.343478e-05   2.031979e-05
+           126   1.879184e-05   4.119266e-05   2.223697e-05   1.923233e-05
+           127   1.695514e-05   3.913911e-05   2.105972e-05   1.828594e-05
+           128   1.644312e-05   3.718245e-05   1.989583e-05   1.737515e-05
+           129   1.567956e-05   3.539415e-05   1.881213e-05   1.652067e-05
+           130   1.612739e-05   3.362266e-05   1.767460e-05   1.568946e-05
+     Iteration     Continuity     X-momentum     Y-momentum     Z-momentum
+           131   1.456611e-05   3.205594e-05   1.663581e-05   1.494999e-05
+           132   1.357384e-05   3.040973e-05   1.562852e-05   1.422506e-05
+           133   1.281832e-05   2.913265e-05   1.458680e-05   1.355117e-05
+           134   1.184123e-05   2.774390e-05   1.358176e-05   1.289181e-05
+           135   1.142474e-05   2.665173e-05   1.277402e-05   1.226025e-05
+           136   1.051665e-05   2.558279e-05   1.194941e-05   1.166570e-05
+           137   1.016933e-05   2.460782e-05   1.128732e-05   1.110975e-05
+           138   1.012539e-05   2.360028e-05   1.068866e-05   1.057719e-05
+           139   9.559047e-06   2.270220e-05   1.000440e-05   1.010017e-05
+           140   8.642527e-06   2.189697e-05   9.616808e-06   9.638313e-06
+     Iteration     Continuity     X-momentum     Y-momentum     Z-momentum
+           141   8.297805e-06   2.096599e-05   9.204706e-06   9.193819e-06
+           142   8.048061e-06   2.003170e-05   8.814073e-06   8.808965e-06
+           143   7.580259e-06   1.908192e-05   8.469816e-06   8.439122e-06
+           144   7.475925e-06   1.807732e-05   8.055509e-06   8.095275e-06
+           145   7.679328e-06   1.723957e-05   7.680322e-06   7.778572e-06
+           146   7.452750e-06   1.603521e-05   7.275463e-06   7.484846e-06
+           147   6.897429e-06   1.502901e-05   6.980673e-06   7.197965e-06
+           148   6.811910e-06   1.400147e-05   6.620875e-06   6.947914e-06
+           149   6.564005e-06   1.304821e-05   6.250124e-06   6.708492e-06
+           150   6.540439e-06   1.222398e-05   5.919189e-06   6.472885e-06
+     Iteration     Continuity     X-momentum     Y-momentum     Z-momentum
+           151   5.989239e-06   1.108298e-05   5.525804e-06   6.251253e-06
+           152   5.748578e-06   1.015727e-05   5.153288e-06   6.028431e-06
+           153   5.371152e-06   9.208543e-06   4.746421e-06   5.821013e-06
+           154   5.274189e-06   8.640203e-06   4.483704e-06   5.601345e-06
+           155   4.920993e-06   7.882295e-06   4.154043e-06   5.393073e-06
+           156   4.440443e-06   7.234500e-06   3.850516e-06   5.176815e-06
+           157   4.313455e-06   6.640174e-06   3.570366e-06   4.964978e-06
+           158   3.878853e-06   6.057986e-06   3.287452e-06   4.757248e-06
+           159   3.664991e-06   5.673370e-06   3.057243e-06   4.534688e-06
+           160   3.404774e-06   5.290237e-06   2.847952e-06   4.326616e-06
+     Iteration     Continuity     X-momentum     Y-momentum     Z-momentum
+           161   3.212331e-06   4.949257e-06   2.689794e-06   4.115334e-06
+           162   2.944715e-06   4.707973e-06   2.522163e-06   3.902290e-06
+           163   2.938350e-06   4.470699e-06   2.379293e-06   3.689919e-06
+           164   2.737594e-06   4.293643e-06   2.266483e-06   3.490730e-06
+           165   2.691866e-06   4.116873e-06   2.133653e-06   3.289300e-06
+           166   2.610096e-06   3.939173e-06   2.044649e-06   3.102366e-06
+           167   2.546434e-06   3.814100e-06   1.958167e-06   2.909233e-06
+           168   2.484820e-06   3.698608e-06   1.897239e-06   2.725993e-06
+           169   2.516958e-06   3.555519e-06   1.810500e-06   2.538321e-06
+           170   2.485837e-06   3.409033e-06   1.746268e-06   2.370489e-06
+     Iteration     Continuity     X-momentum     Y-momentum     Z-momentum
+           171   2.463275e-06   3.278866e-06   1.676121e-06   2.215534e-06
+           172   2.508869e-06   3.147048e-06   1.578160e-06   2.059282e-06
+           173   2.423115e-06   3.027943e-06   1.534468e-06   1.915849e-06
+           174   2.410603e-06   2.882569e-06   1.491349e-06   1.779311e-06
+           175   2.414862e-06   2.724972e-06   1.407807e-06   1.649726e-06
+           176   2.368927e-06   2.619827e-06   1.339200e-06   1.520041e-06
+           177   2.383419e-06   2.482967e-06   1.253643e-06   1.416351e-06
+           178   2.363196e-06   2.325541e-06   1.157082e-06   1.309144e-06
+           179   2.283837e-06   2.189759e-06   1.106009e-06   1.219659e-06
+           180   2.322087e-06   2.048543e-06   1.071087e-06   1.127479e-06
+     Iteration     Continuity     X-momentum     Y-momentum     Z-momentum
+           181   2.299902e-06   1.965714e-06   1.023741e-06   1.036497e-06
+           182   2.232789e-06   1.830843e-06   9.512752e-07   9.561611e-07
+           183   2.336504e-06   1.734854e-06   8.850747e-07   9.225394e-07
+           184   2.209942e-06   1.589968e-06   8.327809e-07   8.576556e-07
+           185   2.177990e-06   1.477409e-06   7.974673e-07   7.987455e-07
+           186   2.136511e-06   1.406313e-06   7.614094e-07   7.536584e-07
+           187   2.114888e-06   1.306225e-06   7.045102e-07   7.036713e-07
+           188   2.102129e-06   1.247896e-06   7.029735e-07   6.566583e-07
+           189   2.191997e-06   1.096828e-06   6.392490e-07   6.657621e-07
+           190   2.109467e-06   1.053995e-06   6.026129e-07   6.033035e-07
+     Iteration     Continuity     X-momentum     Y-momentum     Z-momentum
+           191   2.194553e-06   1.003197e-06   6.018643e-07   6.026820e-07
+           192   2.040736e-06   8.982547e-07   5.448662e-07   5.651915e-07
+           193   1.998699e-06   8.305906e-07   5.431838e-07   5.492291e-07
+           194   2.024016e-06   8.049313e-07   5.248181e-07   5.320574e-07
+           195   1.926612e-06   7.312372e-07   4.923573e-07   5.081957e-07
+           196   1.928710e-06   6.840884e-07   4.837815e-07   4.924187e-07
+           197   1.933319e-06   6.477995e-07   4.975431e-07   4.853038e-07
+           198   1.970554e-06   5.638556e-07   4.482670e-07   4.961073e-07
+           199   1.905375e-06   5.740522e-07   4.519980e-07   4.798594e-07
+           200   1.942701e-06   5.313056e-07   4.383359e-07   4.747560e-07

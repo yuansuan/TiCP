@@ -1,0 +1,17 @@
+version: "3.1"
+services:
+  samba:
+    image: registry.intern.yuansuan.cn/euclid/cloudapp_dirnfs:wanghao-test.2023052512
+    restart: always
+    environment:
+      - SERVICE_ADDR=:8081
+      - SHARE_BASE=/data/common
+      - SAMBA_CONFIG=/etc/smb/samba.conf
+      - USER_CONFIG=/etc/smb/users.json
+    ports:
+      - "139:139"
+      - "445:445"
+      - "8081:8081"
+    volumes:
+      - ./data:/data
+      - ./samba-conf:/etc/smb

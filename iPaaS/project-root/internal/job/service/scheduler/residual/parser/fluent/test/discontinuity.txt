@@ -1,0 +1,231 @@
+/GFPS8p/wujian/software/Ansys/Ansys2023r1/v231/fluent/fluent23.1.0/bin/fluent -r23.1.0 -gu 3ddp -t48 -cnf=/GFPS8p/wujian/project_root_HPC_prod/hpc_storage/data/4ZdQuVyZiDS/58gFtHcybLh/input/53CZqYc5qYy/57685b22-c230-42cb-971a-a8c468f1a3ca/hostlist -ssh -mpi=intel -i /GFPS8p/wujian/project_root_HPC_prod/hpc_storage/data/4ZdQuVyZiDS/58gFtHcybLh/input/53CZqYc5qYy/57685b22-c230-42cb-971a-a8c468f1a3ca/Xue/JOU.jou
+/GFPS8p/wujian/software/Ansys/Ansys2023r1/v231/fluent/fluent23.1.0/cortex/lnamd64/cortex.23.1.0 -f fluent -gu -i /GFPS8p/wujian/project_root_HPC_prod/hpc_storage/data/4ZdQuVyZiDS/58gFtHcybLh/input/53CZqYc5qYy/57685b22-c230-42cb-971a-a8c468f1a3ca/Xue/JOU.jou (fluent "3ddp -pmpi-auto-selected  -host -r23.1.0 -t48 -mpi=intel -cnf=/GFPS8p/wujian/project_root_HPC_prod/hpc_storage/data/4ZdQuVyZiDS/58gFtHcybLh/input/53CZqYc5qYy/57685b22-c230-42cb-971a-a8c468f1a3ca/hostlist -path/GFPS8p/wujian/software/Ansys/Ansys2023r1/v231/fluent -ssh")
+
+Opening input/output transcript to file "/GFPS8p/wujian/project_root_HPC_prod/hpc_storage/data/4ZdQuVyZiDS/58gFtHcybLh/input/53CZqYc5qYy/57685b22-c230-42cb-971a-a8c468f1a3ca/Xue/fluent-20240408-141505-23920.trn".
+Auto-Transcript Start Time:  14:15:05, 08 Apr 2024 
+/GFPS8p/wujian/software/Ansys/Ansys2023r1/v231/fluent/fluent23.1.0/bin/fluent -r23.1.0 3ddp -pmpi-auto-selected -host -t48 -mpi=intel -cnf=/GFPS8p/wujian/project_root_HPC_prod/hpc_storage/data/4ZdQuVyZiDS/58gFtHcybLh/input/53CZqYc5qYy/57685b22-c230-42cb-971a-a8c468f1a3ca/hostlist -path/GFPS8p/wujian/software/Ansys/Ansys2023r1/v231/fluent -ssh -cx cn060935:32884:38563
+Starting /GFPS8p/wujian/software/Ansys/Ansys2023r1/v231/fluent/fluent23.1.0/lnamd64/3ddp_host/fluent.23.1.0 host -cx cn060935:32884:38563 "(list (rpsetvar (QUOTE parallel/function) "fluent 3ddp -flux -node -r23.1.0 -t48 -pmpi-auto-selected -mpi=intel -cnf=/GFPS8p/wujian/project_root_HPC_prod/hpc_storage/data/4ZdQuVyZiDS/58gFtHcybLh/input/53CZqYc5qYy/57685b22-c230-42cb-971a-a8c468f1a3ca/hostlist -ssh") (rpsetvar (QUOTE parallel/rhost) "") (rpsetvar (QUOTE parallel/ruser) "") (rpsetvar (QUOTE parallel/nprocs_string) "48") (rpsetvar (QUOTE parallel/auto-spawn?) #t) (rpsetvar (QUOTE parallel/trace-level) 0) (rpsetvar (QUOTE parallel/remote-shell) 1) (rpsetvar (QUOTE parallel/path) "/GFPS8p/wujian/software/Ansys/Ansys2023r1/v231/fluent") (rpsetvar (QUOTE parallel/hostsfile) "/GFPS8p/wujian/project_root_HPC_prod/hpc_storage/data/4ZdQuVyZiDS/58gFtHcybLh/input/53CZqYc5qYy/57685b22-c230-42cb-971a-a8c468f1a3ca/hostlist") (rpsetvar (QUOTE gpuapp/devices) ""))"
+
+              Welcome to ANSYS Fluent 2023 R1
+
+              Copyright 1987-2023 ANSYS, Inc. All Rights Reserved.
+              Unauthorized use, distribution or duplication is prohibited.
+              This product is subject to U.S. laws governing export and re-export.
+              For full Legal Notice, see documentation.
+
+Build Time: Nov 28 2022 09:30:46 EST  Build Id: 10208  
+ 
+Connected License Server List:	51055@psn084
+Host spawning Node 0 on machine "cn060935" (unix).
+/GFPS8p/wujian/software/Ansys/Ansys2023r1/v231/fluent/fluent23.1.0/bin/fluent -r23.1.0 3ddp -flux -node -t48 -pmpi-auto-selected -mpi=intel -cnf=/GFPS8p/wujian/project_root_HPC_prod/hpc_storage/data/4ZdQuVyZiDS/58gFtHcybLh/input/53CZqYc5qYy/57685b22-c230-42cb-971a-a8c468f1a3ca/hostlist -ssh -mport 173.0.9.35:173.0.9.35:36147:0
+Starting /GFPS8p/wujian/software/Ansys/Ansys2023r1/v231/fluent/fluent23.1.0/multiport/mpi/lnamd64/intel2021/bin/mpirun -f /tmp/fluent-appfile.wujian.24305 --rsh=ssh -genv FLUENT_ARCH lnamd64 -genv I_MPI_DEBUG 0 -genv I_MPI_ADJUST_REDUCE 2 -genv I_MPI_ADJUST_ALLREDUCE 2 -genv I_MPI_ADJUST_BCAST 8 -genv I_MPI_ADJUST_BARRIER 2 -genv I_MPI_ADJUST_ALLGATHER 2 -genv I_MPI_ADJUST_GATHER 2 -genv I_MPI_ADJUST_ALLTOALL 1 -genv I_MPI_ADJUST_SCATTER 2 -genv I_MPI_ADJUST_SCATTERV 2 -genv I_MPI_ADJUST_ALLGATHERV 2 -genv I_MPI_ADJUST_GATHERV 2 -genv I_MPI_PLATFORM auto -genv PYTHONHOME /GFPS8p/wujian/software/Ansys/Ansys2023r1/v231/fluent/fluent23.1.0/../../commonfiles/CPython/3_7/linx64/Release/python -genv FLUENT_PROD_DIR /GFPS8p/wujian/software/Ansys/Ansys2023r1/v231/fluent/fluent23.1.0 -genv FLUENT_AFFINITY 0 -genv I_MPI_PIN enable -genv KMP_AFFINITY disabled -machinefile /tmp/fluent-appfile.wujian.24305 -np 48 /GFPS8p/wujian/software/Ansys/Ansys2023r1/v231/fluent/fluent23.1.0/lnamd64/3ddp_node/fluent_mpi.23.1.0 node -mpiw intel -pic mpi-auto-selected -mport 173.0.9.35:173.0.9.35:36147:0
+
+-------------------------------------------------------------------------------
+ID    Hostname  Core   O.S.      PID    Vendor                      
+-------------------------------------------------------------------------------
+n47   cn060936  24/24  Linux-64  29803  Intel(R) Xeon(R) E5-2680 v3 
+n46   cn060936  23/24  Linux-64  29802  Intel(R) Xeon(R) E5-2680 v3 
+n45   cn060936  22/24  Linux-64  29801  Intel(R) Xeon(R) E5-2680 v3 
+n44   cn060936  21/24  Linux-64  29800  Intel(R) Xeon(R) E5-2680 v3 
+n43   cn060936  20/24  Linux-64  29799  Intel(R) Xeon(R) E5-2680 v3 
+n42   cn060936  19/24  Linux-64  29798  Intel(R) Xeon(R) E5-2680 v3 
+n41   cn060936  18/24  Linux-64  29797  Intel(R) Xeon(R) E5-2680 v3 
+n40   cn060936  17/24  Linux-64  29796  Intel(R) Xeon(R) E5-2680 v3 
+n39   cn060936  16/24  Linux-64  29795  Intel(R) Xeon(R) E5-2680 v3 
+n38   cn060936  15/24  Linux-64  29794  Intel(R) Xeon(R) E5-2680 v3 
+n37   cn060936  14/24  Linux-64  29793  Intel(R) Xeon(R) E5-2680 v3 
+n36   cn060936  13/24  Linux-64  29792  Intel(R) Xeon(R) E5-2680 v3 
+n35   cn060936  12/24  Linux-64  29791  Intel(R) Xeon(R) E5-2680 v3 
+n34   cn060936  11/24  Linux-64  29790  Intel(R) Xeon(R) E5-2680 v3 
+n33   cn060936  10/24  Linux-64  29789  Intel(R) Xeon(R) E5-2680 v3 
+n32   cn060936  9/24   Linux-64  29788  Intel(R) Xeon(R) E5-2680 v3 
+n31   cn060936  8/24   Linux-64  29787  Intel(R) Xeon(R) E5-2680 v3 
+n30   cn060936  7/24   Linux-64  29786  Intel(R) Xeon(R) E5-2680 v3 
+n29   cn060936  6/24   Linux-64  29785  Intel(R) Xeon(R) E5-2680 v3 
+n28   cn060936  5/24   Linux-64  29784  Intel(R) Xeon(R) E5-2680 v3 
+-------------------------------------------------------------------------------
+ID    Hostname  Core   O.S.      PID    Vendor                      
+-------------------------------------------------------------------------------
+n27   cn060936  4/24   Linux-64  29783  Intel(R) Xeon(R) E5-2680 v3 
+n26   cn060936  3/24   Linux-64  29782  Intel(R) Xeon(R) E5-2680 v3 
+n25   cn060936  2/24   Linux-64  29781  Intel(R) Xeon(R) E5-2680 v3 
+n1    cn060936  1/24   Linux-64  29780  Intel(R) Xeon(R) E5-2680 v3 
+n24   cn060935  24/24  Linux-64  25549  Intel(R) Xeon(R) E5-2680 v3 
+n23   cn060935  23/24  Linux-64  25548  Intel(R) Xeon(R) E5-2680 v3 
+n22   cn060935  22/24  Linux-64  25547  Intel(R) Xeon(R) E5-2680 v3 
+n21   cn060935  21/24  Linux-64  25546  Intel(R) Xeon(R) E5-2680 v3 
+n20   cn060935  20/24  Linux-64  25545  Intel(R) Xeon(R) E5-2680 v3 
+n19   cn060935  19/24  Linux-64  25544  Intel(R) Xeon(R) E5-2680 v3 
+n18   cn060935  18/24  Linux-64  25543  Intel(R) Xeon(R) E5-2680 v3 
+n17   cn060935  17/24  Linux-64  25542  Intel(R) Xeon(R) E5-2680 v3 
+n16   cn060935  16/24  Linux-64  25541  Intel(R) Xeon(R) E5-2680 v3 
+n15   cn060935  15/24  Linux-64  25540  Intel(R) Xeon(R) E5-2680 v3 
+n14   cn060935  14/24  Linux-64  25539  Intel(R) Xeon(R) E5-2680 v3 
+n13   cn060935  13/24  Linux-64  25538  Intel(R) Xeon(R) E5-2680 v3 
+n12   cn060935  12/24  Linux-64  25537  Intel(R) Xeon(R) E5-2680 v3 
+n11   cn060935  11/24  Linux-64  25536  Intel(R) Xeon(R) E5-2680 v3 
+n10   cn060935  10/24  Linux-64  25535  Intel(R) Xeon(R) E5-2680 v3 
+n9    cn060935  9/24   Linux-64  25534  Intel(R) Xeon(R) E5-2680 v3 
+-------------------------------------------------------------------------------
+ID    Hostname  Core   O.S.      PID    Vendor                      
+-------------------------------------------------------------------------------
+n8    cn060935  8/24   Linux-64  25533  Intel(R) Xeon(R) E5-2680 v3 
+n7    cn060935  7/24   Linux-64  25532  Intel(R) Xeon(R) E5-2680 v3 
+n6    cn060935  6/24   Linux-64  25531  Intel(R) Xeon(R) E5-2680 v3 
+n5    cn060935  5/24   Linux-64  25530  Intel(R) Xeon(R) E5-2680 v3 
+n4    cn060935  4/24   Linux-64  25529  Intel(R) Xeon(R) E5-2680 v3 
+n3    cn060935  3/24   Linux-64  25528  Intel(R) Xeon(R) E5-2680 v3 
+n2    cn060935  2/24   Linux-64  25527  Intel(R) Xeon(R) E5-2680 v3 
+n0*   cn060935  1/24   Linux-64  25526  Intel(R) Xeon(R) E5-2680 v3 
+host  cn060935         Linux-64  24107  Intel(R) Xeon(R) E5-2680 v3 
+
+MPI Option Selected: intel
+Selected system interconnect: mpi-auto-selected
+-------------------------------------------------------------------------------
+
+Cleanup script file is /GFPS8p/wujian/project_root_HPC_prod/hpc_storage/data/4ZdQuVyZiDS/58gFtHcybLh/input/53CZqYc5qYy/57685b22-c230-42cb-971a-a8c468f1a3ca/Xue/cleanup-fluent-cn060935-24107.sh
+
+Reading journal file /GFPS8p/wujian/project_root_HPC_prod/hpc_storage/data/4ZdQuVyZiDS/58gFtHcybLh/input/53CZqYc5qYy/57685b22-c230-42cb-971a-a8c468f1a3ca/Xue/JOU.jou...
+
+> /file read-case "0.002348.cas"Fast-loading "/GFPS8p/wujian/software/Ansys/Ansys2023r1/v231/fluent/fluent23.1.0/addons/afd/lib/hdfio.bin"
+Done.
+
+Reading from cn060935:"/GFPS8p/wujian/project_root_HPC_prod/hpc_storage/data/4ZdQuVyZiDS/58gFtHcybLh/input/53CZqYc5qYy/57685b22-c230-42cb-971a-a8c468f1a3ca/Xue/0.002348.cas.h5" in NODE0 mode ...
+  Reading mesh ...
+Warning: reading 4 partition grid onto 48 compute node machine.
+         will auto partition.
+      128547 cells,     1 cell zone  ...
+         128547 polyhedra cells,  zone id: 31
+      823214 faces,     8 face zones ...
+         773096 polygonal interior faces,  zone id: 32
+             12 polygonal wall faces,  zone id: 22
+            441 polygonal pressure-inlet faces,  zone id: 20
+          14999 polygonal symmetry faces,  zone id: 35
+           9358 polygonal wall faces,  zone id: 36
+            181 polygonal wall faces,  zone id: 37
+          12201 polygonal wall faces,  zone id: 38
+          12926 polygonal wall faces,  zone id: 39
+      687701 nodes,     1 node zone  ...
+  Done.
+
+
+Building...
+     mesh
+	auto partitioning mesh by Metis (fast),
+	distributing mesh
+		parts................................................,
+		faces................................................,
+		nodes................................................,
+		cells................................................,
+        inter-node communication reduction using architecture-aware remapping: 89%
+        bandwidth reduction using Reverse Cuthill-McKee: 3110/439 = 7.08428
+     materials,
+     interface,
+     domains,
+	mixture
+	phase-1
+	phase-2
+	interaction
+     zones,
+	design9_1/design9_solid11_1_matpoint  (phase-1)
+	int_design9_1/design9_solid11_1_matpoint  (phase-1)
+	symmetry  (phase-1)
+	group1  (phase-1)
+	group2  (phase-1)
+	design9_1/design9_solid11_1  (phase-1)
+	xi  (phase-1)
+	design9_1/design9_solid11_1_matpoint  (phase-2)
+	int_design9_1/design9_solid11_1_matpoint  (phase-2)
+	symmetry  (phase-2)
+	group1  (phase-2)
+	group2  (phase-2)
+	design9_1/design9_solid11_1  (phase-2)
+	xi  (phase-2)
+	inlet  (phase-1)
+	inlet  (phase-2)
+	outlet  (phase-1)
+	outlet  (phase-2)
+	xi
+	design9_1/design9_solid11_1
+	group2
+	group1
+	symmetry
+	int_design9_1/design9_solid11_1_matpoint
+	inlet
+	outlet
+	design9_1/design9_solid11_1_matpoint
+     parallel,
+Done.
+
+
+> /file read-data "0.002348.dat"
+Reading from cn060935:"/GFPS8p/wujian/project_root_HPC_prod/hpc_storage/data/4ZdQuVyZiDS/58gFtHcybLh/input/53CZqYc5qYy/57685b22-c230-42cb-971a-a8c468f1a3ca/Xue/0.002348.dat.h5" in NODE0 mode ...
+
+
+  Reading results.
+Parallel variables...
+Done.
+
+
+> /solve dual-time-iterate 1000 50
+Updating solution at time level N...
+
+Global Courant Number [Explicit VOF Criteria] : 0.0138053
+ done.
+
+  iter  continuity  x-velocity  y-velocity  z-velocity     time/iter
+ 11286  6.3889e-04  1.5456e-08  1.5884e-08  8.5219e-08  0:00:00   50
+!11286 solution is converged
+
+ Reversed flow on 259 faces of pressure-inlet 20.
+ 11288  3.6785e-02  1.5084e-07  1.2364e-07  5.7350e-07  0:00:05   48
+
+ Reversed flow on 259 faces of pressure-inlet 20.
+ 11290  1.9718e-02  1.4385e-08  1.2093e-08  5.5867e-08  0:00:04   46
+
+ Reversed flow on 259 faces of pressure-inlet 20.
+ 11292  1.0630e-02  1.8299e-09  1.7065e-09  7.8722e-09  0:00:04   44
+
+ Reversed flow on 259 faces of pressure-inlet 20.
+ 11294  5.7657e-03  5.2821e-10  5.6128e-10  2.5910e-09  0:00:03   42
+
+ Reversed flow on 259 faces of pressure-inlet 20.
+ 11296  3.1548e-03  2.8120e-10  3.0758e-10  1.4326e-09  0:00:03   40
+
+ Reversed flow on 259 faces of pressure-inlet 20.
+ 11298  1.7405e-03  1.6813e-10  1.8166e-10  8.2559e-10  0:00:03   38
+
+ Reversed flow on 259 faces of pressure-inlet 20.
+ 11300  9.6853e-04  9.6203e-11  1.0259e-10  4.3628e-10  0:00:03   36
+!11300 solution is converged
+Flow time = 0.002349s, time step = 1440
+999 more time steps
+
+Updating solution at time level N...
+
+Global Courant Number [Explicit VOF Criteria] : 0.0138059
+ done.
+
+  iter  continuity  x-velocity  y-velocity  z-velocity     time/iter
+ 11300  9.6853e-04  9.6203e-11  1.0259e-10  4.3628e-10  0:00:04   50
+
+ Reversed flow on 259 faces of pressure-inlet 20.
+ 11302  1.5001e-02  1.4899e-07  1.2145e-07  5.6269e-07  0:00:03   48
+
+ Reversed flow on 259 faces of pressure-inlet 20.
+ 11304  7.6236e-03  1.3503e-08  1.1038e-08  5.0802e-08  0:00:03   46
+
+ Reversed flow on 259 faces of pressure-inlet 20.
+ 11306  3.9067e-03  1.2389e-09  1.0277e-09  4.5495e-09  0:00:03   44
+
+ Reversed flow on 259 faces of pressure-inlet 20.
+ 11308  2.0399e-03  1.5406e-10  1.3938e-10  5.6250e-10  0:00:03   42
+
+ Reversed flow on 259 faces of pressure-inlet 20.
+ 11310  1.1053e-03  5.0465e-10  5.2544e-10  2.9595e-09  0:00:02   40
+
+ Reversed flow on 259 faces of pressure-inlet 20.
+ 11312  5.9993e-04  3.0167e-10  3.2699e-10  1.9101e-09  0:00:02   38
+!11312 solution is converged
+Flow time = 0.00235s, time step = 1441
+998 more time steps

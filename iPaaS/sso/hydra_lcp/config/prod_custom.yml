@@ -1,0 +1,45 @@
+hydra_admin_url:
+frontend_server:
+
+hydra_portal_admin_url:
+frontend_portal_server:
+smtp:
+  host:
+  username:
+  password:
+
+wechat:
+  app_id:
+  app_secret:
+
+offiaccount:
+  app_id:
+  app_secret:
+  cfg_token:
+  encoding_aes_key:
+  expire_seconds:
+  msg_template:
+    job:
+    balance:
+    topup:
+    visjob:
+
+
+
+sms_config:
+  sms_type:
+  aliyun:
+    endpoint:
+    access_key_id:
+    access_key_secret:
+    sign_name:
+  templates:
+    - key: ""
+      monyun_tpl:  ""
+      tencent_tid: ""
+      param_count:
+
+casi_oauth:
+  client_id: ""
+  client_secret: ""
+  redirect_url: ""

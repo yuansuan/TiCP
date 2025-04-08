@@ -1,0 +1,73 @@
+app:
+  db_migration:
+    auto_migrate: true
+    force_migrate: false
+    version: up
+  host: 0.0.0.0
+  load_remote_config: false
+  middleware:
+    apm:
+      apm_server_url: http://0.0.0.0:8200
+    cache:
+      default:
+        backend_type: redis
+        name: default
+    etcd:
+      endpoints: null
+      startup: false
+      tls: false
+    grpc:
+      client:
+        default:
+          addr: :11211
+          timeout_per_request: 5s
+          with_insecure: true
+        hydra_lcp:
+          addr: hydra_lcp:11212
+          naming: false
+          timeout_per_request: 5s
+          with_insecure: true
+        idgen:
+          addr: idgen:11211
+          naming: false
+          timeout_per_request: 5s
+          with_insecure: true
+        license_server:
+          addr: license:11211
+          naming: false
+          timeout_per_request: 5s
+          with_insecure: true
+      server:
+        default:
+          _startup: true
+          addr: :11211
+    kafka:
+      cluster_addr:
+      - kafka:9092
+      startup: true
+    logger:
+      log_dir: ./log
+    monitor:
+      _startup: false
+    mysql:
+      default:
+        _startup: true
+        dsn: ticp_user:ticp6655@tcp(10.0.4.48:3306)/ticp?charset=utf8&parseTime=true&loc=Local
+    redis:
+      default:
+        _startup: true
+        addr: redis:6379
+    tracing:
+      database:
+        binding: true
+        enabled: true
+      details:
+        enabled: true
+        request: true
+        response: false
+      jaeger:
+        endpoint: http://0.0.0.0:14268/api/traces
+      startup: false
+  name: job
+  port: 8899
+  ver: 1.0.0

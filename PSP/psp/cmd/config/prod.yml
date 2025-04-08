@@ -1,0 +1,167 @@
+app:
+  name: pspd
+  ver: 1.0.0
+  host: 0.0.0.0
+  port: 32432
+
+  middleware:
+    logger:
+      log_dir: ./log
+
+    monitor:
+      _startup: true
+      #here to set pspd_ip:9101
+      listen: ":9101"
+      metric: "/metrics"
+      #here to set prometheus_ip:9090
+      prometheus_server_endpoint: "http://10.0.4.48:9090"
+
+
+    mysql:
+      default:
+        _startup: true
+        dsn: "root:root6655@tcp(10.0.4.48:3306)/TiCP?charset=utf8&parseTime=true&loc=Local"
+
+    grpc:
+      server:
+        default:
+          _startup: true
+          addr: :1114
+          #write_buffer_size: 32768
+          #read_buffer_size: 32769
+          #initial_window_size: 65536
+          #initial_conn_window_size: 65537
+          max_recv_msg_size: 4194304
+          max_send_msg_size: 2147483647
+          #max_concurrent_streams: 100
+          #connection_timeout: 100000
+          #max_header_list_size: 1024
+          #keepalive_max_connection_idle: 60000
+          #keepalive_max_connection_age: 61000
+          #keepalive_max_connection_age_grace: 62000
+          #keepalive_time: 63000
+          #keepalive_timeout: 64000
+          #keepalive_enforcement_policy_min_time: 240000
+          #keepalive_enforcement_policy_permit_without_stream: true
+
+      client:
+        user:
+          addr: ":1114"
+          naming: false
+          timeout_per_request: "300s"
+          with_insecure: true
+
+        storage:
+          addr: ":1114"
+          naming: false
+          timeout_per_request: "300s"
+          with_insecure: true
+
+        notice:
+          addr: ":1114"
+          naming: false
+          timeout_per_request: "300s"
+          with_insecure: true
+
+        monitor:
+          addr: ":1114"
+          naming: false
+          timeout_per_request: "300s"
+          with_insecure: true
+
+        app:
+          addr: ":1114"
+          naming: false
+          timeout_per_request: "300s"
+          with_insecure: true
+
+        rbac:
+          addr: ":1114"
+          naming: false
+          timeout_per_request: "300s"
+          with_insecure: true
+
+        job:
+          addr: ":1114"
+          naming: false
+          timeout_per_request: "300s"
+          with_insecure: true
+
+        project:
+          addr: ":1114"
+          naming: false
+          timeout_per_request: "300s"
+          with_insecure: true
+
+        sysconfig:
+          addr: ":1114"
+          naming: false
+          timeout_per_request: "300s"
+          with_insecure: true
+
+        approve:
+          addr: ":1114"
+          naming: false
+          timeout_per_request: "300s"
+          with_insecure: true
+
+        license:
+          addr: ":1114"
+          naming: false
+          timeout_per_request: "300s"
+          with_insecure: true
+#
+#        license_management:
+#          addr: ":1114"
+#          naming: false
+#          timeout_per_request: "60s"
+#          with_insecure: true
+
+        default:
+          addr: :1114
+
+          # golang duration format, such as "300ms", "-1.5h" or "2h45m".
+          # Valid time units are "ns", "us" (or "µs"), "ms", "s", "m", "h".
+          timeout_per_request: "300s"
+
+          with_insecure: true
+          ##复杂配置
+
+          #with_write_buffer_size: 32768
+          #with_initial_window_size: 65536
+          #with_initial_conn_window_size: 65536
+          #with_max_msg_size: 2147483647
+          #with_backoff_max_delay: 10
+          #with_block: true
+          #with_timeout: 0
+          ##返回临时请求错误，但自己不是临时请求设置为true
+          #fail_on_non_temp_dial_error: true
+          #with_user_agent: grpc-demo-app
+          ##with_insecure: true时有效
+          #with_authority: demo-app
+          #with_channelz_parent_id: 1
+          #with_disable_service_config: true
+          ##禁止重试(默认关闭)
+          #with_disable_retry: true
+          #with_max_header_list_size: 1024
+          ##关闭健康检查
+          #with_disable_health_check: true
+          ##keepalive配置
+          #keepalive_time: 70000
+          #keepalive_timeout: 80000
+          #keepalive_permit_without_stream: true
+
+    kafka:
+      startup: true
+      cluster_addr:
+        - "10.0.4.48:9092"
+
+    cache:
+      default:
+        name: default
+        backend_type: redis
+
+    redis:
+      default:
+        _startup: true
+        addr: 10.0.4.48:6379

@@ -1,0 +1,3 @@
+alert_manager:
+  alert_manager_config_path: /opt/alertmanager # alertmanager可执行文件路径
+  alert_manager_url: http://127.0.0.1:9099  # alertmanager访问地址

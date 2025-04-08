@@ -1,0 +1,95 @@
+groups:
+  - name: psp-alert-rule
+    rules:
+      - alert: CPUSystemRateTooHigh # alertname content
+        expr: cpu_total_info{cpu_label="system_rate"} > 5 # alert condition
+        for: 10s # when a alert comes, waiting time before sending alert
+        annotations:
+          description: "CPU system rate usage is above 5%, current value is: {{ $value }}%"
+          value: "{{ $value }}%"
+          condition: ">5%"
+
+      - alert: SwapMemUsed # alertname content
+        expr: memory_info{memory_label="swap_used"} / 1000 > 0 # alert condition
+        for: 10s # when a alert comes, waiting time before sending alert
+        annotations:
+          description: "Swap memory is used, current value is: {{ $value }}KB"
+          value: "{{ $value }}KB"
+          condition: ">0"
+
+      - alert: JobRunTimeTooShort # alertname content
+        expr: job_run_time_too_short == 1 # alert condition
+        for: 10s # when a alert comes, waiting time before sending alert
+        annotations:
+          description: "The job's running time is smaller than 1 minute"
+          condition: "<1min"
+
+      - alert: LoadLargerThanCPUCores # alertname content
+        expr: alert_load_larger_than_cores > 0 # alert condition
+        for: 10s # when a alert comes, waiting time before sending alert
+        annotations:
+          description: "Current 15min load is larger than 70% CPU cores count"
+          condition: "15min_load > 0.7*CPU_Cores"
+
+  # The job notification related alerts
+  - name: job-alert-rule
+    rules:
+      - alert: psp_job_notification_pending
+        expr: psp_job_notification_pending == 1
+        for: 10s
+        labels:
+          severity: 1
+          ModelType: psp-job-submit
+        annotations:
+          summary: "Job {{ $labels.id }} <{{ $labels.name }}> state is {{ $labels.state }}."
+          description: "Job {{ $labels.id }} notification."
+
+      - alert: psp_job_notification_running
+        expr: psp_job_notification_running == 1
+        for: 10s
+        labels:
+          severity: 1
+          ModelType: psp-job-state-run
+        annotations:
+          summary: "Job {{ $labels.id }} <{{ $labels.name }}> state is {{ $labels.state }}."
+          description: "Job {{ $labels.id }} notification."
+
+      - alert: psp_job_notification_done
+        expr: psp_job_notification_done == 1
+        for: 10s
+        labels:
+          severity: 1
+          ModelType: psp-job-state-done
+        annotations:
+          summary: "Job {{ $labels.id }} <{{ $labels.name }}> state is {{ $labels.state }}."
+          description: "Job {{ $labels.id }} notification."
+
+      - alert: psp_job_notification_exited
+        expr: psp_job_notification_exited == 1
+        for: 10s
+        labels:
+          severity: 1
+          ModelType: psp-job-state-exited
+        annotations:
+          summary: "Job {{ $labels.id }} <{{ $labels.name }}> state is {{ $labels.state }}."
+          description: "Job {{ $labels.id }} notification."
+
+      - alert: psp_job_notification_no_update
+        expr: psp_job_notification_no_update == 1
+        for: 10s
+        labels:
+          severity: 1
+          ModelType: psp-job-no-update
+        annotations:
+          summary: "Job {{ $labels.id }} <{{ $labels.name }}> state is {{ $labels.state }}."
+          description: "Job {{ $labels.id }} notification."
+
+      - alert: psp_job_notification_pend_too_long
+        expr: psp_job_notification_pend_too_long == 1
+        for: 10s
+        labels:
+          severity: 1
+          ModelType: psp-job-pend-too-long
+        annotations:
+          summary: "Job {{ $labels.id }} <{{ $labels.name }}> state is {{ $labels.state }}."
+          description: "Job {{ $labels.id }} notification."

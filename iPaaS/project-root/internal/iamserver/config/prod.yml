@@ -1,0 +1,39 @@
+app:
+  name: iamserver
+  ver: 1.0.0
+  host: 0.0.0.0
+  port: 8899
+
+  # db migration
+  db_migration:
+    # 开启auto migrate，接下来的force_migrate和version才会生效
+    auto_migrate: true
+    # 可选配置，默认为true，为false时，当你数据库没有{app_name}_version表时，不会执行你配置的sql文件，但会把version表更新到你sql的最新版
+    force_migrate: false
+    # up代表执行到sql最新版本，数字表示变化到指定版本
+    version: up
+
+  middleware:
+    mysql:
+      default:
+        _startup: true
+        dsn: "wukong_user:wukong6655@tcp(mysql:3306)/wukong?charset=utf8&parseTime=true&loc=Local"
+
+    grpc:
+      client:
+        hydra_lcp:
+          addr: "hydra-lcp:11211"
+          naming: false
+          timeout_per_request: "5s"
+          with_insecure: true
+
+#    redis:
+#      default:
+#        _startup: true
+#        addr: 0.0.0.0:6379
+#        password: 1234yskj
+#
+#    etcd:
+#      startup: true
+#      endpoints:
+#      tls: false

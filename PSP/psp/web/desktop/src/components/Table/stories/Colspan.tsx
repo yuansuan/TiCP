@@ -1,0 +1,122 @@
+/*!
+ * Copyright (C) 2016-present, Yuansuan.cn
+ */
+
+import React from 'react'
+import { Tag as AntTag, Divider as AntDivider } from 'antd'
+import Table from '..'
+
+const data = [
+  {
+    key: '1',
+    firstName: 'John',
+    lastName: 'Brown',
+    age: 32,
+    address: 'New York No. 1 Lake Park',
+    tags: ['nice', 'developer'],
+  },
+  {
+    key: '2',
+    firstName: 'Jim Green',
+    lastName: null,
+    age: 42,
+    address: 'London No. 1 Lake Park',
+    tags: ['loser'],
+  },
+  {
+    key: '3',
+    firstName: 'Joe',
+    lastName: 'Black',
+    age: 32,
+    address: 'Sidney No. 1 Lake Park',
+    tags: ['cool', 'teacher'],
+  },
+]
+
+export const Colspan = () => (
+  <Table
+    props={{ autoHeight: true, data, cellBordered: true, bordered: true }}
+    columns={[
+      {
+        header: 'First Name',
+        dataKey: 'firstName',
+        props: {
+          colSpan: 2,
+          flexGrow: 1,
+        },
+      },
+      {
+        header: 'Last Name',
+        dataKey: 'lastName',
+        props: {
+          flexGrow: 1,
+        },
+      },
+      {
+        header: 'Age',
+        dataKey: 'age',
+        props: {
+          flexGrow: 1,
+        },
+      },
+      {
+        header: 'Address',
+        dataKey: 'address',
+        props: {
+          flexGrow: 1,
+        },
+      },
+      {
+        header: 'Tags',
+
+        props: {
+          flexGrow: 1,
+        },
+        cell: {
+          props: {
+            dataKey: 'tags',
+          },
+          render: ({ rowData, dataKey }) => {
+            const tags = rowData[dataKey]
+
+            return (
+              <span style={{ padding: '0 4px' }}>
+                {tags.map(tag => {
+                  let color = tag.length > 5 ? 'geekblue' : 'green'
+                  if (tag === 'loser') {
+                    color = 'volcano'
+                  }
+                  return (
+                    <AntTag color={color} key={tag}>
+                      {tag.toUpperCase()}
+                    </AntTag>
+                  )
+                })}
+              </span>
+            )
+          },
+        },
+      },
+      {
+        header: 'Action',
+        props: {
+          flexGrow: 1,
+        },
+        cell: {
+          props: {
+            dataKey: 'action',
+          },
+          render: ({ rowData }) => {
+            return (
+              <span style={{ padding: '0 4px' }}>
+                <a>Invite {rowData.name}</a>
+                <AntDivider type='vertical' />
+                <a>Delete</a>
+              </span>
+            )
+          },
+        },
+      },
+    ]}
+  />
+)

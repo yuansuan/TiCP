@@ -1,0 +1,15 @@
+global:
+  scrape_interval:     30s
+  evaluation_interval: 30s
+
+scrape_configs:
+  # Define the PSP monitor exporter
+  - job_name: psp monitor
+
+    # Use file_sd_configs to get the exporter json
+    # When json data is changed, prometheus will load it automatically
+    file_sd_configs:
+      - files: ['@YS_TOP@/psp/config/prometheus/prom/config/psp.json']
+
+    static_configs:
+      - targets: ["localhost:9090"]

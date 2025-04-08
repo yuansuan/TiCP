@@ -1,0 +1,232 @@
+# 系统全局配置
+main:
+  # Swagger API 文档配置
+  # 系统业务 API 文档, 作为开发阶段前后端沟通的辅助工具
+  # 注意: 正式部署版本不应开启或者不包含该部分内容
+  # 访问方式: http://ip:port/swagger/index.html
+  # host 为 pspd 执行程序部署的 ip
+  # port 为系统开放可访问的端口
+  swagger:
+    enable: false
+    host: 127.0.0.1
+    port: 32432
+
+  # 3D 可视化服务配置
+  # 用于控制系统是否加载可视化功能(包括后端路由接口、定时任务; 前端菜单入口、图标展示等)
+  # 若开启该服务, 请确认 Paas 平台已部署可视化所依赖的服务
+  enable_visual: true
+
+  # 自定义计算类型在系统中的展示名称
+  compute_type_names:
+    local: 本地
+
+app:
+  # 计算应用调度资源信息配置文件路径
+  scheduler_resource_path: config/mapping/scheduler_resource.yaml
+
+# 权限控制服务
+rbac:
+  # 基于 casbin 框架的基本模型定义文件路径, 一般无需修改
+  rbac_config_path: config/rbac_model.conf
+
+  # 开启 API 接口认证, 服务内置配置, 无需修改
+  enable_api_authorize: false
+
+# 计算作业配置
+job:
+  # 同步作业信息定时任务配置
+  sync_data:
+    enable: true
+    interval: 5
+
+  # 上传作业文件的临时存储目录
+  tmp_upload: .tmp_upload
+
+  # 线上作业队列名称, 可自定义其他名称
+  cloud_queue: cloud
+
+  # Platform资源正则匹配规则
+  platform_regexp: -(\d+)[a-zA-Z]-
+
+  # 计算作业工作目录配置
+  work_dir:
+    # 设置工作目录名称格式
+    # default: 通过 "format" 格式化时间产生
+    # random: 随机字符串
+    type: default
+    # 当 type 为 default 时, 格式化时间产生工作目录
+    format: "200601/02150405"
+    # 设置作业空间的文件目录
+    workspace: workspace
+
+# 3D 可视化配置
+visual:
+  # 可视化开启的区域信息配置
+  # 在 Paas 平台获取, 需要和其定义的保持一致才可以正常使用
+  zone: az-shanghai
+
+  # 可视化会话数据定时任务配置
+  sync_data:
+    enable: true
+    data_interval: 10
+    status_interval: 5
+
+  # 可视化项目目录挂载配置
+  mount_directory:
+    # 挂载个数限制
+    limit_num: 5
+    # 可挂载磁盘列表
+    drive_names: [ X, Y, Z, V, W ]
+    # linux 挂载根目录
+    linux_mount_root_path: /mnt
+    # 是否挂载共享目录
+    # 注意: 请先开启 storage.public_folder_enable 后再开启该配置
+    enable_public_directory: false
+  # 可视化项目会话通知，项目将要过期时，提前一天通知项目相关的会话
+  session_notification_check:
+    interval: 600 # 每隔多少秒检查一次
+    daily_time: 9 # 每天几点检查(24时)
+    min_time: 0 # 每天几分检查(60分钟)
+
+# Paas OpenAPI 账号配置
+# 账号信息通过 Paas 平台获取
+openapi:
+  # 本地 OpenAPI 账号配置是必须配置的: 管理员权限账号
+  local:
+    settings:
+      app_key:
+      app_secret:
+      api_endpoint:
+      hpc_endpoint:
+      user_id:
+      zone:
+
+# 文件存储配置
+storage:
+  # 本地存储文件根路径配置, 配置的文件路径需要 777 权限
+  local_root_path: /home/yuansuan/data/4TiSsZonTa3
+
+  # 文件列表中用于过滤特殊文件, 使用正向正则表达式配置
+  filter_hide_file_regex: ^[.|_]
+
+  # 作业文件上传的临时目录, 无需修改
+  white_path_list:
+    - /.tmp_upload
+
+  # hpc文件上传云端配置项
+  hpc_upload_config:
+    # 单文件切片上传每片大小(单位:mb)
+    block_size: 5
+    # 切片上传并发数量限制
+    concurrency_limit: 5
+    # 上传失败自动重试次数
+    retry_count: 3
+    # 上传失败自动重试间隔(单位:秒)
+    retry_delay: 1
+    # 失败任务等待用户手动重试时间，超时则移除(单位:分钟)
+    wait_resume_time: 10
+  # 用户home目录下的只读文件(无法移动/删除/重命名)
+  only_read_path_list:
+    - public
+    - workspace
+    - workspace/personal
+  # 是否开启企业共享目录
+  public_folder_enable: true
+
+# 服务网关配置
+gateway:
+  # 登录校验白名单
+  # 不配置::[method]则匹配所有 Method 类型
+  white_url_list:
+    - /api/v1/auth/login::POST
+    - /api/v1/auth/license::POST
+    - /api/v1/auth/license/machineID::GET
+    - /metrics::GET
+    - /ws/v1/notice/consumer
+
+  # Token 失效时间(单位:分钟)
+  token_expire: 120
+
+# 监控服务配置
+monitor:
+  # 机器节点信息同步定时任务配置
+  sync_data:
+    enable: true
+    interval: 60
+
+  # 超时时间
+  timeout: 30
+
+  scheduler:
+    # 调度器类型 slurm or pbspro
+    type: slurm
+
+    # cmd_path默认为空
+    # 如果是pbspro调度器环境：配置pbsnodes可执行文件的全路径，如：/opt/pbs/bin/
+    # 如果是slurm调度器环境：配置scontrol可执行文件的全路径，如：/usr/bin/
+    cmd_path:
+    # pbspro调度器配置文件路径（若是slurm则忽略该配置，默认为空），pbs.conf文件的全路径，如：/etc/pbs.conf
+    conf_path:
+    # 存储挂载路径（获取存储信息），多个挂在路径用","分隔
+    mount_path: /home
+    # 默认队列名称
+    default_queue: workq
+    # 调度器资源名 resources_available.platform
+    res_available_platform: resources_available.platform
+
+  # 标签描述：隐藏节点。配置方式：节点名称，如master。多个节点用","分隔，如master,node1。
+  hidden_node:
+  # 节点不可用状态，多个状态用","分隔
+  unavailable_status: down,offline,idle*
+
+  # 节点分类规则，当前支持 hostname 前缀
+  node_classification:
+    classification_rule: hostname_prefix
+    nodes:
+      - classify_tag: master
+        label: 管理节点
+        type: mgt_node
+      - classify_tag: cn
+        label: 计算节点
+        type: compute_node
+  hostname_mapping:
+    enable: false # 是否开启 hostname 映射
+    path: config/mapping/hostname # hostname 映射文件路径
+
+project:
+  project_check:
+    enable: true # 是否开启项目检查
+    interval: 60 # 每隔多少秒检查一次
+    daily_time: 9 # 每天几点检查(24时)
+  selector_list_limit:
+    enable: true
+    max_months: 12
+logger:
+  max_size: 100 # 单个日志文件大小(MB)
+  backup_count: 50 # 日志文件保留个数
+  max_age: 90 # 日志文件保留天数
+  log_dir: /opt/yuansuan/psp/logs/psp_info.log # 日志文件存放目录
+# 用户服务配置
+user:
+  ldap:
+    enable: true
+    server: ldaps://1234yskj:636
+    base_dn: dc=ys,dc=com
+    # 是否启用tls，通常为 plain, ssl，starttls, 默认为plain
+    encryption: "plain"
+    # 一个有read权限的账号验证通过后搜索用户输入的用户名是否存在
+    admin_bind_dn: CN=caeapp,CN=Users,DC=DFLZM,DC=COM
+    admin_bind_password:
+    # 唯一ID属性，通常为 sAMAccountName, uid 或者cn， 默认为 sAMAccountName
+    uid: "sAMAccountName"
+    # 限制能登录user的查询语句，如 (objectclass=user) 。默认为空，表示允许所有 ad 账户登录
+    userfilter: "(objectClass=user)"
+  openapi:
+    enable: false
+system:
+  alert_manager:
+    alert_manager_config_path: /opt/alertmanager
+    alert_manager_url: http://127.0.0.1:9099
+
+approve:
+  three_person_management_enable: false

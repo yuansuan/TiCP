@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+import "proto/job/application/application.proto";
+import "proto/job/job.proto";
+
+package job;
+option go_package = "github.com/yuansuan/ticp/project-root-api/proto/job";
+
+message SchedulerContext {
+    application.Application app = 1;
+    repeated application.ServerApplicationRuntime app_runtimes = 2;
+    int64 min_cores = 3; 
+    bool has_local_sc = 5;
+    repeated string local_sc_ids = 6;
+
+    // 0: upload_file_info,  1: volume_mounts
+    int64 volume_type = 7;
+    job.UploadFileInfo upload_file_info = 4;
+    job.VolumeMounts volume_mounts = 8;
+}
+

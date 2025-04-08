@@ -1,0 +1,53 @@
+# Visual Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Local History for Visual Studio Code
+.history/
+
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+
+# JetBrains
+.idea
+
+# MacOS
+.DS_Store
+
+# Binaries
+/devops
+/standard-compute
+/sccli
+/fuzzy
+
+# Sqlite
+*.db
+*.db-journal
+
+# test files
+/internal/storage/case/local
+/internal/storage/case/s3
+/internal/storage/case/yuansuan
+
+# Logs
+/log
+
+# Sync cache
+.sync_file_cache/
+
+# go work
+go.work
+go.work.sum

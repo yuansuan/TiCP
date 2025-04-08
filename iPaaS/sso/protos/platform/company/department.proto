@@ -1,0 +1,266 @@
+syntax = "proto3";
+
+package company;
+option go_package = "github.com/yuansuan/ticp/iPaaS/sso/protos/platform/company";
+
+import "google/protobuf/timestamp.proto";
+import "protos/platform/ptype/page.proto";
+
+// 部门
+message Department {
+    string id = 1;
+    // 企业ID
+    string company_id = 2;
+    // 部门状态
+    DepartmentStatus status = 3;
+    // 部门名
+    string name = 4;
+    string remark = 5;
+    string modify_uid = 6;
+    google.protobuf.Timestamp update_time = 7;
+    string create_uid = 8;
+    google.protobuf.Timestamp create_time = 9;
+}
+
+// 部门成员
+message DepartmentUser {
+    string user_id = 1;
+    // 姓名
+    string real_name = 3;
+    // 电话
+    string phone = 4;
+    // email 
+    string email = 5;
+    // 创建时间
+    google.protobuf.Timestamp join_time = 7;
+    // 用户名
+    string user_name = 8;
+    // 显示用户名
+    string display_user_name = 9;
+}
+
+// 部门状态
+enum DepartmentStatus {
+    // 未知
+    DEPARTMENT_UNKNOWN = 0;
+    // 正常
+    DEPARTMENT_NORMAL = 1;
+    // 删除
+    DEPARTMENT_DELETED = 2;
+}
+
+// DepartmentService service definition.
+service DepartmentService {
+    // 获取用户加入的企业部门列表
+    rpc GetUserJoinCompanyDepartmentList (GetUserJoinCompanyDepartmentListRequest) returns (GetUserJoinCompanyDepartmentListResponse) {}
+
+    // 获取企业部门列表
+    rpc GetDepartmentList (GetDepartmentListRequest) returns (GetDepartmentListResponse) {}
+
+    // 获取部门详情
+    rpc GetDepartment (GetDepartmentRequest) returns (GetDepartmentResponse) {}
+
+    // 获取部门成员列表
+    rpc GetDepartmentUserList (GetDepartmentUserListRequest) returns (GetDepartmentUserListResponse) {}
+
+    // 新增部门
+    rpc CreateDepartment(CreateDepartmentRequest) returns (CreateDepartmentResponse) {}
+
+    // 删除部门
+    rpc DeleteDepartment(DeleteDepartmentRequest) returns (DeleteDepartmentResponse) {}
+
+    // 修改部门
+    rpc ModifyDepartment(ModifyDepartmentRequest) returns (ModifyDepartmentResponse) {}
+
+    // 删除部门成员
+    rpc DelUserFromDepartment(DelUserFromDepartmentRequest) returns (DelUserFromDepartmentResponse) {}
+
+    // 添加部门成员
+    rpc AddUserToDepartment(AddUserToDepartmentRequest) returns (AddUserToDepartmentResponse) {}
+}
+
+// 获取用户部门列表请求
+message GetDepartmentListRequest {
+    // 企业ID
+    // @inject_tag: `validate:"is_ysid,required"`
+    string company_id = 1;
+
+    // 部门状态： 1 正常； 2删除；
+    DepartmentStatus status = 2;
+
+    // 名称key: name LIKE "%name_key%"
+    string name_key = 3;
+
+    // @inject_tag: `validate:"required"`
+    ptype.Page page = 10;
+
+    
+}
+
+// 获取用户部门列表结果
+message GetDepartmentListResponse {
+    repeated Department list = 1;
+    ptype.PageCtx page_ctx = 2;
+}
+
+// 获取部门请求
+message GetDepartmentRequest {
+    // @inject_tag: `validate:"is_ysid,required"`
+    string department_id = 1;
+}
+
+// 获取部门结果
+message GetDepartmentResponse {
+    Department department = 1;
+}
+
+// 获取部门成员列表请求
+message GetDepartmentUserListRequest {
+    // @inject_tag: `validate:"is_ysid,required"`
+    string department_id = 1;
+    // 姓名和手机号搜索KEY
+    string key = 2;
+    // @inject_tag: `validate:"is_ysid"`
+    string company_id = 3;
+    // @inject_tag: `validate:"required"`
+    ptype.Page page = 10;
+    
+}
+
+// 获取部门成员列表结果
+message GetDepartmentUserListResponse {
+    repeated DepartmentUser list = 1;
+    ptype.PageCtx page_ctx = 2;
+}
+
+// 修改部门信息请求
+message ModifyDepartmentRequest {
+    // 部门ID
+    // @inject_tag: `validate:"is_ysid,required"`
+    string department_id = 1;
+    // 部门名称
+    string name = 3;
+    // 部门说明
+    string remark = 4;
+    // 操作人uid
+    // @inject_tag: `validate:"required"`
+    string op_user_id = 5;
+    
+}
+
+// 修改部门信息结果
+message ModifyDepartmentResponse {
+    // success 成功 ； fail 失败
+    string msg = 1;
+}
+
+// 新增部门请求
+message CreateDepartmentRequest {
+    // 企业ID
+    // @inject_tag: `validate:"is_ysid,required"`
+    string company_id = 1;
+    // 空间说明
+    string remark = 2;
+    // 部门名称
+    // @inject_tag: `validate:"required"`
+    string name = 3;
+    // 操作人ID 
+    // @inject_tag: `validate:"is_ysid,required"`
+    string op_user_id = 4;
+}
+
+// 新增部门结果
+message CreateDepartmentResponse {
+    Department data = 1;
+}
+
+// 删除部门成员请求
+message DelUserFromDepartmentRequest {
+    // 部门ID
+    // @inject_tag: `validate:"is_ysid,required"`
+    string department_id = 1;
+    // 企业ID
+    // @inject_tag: `validate:"is_ysid,required"`
+    string company_id = 2;
+    // 删除用户ID
+    // @inject_tag `validate:"required"`
+    repeated string delete_user_ids = 3;
+    // @inject_tag: `validate:"is_ysid,required"`
+    string op_user_id = 4;
+}
+
+// 删除部门成员结果
+message DelUserFromDepartmentResponse {
+    // 删除成功用户数
+    int32 deleted_num = 1;
+}
+
+// 添加部门成员请求
+message AddUserToDepartmentRequest {
+    // 部门ID
+    // @inject_tag: `validate:"is_ysid,required"`
+    string department_id = 1;
+    // 企业ID
+    // @inject_tag: `validate:"is_ysid,required"`
+    string company_id = 2;
+    // 添加用户ID
+    // @inject_tag `validate:"required"`
+    repeated string add_user_ids = 3;
+    // @inject_tag: `validate:"is_ysid,required"`
+    string op_user_id = 4;
+}
+
+// 添加部门成员结果
+message AddUserToDepartmentResponse {
+    // 添加成功用户数
+    int32 added_num = 1;
+}
+
+// 删除部门请求
+message DeleteDepartmentRequest {
+    // 部门ID
+    // @inject_tag: `validate:"is_ysid,required"`
+    string department_id = 1;
+    // 操作人用户ID
+    // @inject_tag: `validate:"is_ysid,required"`
+    string op_user_id = 4;
+}
+
+// 删除部门结果
+message DeleteDepartmentResponse {
+    // success 成功 ； fail 失败
+    string msg = 1;
+}
+
+// 获取用户加入的企业部门列表请求
+message GetUserJoinCompanyDepartmentListRequest{
+    // 用户ID
+    // @inject_tag: `validate:"is_ysid,required"`
+    string user_id = 1;
+    // 企业ID
+    // @inject_tag: `validate:"is_ysid,required"`
+    string company_id = 2;
+    // @inject_tag: `validate:"required"`
+    ptype.Page page = 4;
+}
+
+// 获取用户参与的企业部门列表结果
+message GetUserJoinCompanyDepartmentListResponse {
+    repeated Department list = 1;
+    ptype.PageCtx page_ctx = 2;
+}
+
+// 简化部门信息
+message DepartmentLiteInfo {
+    // 部门ID
+    string id = 1;
+    // 部门名称
+    string name = 2;
+    // 企业ID
+    string company_id = 3;
+    // 创建用户ID
+    string create_uid = 4;
+    // 创建时间
+    google.protobuf.Timestamp create_time = 5;
+    
+}

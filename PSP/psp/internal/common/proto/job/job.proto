@@ -1,0 +1,125 @@
+syntax = "proto3";
+
+package job;
+option go_package = "yuansuan.cn/psp/internal/common/proto/job";
+
+import "google/protobuf/timestamp.proto";
+
+service Job {
+
+    // GetCloudJobDetail 获取云作业详情
+    rpc GetCloudJobDetail (GetCloudJobDetailRequest) returns (GetCloudJobDetailResponse) {}
+
+    // GetJobCPUTimeMetric 获取作业合适使用情况
+    rpc GetJobCPUTimeMetric (GetJobMetricRequest) returns (GetJobMetricResponse) {}
+
+    // GetJobDeliverCount 获取作业数和用户数提交统计数据
+    rpc GetJobDeliverCount (GetJobMetricRequest) returns (GetJobMetricResponse) {}
+
+    // GetJobWaitStatistic 作业等待指标
+    rpc GetJobWaitStatistic(GetJobMetricRequest) returns (GetJobWaitTimeStatisticResponse) {}
+
+    rpc GetJobStatus (GetJobStatusRequest) returns (GetJobStatusResponse) {}
+
+    // GetJobCountMetric 作业投递数量统计指标
+    rpc GetJobCountMetric (GetJobMetricRequest) returns (GetJobMetricResponse) {}
+
+}
+
+message JobDetailField {
+    string id = 1;
+
+    string app_id = 2;
+
+    string user_id = 3;
+
+    string out_job_id = 4;
+
+    string real_job_id = 5;
+
+    string project_id = 6;
+
+    string type = 7;
+
+    string name = 8;
+
+    string state = 9;
+
+    string raw_state = 10;
+
+    string queue = 11;
+
+    string exit_code = 12;
+
+    string app_name = 13;
+
+    string user_name = 14;
+
+    string cluster_name = 15;
+
+    string project_name = 16;
+
+    string work_dir = 17;
+
+    string exec_hosts = 18;
+
+    int64 priority = 19;
+
+    int64 cpus_alloc = 20;
+
+    int64 mem_alloc = 21;
+
+    int64 exec_duration = 22;
+
+    int64 exec_host_num = 23;
+
+    google.protobuf.Timestamp submit_time = 24;
+
+    google.protobuf.Timestamp pend_time = 25;
+
+    google.protobuf.Timestamp start_time = 26;
+
+    google.protobuf.Timestamp end_time = 27;
+
+    google.protobuf.Timestamp suspend_time = 28;
+
+    google.protobuf.Timestamp terminate_time = 29;
+}
+
+message GetCloudJobDetailRequest {
+    string job_id = 1;
+}
+
+message GetCloudJobDetailResponse {
+    JobDetailField job = 1;
+}
+
+message GetJobMetricRequest {
+    int64 start_time = 1;
+    int64 end_time = 2;
+    int64 top_size = 3;
+}
+
+message GetJobMetricResponse {
+    repeated MetricKV app_metrics = 1;
+    repeated MetricKV user_metrics = 2;
+}
+
+message GetJobWaitTimeStatisticResponse {
+    repeated MetricKV wait_time_statistic_avg = 1;
+    repeated MetricKV wait_time_statistic_max = 2;
+    repeated MetricKV wait_time_statistic_total = 3;
+    repeated MetricKV wait_num_statistic_total = 4;
+}
+
+message MetricKV {
+    string key = 1;
+    double  value = 2;
+}
+
+message GetJobStatusRequest {
+}
+
+message GetJobStatusResponse {
+    map<string, int64> jobStatusMap = 1;
+}

@@ -1,0 +1,700 @@
+#!/usr/bin/env bash
+#
+# Copyright (C) 2020 LambdaCal Inc.
+#
+# PSP daemons management script
+#
+# ysadmin start | stop | restart | debug | status | version | encrypt | -h
+#
+
+# Usage of command ysadmin
+function usage() {
+  echo "Usage: ysadmin [start | stop | restart | debug | status | list | version | -h]"
+  echo "Sub commands are:"
+  printf "%-10s %-24s %-40s\n" "start" "[service_name | all]" "Starts the specified service"
+  printf "%-10s %-24s %-40s\n" "stop" "[service_name | all]" "Stops the specified service"
+  printf "%-10s %-24s %-40s\n" "restart" "[service_name | all]" "Restarts the specified service"
+  printf "%-10s %-24s %-40s\n" "debug" "[psp(only)]" "Starts the specified service in debug mode"
+  printf "%-10s %-24s %-40s\n" "status" "[service_name | all]" "Shows the status of specified service"
+  printf "%-10s %-24s %-40s\n" "list" "" "List the information of all services"
+  printf "%-10s %-24s %-40s\n" "encrypt" "" "Encrypt the database user and password in prod.yml configuration file"
+  printf "%-10s %-24s %-40s\n" "version" "" "Displays the product version"
+  printf "%-10s %-24s %-40s\n" "-h" "" "Outputs the command usage"
+}
+
+# Print the version of psp
+function version() {
+  ver=`rpm -ql psp | grep "/psp/config/version"`
+  if [ "X$ver" = "X" ]; then
+      echo "No version file."
+  else
+      cat $ver
+  fi
+}
+
+# ListProcess  $PROCESSNAME
+# Get the status、pid、port of process
+function listProcess() {
+  rst=`ps aux | grep "$1" | grep -v grep | awk -F ' ' '{print $8,$11}' | awk -F ' ' '{print $1}' | head -1 `
+  case ${rst:0:1} in
+            "R")
+              STATUS="RUNNING"
+              ;;
+            "S")
+              STATUS="RUNNING"
+              ;;
+            "Z")
+              STATUS="ZOMBIE"
+              ;;
+            "T")
+              STATUS="STOPPED"
+              ;;
+            "D")
+              STATUS="UNINTERRUPT"
+              ;;
+            *)
+              STATUS="STOPPED"
+  esac
+
+  PID=`ps aux | grep "$1" | grep -v grep | awk -F ' ' '{print $2,$11}' | awk -F ' ' '{print $1}' | head -1`
+  if [ "X${PID}" = "X" ]; then
+      PID="-"
+  fi
+}
+
+function listProcessBySupervisor()
+{
+    rst=`ps -ef | grep "supervisord -c $YS_TOP/psp/config/supervisor/supervisord.conf" | grep -v grep`
+    # Check if supervisor is started
+    if [ "X$rst" == "X" ]; then
+      STATUS="STOPPED"
+      PID="-"
+    else
+      STATUS_RES=`supervisorctl -c $YS_TOP/psp/config/supervisor/supervisord.conf status $1`
+
+      # <Fault 6: 'SHUTDOWN_STATE'>
+      SHUTDOWN_STATE=`echo ${STATUS_RES} | grep -v grep | grep "SHUTDOWN_STATE"`
+
+      if [[ -n "${SHUTDOWN_STATE}" ]] ; then
+          STATUS="STOPPED"
+          PID="-"
+      else
+          STATUS=`echo ${STATUS_RES} | awk -F ' ' '{print $2}'`
+
+          if [[ "${STATUS}X" != "RUNNINGX" ]] ; then
+              PID="-"
+          else
+              PID=`echo ${STATUS_RES}  | awk -F ' ' '{print $4}' | awk -F ',' '{print $1}'`
+          fi
+      fi
+
+    fi
+}
+
+
+# Ysadmin list
+function list() {
+  SERVICE_NAME=$1
+  if [[ "X$SERVICE_NAME" = "X" ]]; then
+      SERVICE_NAME=all
+  fi
+
+  list="SERVICE STATUS PID PORT\n"
+
+  if [[ "X$SERVICE_NAME" = "Xall" || "X$SERVICE_NAME" = "Xpsp" ]]; then
+      listProcessBySupervisor "psp"
+      list="${list}psp ${STATUS} ${PID} ${GRPC_SERVER_PORT}\n"
+  fi
+
+  if [[ "X$SERVICE_NAME" = "Xall" || "X$SERVICE_NAME" = "Xfrontend" ]]; then
+      listProcess "nginx -c $YS_TOP/psp/config/nginx/nginx.conf"
+      list="${list}frontend ${STATUS} ${PID} ${NGINX_SERVER_PORT}\n"
+  fi
+
+  if [[ "X$SERVICE_NAME" = "Xall" || "X$SERVICE_NAME" = "Xprometheus" ]]; then
+      listProcessBySupervisor "prometheus"
+      list="${list}prometheus ${STATUS} ${PID} ${PROMETHEUS_PORT}\n"
+  fi
+
+  if [[ "X$SERVICE_NAME" = "Xall" || "X$SERVICE_NAME" = "Xkafka" ]]; then
+      listProcessBySupervisor "kafka"
+      list="${list}kafka ${STATUS} ${PID} ${KAFKA_PORT}\n"
+  fi
+
+  if [[ "X$SERVICE_NAME" = "Xall" || "X$SERVICE_NAME" = "Xredis" ]]; then
+      listProcessBySupervisor "redis"
+      list="${list}redis ${STATUS} ${PID} ${REDIS_SERVER_PORT}\n"
+  fi
+
+  echo -e ${list} | column -t
+}
+
+function  startProcessBySupervisor() {
+    # Check if supervisord is started
+    startSupervisor
+
+    supervisorctl -c $YS_TOP/psp/config/supervisor/supervisord.conf start $1 >/dev/null 2>&1
+}
+
+function startNginx() {
+    # Check if nginx is already started
+    rst=`ps aux | grep "nginx -c $YS_TOP/psp/config/nginx/nginx.conf" | grep -v grep | awk -F ' ' '{print $11}' | head -1 `
+    if [ "X$rst" == "X" ]; then
+      # Start nginx
+      nginx -c $YS_TOP/psp/config/nginx/nginx.conf
+    fi
+}
+
+function  startSupervisor() {
+    rst=`ps -ef | grep "supervisord -c $YS_TOP/psp/config/supervisor/supervisord.conf" | grep -v grep`
+    if [ "X$rst" == "X" ]; then
+        supervisord -c $YS_TOP/psp/config/supervisor/supervisord.conf >/dev/null 2>&1
+    fi
+}
+
+function stopProcessNginx() {
+    pid=`ps aux | grep "nginx -c $YS_TOP/psp/config/nginx/nginx.conf" | grep -v grep | awk -F ' ' '{print $2,$11}' | awk -F ' ' '{print $1}' | head -1`
+    if [ "X${pid}" != "X" ]; then
+        kill $pid
+    fi
+}
+
+function stopProcessBySupervisor() {
+    pid=`ps -ef | grep "supervisord -c $YS_TOP/psp/config/supervisor/supervisord.conf" | grep -v grep | awk -F ' ' '{print $2}'`
+    if [ "X${pid}" != "X" ]; then
+        supervisorctl -c $YS_TOP/psp/config/supervisor/supervisord.conf stop $1 >/dev/null 2>&1
+    fi
+}
+
+function stopProcessSupervisord() {
+    pid=`ps -ef | grep "supervisord -c $YS_TOP/psp/config/supervisor/supervisord.conf" | grep -v grep | awk -F ' ' '{print $2}'`
+    if [ "X${pid}" != "X" ]; then
+      kill $pid
+    fi
+}
+
+log()
+{
+  echo -e "$@"
+}
+
+logerr()
+{
+  echo -e "Error: \033[1;31m$@\033[0m"
+}
+
+#-------------------------------------------------------------------
+# Name: encrypt_mysql
+#
+# Synopsis: encrypt_mysql
+#
+# Description: encrypt mysql
+# 1.Encrypt mysql dsn username and password in prod.yml
+#-------------------------------------------------------------------
+encrypt_mysql()
+{
+    # Get mysql username and password
+    while :
+    do
+      log "Please choose MySQL database label [1:default]:"
+      while :
+      do
+        read db_label
+        if [ x"$db_label" = "x" ];then
+          db_label="default"
+          break 1
+        else
+          if [ "$db_label" = "1" ];then
+            db_label="default"
+            break 1
+          elif [ "$db_label" = "2" ];then
+            db_label="lsf"
+            break 1
+          else
+            logerr "Database label must be 1 or 2.Please input again: "
+          fi
+        fi
+      done
+
+      while :
+      do
+        log "Please input encrypt config file path(Press Enter if use \"${YS_TOP}/psp/config/prod.yml\"):"
+        read prod_file
+        if [ x"$prod_file" = "x" ];then
+          prod_file="${YS_TOP}/psp/config/prod.yml"
+          break 1
+        else
+          if [ -d "$prod_file" ];then
+            logerr "The input path is directory, please add a specific file name."
+            continue
+          fi
+          if [ ! -f "$prod_file" ];then
+            logerr "The config file \"$prod_file\" is not found."
+          else
+            break 1
+          fi
+        fi
+      done
+
+      log "Please input MySQL username:"
+
+      while :
+      do
+        read  mysql_usr
+        if [ x"$mysql_usr" = "x" ];then
+          logerr "Username cannot be empty.Please input again: "
+        else
+          break 1
+        fi
+      done
+
+      log "Password:"
+
+      while :
+      do
+        read -s mysql_pwd
+        if [ x"$mysql_pwd" = "x" ];then
+          logerr "Password cannot be empty.Please input again:"
+        else
+          break 1
+        fi
+      done
+
+      log "Remote IP(Press Enter if use \"localhost\"):"
+      read mysql_ip
+      if [ x"$mysql_ip" = "x" ];then
+        mysql_ip="localhost"
+      fi
+      break 1
+    done
+
+    # Get mysql port from prod.yml config file.
+    check_flag="false"
+    while read line
+    do
+      check_db_label=$(echo ${line} | awk '{print $1}' | sed s/[[:space:]]//g | grep "^${db_label}:")
+      if [ "$?" == "0" ];then
+        check_flag="true"
+      fi
+
+      if [ "${check_flag}" == "true" ];then
+        check_dsn=$(echo ${line} | awk '{print $1}' | sed s/[[:space:]]//g | grep "^dsn:")
+        if [ "$?" == "0" ];then
+          mysql_port=$(echo "$line" | grep -o '(.*)' | awk -F : '{print $2}' | sed 's/)//')
+          break
+        fi
+      fi
+    done < ${prod_file}
+
+    if [ "${mysql_port}" == "" ];then
+      logerr "Get MySQL port failed, make sure the dsn is correct in \"${prod_file}\" file."
+      exit 1
+    fi
+
+    # Attempt to connect database
+    log "Attempt to connect database."
+    db_connect="mysql -u$mysql_usr -p$mysql_pwd -h $mysql_ip -P $mysql_port"
+    $db_connect </dev/null >/dev/null 2>&1
+    if [ "$?" == "0" ]; then
+      log "Connect successfully."
+    else
+      logerr "Login failed, make sure input the correct username, password and ip."
+      exit 1
+    fi
+
+    max_check_num=10
+    # Write encrypted username and password into prod.yml config file.
+    awk '/mysql/,/grpc/{print NR $0}' ${prod_file} | while read line
+    do
+      line_num=$(echo ${line} | awk '{print $1}')
+      has_db_label=$(echo ${line} | awk '{print $2}' | sed s/[[:space:]]//g | grep "^${db_label}:")
+      if [ "$?" == "0" ];then
+        for value in $( seq 1 ${max_check_num} )
+        do
+          next_line_num=$((${line_num}+${value}))
+
+          # check and update encrypt value
+          encrypt=$(awk -v num="${next_line_num}" 'NR==num' ${prod_file} | sed s/[[:space:]]//g)
+          check_encrypt=$(echo ${encrypt} | grep "^encrypt:")
+          if [ "$?" == "0" ];then
+            encrypt_value=$(echo ${encrypt} | awk -F : '{print $2}' | sed s/[[:space:]]//g)
+            if [ "$encrypt_value" == "false" ];then
+              sed -i "${next_line_num}s/false/true/" ${prod_file}
+            fi
+          fi
+
+          # check and upate dsn value
+          dsn=$(awk -v num="${next_line_num}" 'NR==num' ${prod_file} | sed s/[[:space:]]//g)
+          check_dsn=$(echo ${dsn} | grep "^dsn:")
+          if [ "$?" == "0" ];then
+            base_dsn=$(echo $dsn | awk -F "@" '{result="";for(i=1;i<NF;i++){if(result==""){result=$i}else{result=result"@"$i}}; print result}')
+            username=$(echo ${base_dsn} | awk -F : '{print $2}' | sed 's/"//' | sed s/[[:space:]]//g)
+            passwd=$(echo ${base_dsn} | awk -F ":" '{print $NF}' | sed s/[[:space:]]//g)
+            encrypt_username=$(encrypt ${mysql_usr})
+            encrypt_passwd=$(encrypt ${mysql_pwd})
+            if [ "${encrypt_username}" == "" ] || [ "${encrypt_passwd}" == "" ] ;then
+              logerr "Encrypt failed."
+              exit 1
+            fi
+
+            sed -i "${next_line_num}s:${username}:${encrypt_username}:" ${prod_file}
+            sed -i "${next_line_num}s:${passwd}:${encrypt_passwd}:" ${prod_file}
+            break
+          else
+            continue
+          fi
+        done
+      fi
+    done
+
+    echo "Encrypt done, please check \"${prod_file}\" file."
+}
+
+
+function check_server_port() {
+  case $1 in
+        "psp")
+          check_port GRPC_SERVER_PORT
+          ;;
+        "frontend")
+          if [ "$NGINX_SERVER_PROTOCOL" = "https" ];then
+            check_port NGINX_SERVER_HTTPS_PORT
+          else
+            check_port NGINX_SERVER_HTTP_PORT
+          fi
+          ;;
+        "prometheus")
+          check_port PROMETHEUS_PORT
+          ;;
+        "kafka")
+          check_port KAFKA_PORT
+          ;;
+        "redis")
+          check_port REDIS_SERVER_PORT
+          ;;
+        "all")
+          check_port all
+          ;;
+        *)
+          echo "Unknown syntax"
+          usage
+          exit 1
+  esac
+}
+
+function check_port() {
+  profile_file="$YS_TOP/psp/config/profile"
+  check_port_param=$1
+  if [ "${check_port_param}" == "all" ];then
+    while read line
+    do
+      port_config=$(echo ${line} | grep -v "#" | grep "_PORT=")
+      if [ "$?" == "0" ];then
+        if [ "$NGINX_SERVER_PROTOCOL" == "https" ];then
+          nginx_reverse_type="NGINX_SERVER_HTTP_PORT"
+        else
+          nginx_reverse_type="NGINX_SERVER_HTTPS_PORT"
+        fi
+
+        port_name=$(echo ${port_config} | awk -F "=" '{print $1}')
+        if [ "${port_name}" == "${nginx_reverse_type}" ] || [ "${port_name}" == "GRPC_HTTP_SERVER_PORT" ] || [ "${port_name}" == "PSP_MONITOR_PORT" ] ;then
+          continue
+        fi
+
+        get_used_ports ${port_config}
+      fi
+    done < ${profile_file}
+  else
+    while read line
+    do
+      for arg in $*
+      do
+        port_config=$(echo ${line} | grep "${arg}=" | grep -v "#")
+        if [ "$?" == "0" ];then
+          get_used_ports ${port_config}
+        fi
+      done
+
+      if [ "${check_port_count}" == "$#" ];then
+        break
+      fi
+    done < ${profile_file}
+  fi
+
+  if [ "${in_used_ports}" != "" ];then
+    logerr "The ports [${in_used_ports}] already in use, update profile and then source it."
+  fi
+}
+
+function get_used_ports() {
+  port_config_info=$1
+  port=$(echo ${port_config_info} | awk -F "=" '{print $2}')
+  # continue invalid port
+  if [ "${port}" == "" ] || [ "$(echo "${port}" | sed 's/[0-9]*//g')" != "" ];then
+    continue
+  fi
+
+  check_port_count=$[$check_port_count+1]
+  port_check_stdout=$(lsof -i :${port} &>/dev/null)
+  if [ "$?" == "0" ];then
+    psp_used_port_flag="false"
+    psp_used_ports=($(list | grep "RUNNING" | awk '{print $4}'))
+    for psp_used_port in ${psp_used_ports[@]}
+    do
+      if [ "${port}" == "${psp_used_port}" ];then
+        psp_used_port_flag="true"
+        break
+      fi
+    done
+
+    # Ignore psp used port
+    if [ "${psp_used_port_flag}" == "true" ];then
+      continue
+    fi
+
+    if [ "${in_used_ports}" == "" ];then
+      in_used_ports="${port}"
+    else
+      in_used_ports="${in_used_ports}, ${port}"
+    fi
+  fi
+}
+
+function init_workspace() {
+    psp_status=`list psp |  sed '1d' | awk '{print $2}'`
+    if [ "X${psp_status}" == "XRUNNING" ]; then
+        echo "Initializing workspace ..."
+        psp-init-workspace >/dev/null 2>&1
+        if [ $? -ne 0 ]; then
+            logerr "Run psp-init-workspace error.Please execute psp-init-workspace by yourself."
+        fi
+    fi
+}
+
+
+
+function stop() {
+
+  case $1 in
+        "psp")
+          stopProcessBySupervisor "psp"
+          ;;
+        "frontend")
+          stopProcessNginx
+          ;;
+        "prometheus")
+          stopProcessBySupervisor "prometheus"
+          ;;
+        "kafka")
+          stopProcessBySupervisor "kafka"
+          ;;
+        "redis")
+          stopProcessBySupervisor "redis"
+          ;;
+        "all")
+          stopProcessBySupervisor "psp"
+          stopProcessBySupervisor "prometheus"
+          stopProcessBySupervisor "kafka"
+          stopProcessBySupervisor "redis"
+          stopProcessNginx
+          stopProcessSupervisord
+          ;;
+        *)
+          echo "Unknown syntax"
+          usage
+  esac
+
+}
+
+function start() {
+  check_server_port $1
+  case $1 in
+        "psp")
+          startProcessBySupervisor psp
+          ;;
+        "frontend")
+          startNginx
+          ;;
+        "prometheus")
+          startProcessBySupervisor prometheus
+          ;;
+        "kafka")
+          startProcessBySupervisor kafka
+          ;;
+        "redis")
+          startProcessBySupervisor redis
+          ;;
+        "all")
+          # The following is auto started by supervisor
+          startProcessBySupervisor prometheus
+          startProcessBySupervisor kafka
+          startProcessBySupervisor redis
+          startProcessBySupervisor psp
+          startNginx
+          ;;
+        *)
+          echo "Unknown syntax"
+          usage
+  esac
+
+}
+
+#-------------------------------------------------------------------
+# Name: restartService
+#
+# Synopsis: restartService [service_name | all]
+#
+# Description: Restart one or all service
+#-------------------------------------------------------------------
+function restartService() {
+    stop $1
+    start $1
+}
+
+checkDebugEnv() {
+  go=$(go version)
+  if [ $? -ne 0 ]; then
+    yum install epel-release -y && yum repolist && yum clean all && yum makecache && yum install golang -y
+    if [ $(grep -n "PATH=\$PATH:\$HOME\/go\/bin" ~/.bash_profile | wc -l) -eq 0 ]; then
+      sed -i "$(grep -n "export PATH" ~/.bash_profile | awk '{print $1}' | tr ':' " " | awk '{print $1}') i PATH=\$PATH:\$HOME\/go\/bin" ~/.bash_profile
+      source ~/.bash_profile
+    fi
+  else
+    echo "go already installed: ${go}"
+  fi
+
+  dlv=$(dlv version | grep Version)
+  if [ $? -ne 0 ]; then
+    go env -w GO111MODULE=on
+    go env -w GOPROXY=https://goproxy.cn,direct
+    go install github.com/go-delve/delve/cmd/dlv@master
+  else
+    echo "dlv already installed: ${dlv}"
+  fi
+}
+
+startDebug() {
+  serviceName=$1; listenPort=$2; extendArgs=$3
+  echo "Create debug service start: ${serviceName}"
+  svID=$(ps -ef | grep ${serviceName} | grep -v grep | grep ${extendArgs} | awk '{print $2}')
+  if [ -z "${svID}" ]; then
+    echo -e "\033[1;31mService $1 is not running, please start it first\033[0m"
+    exit -1
+  fi
+
+  dlvID=$(ps -ef | grep dlv | grep "${svID}" | grep -v grep | awk '{print $2}')
+  if [ -n "${dlvID}" ]; then
+    kill -9 "${dlvID}"
+  fi
+  nohup dlv attach "${svID}" --listen=:${listenPort} --headless=true --api-version=2 --accept-multiclient &
+  echo -e "\033[1;32mDebug Setting Info: $(hostname -i):${listenPort}\033[0m"
+  echo "Create debug service end: ${serviceName}"
+}
+
+#-------------------------------------------------------------------
+# Name: debug
+#
+# Synopsis: debug [psp]
+#
+# Description: debug one service
+#-------------------------------------------------------------------
+debug() {
+  # check debug env if not exist, setting it
+  checkDebugEnv
+  case $1 in
+  "psp")
+    startDebug "$1" 22340 "./bin/pspd"
+    ;;
+  *)
+    echo "unknown service: currently only support [psp]"
+    usage
+    ;;
+  esac
+}
+
+#-------------------------------------------------------------------
+# Name: restartService
+#
+# Synopsis: restartService [service_name | all]
+#
+# Description: Restart one or all service
+#-------------------------------------------------------------------
+function displayStatus() {
+    list $1
+}
+
+#-------------------------------------------------------------------
+# Name: parse_one_option
+#
+# Synopsis: parse_one_option help|version|list
+#
+# Description:
+# 1. Display the usage of ysadmin
+# 2. Display the version information of PSP
+# 3. List all components status
+#-------------------------------------------------------------------
+function parse_one_option() {
+    case $1 in
+          "help")
+                usage
+                ;;
+          "version")
+                version
+                ;;
+          "list")
+                list
+                ;;
+          "encrypt")
+                encrypt_mysql
+                ;;
+          *)
+                # echo "Unknown syntax"
+                usage
+    esac
+}
+
+#-------------------------------------------------------------------
+# Name: parse_two_option
+#
+# Synopsis: parse_two_option start|stop component_name
+#
+# Description:
+# 1. Start one component
+# 2. Stop one component
+#-------------------------------------------------------------------
+function parse_two_option() {
+  case $1 in
+  "start")
+    start $2
+    ;;
+  "stop")
+    stop $2
+    ;;
+  "restart")
+    restartService $2
+    ;;
+  "debug")
+    debug "$2"
+    ;;
+  "status")
+    displayStatus $2
+    ;;
+  *)
+    # echo "Unknown syntax"
+    usage
+    ;;
+  esac
+}
+
+# Start to handle the options from user input
+case $# in
+      1)
+        parse_one_option $@
+        ;;
+      2)
+        parse_two_option $@
+        ;;
+      *)
+        # echo "Unknown syntax"
+        usage
+esac

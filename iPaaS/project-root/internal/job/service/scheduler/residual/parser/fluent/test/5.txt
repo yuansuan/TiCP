@@ -1,0 +1,149 @@
+/opt/ansys_inc/v171/fluent/fluent17.1.0/bin/fluent -r17.1.0 -g 3ddp -t16 -mpi=intel -i ss.jou
+/opt/ansys_inc/v171/fluent/fluent17.1.0/cortex/lnamd64/cortex.17.1.0 -f fluent -g -i ss.jou (fluent "3ddp -pshmem  -host -r17.1.0 -t16 -mpi=intel -path/opt/ansys_inc/v171/fluent -ssh")
+/opt/ansys_inc/v171/fluent/fluent17.1.0/bin/fluent -r17.1.0 3ddp -pshmem -host -t16 -mpi=intel -path/opt/ansys_inc/v171/fluent -ssh -cx CAESW-1:32889:34996
+Starting /opt/ansys_inc/v171/fluent/fluent17.1.0/lnamd64/3ddp_host/fluent.17.1.0 host -cx CAESW-1:32889:34996 "(list (rpsetvar (QUOTE parallel/function) "fluent 3ddp -flux -node -r17.1.0 -t16 -pshmem -mpi=intel -ssh") (rpsetvar (QUOTE parallel/rhost) "") (rpsetvar (QUOTE parallel/ruser) "") (rpsetvar (QUOTE parallel/nprocs_string) "16") (rpsetvar (QUOTE parallel/auto-spawn?) #t) (rpsetvar (QUOTE parallel/trace-level) 0) (rpsetvar (QUOTE parallel/remote-shell) 1) (rpsetvar (QUOTE parallel/path) "/opt/ansys_inc/v171/fluent") (rpsetvar (QUOTE parallel/hostsfile) "") )"
+
+              Welcome to ANSYS Fluent Release 17.1
+
+              Copyright 2016 ANSYS, Inc.. All Rights Reserved.
+              Unauthorized use, distribution or duplication is prohibited.
+              This product is subject to U.S. laws governing export and re-export.
+              For full Legal Notice, see documentation.
+
+Build Time: Apr 13 2016 01:02:01 EDT  Build Id: 10122  Revision: 893484
+ 
+Host spawning Node 0 on machine "CAESW-1" (unix).
+/opt/ansys_inc/v171/fluent/fluent17.1.0/bin/fluent -r17.1.0 3ddp -flux -node -t16 -pshmem -mpi=intel -ssh -mport 10.1.0.22:10.1.0.22:36580:0
+Starting /opt/ansys_inc/v171/fluent/fluent17.1.0/multiport/mpi/lnamd64/intel/bin/mpirun -f /tmp/fluent-appfile.12737 -genv I_MPI_FABRICS shm -genv I_MPI_FALLBACK_DEVICE disable -genv I_MPI_DEBUG 0 -genv I_MPI_PIN disable -genv I_MPI_ADJUST_REDUCE 2 -genv I_MPI_ADJUST_ALLREDUCE 2 -genv I_MPI_ADJUST_BCAST 1 -genv I_MPI_PLATFORM auto -genv I_MPI_DAPL_SCALABLE_PROGRESS 1 -genv FLUENT_PROD_DIR /opt/ansys_inc/v171/fluent/fluent17.1.0 -genv LD_PRELOAD /opt/ansys_inc/v171/fluent/fluent17.1.0/multiport/mpi/lnamd64/intel/lib/libmpi_mt.so -genv LD_LIBRARY_PATH /opt/ansys_inc/v171/fluent/fluent17.1.0/multiport/mpi/lnamd64/intel/lib:/opt/ansys_inc/v171/fluent/fluent17.1.0/multiport/mpi/lnamd64/intel/lib64:/opt/ansys_inc/v171/fluent/fluent17.1.0/multiport/mpi_wrapper/lnamd64/intel:/opt/ansys_inc/v171/fluent/fluent17.1.0/fm/lnamd64/3ddp_node:/opt/ansys_inc/v171/fluent/fluent17.1.0/addons/afd/lnamd64/3ddp_node:/opt/ansys_inc/v171/fluent/fluent17.1.0/addons/afd/lnamd64:/opt/ansys_inc/v171/fluent/fluent17.1.0/multiport/lnamd64/mpi/shared:/opt/ansys_inc/v171/fluent/fluent17.1.0/multiport/lnamd64/mpi/shared:/lib/i686:/opt/ansys_inc/v171/fluent/fluent17.1.0/lnamd64/syslib:/opt/ansys_inc/v171/fluent/lib/lnamd64/Qt/lib:/opt/ansys_inc/v171/fluent/../FBU_Dependencies/thirdparty/qt/linx64/lib:/opt/ansys_inc/v171/fluent/fluent17.1.0/addons/adjoint/lnamd64/3ddp:/opt/ansys_inc/v171/fluent/fluent17.1.0/fm/lnamd64/3ddp_host:/opt/ansys_inc/v171/fluent/fluent17.1.0/addons/afd/lnamd64/3ddp_host:/opt/ansys_inc/v171/fluent/fluent17.1.0/addons/afd/lnamd64:/opt/ansys_inc/v171/fluent/fluent17.1.0/multiport/lnamd64/net/shared:/lib/i686:/opt/ansys_inc/v171/fluent/fluent17.1.0/lnamd64/syslib:/opt/ansys_inc/v171/fluent/lib/lnamd64/Qt/lib:/opt/ansys_inc/v171/fluent/../FBU_Dependencies/thirdparty/qt/linx64/lib:/opt/ansys_inc/v171/fluent/fluent17.1.0/addons/adjoint/lnamd64/3ddp:/opt/ansys_inc/v171/fluent/fluent17.1.0/multiport/lnamd64/net/shared:/lib/i686:/opt/ansys_inc/v171/fluent/fluent17.1.0/lnamd64/syslib:/opt/ansys_inc/v171/fluent/fluent17.1.0/fm/lnamd64/3ddp:/opt/ansys_inc/v171/fluent/lib/lnamd64/Qt/lib:/opt/ansys_inc/v171/fluent/../FBU_Dependencies/thirdparty/qt/linx64/lib:/opt/ansys_inc/v171/fluent/fluent17.1.0/vki/lnamd64:/opt/ansys_inc/v171/fluent/fluent17.1.0/vki/lnamd64/libodb682:/opt/ansys_inc/v171/fluent/fluent17.1.0/addons/adjoint/lnamd64/3ddp::/opt/ansys_inc/v171/fluent/fluent17.1.0/wave/lnamd64:/opt/ansys_inc/v171/fluent/fluent17.1.0/KINetics/lnamd64:/opt/ansys_inc/v171/fluent/fluent17.1.0/cpropep/lnamd64:/usr/lib64:/usr/lib:/opt/ansys_inc/v171/fluent/lib/lnamd64:.:/opt/ansys_inc/v171/fluent/../commonfiles/Tcl/lib/linx64:.:.:/usr/lib64:/usr/lib:/opt/ansys_inc/v171/fluent/lib/lnamd64:.:/opt/ansys_inc/v171/fluent/../commonfiles/Tcl/lib/linx64:.:.:/opt/ansys_inc/v171/fluent/fluent17.1.0/multiport/mpi_wrapper/lnamd64/stub:/usr/lib64:/usr/lib:/opt/ansys_inc/v171/fluent/lib/lnamd64:.:/opt/ansys_inc/v171/fluent/../commonfiles/Tcl/lib/linx64:.:.:/opt/ansys_inc/v171/fluent/fluent17.1.0/lnamd64/3ddp_node -n 16 -host CAESW-1 /opt/ansys_inc/v171/fluent/fluent17.1.0/lnamd64/3ddp_node/fluent_mpi.17.1.0 node -mpiw intel -pic shmem -mport 10.1.0.22:10.1.0.22:36580:0
+
+-------------------------------------------------------------------------------
+ID     Hostname  Core   O.S.      PID          Vendor                      
+-------------------------------------------------------------------------------
+n0-15  CAESW-1   16/16  Linux-64  12821-12836  Intel(R) Xeon(R) E5-26xx v4 
+host   CAESW-1          Linux-64  12581        Intel(R) Xeon(R) E5-26xx v4 
+
+MPI Option Selected: intel
+Selected system interconnect: shared-memory
+-------------------------------------------------------------------------------
+
+
+Reading journal file ss.jou...
+
+> ; Read case file
+rc ./ss.cas
+
+Multicore processors detected. Processor affinity set!
+
+Reading "./ss.cas"...
+
+Buffering for file scan...
+
+    7182 mixed cells, zone  3, binary.
+    2520 quadrilateral wall faces, zone  1, binary.
+   20103 mixed interior faces, zone  2, binary.
+      57 mixed velocity-inlet faces, zone  6, binary.
+      57 mixed pressure-outlet faces, zone  7, binary.
+    8509 nodes, binary.
+    8509 node flags, binary.
+
+Warning: this is a double-precision solver.
+
+Building...
+     mesh
+	auto partitioning mesh by Metis (fast),
+	distributing mesh
+		parts................,
+		faces................,
+		nodes................,
+		cells................,
+     materials,
+     interface,
+     domains,
+	mixture
+     zones,
+	interior-pipe
+	wall-pipe
+	in
+	ou
+	pipe
+     parallel,
+
+Note: 3d, pressure-based, laminar case read into
+      3d, double precision, pressure-based, laminar solver.
+
+
+
+Done.
+
+> ; Initialize the solution
+/solve/initialize/initialize-flow
+
+> ; Calculate 50 iterations
+it 50  iter  continuity  x-velocity  y-velocity  z-velocity        Cd-1  surf-mon-1  eq-wqe-qwe     time/iter
+     1  1.0000e+00  0.0000e+00  2.3396e-05  3.5026e-01 -3.8354e-08  4.6817e-04  1.7136e-04  0:00:02   49
+     2  1.0000e+00  3.4547e-03  2.6293e-02  1.9567e-02 -1.7989e-06  4.0295e-04  1.5695e-04  0:00:02   48
+     3  6.3790e-01  1.2918e-02  4.5924e-02  3.0288e-02 -1.2546e-06  5.3775e-04  2.0964e-04  0:00:02   47
+     4  4.4370e-01  6.9232e-03  3.0666e-02  2.0333e-02  2.0314e-06  5.6042e-04  2.1903e-04  0:00:02   46
+     5  4.1029e-01  4.0781e-03  2.0659e-02  1.6531e-02  3.5161e-06  5.2434e-04  2.0746e-04  0:00:02   45
+     6  3.2592e-01  3.4493e-03  1.3629e-02  1.1580e-02  8.7676e-07  2.8369e-04  1.0446e-04  0:00:02   44
+     7  2.8188e-01  3.2406e-03  8.7815e-03  7.8193e-03 -9.6183e-07  2.7011e-04  1.0330e-04  0:00:02   43
+     8  1.8631e-01  3.1860e-03  7.1076e-03  6.9330e-03  1.9717e-07  1.9574e-04  7.2680e-05  0:00:02   42
+     9  1.3896e-01  2.6713e-03  6.3809e-03  6.5033e-03 -1.7089e-06  1.9917e-04  7.5077e-05  0:00:02   41
+    10  1.1340e-01  2.4887e-03  5.9331e-03  5.5315e-03 -2.0585e-06  2.1363e-04  8.1629e-05  0:00:01   40
+    11  9.5430e-02  2.1588e-03  4.9563e-03  4.8056e-03 -2.3754e-06  2.3860e-04  9.1984e-05  0:00:01   39
+  iter  continuity  x-velocity  y-velocity  z-velocity        Cd-1  surf-mon-1  eq-wqe-qwe     time/iter
+    12  8.5587e-02  1.9191e-03  4.2094e-03  4.1678e-03 -2.1032e-06  2.4949e-04  9.6499e-05  0:00:02   38
+    13  7.0241e-02  1.7371e-03  3.8602e-03  3.7617e-03 -2.0494e-06  2.6153e-04  1.0136e-04  0:00:01   37
+    14  6.0393e-02  1.6142e-03  3.6269e-03  3.4608e-03 -1.8544e-06  2.7007e-04  1.0479e-04  0:00:01   36
+    15  5.2060e-02  1.4957e-03  3.4895e-03  3.2134e-03 -1.7524e-06  2.7067e-04  1.0502e-04  0:00:01   35
+    16  4.5839e-02  1.3810e-03  3.3186e-03  2.9538e-03 -1.5593e-06  2.6936e-04  1.0415e-04  0:00:01   34
+    17  4.3075e-02  1.2769e-03  3.1195e-03  2.7133e-03 -1.2696e-06  2.6511e-04  1.0215e-04  0:00:01   33
+    18  4.0673e-02  1.1752e-03  2.9191e-03  2.4930e-03 -1.0147e-06  2.6134e-04  1.0061e-04  0:00:01   32
+    19  3.7665e-02  1.0817e-03  2.7068e-03  2.3134e-03 -8.0329e-07  2.6072e-04  1.0037e-04  0:00:01   31
+    20  3.4620e-02  9.8738e-04  2.5213e-03  2.1528e-03 -5.8163e-07  2.6034e-04  1.0024e-04  0:00:01   30
+    21  3.1999e-02  9.0233e-04  2.3578e-03  1.9931e-03 -3.9908e-07  2.6019e-04  1.0018e-04  0:00:01   29
+    22  2.9547e-02  8.2183e-04  2.2067e-03  1.8475e-03 -2.9296e-07  2.6031e-04  1.0022e-04  0:00:01   28
+  iter  continuity  x-velocity  y-velocity  z-velocity        Cd-1  surf-mon-1  eq-wqe-qwe     time/iter
+    23  2.7018e-02  7.4605e-04  2.0640e-03  1.7123e-03 -2.8028e-07  2.6074e-04  1.0040e-04  0:00:01   27
+    24  2.4459e-02  6.7836e-04  1.9312e-03  1.5885e-03 -3.0864e-07  2.6236e-04  1.0105e-04  0:00:01   26
+    25  2.2140e-02  6.1661e-04  1.8109e-03  1.4818e-03 -3.7467e-07  2.6374e-04  1.0164e-04  0:00:01   25
+    26  1.9947e-02  5.5909e-04  1.7003e-03  1.3904e-03 -4.6732e-07  2.6561e-04  1.0240e-04  0:00:01   24
+    27  1.7999e-02  5.1023e-04  1.5984e-03  1.3204e-03 -5.6825e-07  2.6663e-04  1.0281e-04  0:00:01   23
+    28  1.6355e-02  4.7221e-04  1.5004e-03  1.2581e-03 -7.1145e-07  2.6729e-04  1.0306e-04  0:00:01   22
+    29  1.5091e-02  4.4517e-04  1.4055e-03  1.2051e-03 -8.5941e-07  2.6801e-04  1.0333e-04  0:00:01   21
+    30  1.4083e-02  4.2647e-04  1.3191e-03  1.1636e-03 -1.0189e-06  2.6852e-04  1.0352e-04  0:00:01   20
+    31  1.3370e-02  4.1492e-04  1.2362e-03  1.1286e-03 -1.1623e-06  2.6884e-04  1.0364e-04  0:00:01   19
+    32  1.2836e-02  4.1026e-04  1.1641e-03  1.1009e-03 -1.2993e-06  2.6905e-04  1.0371e-04  0:00:01   18
+    33  1.2503e-02  4.1270e-04  1.0999e-03  1.0755e-03 -1.4260e-06  2.6921e-04  1.0377e-04  0:00:01   17
+  iter  continuity  x-velocity  y-velocity  z-velocity        Cd-1  surf-mon-1  eq-wqe-qwe     time/iter
+    34  1.2275e-02  4.1955e-04  1.0449e-03  1.0558e-03 -1.5420e-06  2.6936e-04  1.0383e-04  0:00:01   16
+    35  1.2166e-02  4.2900e-04  9.9848e-04  1.0403e-03 -1.6432e-06  2.6947e-04  1.0388e-04  0:00:01   15
+    36  1.2104e-02  4.3889e-04  9.5629e-04  1.0267e-03 -1.6767e-06  2.6952e-04  1.0391e-04  0:00:01   14
+    37  1.2021e-02  4.4552e-04  9.2020e-04  1.0122e-03 -1.6987e-06  2.6949e-04  1.0392e-04  0:00:00   13
+    38  1.1840e-02  4.4466e-04  8.8431e-04  9.9536e-04 -1.6557e-06  2.6932e-04  1.0386e-04  0:00:00   12
+    39  1.1606e-02  4.3943e-04  8.4810e-04  9.7294e-04 -1.6097e-06  2.6920e-04  1.0382e-04  0:00:00   11
+    40  1.1332e-02  4.2839e-04  8.1130e-04  9.4796e-04 -1.5276e-06  2.6902e-04  1.0377e-04  0:00:00   10
+    41  1.1009e-02  4.1190e-04  7.7565e-04  9.1807e-04 -1.4393e-06  2.6894e-04  1.0375e-04  0:00:00    9
+    42  1.0596e-02  3.9263e-04  7.4190e-04  8.8834e-04 -1.3218e-06  2.6888e-04  1.0373e-04  0:00:00    8
+    43  1.0166e-02  3.7104e-04  7.1070e-04  8.5491e-04 -1.2165e-06  2.6875e-04  1.0369e-04  0:00:00    7
+    44  9.7390e-03  3.4843e-04  6.8245e-04  8.1315e-04 -1.1055e-06  2.6860e-04  1.0364e-04  0:00:00    6
+  iter  continuity  x-velocity  y-velocity  z-velocity        Cd-1  surf-mon-1  eq-wqe-qwe     time/iter
+    45  9.2577e-03  3.2600e-04  6.5399e-04  7.6867e-04 -1.0087e-06  2.6853e-04  1.0362e-04  0:00:00    5
+    46  8.7612e-03  3.0428e-04  6.2295e-04  7.2656e-04 -9.1891e-07  2.6844e-04  1.0360e-04  0:00:00    4
+    47  8.2356e-03  2.8289e-04  5.9170e-04  6.8358e-04 -8.4450e-07  2.6835e-04  1.0356e-04  0:00:00    3
+    48  7.6835e-03  2.6239e-04  5.5916e-04  6.4078e-04 -7.8184e-07  2.6827e-04  1.0354e-04  0:00:00    2
+    49  7.1591e-03  2.4474e-04  5.2713e-04  5.9925e-04 -7.3633e-07  2.6814e-04  1.0349e-04  0:00:00    1
+    50  6.6775e-03  2.2943e-04  4.9403e-04  5.5862e-04 -7.0959e-07  2.6808e-04  1.0347e-04  0:00:00    0
+
+
+> ; Write data file
+wd ./ss.dat
+
+Writing "./ss.dat"...
+
+Done.
+
+
+> ; Exit FLUENT
+exit
+

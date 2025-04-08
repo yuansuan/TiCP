@@ -1,0 +1,62 @@
+global:
+  smtp_auth_password:
+  smtp_auth_username:
+  smtp_from:
+  smtp_smarthost:
+  smtp_require_tls: true
+receivers:
+  - email_configs:
+      - headers:
+          subject: '[告警] 通用报警'
+        to: empty
+    name: common
+  - email_configs:
+      - headers:
+          subject: '[告警] 求解作业失败过多'
+        html: '{{ template "emailalarm.html" . }}'
+        to:
+    name: jobfailnum
+  - email_configs:
+      - headers:
+          subject: '[告警] 存储使用率过高'
+        html: '{{ template "emailalarm.html" . }}'
+        to:
+    name: diskusage
+  - email_configs:
+      - headers:
+          subject: '[告警] 调度器节点下线'
+        html: '{{ template "emailalarm.html" . }}'
+        to:
+    name: nodebreakdown
+  - email_configs:
+      - headers:
+          subject: '[告警] 监控采集服务下线'
+        html: '{{ template "emailalarm.html" . }}'
+        to:
+    name: agentbreakdown
+route:
+  group_by:
+    - alertname
+  group_interval: 10s
+  group_wait: 10s
+  receiver: common
+  repeat_interval: 60m
+  routes:
+    - receiver: jobfailnum
+      match:
+        enable: "1"
+        modeltype: JobFailNumMore
+    - receiver: diskusage
+      match:
+        enable: "1"
+        modeltype: DiskUsageHigh
+    - receiver: nodebreakdown
+      match:
+        enable: "1"
+        modeltype: NodeDownOverlong
+    - receiver: agentbreakdown
+      match:
+        enable: "1"
+        modeltype: AgentServiceDownOverlong
+templates:
+  - /alertmanager-0.26.0.linux-amd64/template/*.tmpl

@@ -1,0 +1,12 @@
+{
+  "Home:": {
+    "type": "folder",
+    "name": "This PC:",
+    "info": {
+      "size": "104000000000",
+      "used": "90000000000",
+      "spid": "%homedrive%"
+    },
+    "data": {}
+  }
+}

@@ -1,0 +1,87 @@
+import { Story, Preview } from '@storybook/addon-docs/blocks'
+
+# Uploader
+
+基于 [Antd Uploader](https://ant.design/components/uploader-cn/) 封装：
+
+- 支持分片上传
+- 批量文件上传只触发一次 beforeUpload
+- 支持文件上传、取消、暂停、恢复、重试
+
+## 使用
+
+### 创建 uploader
+
+```tsx
+import { Uploader } from '@/components'
+
+// 创建 Uploader 时可以定义分片的 chunkSize
+const uploader = new Uploader({
+  chunkSize: 5 * 1024 * 1024,
+})
+
+// 你也可以动态地修改配置
+uploader.updateConfig({
+  chunkSize: 1 * 1024 * 1024,
+})
+```
+
+### 上传文件
+
+通过 uploader.upload 上传文件：
+
+```tsx
+const UPLOAD_ID = 'upload-test'
+uploader.upload({
+  origin: UPLOAD_ID,
+  by: 'chunk',
+  // 可以在 upload 时改写 chunkSize
+  chunkSize: 5 * 1024 * 1024,
+  httpAdapter: axios.create(),
+  beforeUpload(fileList) {},
+  onChange({ file, origin }) {
+    // 默认情况下，所有文件的上传变更都会触发 onChange，可以通过 origin 属性过滤通过当前组件上传的文件
+    if (origin !== UPLOAD_ID) {
+      return
+    }
+  },
+})
+```
+
+### UploadProps
+
+| 属性         | 说明                                    | 类型                                                                                        | 默认值            |
+| ------------ | --------------------------------------- | ------------------------------------------------------------------------------------------- | ----------------- |
+| origin       | 文件上传来源                            | string                                                                                      | -                 |
+| by           | 上传方式：分片上传/全量上传             | 'full' &#124; 'chunk'                                                                       | 'full'            |
+| chunkSize    | 分片大小（仅在 by 属性为 chunk 时生效） | number                                                                                      | 5 \* 1024 \* 1024 |
+| httpAdapter  | axios 实例                              | AxiosInstance                                                                               | -                 |
+| beforeUpload | 上传前处理                              | (fileList: RcFile[]) => string[] &#124; Promise&lt;string[]&gt;                             | -                 |
+| onChange     | 上传文件变更监听函数                    | (info: UploadChangeParam&lt;UploadFile & { origin: string }&gt; & {origin: string}) => void | -                 |
+
+## 上传文件管理
+
+所有经过 uploader 上传的文件都维护在 uploader.fileList 中，File 属性如下：
+
+| 属性            | 说明                     | 类型                                                                                      | 默认值 |
+| --------------- | ------------------------ | ----------------------------------------------------------------------------------------- | ------ |
+| origin          | 同 UploadProps.origin    | string                                                                                    | -      |
+| uid             | union id                 | string                                                                                    | -      |
+| size            | 文件大小                 | number                                                                                    | -      |
+| name            | 文件名                   | string                                                                                    | -      |
+| fileName        | 文件名                   | string                                                                                    | -      |
+| lastModified    | 文件最近修改时间         | number                                                                                    | -      |
+| astModifiedDate | 文件最近修改时间         | Date                                                                                      | -      |
+| url             | 请求链接                 | string                                                                                    | -      |
+| status          | 文件状态                 | 'error' &#124; 'success' &#124; 'done' &#124; 'uploading' &#124; 'removed' &#124;'paused' | -      |
+| percent         | 文件上传百分比           | number                                                                                    | 0      |
+| thumbUrl        | -                        | string                                                                                    | -      |
+| originFileObj   | 原始文件对象             | File &#124; Blob                                                                          | -      |
+| response        | 服务端响应内容           | any                                                                                       | -      |
+| error           | 服务端错误               | any                                                                                       | -      |
+| linkProps       | 下载链接额外的 HTML 属性 | any                                                                                       | -      |
+| type            | 文件类型                 | string                                                                                    | -      |
+| speed           | 上传速度                 | number                                                                                    | 0      |
+| by              | 同 UploadProps.by        | string                                                                                    | -      |
+
+你可以使用 mobx 监听 uploader.fileList 的变更

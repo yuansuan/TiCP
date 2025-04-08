@@ -1,0 +1,9 @@
+"Convergence history of Static Temperature on pressure-outlet-7 (in SI units)"
+"Iteration" "Mass-Weighted Average Static Temperature"
+("Iteration" "Mass-Weighted Average Static Temperature")
+3 300.0749
+6 296.5771
+9 296.4145
+12 296.3981
+15 296.3514
+18 296.3102

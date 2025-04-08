@@ -1,0 +1,38 @@
+casi_oauth:
+  client_id: ''
+  client_secret: ''
+  redirect_url: ''
+frontend_portal_server: null
+frontend_server: null
+hydra_admin_url: null
+hydra_portal_admin_url: null
+offiaccount:
+  app_id: null
+  app_secret: null
+  cfg_token: null
+  encoding_aes_key: null
+  expire_seconds: null
+  msg_template:
+    balance: null
+    job: null
+    topup: null
+    visjob: null
+sms_config:
+  aliyun:
+    access_key_id: null
+    access_key_secret: null
+    endpoint: null
+    sign_name: null
+  sms_type: null
+  templates:
+  - key: ''
+    monyun_tpl: ''
+    param_count: null
+    tencent_tid: ''
+smtp:
+  host: null
+  password: null
+  username: null
+wechat:
+  app_id: null
+  app_secret: null

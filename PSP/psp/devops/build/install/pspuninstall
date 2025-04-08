@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+# Exit when CRTL+C
+trap "exit" INT
+PSP=$(rpm -qa |grep ^psp-[0-9])
+# Check if psp has been installed
+if [ x"${PSP}" = "x" ];then
+  echo "Error: package psp is not installed"
+  exit 1
+fi
+
+if [ "${YS_TOP}" == "" ];then
+  echo "Error: 'YS_TOP' variable is empty, please source psp profile"
+  exit 1
+fi
+
+# Make sure the user want to uninstall psp
+echo "PSP(${PSP}) will be uninstalled, are you sure? [Y/n] "
+while true
+do
+  read -s input
+  case "${input}" in
+      [yY][eE][sS]|[yY])
+      echo "Uninstalling..."
+      break
+      ;;
+
+      [nN][oO]|[nN])
+      exit 0
+      ;;
+
+      *)
+      echo "Invalid input, please input again:"
+      ;;
+  esac
+done
+# Uninstall psp
+rpm -e "${PSP}"
+# Check if psp is uninstalled successfully
+if [ "$?" != "0" ];then
+  echo "Error: failed to uninstall PSP(${PSP})"
+  exit 1
+else
+  echo "PSP(${PSP}) is uninstalled successfully."
+  exit 0
+fi

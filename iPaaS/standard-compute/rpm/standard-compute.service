@@ -1,0 +1,17 @@
+[Unit]
+Description=standard-compute
+
+[Service]
+Type=simple
+User=lambda
+Group=lambda
+WorkingDirectory=/opt/standard-compute
+ExecStart=./standard-compute
+Restart=always
+SyslogIdentifier=standard-compute
+LimitCORE=infinity
+LimitNOFILE=65535
+StandardOutput=journal+console
+
+[Install]
+WantedBy=multi-user.target

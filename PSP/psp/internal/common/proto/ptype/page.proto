@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package ptype;
+
+option go_package = "yuansuan.cn/psp/internal/common/proto/ptype";
+
+message PageReq {
+    // 页数索引，范围大于等于1
+    int64 index = 1;
+    // 每页大小，范围[1, 1000]
+    int64 size  = 2;
+}
+
+message PageResp {
+    // 页数索引
+    int64 index = 1;
+    // 每页大小
+    int64 size  = 2;
+    // 数据总量
+    int64 total = 3;
+}

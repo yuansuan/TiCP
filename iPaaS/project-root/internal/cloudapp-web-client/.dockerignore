@@ -1,0 +1,8 @@
+.DS_Store
+node_modules
+dist
+.env
+yarn.lock
+config/mock/**
+!config/mock/config.sample.js
+!config/mock/mockData.sample.js

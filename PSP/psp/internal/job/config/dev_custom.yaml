@@ -1,0 +1,24 @@
+# 同步作业信息定时任务配置
+sync_data:
+  enable: true
+  interval: 5
+
+# 上传作业文件的临时存储目录
+tmp_upload: .tmp_upload
+
+# 线上作业队列名称, 可自定义其他名称
+cloud_queue: cloud
+
+# Platform资源正则匹配规则
+platform_regexp: -(\d+)[a-zA-Z]-
+
+# 计算作业工作目录配置
+work_dir:
+  # 设置工作目录名称格式
+  # default: 通过 "format" 格式化时间产生
+  # random: 随机字符串
+  type: default
+  # 当 type 为 default 时, 格式化时间产生工作目录
+  format: "200601/02150405"
+  # 设置作业空间的文件目录
+  workspace: workspace

@@ -1,0 +1,5 @@
+ys_id: ""
+access_key_id: ""
+access_key_secret: ""
+endpoint: "https://openapi3.intern.yuansuan.cn/"
+storage_endpoint: "http://127.0.0.1:8080"

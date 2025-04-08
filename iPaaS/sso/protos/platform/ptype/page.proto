@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+
+package ptype;
+option go_package = "github.com/yuansuan/ticp/iPaaS/sso/protos/platform/ptype";
+
+import "validate/validate.proto";
+
+message Page {
+    // @inject_tag: `validate:"gte=1"`
+    int64 index = 1 [(validate.rules).int64.gte = 1];
+    // @inject_tag: `validate:"gt=0,max=1000"`
+    int64 size  = 2 [(validate.rules).int64 = {gt: 0, lte: 1000}];
+}
+
+message PageCtx {
+    int64 index = 1;
+    int64 size  = 2;
+    // total record number, not page number
+    int64 total = 3;
+}

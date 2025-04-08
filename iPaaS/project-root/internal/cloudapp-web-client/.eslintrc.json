@@ -1,0 +1,75 @@
+{
+    "extends": [
+        "airbnb-base",
+        "plugin:prettier/recommended",
+        "eslint-config-prettier",
+        "plugin:react/recommended"
+    ],
+    "plugins": [
+        "prettier"
+    ],
+    "globals": {
+        "G_ENV": true
+    },
+    "root": true,
+    "env": {
+        "node": true,
+        "es6": true,
+        "browser": true,
+        "jquery": true
+    },
+    "parser": "babel-eslint",
+    "rules": {
+        "import/no-extraneous-dependencies": "off",
+        "import/prefer-default-export": "off",
+        "import/no-unresolved": "off",
+        "import/extensions": "off",
+        "class-methods-use-this": "off",
+        "no-nested-ternary": "off",
+        "global-require": "off",
+        "prettier/prettier": "error",
+        "prefer-destructuring": [
+            "error",
+            {
+                "VariableDeclarator": {
+                    "array": false,
+                    "object": true
+                },
+                "AssignmentExpression": {
+                    "array": false,
+                    "object": false
+                }
+            }
+        ],
+        "no-unused-expressions": [
+            "error",
+            {
+                "allowShortCircuit": true
+            }
+        ],
+        "no-underscore-dangle": [
+            "error",
+            {
+                "allowAfterThis": true
+            }
+        ],
+        "no-param-reassign": [
+            "error",
+            {
+                "props": false
+            }
+        ],
+        "no-return-assign": [
+            "error",
+            "except-parens"
+        ],
+        "no-cond-assign": [
+            "error",
+            "except-parens"
+        ],
+        "radix": [
+            "error",
+            "as-needed"
+        ]
+    }
+}

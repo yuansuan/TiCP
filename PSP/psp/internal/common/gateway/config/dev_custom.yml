@@ -1,0 +1,8 @@
+# 登录校验白名单，不配置::[method]则匹配所有method
+white_url_list:
+  - /api/v1/auth/login::POST
+  - /api/v1/auth/license::POST
+  - /api/v1/auth/license/machineID::GET
+
+# token失效时间(单位:分钟)
+token_expire: 120

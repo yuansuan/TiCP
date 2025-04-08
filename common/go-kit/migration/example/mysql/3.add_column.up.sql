@@ -1,0 +1,2 @@
+ALTER TABLE tableA
+    ADD COLUMN `alter_add_column` VARCHAR(32) NOT NULL DEFAULT '';

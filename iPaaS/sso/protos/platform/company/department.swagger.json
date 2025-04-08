@@ -1,0 +1,269 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "protos/platform/company/department.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "DepartmentService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {},
+  "definitions": {
+    "companyAddUserToDepartmentResponse": {
+      "type": "object",
+      "properties": {
+        "addedNum": {
+          "type": "integer",
+          "format": "int32",
+          "title": "添加成功用户数"
+        }
+      },
+      "title": "添加部门成员结果"
+    },
+    "companyCreateDepartmentResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/companyDepartment"
+        }
+      },
+      "title": "新增部门结果"
+    },
+    "companyDelUserFromDepartmentResponse": {
+      "type": "object",
+      "properties": {
+        "deletedNum": {
+          "type": "integer",
+          "format": "int32",
+          "title": "删除成功用户数"
+        }
+      },
+      "title": "删除部门成员结果"
+    },
+    "companyDeleteDepartmentResponse": {
+      "type": "object",
+      "properties": {
+        "msg": {
+          "type": "string",
+          "title": "success 成功 ； fail 失败"
+        }
+      },
+      "title": "删除部门结果"
+    },
+    "companyDepartment": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "companyId": {
+          "type": "string",
+          "title": "企业ID"
+        },
+        "status": {
+          "$ref": "#/definitions/companyDepartmentStatus",
+          "title": "部门状态"
+        },
+        "name": {
+          "type": "string",
+          "title": "部门名"
+        },
+        "remark": {
+          "type": "string"
+        },
+        "modifyUid": {
+          "type": "string"
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "createUid": {
+          "type": "string"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "title": "部门"
+    },
+    "companyDepartmentStatus": {
+      "type": "string",
+      "enum": [
+        "DEPARTMENT_UNKNOWN",
+        "DEPARTMENT_NORMAL",
+        "DEPARTMENT_DELETED"
+      ],
+      "default": "DEPARTMENT_UNKNOWN",
+      "description": "- DEPARTMENT_UNKNOWN: 未知\n - DEPARTMENT_NORMAL: 正常\n - DEPARTMENT_DELETED: 删除",
+      "title": "部门状态"
+    },
+    "companyDepartmentUser": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "realName": {
+          "type": "string",
+          "title": "姓名"
+        },
+        "phone": {
+          "type": "string",
+          "title": "电话"
+        },
+        "email": {
+          "type": "string",
+          "title": "email"
+        },
+        "joinTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "创建时间"
+        },
+        "userName": {
+          "type": "string",
+          "title": "用户名"
+        },
+        "displayUserName": {
+          "type": "string",
+          "title": "显示用户名"
+        }
+      },
+      "title": "部门成员"
+    },
+    "companyGetDepartmentListResponse": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/companyDepartment"
+          }
+        },
+        "pageCtx": {
+          "$ref": "#/definitions/ptypePageCtx"
+        }
+      },
+      "title": "获取用户部门列表结果"
+    },
+    "companyGetDepartmentResponse": {
+      "type": "object",
+      "properties": {
+        "department": {
+          "$ref": "#/definitions/companyDepartment"
+        }
+      },
+      "title": "获取部门结果"
+    },
+    "companyGetDepartmentUserListResponse": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/companyDepartmentUser"
+          }
+        },
+        "pageCtx": {
+          "$ref": "#/definitions/ptypePageCtx"
+        }
+      },
+      "title": "获取部门成员列表结果"
+    },
+    "companyGetUserJoinCompanyDepartmentListResponse": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/companyDepartment"
+          }
+        },
+        "pageCtx": {
+          "$ref": "#/definitions/ptypePageCtx"
+        }
+      },
+      "title": "获取用户参与的企业部门列表结果"
+    },
+    "companyModifyDepartmentResponse": {
+      "type": "object",
+      "properties": {
+        "msg": {
+          "type": "string",
+          "title": "success 成功 ； fail 失败"
+        }
+      },
+      "title": "修改部门信息结果"
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "ptypePage": {
+      "type": "object",
+      "properties": {
+        "index": {
+          "type": "string",
+          "format": "int64",
+          "title": "@inject_tag: `validate:\"gte=1\"`"
+        },
+        "size": {
+          "type": "string",
+          "format": "int64",
+          "title": "@inject_tag: `validate:\"gt=0,max=1000\"`"
+        }
+      }
+    },
+    "ptypePageCtx": {
+      "type": "object",
+      "properties": {
+        "index": {
+          "type": "string",
+          "format": "int64"
+        },
+        "size": {
+          "type": "string",
+          "format": "int64"
+        },
+        "total": {
+          "type": "string",
+          "format": "int64",
+          "title": "total record number, not page number"
+        }
+      }
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

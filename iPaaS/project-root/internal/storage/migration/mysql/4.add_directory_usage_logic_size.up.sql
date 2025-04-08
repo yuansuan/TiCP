@@ -1,0 +1,1 @@
+ALTER TABLE `directory_usage` ADD COLUMN `logic_size` bigint(20) NOT NULL DEFAULT 0 COMMENT '目录大小 单位为字节 软链接本身大小' AFTER `size`;

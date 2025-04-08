@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package company;
+option go_package = "github.com/yuansuan/ticp/iPaaS/sso/protos/platform/company";
+
+// CompanyCheckService service definition.
+service CompanyCheckService {
+    // CompanyMerchandiseResourceIsPriced check is app runtime in list priced in company
+    rpc CompanyMerchandiseResourceIsPriced (CompanyMerchandiseResourceIsPricedRequest) returns (CompanyMerchandiseResourceIsPricedResponse) {}
+}
+
+message CompanyMerchandiseResourceIsPricedRequest {
+    // @inject_tag: `validate:"is_ysid,required"`
+    string company_id = 1;
+    // default: yscloud
+    string product_id = 2;  
+    repeated string appruntime_id = 3;
+}
+
+message CompanyMerchandiseResourceIsPricedResult {
+    string appruntime_id = 1;
+    bool is_avaliable = 2;
+}
+
+message CompanyMerchandiseResourceIsPricedResponse {
+    string company_id = 1;
+    repeated CompanyMerchandiseResourceIsPricedResult result = 2;
+}
+    

@@ -1,0 +1,1 @@
+ALTER TABLE `sc_job` DROP COLUMN `scheduler_submit_flags`;

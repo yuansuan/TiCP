@@ -1,0 +1,554 @@
+syntax = "proto3";
+
+package company;
+option go_package = "github.com/yuansuan/ticp/iPaaS/sso/protos/platform/company";
+
+import "google/protobuf/timestamp.proto";
+import "protos/platform/company/permission.proto";
+import "protos/platform/company/role.proto";
+import "protos/platform/ptype/page.proto";
+
+
+// UserService service definition.
+service UserService {
+    // 企业邀请用户
+    rpc InviteUser (InviteUserRequest) returns (InviteUserResponse) {}
+
+    // 用户确认企业邀请
+    rpc ConfirmInvite (ConfirmInviteRequest) returns (ConfirmInviteResponse) {}
+
+    // 用户邀请信息
+    rpc GetUserInviteInfo (GetUserInviteInfoRequest) returns (GetUserInviteInfoResponse) {}
+
+    // 用户信息修改
+    rpc UserModify (UserModifyRequest) returns (UserModifyResponse) {}
+
+    // 用户初始化
+    rpc UserInit(UserInitRequest) returns (UserInitResponse) {}
+
+    // 获取用户企业角色及权限
+    rpc GetUserRoleAndPermisson(GetUserRoleAndPermissonRequest) returns (GetUserRoleAndPermissonResponse) {}
+
+    // 验证用户权限
+    rpc CheckUserPermisson(CheckUserPermissonRequest) returns (CheckUserPermissonResponse) {}
+
+    // 获取用户企业信息
+    rpc GetUserCompanyInfo(GetUserCompanyInfoRequest) returns (GetUserCompanyInfoResponse) {}
+
+    // 获取用户信息
+    rpc GetUserInfo(GetUserInfoRequest) returns (GetUserInfoResponse) {}
+
+    // 用户列表查询
+    rpc UserListQuery (UserListQueryRequest) returns (UserListQueryResponse) {}
+
+    // 添加用户备注 (当前实现不是最好实现，未来需要独立的服务来支持)
+    rpc AddUserRemark (AddUserRemarkRequest) returns (AddUserRemarkResponse) {}
+
+    // 批量邀请用户（未注册手机号自动注册）
+    rpc BatchInviteUser (BatchInviteUserRequest) returns (BatchInviteUserResponse) {}
+
+    // 更新用户自定义码
+    rpc UpdateUserFeCode (UpdateUserFeCodeRequest) returns (UpdateUserFeCodeResponse) {}
+
+    // 获取个人用户产品开通信息
+    rpc GetUserProductList (GetUserProductListRequest) returns (GetUserProductListResponse) {}
+
+    // 为个人用户添加产品
+    rpc AddProductToUser (AddProductToUserRequest) returns (AddProductToUserResponse) {}
+
+    // 移除个人用户产品
+    rpc RemoveProductFromUser (RemoveProductFromUserRequest) returns (RemoveProductFromUserResponse) {}
+
+    // 移除企业产品
+    rpc CheckUserProduct (CheckUserProductRequest) returns (CheckUserProductResponse) {}
+
+}
+
+// 邀请用户状态
+enum InviteUserStatus {
+    // 未知
+    INVITE_UNKNOWN = 0;
+    // 未确认
+    INVITE_UNCONFIRMED = 1;
+    // 同意
+    INVITE_ACCEPT = 2;
+    // 拒绝
+    INVITE_REJECT = 3;
+}
+
+// 邀请用户是否成为管理员
+enum InviteUserToAdmin {
+    // 未知
+    INVITE_TO_UNKNOW = 0;
+    // 非管理员
+    INVITE_NOT_ADMIN = 1;
+    // 管理员
+    INVITE_IS_ADMIN = 2;
+}
+
+
+message User {
+    string user_id = 1;
+    // 企业ID
+    string company_id = 2;
+    // 姓名
+    string real_name = 3;
+    // 电话
+    string phone = 4;
+    // email 
+    string email = 5;
+    // 资金账号ID
+    string account_id = 6;
+    // 创建时间
+    google.protobuf.Timestamp create_time = 7;
+    // 更新时间
+    google.protobuf.Timestamp update_time = 8;
+    // 最近登录时间
+    google.protobuf.Timestamp last_login_time = 9;
+    // 用户名
+    string user_name = 10;
+    // 显示用户名
+    string display_user_name = 11;
+    // 最大空间数量
+    int64 max_projects = 12;
+
+}
+
+
+message InviteUser {
+    string id = 1;
+    // 企业ID
+    string company_id = 2;
+    // 企业名称
+    string company_name = 3;
+    // 姓名
+    string real_name = 4;
+    // 用户ID
+    string user_id = 5;
+    // 邀请状态
+    InviteUserStatus status = 6;
+    // 是否初始化为管理员 1否；2是；
+    InviteUserToAdmin is_admin = 7;
+    string create_uid = 8;
+    string create_name = 9;
+    google.protobuf.Timestamp create_time = 10;
+    google.protobuf.Timestamp update_time = 11;
+    // 电话 
+    string phone = 12;
+    // 角色ID
+    string role_id = 13;
+    string department_id = 14;
+    // 最大项目数量
+    int64 max_projects = 15;
+}
+
+// 企业邀请用户请求参数
+message InviteUserRequest {
+    // @inject_tag: `validate:"is_ysid,required"`
+    string company_id = 1;
+    // @inject_tag: `validate:"is_ysid,required"`
+    string user_id = 2;
+    InviteUserToAdmin is_admin = 3;
+    string create_uid = 4;
+    // @inject_tag: `validate:"required"`
+    string create_name = 5;
+    // 电话
+    string phone = 6 ;
+    // 姓名
+    string real_name = 7;
+    // @inject_tag: `validate:"is_ysid"`
+    string department_id = 8;
+}
+
+// 企业邀请用户返回结果
+message InviteUserResponse {
+    string id = 1;
+}
+
+// 用户确认邀请请求
+message ConfirmInviteRequest {
+    // @inject_tag: `validate:"is_ysid,required"`
+    string company_id = 1;
+    // @inject_tag: `validate:"is_ysid,required"`
+    string user_id = 2;
+    // @inject_tag: `validate:"required"`
+    InviteUserStatus status = 3;
+    // 姓名
+    string real_name = 4;
+    // email 
+    string email = 5;
+    // 电话
+    string phone = 6;
+}
+
+// 用户确认邀请结果
+message ConfirmInviteResponse {
+    // success 成功 ； fail 失败
+    string msg = 1;
+}
+
+// 用户邀请信息请求
+message GetUserInviteInfoRequest {
+    // @inject_tag: `validate:"is_ysid,required"`
+    string invite_id = 1;
+    // @inject_tag: `validate:"is_ysid,required"`
+    string user_id = 2;
+}
+
+// 用户邀请信息结果
+message GetUserInviteInfoResponse {
+    InviteUser Info = 1;
+}
+
+
+// 用户信息修改请求
+message UserModifyRequest {
+    // @inject_tag: `validate:"is_ysid,required"`
+    string user_id = 1;
+    // 电话
+    string phone = 2;
+    // 姓名
+    string real_name = 3;
+    // email 
+    string email = 4;
+    // 最后登录时间
+    google.protobuf.Timestamp last_login_time = 5;
+    // 最大项目数量
+    int64 max_projects = 6;
+}
+
+// 用户信息修改结果
+message UserModifyResponse {
+    // success 成功 ； fail 失败
+    string msg = 1;
+}
+
+
+// 用户初始化请求
+message UserInitRequest {
+    // @inject_tag: `validate:"is_ysid,required"`
+    string user_id = 1;
+    // @inject_tag: `validate:"required"`
+    string phone = 2;
+    // 姓名
+    string real_name = 3;
+    // email 
+    string email = 4;
+    // 用户名
+    string user_name = 5;
+    // 用户产品ID,初始化默认工作空间使用，默认为远算云
+    // @inject_tag: `validate:"is_ysid"`
+    string product_id = 6;
+}
+
+// 用户初始化结果
+message UserInitResponse {
+    // success 成功 ； fail 失败
+    string msg = 1;
+}
+
+// 获取用户角色及权限请求
+message GetUserRoleAndPermissonRequest {
+    // @inject_tag: `validate:"is_ysid,required"`
+    string user_id = 1;
+    // @inject_tag: `validate:"is_ysid,required"`
+    string company_id = 2;
+}
+
+// 获取用户角色及权限结果
+message GetUserRoleAndPermissonResponse {
+    // 角色ID
+    repeated company.Role role_list = 1;
+    // 权限列表
+    repeated company.Permission permission_list = 2;
+}
+
+// 验证用户权限请求
+message CheckUserPermissonRequest {
+    // @inject_tag: `validate:"is_ysid,required"`
+    string user_id = 1;
+    // @inject_tag: `validate:"is_ysid,required"`
+    string company_id = 2;
+    // permission code
+    // @inject_tag: `validate:"required"`
+    string permission_code = 3;
+}
+
+// 验证用户权限结果
+message CheckUserPermissonResponse {
+    // 验证结果； true 有权限； false 无权限
+    bool result = 1;
+}
+
+// 获取用户企业信息请求
+message GetUserCompanyInfoRequest {
+    // @inject_tag: `validate:"is_ysid,required"`
+    string user_id = 1;
+    // @inject_tag: `validate:"is_ysid"`
+    string product_id = 2;
+}
+
+// 获取用户企业信息结果
+message GetUserCompanyInfoResponse{
+    // 企业ID
+    string company_id = 1;
+    // 企业名称
+    string company_name = 2;
+}
+
+
+// 获取用户信息请求
+message GetUserInfoRequest {
+    // @inject_tag: `validate:"is_ysid,required"`
+    string user_id = 1;
+
+    // @inject_tag: `validate:"is_ysid"`
+    string product_id = 2;
+}
+
+// 获取用户信息结果
+message GetUserInfoResponse{
+    // 用户ID
+    string user_id = 1;
+    // 电话
+    string phone = 2;
+    // 姓名
+    string real_name = 3;
+    // 资金账户ID
+    string account_id = 4;
+    // 企业ID
+    string company_id = 5;
+    // 企业名称
+    string company_name = 6;
+    // 盒子访问域名
+    string company_box_domain = 7;
+    repeated company.Permission permission_list = 8;
+    string public_box_domain = 9;
+    // 用户名
+    string user_name = 10;
+    // 显示用户名
+    string display_user_name = 11;
+    // 用户来源
+    string user_source = 12;
+    // 用户渠道
+    string user_channel = 13;
+    // 推荐用户id
+    string user_referer = 14;
+    // 用户头像
+    string headimg_url = 15;
+    // 微信UnionId
+    string wechat_union_id = 16;
+    // 用户创建时间
+    string create_time = 17;
+    // 用户email
+    string email = 18;
+    // 用户微信昵称
+    string wechat_nick_name = 19;
+    // 前端自定义码(新手引导执行步骤、设置等)
+    int64 fe_code = 20;
+    // 部门ID
+    string department_id = 21;
+    // 用户最大空间数量
+    int64 max_projects = 22;
+    // 增加存储配额
+    int64 storage_quota = 23;
+}
+
+// 个人用户查询排序
+enum UserQueryOrderBy {
+    USER_ORDERBY_NULL = 0;
+    // 注册时间倒序
+    USER_ORDERBY_REGTIME_DESC = 1;
+    // 注册时间正序
+    USER_ORDERBY_REGTIME_ASC = 2;
+    // 最近登录时间倒序
+    USER_ORDERBY_LASTLOGINTIME_DESC = 3;
+    // 最近登录时间正序
+    USER_ORDERBY_LASTLOGINTIME_ASC = 4;
+}
+
+// 是否加入企业
+enum WhetherJoinCompany {
+    UNKNOW_JOIN_COMPANY = 0;
+    NOT_JOIN_COMPANY = 1;
+    ALREADY_JOIN_COMPANY = 2;
+}
+
+// 个人用户
+message PUser {
+    string user_id = 1;
+    // 姓名
+    string real_name = 3;
+    // 电话
+    string phone = 4;
+    // email 
+    string email = 5;
+    // 用户备注
+    string remark = 6;
+    // 创建时间
+    google.protobuf.Timestamp create_time = 7;
+    // 更新时间
+    google.protobuf.Timestamp update_time = 8;
+    // 最近登录时间
+    google.protobuf.Timestamp last_login_time = 9;
+    // 是否加入企业
+    bool is_join_company = 10;
+    // 用户名
+    string user_name = 11;
+    // 显示用户名
+    string display_user_name = 12;
+    // 用户渠道
+    string user_channel = 13;
+    // 用户来源
+    string user_source = 14;
+    // 用户推荐人
+    string user_referer = 15;
+    // 用户头像
+    string headimg_url = 16;
+    // 微信UnionId
+    string wechat_union_id = 17;
+    // 用户微信昵称
+    string wechat_nick_name = 18;
+    // 已加入的企业名称
+    string company_name = 19;
+}
+
+// 个人用户查询请求
+message UserListQueryRequest {
+    // 搜索关键字，全匹配用户手机号和姓名
+    string key = 1;
+    WhetherJoinCompany is_join_company = 2;
+    // 结果排序
+    // @inject_tag: `validate:"required"`
+    UserQueryOrderBy order_by = 3;
+    // @inject_tag: `validate:"required"`
+    ptype.Page page = 4;
+    // 用户备注（模糊搜索）
+    string remark = 5;
+    // 来源包含（模糊搜索）
+    string source = 6;
+    // 来源排除 (精确排除，单一类别)
+    string exclude_source = 7;
+    // 用户渠道模糊搜索）
+    string channel = 8;
+    // 用户名模糊搜索
+    string name_key = 9;
+}
+
+// 个人用户查询结果
+message UserListQueryResponse {
+    // 数据列表
+    repeated PUser list = 1;
+    ptype.PageCtx page_ctx = 2;
+}
+
+
+// 添加用户备注请求
+message AddUserRemarkRequest {
+    // 用户ID
+    // @inject_tag: `validate:"is_ysid,required"`
+    string user_id = 1;
+    // 用户备注
+    // @inject_tag: `validate:"required"`
+    string remark = 2;
+}
+
+// 添加用户备注结果
+message AddUserRemarkResponse {
+    // success 成功 ； fail 失败
+    string msg = 1;
+}
+
+// 邀请结果
+message InviteResult {
+    string phone = 1;
+    // 170011 : 用户已邀请（user invited）
+    // 170012 : 手机号格式错误（phone invalidate）
+    // 170013 ：用户已经加入其他企业（user already join other company）
+    // 2 :  未知错误（unknown error）
+    // 0 : 成功（success）
+    int64 code = 2;
+    string message = 3;
+    // 用户ID（手机号成功注册平台时返回）
+    string user_id = 4;
+}
+
+// 批量邀请用户请求
+message BatchInviteUserRequest {
+    // 角色ID
+    // @inject_tag: `validate:"is_ysid,required"`
+    string company_id = 1;
+    // 角色ID
+    // @inject_tag: `validate:"is_ysid,required"`
+    string role_id = 2;
+    // 手机号列表
+    // @inject_tag: `validate:"required"`
+    repeated string phone_list = 3;
+    string create_uid = 4;
+    // @inject_tag: `validate:"required"`
+    string create_name = 5;
+    // @inject_tag: `validate:"is_ysid"`
+    string department_id = 6;
+}
+
+// 批量邀请用户结果
+message BatchInviteUserResponse {
+    repeated InviteResult invite_result = 1;
+    int32 total_count = 2;
+    int32 fail_count = 3;
+    int32 success_count = 4;
+}
+
+//获取邀请用户结果
+message GetReferedUserResponse{
+    //仅需返回用户id, 头像昵称存储于sso表
+    repeated string user_id = 1;
+}
+
+message UpdateUserFeCodeRequest {
+    // @inject_tag: `validate:"is_ysid,required"`
+    string user_id = 1;
+    // @inject_tag: `validate:"required"`
+    int64 fe_code = 2;
+}
+
+message UpdateUserFeCodeResponse {
+    // success 成功 ； fail 失败
+    string msg = 1;
+}
+
+message GetUserProductListRequest {
+    string user_id = 1;
+}
+
+message GetUserProductListResponse {
+    repeated string product_list = 1;
+}
+
+message AddProductToUserRequest {
+    string user_id = 1;
+    string product_id = 2;
+}
+
+message AddProductToUserResponse {
+    string msg = 1;
+}
+
+message RemoveProductFromUserRequest {
+    string user_id = 1;
+    string product_id = 2;
+}
+
+message RemoveProductFromUserResponse {
+    string msg = 1;
+}
+
+
+message CheckUserProductRequest {
+    string user_id = 1;
+    string product_id = 2;
+}
+
+message CheckUserProductResponse {
+    bool has = 1;
+}

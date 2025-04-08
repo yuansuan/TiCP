@@ -1,0 +1,62 @@
+app:
+  name: license
+  ver: 1.0.0
+  host: 0.0.0.0
+  port: 8889
+
+  middleware:
+    monitor:
+      _startup: true
+      listen: ":9102"
+      metric: "/metrics"
+      prometheus_server_endpoint: "http://localhost:9090"
+
+    mysql:
+      default:
+        _startup: true
+        encrypt: false
+        dsn: "root:password@tcp(localhost:3306)/xx?charset=utf8&parseTime=true&loc=Local"
+
+    grpc:
+      server:
+        default:
+          _startup: true
+          addr: :1114
+          #write_buffer_size: 32768
+          #read_buffer_size: 32769
+          #initial_window_size: 65536
+          #initial_conn_window_size: 65537
+          max_recv_msg_size: 4194304
+          max_send_msg_size: 2147483647
+          #max_concurrent_streams: 100
+          #connection_timeout: 100000
+          #max_header_list_size: 1024
+          #keepalive_max_connection_idle: 60000
+          #keepalive_max_connection_age: 61000
+          #keepalive_max_connection_age_grace: 62000
+          #keepalive_time: 63000
+          #keepalive_timeout: 64000
+          #keepalive_enforcement_policy_min_time: 240000
+          #keepalive_enforcement_policy_permit_without_stream: true
+
+      client:
+        app:
+          addr: ":1114"
+          naming: false
+          timeout_per_request: "300s"
+          with_insecure: true
+
+        approve:
+          addr: ":1114"
+          naming: false
+          timeout_per_request: "300s"
+          with_insecure: true
+
+        default:
+          addr: :1114
+
+          # golang duration format, such as "300ms", "-1.5h" or "2h45m".
+          # Valid time units are "ns", "us" (or "µs"), "ms", "s", "m", "h".
+          timeout_per_request: "300s"
+
+          with_insecure: true

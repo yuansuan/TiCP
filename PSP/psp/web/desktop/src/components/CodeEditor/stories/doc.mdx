@@ -1,0 +1,48 @@
+import { Story, Preview } from '@storybook/addon-docs/blocks'
+
+# CodeEditor
+
+CodeEditor 是基于 <a target="_blank" href="https://microsoft.github.io/monaco-editor/">monaco-editor</a> 实现的代码编辑器组件。
+
+## 代码演示
+
+### 基本使用
+
+使用 value 属性设置默认值，并通过 onChange 监听编辑器的内容变更。
+
+<Preview withSource='none'>
+  <Story id='components-codeeditor--basic' />
+</Preview>
+
+### 受控编辑器
+
+受控组件会重复渲染编辑器，造成编辑器内容闪动的现象，建议使用命令式方式获取编辑器内容。
+
+<Preview withSource='none'>
+  <Story id='components-codeeditor--controlled' />
+</Preview>
+
+### 命令式
+
+可以通过 ref 直接获取编辑器的内容。
+
+<Preview withSource='none'>
+  <Story id='components-codeeditor--imperative' />
+</Preview>
+
+### 只读模式
+
+设置 readOnly 属性禁止编辑器的编辑功能。
+
+<Preview withSource='none'>
+  <Story id='components-codeeditor--readonly' />
+</Preview>
+
+## API
+
+| 参数     | 说明               | 类型                                   | 默认值 |
+| -------- | ------------------ | -------------------------------------- | ------ |
+| value    | 编辑器内容         | string                                 | -      |
+| readOnly | 是否只读           | boolean                                | false  |
+| onChange | 监听编辑器内容变更 | (e: { detail; value: string }) => void | -      |
+| language | 编辑器语言         | 'javascript' &#124; 'shell'            | -      |

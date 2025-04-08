@@ -1,0 +1,1 @@
+alter table job add column scheduler_submit_flags text not null default '';

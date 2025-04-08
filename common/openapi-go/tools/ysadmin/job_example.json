@@ -1,0 +1,39 @@
+{
+    "Name":"self_payBy_test",
+    "Params":{
+        "Application":{
+            "Command":"echo hello;sleep 30;echo done",
+            "AppID":"53kXFV7UpYU"
+        },
+        "Resource":{
+            "Cores":1,
+            "Memory":56
+        },
+        "EnvVars":{
+            "file_name": "Blade.sim"
+        },
+        "Input":{
+            "Type":"cloud_storage",
+            "Source":"http://10.0.5.50:9900/4TiSsZonTa3/aether/input/20240510"
+        },
+        "Output":{
+            "Type": "cloud_storage",
+            "Address": "http://10.0.5.50:9900/4TiSsZonTa3/aether/result/20240510/1"
+        },
+        "TmpWorkdir":true,
+        "SubmitWithSuspend":false,
+        "CustomStateRule":{
+            "KeyStatement":"error",
+            "ResultState":"failed"
+        }
+    },
+    "Timeout":3600,
+    "Zone":"az-zhigu-slurm2",
+    "Comment":"test payby",
+    "ChargeParam":{
+        "ChargeType":"PostPaid",
+        "PeriodType":"hour",
+        "PeriodNum":1
+    }
+}
+

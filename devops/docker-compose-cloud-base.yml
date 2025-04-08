@@ -1,0 +1,60 @@
+networks:
+  ticp-network:
+    driver: bridge
+services:
+  account_bill:
+    container_name: account_bill
+    environment:
+    - YS_MODE=prod
+    image: harbor.yuansuan.cn/ticp/account_bill:202503211507
+    logging:
+      driver: json-file
+      options:
+        max-file: '20'
+        max-size: 50m
+    networks:
+    - ticp-network
+    ports:
+    - 8891:8899
+    restart: always
+    volumes:
+    - /Users/apple/code/TiCP/devops/config/cloud-base/account_bill:/workspace/account_bill/config
+    - /home/data/account_bill/logs:/workspace/account_bill/log
+  hydra_lcp:
+    container_name: hydra_lcp
+    environment:
+    - YS_MODE=prod
+    image: harbor.yuansuan.cn/ticp/hydra_lcp:202504021001
+    logging:
+      driver: json-file
+      options:
+        max-file: '20'
+        max-size: 50m
+    networks:
+    - ticp-network
+    ports:
+    - 9091:9091
+    - 11212:11211
+    restart: always
+    volumes:
+    - /Users/apple/code/TiCP/devops/config/cloud-base/hydra_lcp:/workspace/hydra_lcp/config
+    - /home/data/hydra_lcp/logs:/workspace/hydra_lcp/log
+  iamserver:
+    container_name: iamserver
+    environment:
+    - YS_MYSQL_DEFAULT_DSN=ticp_user:ticp6655@tcp(10.0.4.48:3306)/ticp?charset=utf8&parseTime=true&loc=Local
+    - YS_MODE=prod
+    image: harbor.yuansuan.cn/ticp/iamserver:202503211509
+    logging:
+      driver: json-file
+      options:
+        max-file: '20'
+        max-size: 50m
+    networks:
+    - ticp-network
+    ports:
+    - 8899:8899
+    restart: always
+    volumes:
+    - /Users/apple/code/TiCP/devops/config/cloud-base/iamserver:/workspace/iamserver/config
+    - /home/data/iamserver/logs:/workspace/iamserver/log

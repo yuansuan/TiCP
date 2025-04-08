@@ -1,0 +1,11 @@
+{
+  "title": "XXX仿真平台",
+  "favicon": "/favicon1.ico?v=2",
+  "logoUrl": "",
+  "loginPage": {
+    "bgUrl": "./img/wallpaper/ThemeA/img2.jpg",
+    "leftBgUrl": "./img/wallpaper/ThemeA/img2.jpg",
+    "copyRightLogoUrl": "./img/asset/hxzylogo_white.png",
+    "copyRightText": "© 2016-2024 HXZY All rights reserved."
+  }
+}

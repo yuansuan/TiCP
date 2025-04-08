@@ -1,0 +1,11 @@
+{
+  "title": "远算云仿真平台",
+  "favicon": "/favicon.svg?v=2",
+  "logoUrl": "",
+  "loginPage": {
+    "bgUrl": "",
+    "leftBgUrl": "",
+    "copyRightLogoUrl": "",
+    "copyRightText": "© 2016-2024 Yuansuan.cn All rights reserved."
+  }
+}

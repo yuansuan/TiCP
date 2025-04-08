@@ -1,0 +1,38 @@
+#toolPanel {
+  background: #ffffff;
+  z-index: 999999999;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 10px;
+
+  > div {
+    width: 24px;
+    height: 24px;
+    margin-right: 15px;
+    float: left;
+    cursor: pointer;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  .close {
+    background-image: url('./img/close.png');
+    background-size: cover;
+
+    &:hover {
+      background-image: url('./img/close-hover.png');
+    }
+  }
+
+  .confirm {
+    background-image: url('./img/confirm.png');
+    background-size: cover;
+
+    &:hover {
+      background-image: url('./img/confirm-hover.png');
+    }
+  }
+}

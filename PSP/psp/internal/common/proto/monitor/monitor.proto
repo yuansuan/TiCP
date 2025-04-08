@@ -1,0 +1,63 @@
+syntax = "proto3";
+
+package monitor;
+option go_package = "yuansuan.cn/psp/internal/common/proto/monitor";
+
+service Monitor {
+  // QueueList 获取队列列表
+  rpc QueueList (QueueListRequest) returns (QueueListResponse);
+
+  // GetQueueAvailableCores 获取队列及对应的可用核数
+  rpc GetQueueAvailableCores (GetQueueAvailableCoresRequest) returns (GetQueueAvailableCoresResponse);
+
+  // GetPlatformCores 获取Platform及对应核数
+  rpc GetPlatformCores (GetPlatformCoresRequest) returns (GetPlatformCoresResponse);
+
+  // GetQueueCoreInfos 获取Queue及对应核数
+  rpc GetQueueCoreInfos (GetQueueCoreInfosRequest) returns (GetQueueCoreInfosResponse);
+
+}
+
+message QueueListRequest {
+}
+
+message GetPlatformCoresRequest {}
+
+message GetPlatformCoresResponse {
+  repeated PlatformCore platform_cores = 1;
+}
+
+message PlatformCore {
+  string platform_name = 1;
+  int64  total_cores = 2;
+  int64  available_cores = 3;
+}
+
+message GetQueueCoreInfosRequest {}
+
+message GetQueueCoreInfosResponse {
+  repeated QueueCoreInfo queue_core_infos = 1;
+}
+
+message QueueCoreInfo {
+  string queue_name =1;
+  int64  total_cores = 2;
+  int64  available_cores = 3;
+}
+
+message QueueListResponse {
+  repeated string queue_names = 1;
+}
+
+message GetQueueAvailableCoresRequest {
+  repeated string queue_names = 1;
+}
+
+message GetQueueAvailableCoresResponse {
+  repeated QueueCore queue_cores = 1;
+}
+
+message QueueCore {
+  string queue_name = 1;
+  int64  core_num = 2;
+}

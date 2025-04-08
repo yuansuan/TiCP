@@ -1,0 +1,303 @@
+#!/usr/bin/env bash
+#
+# Copyright (C) 2020 LambdaCal Inc.
+#
+# The basic environment variable setting
+#
+
+##########################################################
+# PROFILE SCRIPT - Don't modify below scripts
+##########################################################
+
+# YS_TOP directory
+YS_TOP=@YS_TOP@
+
+# Psp installation path
+PSP_TOP=${YS_TOP}/psp
+
+# Source the psp.conf
+if [[ -f "${PSP_TOP}/config/psp.conf" ]]; then
+    source ${PSP_TOP}/config/psp.conf
+fi
+
+# Generate the source profile log
+SOURCE_PROFILE_LOG=${PSP_TOP}/log/source_profile.log
+
+# Jre installation path
+JRE_TOP=${YS_TOP}/3rd_party/jre
+
+# Nginx installation path
+NGINX_TOP=${YS_TOP}/3rd_party/nginx
+
+# Node installation path
+NODE_TOP=${YS_TOP}/3rd_party/node
+
+# Prometheus installation path
+PROMETHEUS_TOP=${YS_TOP}/3rd_party/prometheus
+
+# Kafka installation path
+KAFKA_TOP=${YS_TOP}/3rd_party/kafka
+
+# Redis installation path
+REDIS_TOP=${YS_TOP}/3rd_party/redis
+
+# Log the information into source_profile.log
+#==================================================
+log()
+{
+  current_date=$(date "+%Y-%m-%d %H:%M:%S")
+  echo -e "${current_date} $@" >> ${SOURCE_PROFILE_LOG}
+  echo -e "$@"
+}
+
+# Add path to environment variable PATH
+#==================================================
+
+if [[ -n $PSP_TOP ]] ; then
+    PATH=${PSP_TOP}/bin:${PATH}
+fi
+
+if [[ -n $NGINX_TOP ]] ; then
+    PATH=${NGINX_TOP}/sbin:${PATH}
+fi
+
+if [[ -n $NODE_TOP ]] ; then
+    PATH=${NODE_TOP}/bin:${PATH}
+fi
+
+
+# Add path to environment variable PSP_JAVA_HOME
+#==================================================
+if [[ -n $JRE_TOP ]] ; then
+    PSP_JAVA_HOME=${JRE_TOP}
+fi
+
+if [[ "${NGINX_SERVER_PROTOCOL}" != "http" && "${NGINX_SERVER_PROTOCOL}" != "https" ]]; then
+    log "The NGINX_SERVER_PROTOCOL nginx http server protocol: ${NGINX_SERVER_PROTOCOL} is invalid, only 'http' or 'https' is accepted"
+    return
+fi
+if [ "$NGINX_SERVER_PROTOCOL" = "https" ]; then
+    NGINX_SERVER_PORT=${NGINX_SERVER_HTTPS_PORT}
+else
+    NGINX_SERVER_PORT=${NGINX_SERVER_HTTP_PORT}
+fi
+
+#-----------------------------------------------
+# gRPC port
+echo ${GRPC_SERVER_PORT} | grep -q "[^0-9]"
+if [[ $? -eq 0 ]] ; then
+    log "The GRPC_SERVER_PORT port number: ${GRPC_SERVER_PORT} is invalid"
+    return
+fi
+
+if [[ -f "${YS_TOP}/psp/config/prod.yml" ]] ; then
+    sed -i "s/addr: .*$/addr: :${GRPC_SERVER_PORT}/" ${YS_TOP}/psp/config/prod.yml
+    if [[ "$?" != "0" ]] ; then
+        log "Failed to configure the GRPC server port."
+        return
+    fi
+fi
+
+#-----------------------------------------------
+
+#-----------------------------------------------
+# Http server port in gRPC
+echo ${GRPC_HTTP_SERVER_PORT} | grep -q "[^0-9]"
+if [[ $? -eq 0 ]] ; then
+    log "The GRPC_HTTP_SERVER_PORT port number: ${GRPC_HTTP_SERVER_PORT} is invalid"
+    return
+fi
+
+if [[ -f "${YS_TOP}/psp/config/prod.yml" ]] ; then
+    sed -i "0,/port:/{s/port:.*$/port: ${GRPC_HTTP_SERVER_PORT}/}" ${YS_TOP}/psp/config/prod.yml
+    if [[ "$?" != "0" ]] ; then
+        log "Failed to configure the GRPC http server port."
+        return
+    fi
+fi
+#-----------------------------------------------
+
+#-----------------------------------------------
+# nginx port and http protocol
+echo ${NGINX_SERVER_HTTP_PORT} | grep -q "[^0-9]"
+if [[ $? -eq 0 ]] ; then
+    log "The NGINX_SERVER_HTTP_PORT port number: ${NGINX_SERVER_HTTP_PORT} is invalid"
+    return
+fi
+echo ${NGINX_SERVER_HTTPS_PORT} | grep -q "[^0-9]"
+if [[ $? -eq 0 ]] ; then
+    log "The NGINX_SERVER_HTTPS_PORT port number: ${NGINX_SERVER_HTTPS_PORT} is invalid"
+    return
+fi
+
+if [[ -f "${YS_TOP}/psp/config/nginx/frontend.conf" ]] ; then
+    if [[ "${NGINX_SERVER_PROTOCOL}" = "http" ]]; then
+        grep "listen .*${NGINX_SERVER_HTTP_PORT};$" ${YS_TOP}/psp/config/nginx/frontend.conf >/dev/null 2>&1
+        if [[ "$?" != "0" ]] ; then
+            sed -i "0,/listen/{s/listen .*;$/listen   ${NGINX_SERVER_HTTP_PORT};/}" ${YS_TOP}/psp/config/nginx/frontend.conf
+            if [[ "$?" != "0" ]] ; then
+                log "Failed to configure the nginx http server port."
+                return
+            fi
+        fi
+
+        grep '#listen .* ssl;$' ${YS_TOP}/psp/config/nginx/frontend.conf >/dev/null 2>&1
+        if [[ "$?" != "0" ]] ; then
+            grep 'listen .* ssl;$' ${YS_TOP}/psp/config/nginx/frontend.conf >/dev/null 2>&1
+            if [[ "$?" = "0" ]] ; then
+               sed -i "s/listen .* ssl;$/#&/" ${YS_TOP}/psp/config/nginx/frontend.conf
+               if [[ "$?" != "0" ]] ; then
+                   log "Failed to configure the nginx https server port."
+                   return
+               fi
+            fi
+        fi
+        https_enabled_flag=no
+    else
+        grep '#listen .* ssl;$' ${YS_TOP}/psp/config/nginx/frontend.conf >/dev/null 2>&1
+        if [[ "$?" != "0" ]] ; then
+            # check https port is changed
+            grep 'listen .*$NGINX_SERVER_HTTPS_PORT ssl;$' ${YS_TOP}/psp/config/nginx/frontend.conf >/dev/null 2>&1
+            if [[ "$?" != "0" ]] ; then
+                sed -i "s/listen.* ssl;$/listen   $NGINX_SERVER_HTTPS_PORT ssl;/" ${YS_TOP}/psp/config/nginx/frontend.conf
+                if [[ "$?" != "0" ]] ; then
+                    log "Failed to configure the nginx https server port."
+                    return
+                fi
+            fi
+        else
+            sed -i "s/#listen.* ssl;$/listen   $NGINX_SERVER_HTTPS_PORT ssl;/" ${YS_TOP}/psp/config/nginx/frontend.conf
+            if [[ "$?" != "0" ]] ; then
+                log "Failed to configure the nginx https server port."
+                return
+            fi
+        fi
+
+        grep "rewrite ^(.*)\$ https\://\$host\:${NGINX_SERVER_HTTPS_PORT} permanent;" ${YS_TOP}/psp/config/nginx/frontend.conf >/dev/null 2>&1
+        if [ "$?" != "0" ]; then
+            sed -i "s:rewrite .* permanent;:rewrite ^(.*)\$ https\://\$host\:${NGINX_SERVER_HTTPS_PORT} permanent;:g" ${YS_TOP}/psp/config/nginx/frontend.conf >/dev/null 2>&1
+            if [ "$?" != "0" ]; then
+                log "Failed to configure the NGINX rewrite."
+                return
+            fi
+        fi
+        https_enabled_flag=yes
+    fi
+    sed -i "s/set \$https_enabled .*$/set \$https_enabled $https_enabled_flag;/" ${YS_TOP}/psp/config/nginx/frontend.conf
+    if [ "$?" != "0" ]; then
+        log "Failed to configure the NGINX https server flag \$https_enabled."
+        return
+    fi
+fi
+#-----------------------------------------------
+
+#-----------------------------------------------
+# prometheus port
+echo ${PROMETHEUS_PORT} | grep -q "[^0-9]"
+if [[ $? -eq 0 ]] ; then
+    log "The PROMETHEUS_PORT port number: ${PROMETHEUS_PORT} is invalid"
+    return
+fi
+
+if [[ -f "${YS_TOP}/psp/config/prod.yml" ]] ; then
+    sed -i "s|prometheus_server_endpoint:.*$|prometheus_server_endpoint: \"http://localhost:${PROMETHEUS_PORT}\"|" ${YS_TOP}/psp/config/prod.yml
+    if [ "$?" != "0" ] ; then
+        log "Failed to configure the prometheus port in prod.yml."
+        return
+    fi
+fi
+#-----------------------------------------------
+
+#-----------------------------------------------
+# kafka port
+echo ${KAFKA_PORT} | grep -q "[^0-9]"
+if [[ $? -eq 0 ]] ; then
+    log "The KAFKA_PORT port number: ${KAFKA_PORT} is invalid"
+    return
+fi
+
+# Configure the kafka server.properties
+if [[ -f "${YS_TOP}/psp/config/kafka/server.properties" ]] ; then
+    sed -i "s#PLAINTEXT://localhost:[0-9]\+#PLAINTEXT://localhost:${KAFKA_PORT}#" ${YS_TOP}/psp/config/kafka/server.properties
+    if [ "$?" != "0" ] ; then
+        log "Failed to configure the kafka listeners in server.properties."
+        return
+    fi
+fi
+
+
+# Configure prod.yml to replace the kafka port
+if [[ -f "${YS_TOP}/psp/config/prod.yml" ]] ; then
+    sed -i "/kafka/{n;n;n;s/\".*\"/\"localhost:${KAFKA_PORT}\"/}" ${YS_TOP}/psp/config/prod.yml
+    if [ "$?" != "0" ]; then
+        log "Failed to configure the kafka port for prod.yml."
+        return
+    fi
+fi
+
+
+#-----------------------------------------------
+# prometheus exporter monitor port
+echo ${PSP_MONITOR_PORT} | grep -q "[^0-9]"
+if [[ $? -eq 0 ]] ; then
+    log "The PSP_MONITOR_PORT port number: ${PSP_MONITOR_PORT} is invalid"
+    return
+fi
+
+if [[ -f "${YS_TOP}/psp/config/prod.yml" ]] ; then
+sed -i "/monitor:/{n;n;n;s|listen:.*$|listen: \":${PSP_MONITOR_PORT}\"|}" ${YS_TOP}/psp/config/prod.yml
+    if [ "$?" != "0" ] ; then
+        log "Failed to configure the psp monitor port in prod.yml file."
+        return
+    fi
+fi
+
+if [[ -f "${YS_TOP}/psp/config/prometheus/prom/config/psp.json" ]] ; then
+    sed -i "/targets/{n;s|\".*\"|\"localhost:${PSP_MONITOR_PORT}\"|}" ${YS_TOP}/psp/config/prometheus/prom/config/psp.json
+    if [ "$?" != "0" ] ; then
+        log "Failed to configure the psp monitor port in prometheus config file."
+        return
+    fi
+fi
+#-----------------------------------------------
+
+#-----------------------------------------------
+# Redis server port
+echo ${REDIS_SERVER_PORT} | grep -q "[^0-9]"
+if [[ $? -eq 0 ]] ; then
+    log "The REDIS_SERVER_PORT port number: ${REDIS_SERVER_PORT} is invalid"
+    return
+fi
+
+sed -i "s/^\s*port .*/port ${REDIS_SERVER_PORT}/" ${YS_TOP}/psp/config/redis/redis.conf
+if [ "$?" != "0" ]; then
+    logerr "Failed to configure the redis conf port, exit."
+    return
+fi
+
+# Configure the prod.yml
+sed -i "/redis:/{n;n;n;s|addr:.*$|addr: 127.0.0.1:${REDIS_SERVER_PORT}|}" ${YS_TOP}/psp/config/prod.yml
+if [ "$?" != "0" ]; then
+    log "Failed to configure redis addr in prod.yml, exit."
+    return
+fi
+
+
+
+#-----------------------------------------------
+# Configure the log level
+if [[ -f "${YS_TOP}/psp/.env" ]] ; then
+    sed -i "s|^\s*LogLevel=.*|LogLevel=${LOG_LEVEL}|" ${YS_TOP}/psp/.env
+fi
+#-----------------------------------------------
+
+
+# Remove the duplicated paths in PATH variable
+PATH=$(echo $PATH | sed 's/:/\n/g' | sort | uniq | tr -s '\n' ':' | sed 's/:$//g')
+
+
+# Export these env variables
+export YS_ADMIN YS_TOP PATH PSP_JAVA_HOME GRPC_SERVER_PORT NGINX_SERVER_PORT NGINX_SERVER_HTTP_PORT NGINX_SERVER_HTTPS_PORT NGINX_SERVER_PROTOCOL\
+       PROMETHEUS_TOP PROMETHEUS_PORT REDIS_SERVER_PORT REDIS_TOP \
+       KAFKA_TOP KAFKA_PORT \
+       CLUSTER_NAME

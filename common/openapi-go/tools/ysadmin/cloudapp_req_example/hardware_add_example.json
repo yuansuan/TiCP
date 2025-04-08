@@ -1,0 +1,13 @@
+{
+  "Zone": "az-zhigu",
+  "Name": "2u4g",
+  "Desc": "2u4g",
+  "InstanceType": "2u4g",
+  "InstanceFamily": "",
+  "Network": 1,
+  "Cpu": 2,
+  "CpuModel": "",
+  "Mem": 4096,
+  "Gpu": 0,
+  "GpuModel": ""
+}

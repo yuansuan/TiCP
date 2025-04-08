@@ -1,0 +1,58 @@
+import { Story, Preview } from '@storybook/addon-docs/blocks'
+
+# 页面布局
+
+使用 @ys/components 中的 PageLayout 组件可以快速地生成 Menu、Header 和 Layout。
+
+## 基本使用
+
+<Preview withSource='none'>
+  <Story id='components-pagelayout--basic' />
+</Preview>
+
+## 自定义页脚
+
+允许传入自定义组件作为页脚
+
+<Preview withSource='none'>
+  <Story id='components-pagelayout--footer' />
+</Preview>
+
+## 获取菜单状态
+
+使用 `PageLayout.useStore` 可以获取 PageLayout 的内部状态
+
+<Preview withSource='none'>
+  <Story id='components-pagelayout--state' />
+</Preview>
+
+## 参数配置
+
+| 参数                | 说明                                                                                                                    | 类型                                                                                                                    | 默认值                     |
+| ------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | -------------------------- |
+| defaultExpandedKeys | 默认展开菜单                                                                                                            | string[]                                                                                                                | []                         |
+| routers             | 菜单路由配置表                                                                                                          | RouterType[]                                                                                                            | []                         |
+| title               | 菜单标题                                                                                                                | string                                                                                                                  | -                          |
+| logo                | logo 元组，第一张 logo 用于展开状态的菜单，第二张 logo 用于收缩状态的菜单                                               | [any, any]                                                                                                              | [undefined, undefined]     |
+| Menu                | 自定义菜单                                                                                                              | React.ElementType                                                                                                       | -                          |
+| HeaderToolbar       | 自定义 Header 右上角的工具栏                                                                                            | React.ElementType                                                                                                       | -                          |
+| Link                | 自定义 Link                                                                                                             | React.ElementType                                                                                                       | react-router-dom 中的 Link |
+| historyType         | 定义 path 解析的类型：值为 "browser" 时根据 window.location.pathname 解析，值为 "hash" 时根据 window.location.hash 解析 | "browser" &#124; "hash"                                                                                                 | "browser"                  |
+| history             | 当类型为字符串时，作用同 historyType；当类型为对象时，用于面包屑的功能                                                  | "browser" &#124; "hash" &#124; { type:string, push: (params:any) => void, listen: (params:any) => void, location: any } | "browser"                  |
+
+| showBreadcrumb | 是否显示面包屑 | boolean | false |
+
+```tsx
+import { RouteProps } from 'react-router-dom'
+
+type RouterType = {
+  visible: boolean | (() => boolean)
+  component?: () => React.ReactNode
+  icon?: React.ReactNode
+  path?: string
+  name?: string
+  children?: RouterType[]
+  isMenu?: boolean
+  key?: string
+} & Omit<RouteProps, 'component'>
+```

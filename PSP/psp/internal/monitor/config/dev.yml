@@ -1,0 +1,36 @@
+app:
+  name: monitor
+  ver: 1.0.0
+  host: 0.0.0.0
+  port: 8889
+
+  middleware:
+    monitor:
+      _startup: true
+      listen: ":9101"
+      metric: "/metrics"
+      prometheus_server_endpoint: "http://:9090"
+
+    mysql:
+      default:
+        _startup: true
+        encrypt: false
+        dsn: "root:password@tcp(localhost:3306)/xx?charset=utf8&parseTime=true&loc=Local"
+
+    grpc:
+      server:
+        default:
+          _startup: true
+          addr: :1114
+          #write_buffer_size: 32768
+          #read_buffer_size: 32769
+          #initial_window_size: 65536
+          #initial_conn_window_size: 65537
+          max_recv_msg_size: 4194304
+          max_send_msg_size: 2147483647
+      client:
+        job:
+          addr: "1114"
+          naming: false
+          timeout_per_request: "300s"
+          with_insecure: true

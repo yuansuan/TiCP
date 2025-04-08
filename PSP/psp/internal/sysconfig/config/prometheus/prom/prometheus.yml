@@ -1,0 +1,30 @@
+global:
+  scrape_interval:     60s
+  evaluation_interval: 60s
+
+scrape_configs:
+  - job_name: hpc agent
+    static_configs:
+      - targets: ['10.0.1.200:9101']
+        labels:
+          instance: hpc-agent
+
+  - job_name: local pc
+    static_configs:
+      - targets: ['10.0.1.200:9100']
+        labels:
+          instance: local-pc
+
+  - job_name: push gateway
+    static_configs:
+      - targets: ['10.0.1.200:9091']
+        labels:
+          instance: push-gateway
+
+alerting:
+  alertmanagers:
+    - static_configs:
+      - targets:
+
+rule_files:
+  - /etc/prometheus/rules.yml

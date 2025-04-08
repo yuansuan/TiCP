@@ -1,0 +1,817 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+import "proto/job/application/application.proto";
+import "proto/account_bill/billing.proto";
+import "proto/ptype/page.proto";
+
+package job;
+option go_package = "github.com/yuansuan/ticp/project-root-api/proto/job";
+
+enum DisplayState {
+    // do not use it.
+    DisplayState_UNKNOWN = 0;
+
+    DisplayStateInitiated = 1; // 准备中
+    DisplayStateRunning = 2; // 运行中
+    DisplayStateCancelling = 3; // 取消中
+    DisplayStateCompleted = 4; // 已完成
+    DisplayStateCancelled = 5; // 已取消 (deprecated)
+    DisplayStateFailed = 6; // 已失败 (deprecated)
+    DisplayStatePending = 7; // 排队中
+}
+
+message Job {
+    string id = 1;
+    string app_id = 2;
+    string user_id = 3;
+    string client_id = 5;
+    string sc_id = 6;
+    string name = 7;
+    string user_params = 8;
+    string project_id = 9;
+
+    ResourceUsage resource_usage = 10;
+    State state = 11;
+
+    bool is_deleted = 12;
+    bool user_cancel = 13;
+    bool is_billed = 14;
+
+    string pend_reason = 15;
+    string exit_reason = 16;
+
+    // The matched sc ids when scheduling
+    repeated string matched_sc_id = 17;
+    string file_upload_blacklist = 18;
+    string file_download_blacklist = 19;
+
+    int64 retry = 20;
+    string account_id = 21;
+    string app_name = 22;
+    DisplayState display_state = 23;
+    bool system_terminal = 24;
+    string system_terminal_message = 25;
+
+    JobRuntime runtime = 30;
+
+    string company_id = 31;
+    string merchandise_id = 32;
+    string job_set_id = 33;
+    string job_set_name = 34;
+    bool is_trial = 35;
+    string department_id = 36;
+
+    // 存储区域
+    string file_storage_zone = 37;
+
+    string exit_code = 38;
+    string output_dir = 39;
+    string zone = 40;
+
+    string license_ids = 41;
+
+    string solution = 42;
+    
+    google.protobuf.Timestamp canceling_time = 107;
+    google.protobuf.Timestamp failing_time = 108;
+    google.protobuf.Timestamp create_time = 100;
+    google.protobuf.Timestamp update_time = 101;
+}
+
+message JobInf {
+    int64 id = 1;
+    string name = 2;
+    int64 company_id = 3;
+}
+
+message JobRuntime {
+    string id = 1;
+    string job_id = 2;
+    string sc_id = 3;
+    string work_dir = 4;
+    bool is_clean = 5;
+    bool is_file_ready = 6;
+    string scheduler_job_id = 7;
+    ResourceAssign resource_assign = 8;
+    int64 cpu_time = 9;
+    string sc_attrs = 10;
+    string submission_script = 11;
+    string app_runtime_id = 12;
+    string billing_id = 13;
+    bool have_residual = 14;
+    application.ServerParamsMapWrapper server_params = 15;
+    string upload_task_id = 16;
+    string download_task_id = 17;
+    bool download_finished = 18;
+    bool is_archived = 19;
+    // The application result file filter rule
+    string result_file_filter_rule = 20;
+    google.protobuf.Timestamp upload_time = 100;
+    google.protobuf.Timestamp queue_time = 101;
+    google.protobuf.Timestamp start_time = 102;
+    google.protobuf.Timestamp end_time = 103;
+    google.protobuf.Timestamp create_time = 104;
+    google.protobuf.Timestamp update_time = 105;
+    google.protobuf.Timestamp download_time = 106;
+}
+
+message State {
+    int64 state = 1;
+    int64 sub_state = 2;
+}
+
+message ResourceUsage {
+    int64 cpus = 1;
+    int64 nodes = 2;
+}
+
+message ResourceAssign {
+    int64 cpus = 1;
+    int64 nodes = 2;
+}
+
+// The job management gRPC interfaces for gw master
+service JobManagement {
+
+    // Get one job information
+    rpc GetJob (GetJobRequest) returns (GetJobReply) {}
+    rpc GetJobByRuntime(GetJobByRuntimeRequest) returns (GetJobByRuntimeReply) {}
+    // TODO: workflow api
+    rpc GetSCJobs(GetSCJobsRequest) returns (GetSCJobsReply) {}
+    rpc CreateJobWithSchedule (CreateJobWithScheduleRequest) returns (CreateJobWithScheduleReply) {}
+    rpc CreateJobWithScheduleV2(CreateJobWithScheduleV2Request) returns (CreateJobWithScheduleV2Reply) {} // for openapi
+    rpc SetJobFileReady(SetJobFileReadyRequest) returns (SetJobFileReadyReply) {}
+    rpc GetSubmittingJobs (GetSubmittingJobsRequest) returns (GetSubmittingJobsReply) {}
+    rpc SetJobSubmitted (SetJobSubmittedRequest) returns (SetJobSubmittedReply) {}
+    rpc UpdateSCScheduledJob (UpdateSCScheduledJobRequest) returns (UpdateSCScheduledJobReply) {}
+
+    // Get the job list by specified parameters
+    rpc GetJobList (GetJobListRequest) returns (GetJobListReply) {}
+
+    // Get the job filters: app_name, state, resource_usage_cpus
+    rpc GetJobFilter (GetJobFilterRequest) returns (GetJobFilterReply) {}
+    // Cancel selected job(s)
+    rpc CancelJobs(CancelJobsRequest) returns (CancelJobsReply) {}
+    rpc CancelJob(CancelJobRequest) returns (CancelJobReply) {}
+    // Delete selected job(s)
+    rpc DeleteJobs(DeleteJobsRequest) returns (DeleteJobsReply) {}
+    // GetJobRuntime gets the job runtime(s) of one job or more jobs
+    rpc GetJobRuntimeList(GetJobRuntimeListRequest) returns (GetJobRuntimeListReply){}
+
+    rpc SystemTerminalJob(SystemTerminalJobRequest) returns (SystemTerminalJobReply){}
+
+    rpc GetJobRuntimeToArchive(GetJobRuntimeToArchiveRequest) returns (GetJobRuntimeToArchiveReply){}
+    rpc SetJobRuntimeArchived(SetJobRuntimeArchivedRequest) returns (SetJobRuntimeArchivedReply){}
+
+    // Get the event log for job
+    rpc GetJobEventLog (GetJobEventLogRequest) returns (GetJobEventLogReply) {}
+
+    // Get the total number job & completed job in project
+    rpc GetTotalNumberOfJobInProject (GetTotalNumberOfJobInProjectRequest) returns (GetTotalNumberOfJobInProjectResponse) {}
+
+    // Get total number of job cpu time within a project
+    rpc GetTotalCPUTimeInProject (GetTotalCPUTimeInProjectRequest) returns (GetTotalCPUTimeInProjectResponse) {}
+
+    // Create bill for completed job
+    rpc CreateJobBill (CreateJobBillRequest) returns (CreateJobBillReply) {}
+    // Create bill for completed job
+    rpc CancelJobBill (CreateJobBillRequest) returns (CreateJobBillReply) {}
+
+    rpc SyncJobToMonitor (Job) returns (google.protobuf.Empty) {}
+
+    rpc StatJobSubmitParams (StatJobSubmitParamsRequest) returns (StatJobSubmitParamsResponse) {}
+
+    rpc UpdateMonitorChart (UpdateMonitorChartRequest) returns (UpdateMonitorChartResponse) {}
+    rpc GetMonitorChart (GetMonitorChartRequest) returns (GetMonitorChartResponse) {}
+
+    // 更新作业实时日志
+    rpc UpdateMonitorLog (UpdateMonitorLogRequest) returns (UpdateMonitorLogResponse) {}
+
+    rpc GetJobIDsByJobRuntimeIDs(JobRuntimeIDsRequest) returns (JobRuntimeIDsResponse) {}
+
+    //批量获取作业信息 by job_ids
+    rpc GetJobInfoByJobIDs(GetJobInfoByJobIDsRequest) returns (GetJobInfoByJobIDsResult) {}
+
+  // 根据解决方案提交作业
+  rpc CreateJobWithSolution(CreateJobWithSolutionRequest) returns (CreateJobWithSolutionReply) {}
+
+  // 解决方案列表，包括超算ID和licenseID的绑定信息
+  rpc ListSolutions(ListSolutionsRequest) returns (ListSolutionsResponse) {}
+}
+
+// 解决方案名称
+message ListSolutionsRequest {
+  string name = 1;
+}
+
+// 返回解决方案列表
+message ListSolutionsResponse {
+  repeated Solution solutions = 1;
+}
+
+// 解决方案详细信息
+message Solution {
+  string name = 1;
+  repeated License licenses = 2;
+  repeated string scIDs = 3;
+}
+
+// license信息
+message License {
+  string appType = 1;
+  string appVersion = 2;
+  repeated string licenseIDs = 3;
+}
+
+// 带解决方案的Job请求
+message CreateJobWithSolutionRequest {
+  ScheduleParams params = 1;
+  // @inject_tag: `validate:"is_ysid,required"`
+  string app_id = 2;
+  // @inject_tag: `validate:"is_ysid,required"`
+  string user_id = 4;
+  // @inject_tag: `validate:"is_ysid,required"`
+  string client_id = 5;
+  // @inject_tag: `validate:"required"`
+  string name = 7;
+  // The user input parameters
+  UserParams user_params = 8;
+  // @inject_tag: `validate:"is_ysid,required"`
+  string project_id = 9;
+  // @inject_tag: `validate:"is_ysid"`
+  string department_id = 10;
+  // @inject_tag: `validate:"required"`
+  string user_params_version = 11;
+  // The uploaded file info in box
+  UploadFileInfo upload_file_info = 12;
+  OutputInfo output = 13;
+  // @inject_tag: `validate:"is_ysid,required"`
+  string account_id = 21;
+  //User defined file upload blacklist
+  string file_upload_blacklist = 22;
+  //User defined file download blacklist
+  string file_download_blacklist = 23;
+  // Wechat Official Account notification switch
+  bool notify_offiaccount = 24;
+  // 解决方案名称，非必填，如果为空默认为远算云方案
+  string solution_name = 25;
+}
+
+// 返回作业信息
+message CreateJobWithSolutionReply {
+  Job job = 1;
+  repeated Job jobs = 2;
+}
+
+message MonitorChart {
+    message KV {
+        repeated double kv = 1;
+    }
+    string key = 1;
+    repeated KV items = 2;
+}
+
+message UpdateMonitorChartRequest {
+    repeated MonitorChart charts = 1;
+    string job_id = 2;
+    int32 status = 3; // 0 => start, 1 => middle; 2 => end
+}
+
+message UpdateMonitorChartResponse {}
+
+message GetMonitorChartRequest {
+    string job_id = 1;
+}
+
+message GetMonitorChartResponse {
+    repeated MonitorChart charts = 1;
+}
+
+// The sum request contains two parameters.
+message GetJobRequest {
+    // @inject_tag: `validate:"is_ysid,required"`
+    string id = 1;
+    // @inject_tag: `validate:"is_ysid"`
+    string project_id = 2;
+}
+
+// The sum response contains the result of the calculation.
+message GetJobReply {
+    Job job = 1;
+}
+
+message GetSCJobsRequest {
+    // @inject_tag: `validate:"required"`
+    string sc_id = 1;
+}
+
+message GetSCJobsReply {
+    repeated Job jobs = 1;
+}
+
+// The files which have uploaded to box, this uploaded file info will be used to sync files into box to SC
+message UploadFileInfo {
+    // job file related parameters
+    string source_file_storage_id = 20;
+    // 存储区域字段
+    string file_zone = 200;
+    string source_path = 21;
+    string sync_runner_id = 22;
+}
+
+message  OutputInfo {
+    string address = 1;
+    string storage_id = 2;
+    string zone = 3;
+}
+
+message UserParams {
+    repeated FieldReq fields = 1;
+}
+
+// FieldReq is the request field id/value in submission form
+message FieldReq {
+
+    // Required: true The field ID for job submission
+    string id = 1;
+
+    // Required: true The field type for job submission
+    string type = 2;
+
+    // The field value for job submission: text/date/list/radio/checkbox
+    string value = 3;
+
+    // The field value for job submission: multi/lsfile
+    repeated string values = 4;
+
+    // The field value for master slave files relationship json string
+    string master_slave = 5;
+
+}
+
+message CreateJobWithScheduleRequest {
+    ScheduleParams params = 1;
+    // @inject_tag: `validate:"is_ysid,required"`
+    string app_id = 2;
+    // @inject_tag: `validate:"is_ysid,required"`
+    string user_id = 4;
+    // @inject_tag: `validate:"is_ysid,required"`
+    string client_id = 5;
+    // @inject_tag: `validate:"required"`
+    string name = 7;
+    // The user input parameters
+    UserParams user_params = 8;
+    // @inject_tag: `validate:"is_ysid,required"`
+    string project_id = 9;
+    // @inject_tag: `validate:"is_ysid"`
+    string department_id = 10;
+    // @inject_tag: `validate:"required"`
+    string user_params_version = 11;
+    // The uploaded file info in box
+    UploadFileInfo upload_file_info = 12;
+    OutputInfo output = 13;
+    // @inject_tag: `validate:"is_ysid,required"`
+    string account_id = 21;
+
+    //User defined file upload blacklist
+    string file_upload_blacklist = 22;
+    //User defined file download blacklist
+    string file_download_blacklist = 23;
+
+    // Wechat Official Account notification switch
+    bool notify_offiaccount = 24;
+    // license_ids
+    repeated string license_ids = 25;
+    // solution
+    Solution solution = 26;
+}
+
+message ScheduleParams {
+    repeated string selected_sc = 1;
+    // @inject_tag: `validate:"required"`
+    int64 min_cores = 2;
+}
+
+message CreateJobWithScheduleReply {
+    Job job = 1;
+    repeated Job jobs = 2;
+}
+
+message SetJobFileReadyRequest {
+    // @inject_tag: `validate:"is_ysid,required"`
+    string job_id = 1;
+}
+
+message SetJobFileReadyReply {
+    Job job = 1;
+}
+
+message GetSubmittingJobsRequest {
+    // @inject_tag: `validate:"required"`
+    string sc_id = 1;
+}
+
+message GetSubmittingJobsReply {
+    repeated Job jobs = 1;
+}
+
+enum SubmitResult {
+    Success = 0;
+    Cancelled = 1;
+    Failed = 2;
+}
+
+message SetJobSubmittedRequest {
+    // @inject_tag: `validate:"is_ysid,required"`
+    string job_id = 1;
+    string sc_job_id = 2;
+    SubmitResult res = 3;
+    string message = 4;
+}
+
+message SetJobSubmittedReply {
+    Job job = 1;
+}
+
+message UpdateSCScheduledJobRequest {
+    // @inject_tag: `validate:"is_ysid,required"`
+    string job_id = 1;
+    // @inject_tag: `validate:"required"`
+    State state = 2;
+    // paas the params, if job status == running or completed
+    int64 running_duration = 3;
+    // job start time
+    google.protobuf.Timestamp start_time = 4;
+    // job end time
+    google.protobuf.Timestamp end_time = 5;
+    // number cpus used
+    int64 num_cups = 6;
+    // number nodes used
+    int64 num_nodes = 7;
+    string exit_reason = 8;
+    string pend_reason = 9;
+    // job submit time
+    google.protobuf.Timestamp submit_time = 10;
+
+    //scjob_id update, only for gz 广州超算在超算内部进行license排队，初始id为fake id， 具体缘由参见http://wiki.intern.yuansuan.cn/display/ENG/national+super+compute+center+in+guangzhou
+    string scheduler_job_id = 11;
+
+    string exit_code = 12;
+}
+
+message UpdateSCScheduledJobReply {
+    Job job = 1;
+}
+
+message CancelJobsRequest {
+    repeated string job_ids = 1;
+}
+
+message GetJobInfoByJobIDsRequest {
+    repeated int64 job_ids = 1;
+}
+
+message GetJobInfoByJobIDsResult {
+    repeated JobInf jobs = 1;
+}
+
+message CancelJobsReply {
+
+}
+
+message DeleteJobsRequest {
+    repeated string job_ids = 1;
+}
+
+message DeleteJobsReply {
+
+}
+
+// GetInitiatedJobsRequest is an empty request
+message GetInitiatedJobsRequest {
+
+}
+
+// GetInitiatedJobsResponse responses the initiated job list
+message GetInitiatedJobsResponse {
+    repeated Job jobs = 1;
+}
+
+// GetJobListRequest gets the job list by the parameters in request
+message GetJobListRequest {
+    // The job id filter
+    repeated string job_ids_filter = 1;
+
+    // The sc column filter
+    repeated string sc_filters = 2;
+
+    // The user column filter
+    repeated string user_filters = 3;
+
+    // The app column filter
+    repeated string app_filters = 4;
+
+    // The state (combine user_cancel) column filter
+    repeated DisplayState state_filters = 5;
+
+    // The core column filter
+    repeated string core_filters = 6;
+
+    // The project filter
+    repeated string project_filters = 7;
+
+    // The fuzzy search ky
+    string fuzzy_key = 8;
+
+    // The order by value
+    string order_by = 9;
+
+    // The sort by ASC: true or false
+    bool sort_by_asc = 10;
+
+
+    // @inject_tag: `validate:"required"`
+    ptype.Page page = 11;
+
+    // Whether include  the deleted jobs ( Exclude the deleted jobs by default)
+    bool include_deleted = 12;
+
+    // @inject_tag: `validate:"is_ysid"`
+    string job_id = 13;
+
+    repeated int64 sub_state_filters = 14;
+
+    // 开始时间 (create_time >= start_time)
+    google.protobuf.Timestamp start_time = 15;
+    // 结束时间 (create_time < end_time)
+    google.protobuf.Timestamp end_time = 16;
+
+    // comany filter
+    repeated string company_filters = 17;
+    // jobs set key
+    repeated string jobset_filters = 19;
+    // 回传状态
+    repeated int64 download_filters = 20;
+
+    bool is_trial_job = 21;
+
+    repeated string product_filters = 22;
+
+    // 超算id
+    string sc_id = 23;
+}
+
+// GetJobListReply returns the job list information and total number
+message GetJobListReply {
+    // The job list information
+    repeated Job jobs = 2;
+
+    ptype.PageCtx page_ctx = 3;
+}
+
+
+// GetJobFilterRequest GetJobFilterRequest
+message GetJobFilterRequest {
+
+    // The client id
+    string client_id = 1;
+
+    // The project filter
+    repeated string project_filters = 2;
+
+    // The fuzzy search ky
+    string fuzzy_key = 3;
+}
+
+// GetJobFilterReply replies the filters for app, cpu, state and user
+message GetJobFilterReply {
+    // The all cpu information for filter
+    repeated string cpu_filter = 1;
+
+    // The all app information for filter
+    repeated string app_filter = 2;
+
+    // The all state information for filter
+    repeated DisplayState state_filter = 3;
+
+    // The all user information for filter
+    repeated string user_filter = 4;
+
+    // The all sub state for filter
+    repeated int64 sub_state_filter = 5;
+    // jobs set key
+    repeated string jobset_filters = 6;
+    // 回传状态
+    repeated int64 download_filters = 7;
+}
+
+// GetJobRuntimeListRequest GetJobRuntimeListRequest
+message GetJobRuntimeListRequest {
+    // The job id
+    string job_id = 1;
+}
+
+// GetJobRuntimeListReply replies the job runtimes
+message GetJobRuntimeListReply {
+    repeated JobRuntime job_runtimes = 1;
+}
+
+message SystemTerminalJobRequest {
+    // @inject_tag: `validate:"is_ysid,required"`
+    string job_id = 1;
+    string message = 2;
+}
+
+message SystemTerminalJobReply {
+    Job job = 1;
+}
+
+message GetJobRuntimeToArchiveRequest {
+    string sc_id = 1;
+}
+
+message GetJobRuntimeToArchiveReply {
+    repeated JobRuntime job_runtimes = 1;
+}
+
+message SetJobRuntimeArchivedRequest {
+    // @inject_tag: `validate:"is_ysid,required"`
+    string job_runtime_id = 1;
+}
+
+message SetJobRuntimeArchivedReply {
+    JobRuntime job_runtime = 1;
+}
+
+message JobEventLog {
+    string id = 1;
+    string job_id = 2;
+    string job_runtime_id = 3;
+    string event = 4;
+    int64 state = 5;
+    int64 sub_state = 6;
+    google.protobuf.Timestamp create_time = 7;
+}
+
+message GetJobEventLogRequest {
+    // @inject_tag: `validate:"is_ysid"`
+    string job_id = 1;
+    // @inject_tag: `validate:"is_ysid"`
+    string job_runtime_id = 2;
+}
+
+message GetJobEventLogReply {
+    repeated JobEventLog list = 1;
+}
+
+message GetTotalNumberOfJobInProjectRequest {
+    // project_id 工作空间ID
+    // @inject_tag: `validate:"is_ysid"`
+    string project_id = 1;
+}
+
+message GetTotalNumberOfJobInProjectResponse {
+    int64 total = 1;
+    int64 completed = 2;
+}
+
+message GetTotalCPUTimeInProjectRequest {
+    // project_id 工作空间ID
+    // @inject_tag: `validate:"is_ysid"`
+    string project_id = 1;
+}
+
+message GetTotalCPUTimeInProjectResponse {
+    int64 total = 1;
+}
+
+message GetJobByRuntimeRequest {
+    // @inject_tag: `validate:"is_ysid,required"`
+    string job_runtime_id = 1;
+}
+
+message GetJobByRuntimeReply {
+    Job job = 1;
+}
+
+message CreateJobBillRequest {
+    string job_id = 1;
+}
+
+message CreateJobBillReply {
+    account_bill.Billing bill = 1;
+}
+
+message VolumeMount {
+    // storage path
+    string src_path = 1;
+    // storage path
+    string dest_path = 2;
+}
+
+message VolumeMounts {
+    string storage_id = 1;
+    repeated VolumeMount mounts = 2;
+}
+
+
+message CreateJobWithScheduleV2Request {
+    // @inject_tag: `validate:"is_ysid,required"`
+    string project_id = 1;
+
+    job.ScheduleParams params = 2;
+
+    // @inject_tag: `validate:"is_ysid,required"`
+    string app_id = 3;
+
+    // @inject_tag: `validate:"is_ysid,required"`
+    string user_id = 4;
+
+    // @inject_tag: `validate:"required"`
+    string name = 7;
+
+    job.UserParams user_params = 8;
+    // @inject_tag: `validate:"required"`
+    string user_params_version = 11;
+
+    VolumeMounts volume_mounts = 12;
+
+    //User defined file download blacklist
+    string file_download_blacklist = 23;
+
+    // Wechat Official Account notification switch
+    bool notify_offiaccount = 24;
+}
+
+message CreateJobWithScheduleV2Reply {
+    string job_id = 1;
+}
+
+message CancelJobRequest {
+    string project_id = 1;
+    string job_id = 2;
+}
+
+message CancelJobReply {
+
+}
+
+message StatJobSubmitParamsRequest {
+    // @inject_tag: `validate:"is_ysid,required"`
+    string app_runtime_id = 1;
+    // @inject_tag: `validate:"is_ysid"`
+    string company_id = 2;
+    // @inject_tag: `validate:"is_ysid"`
+    string user_id = 3;
+}
+
+message StatJobSubmitParamsResponse {
+    double rate = 1;
+    int64 cores = 2;
+}
+
+
+message MonitorLog {
+    string key = 1;
+    repeated string content = 2;
+}
+// 更新作业实时日志请求
+message UpdateMonitorLogRequest {
+    repeated MonitorLog logs = 1;
+    // @inject_tag: `validate:",required"`
+    string job_id = 2;
+    // @inject_tag: `validate:"required"`
+    int32 status = 3; // 0 => start, 1 => middle; 2 => end
+}
+
+// 更新作业实时日志结果
+message UpdateMonitorLogResponse {}
+
+message JobRuntimeIDsRequest {
+    repeated string runtimeIDs = 1;
+}
+
+message RuntimeInfo {
+    string runtimeID = 1;
+    string jobID = 2;
+}
+
+message JobRuntimeIDsResponse {
+    repeated RuntimeInfo runtimeInfos = 1;
+}
+
+//message Page {
+//    // @inject_tag: `validate:"gte=1"`
+//    int64 index = 1 ;
+//    // @inject_tag: `validate:"gt=0,max=1000"`
+//    int64 size  = 2 ;
+//}
+//
+//message PageCtx {
+//    int64 index = 1;
+//    int64 size  = 2;
+//    // total record number, not page number
+//    int64 total = 3;
+//}

@@ -1,0 +1,32 @@
+global:
+    smtp_auth_password: "1111"
+    smtp_auth_username: "1111"
+    smtp_from: 111@11.com
+    smtp_require_tls: false
+    smtp_smarthost: 1.1.1.1:1203
+receivers:
+    - email_configs:
+        - headers:
+            subject: '[告警] 通用报警'
+          to: empty
+      name: common
+    - email_configs:
+        - headers:
+            subject: '[告警] 求解作业失败过多'
+          html: '{{ template "emailalarm.html" . }}'
+          to: '222@22.com '
+      name: jobfailnum
+route:
+    group_by:
+        - alertname
+    group_interval: 10s
+    group_wait: 10s
+    receiver: common
+    repeat_interval: 60m
+    routes:
+        - receiver: jobfailnum
+          match:
+            enable: "1"
+            modeltype: JobFailNumMore
+templates:
+    - /etc/alertmanager/emailalarm.tmpl

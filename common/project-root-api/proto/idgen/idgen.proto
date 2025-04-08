@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "io.grpc.examples.helloworld";
+option java_outer_classname = "HelloWorldProto";
+
+package idgen;
+option go_package = "github.com/yuansuan/ticp/project-root-api/proto/idgen";
+
+// The greeting service definition.
+service IdGen{
+    // Sends a greeting
+    rpc GenerateID (GenRequest) returns (GenReply) {
+    }
+
+    rpc GenerateIDs (GenerateIDsRequest) returns (GenerateIDsReply) {}
+}
+
+// The request message containing the user's name.
+message GenRequest {
+}
+
+// The response message containing the greetings
+message GenReply {
+    int64 id = 1;
+}
+
+message GenerateIDsRequest {
+    int64 count = 1;
+}
+
+message GenerateIDsReply {
+    repeated int64 ids = 2;
+}

@@ -1,0 +1,121 @@
+import { Story, Preview } from '@storybook/addon-docs/blocks'
+
+# Modal 弹窗
+
+基于[Antd Modal](https://ant.design/components/modal-cn/)封装，扩展了 show、showConfirm、theme、Footer 静态属性。
+
+## 代码演示
+
+### 基本使用
+
+使用 Modal.showConfirm 显示确认弹窗，使用 Modal.show 显示模态弹窗。这两个函数返回 Promise，可以用 Promise.then 监听确认操作，Promise.catch 监听取消操作。
+
+<Preview withSource='none'>
+  <Story id='components-modal--basic' />
+</Preview>
+
+### 异步处理与 loading
+
+Modal 的 onOk 和 onCancel 属性支持使用 async/Promise 实现异步处理，并内置按钮的 loading 控制。
+
+<Preview withSource='none'>
+  <Story id='components-modal--async' />
+</Preview>
+
+### 受控组件
+
+show/showConfirm 渲染的组件是动态挂载到指定 DOM 上的，所以不能在 show/showConfirm 所在的组件中通过 state 控制 Modal 内的组件。受控组件的功能需要通过 mobx 实现。
+
+<Preview withSource='none'>
+  <Story id='components-modal--controlled' />
+</Preview>
+
+### 自定义弹窗
+
+1. 调用 show/showConfirm 时支持传入 footer/OkButton/CancelButton 属性自定义弹窗底部按钮，可以使用 Modal.Footer 快速封装。如果不希望 footer fix 在弹窗底部，还可以通过将 footer 设置在 content 内部实现。
+2. 调用 show/showConfirm 时支持传入 toolbar 属性自定义弹窗 header 右上角的工具栏，可以使用 Modal.Toolbar 快速封装。
+3. 调用 show/showConfirm 时支持传入 showHeader 属性隐藏 header。
+
+<Preview withSource='none'>
+  <Story id='components-modal--custom' />
+</Preview>
+
+### 数据传输
+
+可以使用受控组件和回调函数两种方式从弹窗内获取数据。
+
+<Preview withSource='none'>
+  <Story id='components-modal--data' />
+</Preview>
+
+### 弹窗主题
+
+弹窗主题有两种配置方式：
+
+1. Modal.theme 属性可以配置弹窗的主题。
+2. Modal.Wrapper 定义 ThemeProvider 配置弹窗主题。
+
+<Preview withSource='none'>
+  <Story id='components-modal--theme' />
+</Preview>
+
+## API
+
+### Modal 静态函数/属性
+
+| 参数                | 说明                                                             | 类型                                         |
+| ------------------- | ---------------------------------------------------------------- | -------------------------------------------- |
+| theme               | 弹窗主题配置项                                                   | object                                       |
+| configProviderProps | antd ConfigProvider 配置                                         | ConfigProviderProps                          |
+| Wrapper             | 弹窗容器，用于全局自定义弹窗 body 的父元素，可以用于定义 Context | React.Component&lt;IModalFooterProps&gt;     |
+| show                | 显示模态弹窗                                                     | (options: IModalProps) => Promise&lt;any&gt; |
+| showConfirm         | 显示确认弹窗                                                     | (options: IModalProps) => Promise&lt;any&gt; |
+| Footer              | 弹窗底部组件                                                     | React.Component&lt;IModalFooterProps&gt;     |
+
+### IModalProps
+
+| 参数              | 说明                                 | 类型                                                                                                                           | 默认值                 |
+| ----------------- | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ---------------------- |
+| title             | 弹窗标题                             | string                                                                                                                         | '模态弹窗'             |
+| content           | 弹窗内容                             | string &#124; React.ReactNode &#124; React.ComponentType&lt;{onCancel?: (data?: any) => void, onOk?: (data?: any) => void}&gt; | '确认要执行此操作吗？' |
+| toolbar           | 弹窗头部工具栏                       | React.Node                                                                                                                     | -                      |
+| onOk              | 弹窗确认回调                         | (next?) => void &#124; Promise&lt;any&gt;                                                                                      | -                      |
+| onCancel          | 弹窗取消回调                         | (next?) => void &#124; Promise&lt;any&gt;                                                                                      | -                      |
+| width             | 弹窗宽度                             | number                                                                                                                         | 520                    |
+| footer            | 弹窗底部内容，传入 null 可以隐藏底部 | React.ComponentType&lt;{ onCancel?: (data?: any) => void, onOk?: (data?: any) => void}&gt;                                     | -                      |
+| bodyStyle         | 弹窗主体样式                         | CSSProperties                                                                                                                  | -                      |
+| okButtonProps     | 确认按钮属性                         | [请参考 antd button 文档](https://ant.design/components/button-cn/)                                                            | -                      |
+| centered          | 垂直居中展示 Modal                   | boolean                                                                                                                        | true                   |
+| cancelButtonProps | 取消按钮属性                         | [请参考 antd button 文档](https://ant.design/components/button-cn/)                                                            | -                      |
+| className         | 弹窗类名                             | string                                                                                                                         | -                      |
+| CancelButton      | 取消按钮                             | React.ComponentType&lt;{onCancel?: (event?: React.MouseEvent&lt;HTMLElement, MouseEvent&gt;) => void, loading?: boolean}&gt;   | -                      |
+| OkButton          | 确认按钮                             | React.ComponentType&lt;{onOk?: (event?: React.MouseEvent&lt;HTMLElement, MouseEvent&gt;) => void, loading?: boolean}&gt;       | -                      |
+| showHeader        | 隐藏 header                          | boolean                                                                                                                        | true                   |
+
+其他属性请参考 [Antd Modal 属性](https://ant.design/components/modal-cn/)
+
+## Modal.Footer 提供了 Footer 子组件
+
+### IModalFooterProps
+
+| 参数              | 说明         | 类型                                                                                                                         | 默认值 |
+| ----------------- | ------------ | ---------------------------------------------------------------------------------------------------------------------------- | ------ |
+| onOk              | 确认回调函数 | () => Promise&lt;any&gt; &#124; void                                                                                         | -      |
+| onCancel          | 取消回调函数 | () => Promise&lt;any&gt; &#124; void                                                                                         | -      |
+| okText            | 确认按钮文案 | string                                                                                                                       | -      |
+| cancelText        | 取消按钮文案 | string                                                                                                                       | -      |
+| className         | 扩展类名     | string                                                                                                                       | -      |
+| CancelButton      | 取消按钮     | React.ComponentType&lt;{onCancel?: (event?: React.MouseEvent&lt;HTMLElement, MouseEvent&gt;) => void, loading?: boolean}&gt; | -      |
+| OkButton          | 确认按钮     | React.ComponentType&lt;{onOk?: (event?: React.MouseEvent&lt;HTMLElement, MouseEvent&gt;) => void, loading?: boolean}&gt;     | -      |
+| cancelButtonProps | 取消按钮属性 | [请参考 antd button 文档](https://ant.design/components/button-cn/)                                                          | -      |
+| okButtonProps     | 确认按钮属性 | [请参考 antd button 文档](https://ant.design/components/button-cn/)                                                          | -      |
+
+## Modal.Toolbar 提供了 Modal Header 上的 Toolbar 子组件
+
+### IModalToolbarProps
+
+| 参数      | 说明           | 类型                                                | 默认值 |
+| --------- | -------------- | --------------------------------------------------- | ------ |
+| className | 自定义类       | string                                              | -      |
+| style     | 自定义 style   | React.CSSProperties                                 | -      |
+| actions   | 自定义 actions | Array&lt;{ tip?:string, slot: React.ReactNode }&gt; | -      |

@@ -1,0 +1,64 @@
+pbspro1
+     Mom = pbspro
+     ntype = PBS
+     state = free
+     pcpus = 4
+     resources_available.arch = linux
+     resources_available.host = pbspro
+     resources_available.mem = 200000kb
+     resources_available.ncpus = 4
+     queue = test123
+     resources_available.vnode = pbspro
+     resources_assigned.accelerator_memory = 0kb
+     resources_assigned.hbmem = 0kb
+     resources_assigned.mem = 0kb
+     resources_assigned.naccelerators = 0
+     resources_assigned.ncpus = 0
+     resources_assigned.vmem = 0kb
+     resv_enable = True
+     sharing = default_shared
+     last_state_change_time = Thu Jun 23 03:23:32 2022
+     last_used_time = Thu Jun 23 12:25:55 2022
+
+pbspro2
+     Mom = pbspro
+     ntype = PBS
+     state = free
+     pcpus = 4
+     resources_available.arch = linux
+     resources_available.host = pbspro
+     resources_available.mem = 100000kb
+     resources_available.ncpus = 3
+     resources_available.vnode = pbspro
+     resources_assigned.accelerator_memory = 0kb
+     resources_assigned.hbmem = 0kb
+     resources_assigned.mem = 0kb
+     resources_assigned.naccelerators = 0
+     resources_assigned.ncpus = 0
+     resources_assigned.vmem = 0kb
+     resv_enable = True
+     sharing = default_shared
+     last_state_change_time = Thu Jun 23 03:23:32 2022
+     last_used_time = Thu Jun 23 12:25:55 2022
+
+pbspro3
+     Mom = pbspro
+     ntype = PBS
+     state = free
+     pcpus = 4
+     resources_available.arch = linux
+     resources_available.host = pbspro
+     resources_available.mem = 600000kb
+     resources_available.ncpus = 2
+     resources_available.vnode = pbspro
+     resources_assigned.accelerator_memory = 0kb
+     resources_assigned.hbmem = 0kb
+     resources_assigned.mem = 0kb
+     resources_assigned.naccelerators = 0
+     resources_assigned.ncpus = 0
+     resources_assigned.vmem = 0kb
+     resv_enable = True
+     sharing = default_shared
+     last_state_change_time = Thu Jun 23 03:23:32 2022
+     last_used_time = Thu Jun 23 12:25:55 2022
+

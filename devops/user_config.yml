@@ -1,0 +1,23 @@
+deploy_switch:
+  base: true
+  cloud-base: true
+  ipaas: true
+  ipaas-hpc: true
+  psp: true
+  agent: true
+
+mysql:
+  host: 10.0.4.48
+  database: ticp
+  user: ticp_user
+  password: ticp6655
+  root_password: root6655
+
+prometheus:
+  ip: 10.0.4.48
+
+storage: /home/test2
+
+server_ip:
+  iam: 10.0.4.48
+  hpc: 10.0.4.48

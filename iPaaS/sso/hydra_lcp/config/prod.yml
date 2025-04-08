@@ -1,0 +1,67 @@
+app:
+  name: hydra_lcp
+  ver: 1.0.0
+
+  host: 0.0.0.0
+  port: 9091
+
+  # load config from etcd?
+  load_remote_config: false
+
+  # get local ip from network interface(network_if_name), if empty use first available local ip
+  network_if_name: ""
+
+  middleware:
+    logger:
+      log_dir: ./log
+
+    monitor:
+      _startup: true
+      listen: ":9101"
+      metric: "/metrics"
+
+    mysql:
+      default:
+        _startup: true
+        dsn: "wukong_user:wukong6655@tcp(10.0.4.48:3306)/wukong?charset=utf8&parseTime=true&loc=Local"
+
+    redis:
+      default:
+        _startup: true
+        addr: 10.0.4.48:6379
+
+    grpc:
+      server:
+        default:
+          addr: ":11211"
+          _startup: true
+          max_concurrent_streams: 100
+
+      client:
+        idgen:
+          addr: "10.0.4.48:11211"
+          timeout_per_request: "5s"
+          with_insecure: true
+
+        company:
+          addr: ""
+          naming: false
+          timeout_per_request: "5s"
+          with_insecure: true
+
+        default:
+          addr: ":11211"
+          timeout_per_request: "15s"
+          with_insecure: true
+
+
+    cache:
+      default:
+        name: default
+        backend_type: redis
+
+    etcd:
+      startup: false
+      endpoints: ["10.0.4.48:2379"]
+      tls: false
+

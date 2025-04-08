@@ -1,0 +1,43 @@
+import { Story, Preview } from '@storybook/addon-docs/blocks'
+
+# TreeTable 树表格
+
+## 特性
+
+- 支持树状数据结构
+- 支持拖拽行
+- 支持受控的展开行
+- 支持展开收起事件
+- 支持自定义每一列的 render 函数
+- 支持列宽度定义
+
+## 代码演示
+
+### 基本使用
+
+简单的表格，最后一列是各种操作。
+
+<Preview withSource='none'>
+  <Story id='components-treetable--basic' />
+</Preview>
+
+## dependencies
+
+需要安装`react-dnd`和`react-dnd-html5-backend`
+
+## API
+
+### TreeTable
+
+| 参数             | 说明                      | 类型                                                                                   | 默认值     |
+| ---------------- | ------------------------- | -------------------------------------------------------------------------------------- | ---------- |
+| dataSource       | 数据源                    | IData[]                                                                                | --         |
+| columns          | 列定义                    | IColumn[]                                                                              | --         |
+| rowKey           | 行的主键                  | string                                                                                 | "key"      |
+| childrenField    | children 字段             | string                                                                                 | "children" |
+| expandIcon       | 展开收起 icon             | (isExpand: boolean) => ReactElement                                                    | --         |
+| defaultExpandAll | 是否默认全部展开          | boolean                                                                                | false      |
+| indentSize       | 每一级缩进大小, 单位为 px | number                                                                                 | 24         |
+| onExpand         | 展开或者收起的回调        | (expanded: string[], record: IData) => any                                             | --         |
+| draggable        | 是否可拖拽                | boolean                                                                                | false      |
+| onDragEnd        | 拖拽结束的回调            | (key1: string, key2: string) => void key1 是 drag 的元素的主键/key2 是 drop 的元素主键 | --         |

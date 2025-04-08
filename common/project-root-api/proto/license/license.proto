@@ -1,0 +1,137 @@
+syntax = "proto3";
+package application;
+option go_package = "github.com/yuansuan/ticp/project-root-api/proto/license";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+
+
+service LicenseManagerService {
+  // 使用license
+  rpc AcquireLicenses(ConsumeRequest) returns (ConsumeResponse) {};
+
+  // 结束使用license
+  rpc ReleaseLicense(ReleaseRequest) returns (google.protobuf.Empty) {};
+}
+
+// 发布状态
+enum Status {
+  UNKNOWNSTATUS = 0;
+  PUBLISHED = 1;
+  UNPUBLISHED = 2;
+}
+
+// License类型，跟供应商有关
+enum LicenseType {
+  // 自有
+  SELFOWNED = 0;
+  // 外部
+  OTHEROWNED = 1;
+  // 寄售
+  CONSIGNED = 2;
+}
+
+message ReleaseRequest {
+  int64 job_id = 1;
+}
+
+message UsedRequest {
+
+  string manager_id = 1;
+
+  PageCtx page = 2;
+}
+
+message LicenseUsedResponse {
+
+  repeated LicenseUsedResult result = 1;
+
+  PageCtx page = 2;
+}
+
+message LicenseUsedResult {
+
+  string id = 1;
+
+  //企业名称
+  string company_name = 2;
+
+  //使用数
+  int64 licenses = 3;
+
+  //作业id
+  string job_id = 4;
+
+  //作业名称
+  string job_name = 5;
+
+  //开始时间
+  google.protobuf.Timestamp create_time = 6;
+
+  //应用id
+  string app_id = 7;
+}
+
+message ConsumeRequest {
+  repeated ConsumeInfo info = 1;
+  bool only_query = 2;
+}
+
+message ConsumeInfo {
+  // 作业id
+  int64 job_id = 1;
+
+  int64 app_id = 2;
+
+  int64 cpus = 3;
+
+  // 若指定了lic_ids,则只在lic_ids里选择license
+  repeated string lic_ids = 4;
+
+  int64 lic_manager_id = 5;
+
+  string hpc_endpoint = 6;
+}
+
+message ConsumeResponse {
+  repeated ConsumeResult result = 1;
+}
+
+enum LicenseStatus {
+  // 未配置
+  UNCONFIGURED = 0;
+  // license 不够
+  NOTENOUTH = 1;
+  // license 足够
+  ENOUGH = 2;
+  // 未发布
+  UNPUBLISH = 3;
+}
+
+message ConsumeResult {
+  // 作业id
+  int64 job_id = 1;
+
+  // license 地址
+  string server_url = 2;
+
+  // license 环境变量信息类似： ANSYSLMD_LICENSE_FILE=31345@zgyslicense
+  repeated string license_envs = 3;
+
+  // license 状态
+  LicenseStatus status = 4;
+}
+
+message Page {
+  // @inject_tag: `validate:"gte=1"`
+  int64 index = 1 ;
+  // @inject_tag: `validate:"gt=0,max=1000"`
+  int64 size = 2;
+}
+
+message PageCtx {
+  int64 index = 1;
+  int64 size = 2;
+  // total record number, not page number
+  int64 total = 3;
+}

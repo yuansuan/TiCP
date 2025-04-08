@@ -1,0 +1,1 @@
+gin-boot的helloworld已迁移至 http://phabricator.intern.yuansuan.cn/source/helloworld/

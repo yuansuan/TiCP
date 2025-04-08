@@ -1,0 +1,127 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "proto/license/license.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "LicenseManagerService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {},
+  "definitions": {
+    "applicationConsumeInfo": {
+      "type": "object",
+      "properties": {
+        "jobId": {
+          "type": "string",
+          "format": "int64",
+          "title": "作业id"
+        },
+        "appId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "cpus": {
+          "type": "string",
+          "format": "int64"
+        },
+        "licIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "若指定了lic_ids,则只在lic_ids里选择license"
+        },
+        "licManagerId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "hpcEndpoint": {
+          "type": "string"
+        }
+      }
+    },
+    "applicationConsumeResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/applicationConsumeResult"
+          }
+        }
+      }
+    },
+    "applicationConsumeResult": {
+      "type": "object",
+      "properties": {
+        "jobId": {
+          "type": "string",
+          "format": "int64",
+          "title": "作业id"
+        },
+        "serverUrl": {
+          "type": "string",
+          "title": "license 地址"
+        },
+        "licenseEnvs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "license 环境变量信息类似： ANSYSLMD_LICENSE_FILE=31345@zgyslicense"
+        },
+        "status": {
+          "$ref": "#/definitions/applicationLicenseStatus",
+          "title": "license 状态"
+        }
+      }
+    },
+    "applicationLicenseStatus": {
+      "type": "string",
+      "enum": [
+        "UNCONFIGURED",
+        "NOTENOUTH",
+        "ENOUGH",
+        "UNPUBLISH"
+      ],
+      "default": "UNCONFIGURED",
+      "title": "- UNCONFIGURED: 未配置\n - NOTENOUTH: license 不够\n - ENOUGH: license 足够\n - UNPUBLISH: 未发布"
+    },
+    "googlerpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    }
+  }
+}

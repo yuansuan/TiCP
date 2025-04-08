@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package proto;
+option go_package = "github.com/yuansuan/ticp/project-root-api/proto/hello";
+
+service HiService {
+    rpc SayHi (HiRequest) returns (HiResponse) {}
+}
+
+message HiRequest {
+    string name = 1;
+}
+
+message HiResponse {
+    string message = 1;
+}

@@ -1,0 +1,12 @@
+**/node_modules
+**/dist
+**/build
+**/packages
+**/.next
+/dist
+**/*.dmg
+**/*.zip
+**/*.exe
+**/build.mk
+**/build.custom.mk
+platform/**/Dockerfile

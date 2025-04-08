@@ -1,0 +1,361 @@
+#!/usr/bin/env bash
+#
+# Copyright (C) 2020 LambdaCal Inc.
+#
+# Installation script of PSP
+#
+
+##########################################################
+# PSP INSTALLATION SCRIPT - Don't modify below scripts
+##########################################################
+if [[ -f /etc/rc.d/init.d/functions ]]; then
+    . /etc/rc.d/init.d/functions
+fi
+MOVE_TO_COL="echo -en \\033[90G"
+INSTALL_LOG=$(pwd)/install.log
+# Define the name of the database which will be created
+DB_NAME=psp
+# Define whether to init database
+INIT_DB="true"
+export PATH=$PATH:/usr/local/sbin:/usr/local/bin:/root/bin
+
+#-------------------------------------------------------------------
+# Name: psp_action
+#
+# Synopsis: psp_action string /bin/true | /bin/false
+#
+# Description: Log the [ OK ] or [ Fail ]
+#-------------------------------------------------------------------
+psp_action() {
+    local STRING rc
+
+    STRING=$1
+    echo -en "$STRING "
+    shift
+    "$@" && success $"$STRING" || failure $"$STRING"
+    rc=$?
+    echo
+    return $rc
+}
+
+#-------------------------------------------------------------------
+# Name: log
+#
+# Synopsis: log "\033[1;34m <message> \033[0m"
+#
+# Description: Log the information into install.log
+#-------------------------------------------------------------------
+log()
+{
+    echo -e "$@" | tee -a $INSTALL_LOG
+}
+
+#-------------------------------------------------------------------
+# Name: log_success
+#
+# Synopsis: log_success "\033[1;34m <message> \033[0m"
+#
+# Description: Log the information into install.log and with [ OK ]
+#-------------------------------------------------------------------
+log_success()
+{
+   psp_action "$@" /bin/true | tee -a $INSTALL_LOG
+}
+
+#-------------------------------------------------------------------
+# Name: error
+#
+# Synopsis: error "\033[1;31m <message> \033[0m"
+#
+# Description: Echo error messages
+#-------------------------------------------------------------------
+error()
+{
+  psp_action "Error: \033[1;31m$@\033[0m" /bin/false | tee -a $INSTALL_LOG
+}
+
+#-------------------------------------------------------------------
+# Name: logerr
+#
+# Synopsis: loger "\033[1;31m <message> \033[0m"
+#
+# Description: Log the error messages into install.log
+#-------------------------------------------------------------------
+logerr()
+{
+  psp_action "Error: \033[1;31m$@\033[0m" /bin/false | tee -a $INSTALL_LOG
+  echo "Error: $@" >> ${INSTALL_LOG}
+}
+
+#-------------------------------------------------------------------
+# Name: logwarn
+#
+# Synopsis: logwarn "\033[1;33m <message> \033[0m"
+#
+# Description: Log the warning messages into install.log
+#-------------------------------------------------------------------
+logwarn()
+{
+  echo -en "Warn: \033[1;33m$@\033[0m" && warning
+  echo
+  echo "Warn: $@" >> ${INSTALL_LOG}
+}
+
+#-------------------------------------------------------------------
+# Name: logtips
+#
+# Synopsis: logtips "\033[1;32m <message> \033[0m"
+#
+# Description: Log the tip messages into install.log
+#-------------------------------------------------------------------
+logtips()
+{
+  echo -e "\033[1;32m$@\033[0m"
+  echo "$@" >> ${INSTALL_LOG}
+}
+
+#-------------------------------------------------------------------
+# Name: check_mysql
+#
+# Synopsis: check_mysql
+#
+# Description: Check local mysql and create database
+# 1. get mysql username, password and port
+# 2. attempt to connect mysql
+# 3. check if database is existed
+# 4. create database
+#-------------------------------------------------------------------
+check_mysql()
+{
+  log "Check MySQL."
+
+
+  echo -en  "Please input MySQL IP:" | tee -a $INSTALL_LOG
+  while :
+  do
+    read  mysql_ip
+    if [ x"mysql_ip" = "x" ];then
+      echo -en "MySQL IP cannot be empty.Please input again: " | tee -a $INSTALL_LOG
+    else
+      break 1
+    fi
+  done
+
+  echo -en  "Please input MySQL username: " | tee -a $INSTALL_LOG
+  while :
+  do
+    read  mysql_usr
+    if [ x"$mysql_usr" = "x" ];then
+      echo -en "Username cannot be empty.Please input again: " | tee -a $INSTALL_LOG
+    else
+      break 1
+    fi
+  done
+  echo -en "Please input MySQL password: " | tee -a $INSTALL_LOG
+  while :
+  do
+    read -s mysql_pwd
+    if [ x"$mysql_pwd" = "x" ];then
+      echo -en "Password cannot be empty.Please input again: " | tee -a $INSTALL_LOG
+    else
+      break 1
+    fi
+  done
+  echo
+  echo -en "MySQL port(Press Enter if use default port \"3306\"): " | tee -a $INSTALL_LOG
+  read mysql_port
+  if [ x"$mysql_port" = x ]; then
+    mysql_port=3306
+  fi
+
+  log "use local db?(y/yes/n/no):"
+  read use_local_db
+  if [[ "${use_local_db,,}" == "y" || "${use_local_db,,}" == "yes" ]]; then
+    # Use local mysql database
+    log "Use local database."
+    # Get mysql username, password, port
+    log "Attempt to connect database."
+    # Attempt to connect database
+    db_connect="mysql -u$mysql_usr -p$mysql_pwd -P $mysql_port"
+    $db_connect </dev/null  >> $INSTALL_LOG 2>&1
+    if [ "$?" != "0" ]; then
+      logerr "Login failed, make sure input the correct username, password, and port."
+    else
+      log "Connect successfully."
+      log "Create database \"$DB_NAME\"."
+      # Check if database is existed
+      mysql -u$mysql_usr -p$mysql_pwd -P $mysql_port -e "use $DB_NAME"   >> $INSTALL_LOG 2>&1
+      if [ "$?" = "0" ];then
+        logwarn "Existed database \"$DB_NAME\", init_db.sh will not be executed."
+        INIT_DB="false"
+      else
+        # Create  database
+        INIT_DB="true"
+        mysql -u$mysql_usr -p$mysql_pwd -P $mysql_port -e "create database $DB_NAME"   >> $INSTALL_LOG 2>&1
+        if [ "$?" != "0" ];then
+          logerr "Can not create database \"$DB_NAME\", exit."
+          exit 1
+        fi
+        log_success "Create database \"$DB_NAME\" successfully."
+      fi
+    fi
+  else
+    log "Use remote database, don't init database"
+  fi
+}
+
+
+
+generate_ssl_certs()
+{
+  log "Generating open ssl certs."
+  cd ./config/cert
+
+  if [ -e cert.pem ]; then
+      log "open ssl certs already existed, skip"
+  else
+      HOST_IP=`hostname -I`
+      HOSTNAME=`hostname`
+      HOSTNAMEFULL=`hostname -f`
+
+      sed -i "s/^\s*CN =.*/CN = ${HOSTNAME}/" cert.conf
+      echo "DNS.1 = ${HOSTNAME}" >> cert.conf
+      echo "DNS.2 = ${HOSTNAMEFULL}" >> cert.conf
+      echo "IP.1 = ${HOST_IP}" >> cert.conf
+
+      openssl req -x509 -sha256 -nodes -days 3650 -newkey rsa:1024 -keyout ./cert.key -out ./cert.pem  -config ./cert.conf >> $INSTALL_LOG 2>&1
+      if [ "$?" != "0" ]; then
+         logerr "Failed to generate self-signed cert, exit."
+         exit 1
+      fi
+      log_success "Generated open ssl certs for nginx successfully."
+  fi
+
+  cd -
+}
+
+docker_compose() {
+
+    log "Start docker_compose."
+    docker load < psp-be-image.tar
+    if [ "$?" != "0" ]; then
+       logerr "Failed to load psp-be image, exit."
+       exit 1
+    fi
+    docker load < psp-fe-image.tar
+    if [ "$?" != "0" ]; then
+       logerr "Failed to load psp-fe image, exit."
+       exit 1
+    fi
+    docker-compose up -d
+    if [ "$?" != "0" ]; then
+       logerr "Failed to docker-compose up, exit."
+       exit 1
+    fi
+
+    log_success "docker_compose successfully."
+}
+
+encrypt_mysql()
+{
+  max_check_num=10
+  prod_file="./config/prod.yml"
+  awk '/mysql/,/grpc/{print NR $0}' ${prod_file} | while read line
+  do
+    line_num=$(echo ${line} | awk '{print $1}')
+    has_encrypt=$(echo ${line} | awk '{print $2}' | sed s/[[:space:]]//g | grep "^encrypt:")
+    if [ "$?" == "0" ];then
+      encrypt=$(echo ${line} | awk -F : '{print $2}' | sed s/[[:space:]]//g)
+      if [ "$encrypt" == "true" ];then
+        for value in $( seq 1 ${max_check_num} )
+        do
+          next_line_num=$((${line_num}+${value}))
+          dsn=$(awk -v num="${next_line_num}" 'NR==num' ${prod_file} | sed s/[[:space:]]//g)
+          check_dsn=$(echo ${dsn} | grep "^dsn:")
+          if [ "$?" == "0" ];then
+            username=$(echo ${dsn} | awk -F : '{print $2}' | sed 's/"//' | sed s/[[:space:]]//g)
+            passwd=$(echo ${dsn} | awk -F : '{print $3}' | awk -F @ '{print $1}' | sed s/[[:space:]]//g)
+            encrypt_username=$(./util/encrypt ${username})
+            encrypt_passwd=$(./util/encrypt ${passwd})
+            if [ "${encrypt_username}" == "" ] || [ "${encrypt_passwd}" == "" ] ;then
+              echo "Encrypt failed"
+              exit 1
+            fi
+
+            sed -i "${next_line_num}s:${username}:${encrypt_username}:g" ${prod_file}
+            sed -i "${next_line_num}s:${passwd}:${encrypt_passwd}:g" ${prod_file}
+            break
+          else
+            continue
+          fi
+        done
+      fi
+    fi
+  done
+}
+
+
+#-------------------------------------------------------------------
+# Name: exec_init_db
+#
+# Synopsis: exec_init_db
+#
+# Description: Execute init_db.sh to initialize database
+#     This operation needs environment variable YS_ADMIN
+#     You need source profile first
+#-------------------------------------------------------------------
+exec_init_db()
+{
+    cd ./schema  >> $INSTALL_LOG 2>&1 || exit 1
+    # Exec init_db.sh
+    sh init_db.sh ${mysql_usr} ${mysql_pwd} ${mysql_port} ${DB_NAME} >> $INSTALL_LOG 2>&1
+    if [ "$?" != "0" ]; then
+      logerr "Failed to initialize the database, exit."
+      exit 1
+    fi
+    cd - >> $INSTALL_LOG 2>&1 || pwd
+}
+
+
+#-------------------------------------------------------------------
+# Name: configure_mysql
+#
+# Synopsis: configure_mysql
+#
+# Description: Configure mysql
+# 1.Modify mysql dsn in prod.yml
+# 2.Modify variable DB_CONN in init_db.sh
+# 3.Exec init_db.sh
+#-------------------------------------------------------------------
+configure_mysql()
+{
+  if [[ "${use_local_db,,}" == "y" || "${use_local_db,,}" == "yes" ]]; then
+    log "Configuring MySQL."
+    # Modify mysql dsn in prod.yml
+    sed -i "/dsn/{s/dsn:.*$/dsn: \"${mysql_usr}:${mysql_pwd}@tcp(${mysql_ip}:${mysql_port})\/${DB_NAME}?charset=utf8\&parseTime=true\&loc=Local\"/}" ./config/prod.yml  >> $INSTALL_LOG 2>&1
+    if [ "$?" != "0" ];then
+      logerr "Failed to configure \"MySQL dsn\" in prod.yml, exit."
+      exit 1
+    fi
+
+    if [ "${INIT_DB}" == "true" ];then
+      exec_init_db
+    fi
+    log_success "Configure MySQL successfully."
+  fi
+  # Encrypt mysql
+  encrypt_mysql
+}
+
+
+main()
+{
+    check_mysql
+    configure_mysql
+    generate_ssl_certs
+    docker_compose
+}
+
+# Install PSP
+main
+exit 0

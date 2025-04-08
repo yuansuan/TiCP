@@ -1,0 +1,10 @@
+{
+  "Zone":  "az-zhigu",
+  "Name": "linux-base",
+  "Desc":  "",
+  "Icon": "",
+  "Platform":  "LINUX",
+  "ImageId": "b0bf8d34-e2ae-456d-ac84-f975c0975103",
+  "InitScript":  "#!/bin/bash\n\ncat <<EOF > \"/etc/ys-agent/agent_env\"\nSHARE_SERVER=192.168.11.55\nSIGNAL_HOST={{.SignalHost}}\nSIGNAL_PORT=443\nSIGNAL_USE_SSL=1\nROOM_ID={{.RoomId}}\nSHARE_REGISTER_ADDRESS=192.168.11.55:8081\nSHARE_USERNAME={{.ShareUsername}}\nSHARE_PASSWORD={{.SharePassword}}\nSHARE_MOUNT_PATHS={{.ShareMountPaths}}\nLOGIN_PASSWORD={{.LoginPassword}}\nREMOTE_APP_USER_PASSES={{.RemoteAppUserPasses}}\nEOF",
+  "GpuDesired": false
+}

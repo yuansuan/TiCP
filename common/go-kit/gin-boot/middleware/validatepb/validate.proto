@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package validatepb;
+option go_package = "github.com/yuansuan/ticp/common/go-kit/gin-boot/middleware/validatepb";
+
+message ValidateError {
+  string Field = 1;
+  string Reason = 2;
+}

@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package license;
+option go_package = "yuansuan.cn/psp/internal/common/proto/license";
+
+import "google/protobuf/timestamp.proto";
+
+service License {
+  // QueueTypeList 获取LicenseType列表
+  rpc QueueLicenseTypeList (QueueLicenseTypeListRequest) returns (QueueLicenseTypeListResponse) {}
+}
+
+message QueueLicenseTypeListRequest {}
+
+message QueueLicenseTypeListResponse {
+  repeated LicenseType license_types = 1;
+}
+
+message LicenseType {
+  string  id = 1;
+  string type_name = 2;
+  bool licence_valid = 3;
+}

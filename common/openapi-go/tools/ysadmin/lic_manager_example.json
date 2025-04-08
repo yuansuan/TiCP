@@ -1,0 +1,7 @@
+{
+  "Os": 1,
+  "Desc": "123222",
+  "AppType": "StarCCM+",
+  "ComputeRule": "echo '{\"ccmppower\": 1}'",
+  "Status": 1
+}
