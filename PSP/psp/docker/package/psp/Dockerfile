@@ -1,4 +1,3 @@
-#FROM harbor.yuansuan.cn/wukong/golang:1.24
 FROM registry.intern.yuansuan.cn/library/alpine:3.10
 
 ## 设置时区

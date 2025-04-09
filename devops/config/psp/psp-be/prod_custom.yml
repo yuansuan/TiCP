@@ -98,7 +98,7 @@ storage:
   - /.tmp_upload
 system:
   alert_manager:
-    alert_manager_config_path: /home/wukong/config/base
+    alert_manager_config_path: /home/ticp/config/base
     alert_manager_url: http://10.0.4.48:9094
 user:
   ldap:
