@@ -35,7 +35,7 @@ services:
     networks:
     - ticp-network
     ports:
-    - 22341:8088
+    - 8890:8088
     privileged: true
     restart: always
     volumes:

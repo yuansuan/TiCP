@@ -183,9 +183,9 @@ def update_custom_config_files(ak_info, devops_path, user_config, userId):
         for file in files:
             if file == 'prod_custom.yml': # 替换AK
                 file_path = os.path.join(root, file)
-                update_custom_config_file(file_path, ak_info, user_config,userId)
+                update_custom_config_file(devops_path, file_path, ak_info, user_config,userId)
 
-def update_custom_config_file(file_path, ak_info, user_config, userId):
+def update_custom_config_file(devops_path, file_path, ak_info, user_config, userId):
     access_key_id = ak_info['AccessKeyId']
     access_key_secret = ak_info['AccessKeySecret']
     ys_id = ak_info['YSId']
@@ -211,6 +211,8 @@ def update_custom_config_file(file_path, ak_info, user_config, userId):
         config['openapi']['local']['settings']['api_endpoint'] = f"http://{iam_ip}:8899"
         config['openapi']['local']['settings']['hpc_endpoint'] = f"http://{hpc_ip}:8001"
         config['storage']['local_root_path'] = os.path.join(user_config['storage'], userId)
+        config['system']['alert_manager']['alert_manager_config_path'] = os.path.join(devops_path, "config/base")
+        config['system']['alert_manager']['alert_manager_url'] = f"http://{iam_ip}:9093"
     elif 'cloud-base/iamserver' in file_path:
         config['ys_api_server']['job'] = f"http://{iam_ip}:8893"
         config['ys_api_server']['account_bill'] = f"http://{iam_ip}:8891"
