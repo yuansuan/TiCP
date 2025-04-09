@@ -1,8 +1,5 @@
-
 CREATE DATABASE IF NOT EXISTS ticp_portal DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 CREATE DATABASE IF NOT EXISTS ticp DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-
--- CREATE USER IF NOT EXISTS 'ticp_user'@'%' IDENTIFIED BY 'ticp6655';
 
 GRANT ALL PRIVILEGES ON ticp.* TO 'ticp_user'@'%';
 GRANT ALL PRIVILEGES ON ticp_portal.* TO 'ticp_user'@'%';
