@@ -167,6 +167,16 @@ def update_ysadmin(file_path, ak_info):
     with open(file_path, 'w') as f:
         yaml.dump(config, f, default_flow_style=False)
 
+def update_iam_endpoint(devops_path, user_config):
+    file_path = os.path.join(devops_path, 'ysadmin', 'config.yaml')
+    server_ip = user_config['server_ip']
+    iam_ip = server_ip['iam']
+    with open(file_path, 'r') as f:
+        config = yaml.safe_load(f)
+    config['environments']['dev']['iam_endpoint'] = f"http://{iam_ip}:8899"
+    with open(file_path, 'w') as f:
+        yaml.dump(config, f, default_flow_style=False)
+
 def update_custom_config_files(ak_info, devops_path, user_config, userId):
     config_path = os.path.join(devops_path, "config")
     for root, dirs, files in os.walk(config_path):
@@ -232,6 +242,7 @@ def update_sc(file_path, ak_info, user_config):
         yaml.dump(config, f, default_flow_style=False)
 
 def update_AK(user_config,devops_path):
+    update_iam_endpoint(devops_path, user_config)
     userId =add_user(devops_path)
     result =create_access_keys(devops_path,userId)
     update_custom_config_files(result, devops_path, user_config, userId)
@@ -241,7 +252,7 @@ def update_AK(user_config,devops_path):
 def add_user(devops_path):
     ysadmin_path = os.path.join(devops_path, "ysadmin", "ysadmin")
     run_path = os.path.join(devops_path, "ysadmin")
-    with open(os.path.join(devops_path, 'user_param.json'), 'r') as f:
+    with open(os.path.join(run_path, 'user_param.json'), 'r') as f:
         user_params = yaml.safe_load(f)
     phone_to_check = user_params.get('Phone')
     list_command = [ysadmin_path, 'iam', 'list', 'users']
@@ -295,6 +306,7 @@ def start_base_services(devops_path, user_config):
                 print("启动中...")
                 printed_message = True
             time.sleep(2)
+    time.sleep(5)
 
 def start_other_services(devops_path, user_config):
     if user_config['deploy_switch']['ipaas']:
@@ -319,17 +331,25 @@ def start_agent_services(devops_path, user_config):
 
 def init_mysql(devops_path, user_config):
     init_db_sh = os.path.join(devops_path, "ticp_portal_sql", "init_db.sh")
-    try:
-        subprocess.run([
-            init_db_sh,
-            "root",
-            user_config['mysql']['root_password'],
-            "3306",
-            "ticp_portal",
-            user_config['mysql']['host']
-    ], check=True)
-    except subprocess.CalledProcessError as e:
-        print(f"Error starting agent services: {e}")
+    max_retries = 5
+    retry_interval = 3
+    for attempt in range(max_retries):
+        try:
+            subprocess.run([
+                init_db_sh,
+                "root",
+                user_config['mysql']['root_password'],
+                "3306",
+                "ticp_portal",
+                user_config['mysql']['host']
+            ], check=True)
+            return
+        except subprocess.CalledProcessError as e:
+            if attempt < max_retries - 1:
+                time.sleep(retry_interval)
+            else:
+                print(f"数据库初始化失败: {e}")
+                raise
 
 def update_prometheus_config(devops_path, user_config):
     prometheus_file = os.path.join(devops_path, "config/base/prometheus.yml")
@@ -359,9 +379,34 @@ def update_prometheus_config(devops_path, user_config):
     with open(prometheus_file, 'w') as f:
         yaml.dump(config, f, default_flow_style=False, indent=2)
 
+def update_init_sql(devops_path, user_config):
+    init_sql_path = os.path.join(devops_path, "init.sql")
+    if not os.path.exists(init_sql_path):
+        print(f"Warning: {init_sql_path} 不存在")
+        return
+    with open(init_sql_path, 'r') as f:
+        content = f.read()
+    lines = content.split('\n')
+    new_lines = []
+    for line in lines:
+        if 'CREATE DATABASE' in line and 'ticp_portal' not in line:
+            line = f"CREATE DATABASE IF NOT EXISTS {user_config['mysql']['database']} DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;"
+        elif 'GRANT ALL PRIVILEGES' in line:
+            if 'ticp_portal' in line:
+                line = f"GRANT ALL PRIVILEGES ON ticp_portal.* TO '{user_config['mysql']['user']}'@'%';"
+            else:
+                line = f"GRANT ALL PRIVILEGES ON {user_config['mysql']['database']}.* TO '{user_config['mysql']['user']}'@'%';"
+        elif line.strip().startswith('USE '):
+            line = f"USE {user_config['mysql']['database']};"
+        new_lines.append(line)
+    new_content = '\n'.join(new_lines)
+    with open(init_sql_path, 'w') as f:
+        f.write(new_content)
+
 def main():
     devops_path = get_devops_path()
     user_config = read_user_config()
+    update_init_sql(devops_path, user_config)
     update_prometheus_config(devops_path, user_config)
     update_docker_compose_paths(devops_path,user_config)
     update_prod_config(user_config, devops_path)

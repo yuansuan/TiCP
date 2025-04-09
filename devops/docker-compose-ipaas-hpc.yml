@@ -9,6 +9,7 @@ services:
     volumes:
     - /Users/apple/code/TiCP/devops/config/ipaas/nginx/nginx.conf:/etc/nginx/nginx.conf
     - /Users/apple/code/TiCP/devops/config/ipaas/nginx/conf.d/root.conf:/etc/nginx/conf.d/root.conf
+    - /dev/null:/etc/nginx/conf.d/default.conf
     - /home/data/nginx/logs:/var/log/nginx
   standard-compute:
     container_name: standard-compute
