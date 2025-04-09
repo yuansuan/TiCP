@@ -29,4 +29,8 @@ https://ticp.yuansuan.com/
 ## 联系方式
  电话：400-168-2407
 
+## 远算公众号
+![yuansuan.png](docs/yuansuan.png)
+
+
 
