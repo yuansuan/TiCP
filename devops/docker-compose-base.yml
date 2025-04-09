@@ -6,7 +6,7 @@ services:
     container_name: alertmanager
     image: harbor.yuansuan.cn/ticp/alertmanager:v0.27.0
     ports:
-    - 9094:9093
+    - 9093:9093
     restart: always
     volumes:
     - /Users/apple/code/TiCP/devops/config/base/alertmanager.yml:/etc/alertmanager/alertmanager.yml

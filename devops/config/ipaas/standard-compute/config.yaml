@@ -1,4 +1,4 @@
-http_address: 0.0.0.0:8999
+http_address: 0.0.0.0:8896
 # 如果为空，则pporf handler注册在 http_address中
 performance_address: 127.0.0.1:8081
 hpc_storage_address: http://10.0.4.48:8001

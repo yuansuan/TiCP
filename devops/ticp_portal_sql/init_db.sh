@@ -64,22 +64,67 @@ if [ "${mysql_usr}" == "" ] || [ "${mysql_pwd}" == "" ];then
   done
 fi
 
-MYSQL_CMD=(mysql -u"$mysql_usr" -p"$mysql_pwd" -h "$mysql_ip" -P "$mysql_port" -D "$mysql_db_name" --default-character-set=utf8)
+TMP_CNF=$(mktemp)
+cat > "$TMP_CNF" << EOF
+[client]
+user=$mysql_usr
+password=$mysql_pwd
+host=$mysql_ip
+port=$mysql_port
+database=$mysql_db_name
+default-character-set=utf8
+EOF
+
+MYSQL_CMD=(mysql --defaults-extra-file="$TMP_CNF")
 
 if "${MYSQL_CMD[@]}" </dev/null >/dev/null 2>&1; then
   log "Connection successful"
 else
   logerr "Connection failed"
+  rm -f "$TMP_CNF"
   exit 1
 fi
 
 TABLE_EXISTS=$("${MYSQL_CMD[@]}" -N -B -e "SHOW TABLES LIKE 'resource';")
 
 if [ "$TABLE_EXISTS" != "resource" ]; then
-  for i in $(find . -type f | grep '\.sql$' | grep -v 'init.sql$' | grep -v '/patch/'); do
-    "${MYSQL_CMD[@]}" < "$i"
+  SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+  for i in $(find "$SCRIPT_DIR" -type f | grep '\.sql$' | grep -v '^init.sql$' | grep -v '/patch/' | grep -v 'rbac_init.sql' | grep -v 'user_init.sql'); do
+    if ! "${MYSQL_CMD[@]}" < "$i"; then
+      logerr "Failed to execute $i"
+      rm -f "$TMP_CNF"
+      exit 1
+    fi
   done
+
+  if [ -f "$SCRIPT_DIR/rbac_init.sql" ]; then
+    if ! "${MYSQL_CMD[@]}" < "$SCRIPT_DIR/rbac_init.sql"; then
+      logerr "Failed to execute rbac_init.sql"
+      rm -f "$TMP_CNF"
+      exit 1
+    fi
+  else
+    logerr "rbac_init.sql not found at $SCRIPT_DIR/rbac_init.sql"
+    rm -f "$TMP_CNF"
+    exit 1
+  fi
+
+  if [ -f "$SCRIPT_DIR/user_init.sql" ]; then
+    if ! "${MYSQL_CMD[@]}" < "$SCRIPT_DIR/user_init.sql"; then
+      logerr "Failed to execute user_init.sql"
+      rm -f "$TMP_CNF"
+      exit 1
+    fi
+  else
+    logerr "user_init.sql not found at $SCRIPT_DIR/user_init.sql"
+    rm -f "$TMP_CNF"
+    exit 1
+  fi
+  
   log "Initialization completed"
 else
   log "Skipping initialization"
 fi
+
+# 清理临时配置文件
+rm -f "$TMP_CNF"
