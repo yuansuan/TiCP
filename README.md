@@ -16,12 +16,17 @@ TiCP(Ti Compute Platform)是远算科技有限公司开发的下一代企业级�
 | XFLow            | Matlab           | MSC Adams     | MSC Nastran | 
 | OptiStruct       | HyperWorks       | ANSA          | Converge    |
 | Code Aster       | Code Saturne     | Salome CFD    | Telemac     | 
-| PreonLab         | AVL FIRE M       |               |             |
+| PreonLab         | AVL FIRE M       | OpenFORM      |             |
 ## 系统架构
 ![img.png](docs/architecture.png)
 ## 使用文档
 https://ticp.yuansuan.com/
 
 ## 技术交流和反馈
+### 远算TiCP技术交流群
+![ticpqrcode.png](docs/ticpqrcode.png)
+
 ## 联系方式
+ 电话：400-168-2407
+
 
