@@ -7,7 +7,6 @@ import (
 	"github.com/yuansuan/ticp/iPaaS/sso/hydra_lcp/config"
 	"github.com/yuansuan/ticp/iPaaS/sso/hydra_lcp/handler_rpc"
 	"github.com/yuansuan/ticp/iPaaS/sso/hydra_lcp/migration"
-	"github.com/yuansuan/ticp/iPaaS/sso/hydra_lcp/router"
 )
 
 func main() {
@@ -19,7 +18,6 @@ func main() {
 	logger.Infof("%#v", config.Custom)
 
 	server.Register( //注册路由策略
-		router.UseRoutersGenerated,
 		handler_rpc.InitGRPCServer,
 	).
 		DBAutoMigrate(migration.Mysql).

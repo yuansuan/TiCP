@@ -42,13 +42,6 @@ app:
           addr: "10.0.4.48:11211"
           timeout_per_request: "5s"
           with_insecure: true
-
-        company:
-          addr: ""
-          naming: false
-          timeout_per_request: "5s"
-          with_insecure: true
-
         default:
           addr: ":11211"
           timeout_per_request: "15s"

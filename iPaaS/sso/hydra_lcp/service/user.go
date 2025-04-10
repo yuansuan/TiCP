@@ -2,7 +2,9 @@ package service
 
 import (
 	"context"
+	"github.com/golang/protobuf/ptypes/timestamp"
 	"strings"
+	"time"
 
 	"google.golang.org/grpc/status"
 
@@ -50,15 +52,6 @@ func (s *UserService) Get(ctx context.Context, u *models.SsoUser) (bool, error) 
 	return s.userDao.Get(ctx, u)
 }
 
-func (s *UserService) GetFromPhone(ctx context.Context, phone string) (info models.SsoUser, err error) {
-	return s.userDao.GetFromPhone(ctx, phone)
-}
-
-// GetBatch GetBatch
-func (s *UserService) GetBatch(ctx context.Context, ysid []int64) ([]*models.SsoUser, error) {
-	return s.userDao.GetBatch(ctx, ysid)
-}
-
 func (s *UserService) List(ctx context.Context, offset, limit int64, name string) ([]*models.SsoUser, int64, error) {
 	offset = offset - 1
 	return s.userDao.List(ctx, int(offset), int(limit), name)
@@ -78,11 +71,6 @@ func (s *UserService) GetID(ctx context.Context, email string, phone string, wec
 	return u.Ysid, nil
 }
 
-// CheckUserExists CheckUserExists
-func (s *UserService) CheckUserExists(ctx context.Context, user models.SsoUser) (err error) {
-	return s.userDao.Exists(ctx, user)
-}
-
 // VerifyPasswordByPhone VerifyPasswordByPhone
 func (s *UserService) VerifyPasswordByPhone(ctx context.Context, phone string, pwd string) (userID int64, err error) {
 	return s.verifyPassword(ctx, "", phone, 0, "", pwd)
@@ -96,12 +84,6 @@ func (s *UserService) VerifyPasswordByEmail(ctx context.Context, email string, p
 // VerifyPasswordByUserID VerifyPasswordByUserID
 func (s *UserService) VerifyPasswordByUserID(ctx context.Context, ysid int64, pwd string) (userID int64, err error) {
 	return s.verifyPassword(ctx, "", "", ysid, "", pwd)
-}
-
-// VerifyPasswordByName VerifyPasswordByName
-// FIXME name不是唯一键，提供name+pwd的登录方式应该是不安全的
-func (s *UserService) VerifyPasswordByName(ctx context.Context, name string, pwd string) (userID int64, err error) {
-	return s.verifyPassword(ctx, "", "", 0, name, pwd)
 }
 
 // Update Update
@@ -240,5 +222,13 @@ func getDisplayUserName(userName string) string {
 		// 处理用户名中包含”.“的情况
 		// @example:  dev.test.a1 返回 test.a1
 		return strings.Join(t[1:], ".")
+	}
+}
+
+// ModelToProtoTime convert time.Time to proto timestamp
+func ModelToProtoTime(time *time.Time) *timestamp.Timestamp {
+	return &timestamp.Timestamp{
+		Seconds: time.Unix(),
+		Nanos:   int32(time.Nanosecond()),
 	}
 }

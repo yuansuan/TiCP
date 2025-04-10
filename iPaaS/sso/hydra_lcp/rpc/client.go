@@ -4,7 +4,6 @@ import (
 	"context"
 	"sync"
 
-	"github.com/yuansuan/ticp/iPaaS/sso/protos/platform/company"
 	"github.com/yuansuan/ticp/iPaaS/sso/protos/platform/idgen"
 
 	"github.com/yuansuan/ticp/iPaaS/sso/hydra_lcp/pkg/snowflake"
@@ -16,9 +15,6 @@ import (
 type Client struct {
 	Base struct {
 		Gen idgen.IdGenClient `grpc_client_inject:"idgen"`
-	}
-	Company struct {
-		Company company.CompanyServiceClient `grpc_client_inject:"company"`
 	}
 }
 
