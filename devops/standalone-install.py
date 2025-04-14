@@ -2,6 +2,7 @@ import os
 import subprocess
 import yaml
 import time
+import re
 
 CONFIG_FILES = {
     'docker_compose': [
@@ -114,8 +115,11 @@ def get_volume_mounts(devops_path, user_config):
             "/home/data/license/logs:/workspace/license/log"
         ],
         'psp-be': [
-            f"{devops_path}/config/psp/psp-be:/opt/yuansuan/psp/config",
+            f"{devops_path}/config/psp:/opt/yuansuan/psp/config",
             "/home/data/psp-be/logs:/opt/yuansuan/psp/logs/"
+        ],
+        'frontend': [
+            f"{devops_path}/config/psp:/opt/yuansuan/psp/config"
         ]
     }
 
@@ -137,7 +141,7 @@ def update_mysql(file_path, user_config):
         config = yaml.safe_load(f)
     middleware=config['app']['middleware']
     if 'mysql' in middleware and 'default' in middleware['mysql']:
-        if '/psp/psp-be' in file_path:
+        if '/psp/prod.yml' in file_path:
             middleware['mysql']['default']['dsn'] = create_dsn_portal(user_config['mysql'])
         else:
             middleware['mysql']['default']['dsn'] = create_dsn(user_config['mysql'])
@@ -147,6 +151,9 @@ def update_mysql(file_path, user_config):
 
 def create_dsn(mysql_config):
     return f"{mysql_config['user']}:{mysql_config['password']}@tcp({mysql_config['host']}:3306)/{mysql_config['database']}?charset=utf8&parseTime=true&loc=Local"
+
+def create_dsn_sc(mysql_config):
+    return f"{mysql_config['user']}:{mysql_config['password']}@tcp({mysql_config['host']}:3306)/{mysql_config['database']}?charset=utf8&parseTime=true&loc=Local&multiStatements=true"
 
 def create_dsn_portal(mysql_config):
     return f"{mysql_config['user']}:{mysql_config['password']}@tcp({mysql_config['host']}:3306)/ticp_portal?charset=utf8&parseTime=true&loc=Local"
@@ -204,7 +211,7 @@ def update_custom_config_file(devops_path, file_path, ak_info, user_config, user
         config['access_key_id'] = access_key_id
         config['access_key_secret'] = access_key_secret
         config['iam_server_url'] = f"http://{iam_ip}:8899"
-    elif '/psp/psp-be' in file_path:
+    elif '/psp/prod_custom.yml' in file_path:
         config['openapi']['local']['settings']['app_key'] = access_key_id
         config['openapi']['local']['settings']['app_secret'] = access_key_secret
         config['openapi']['local']['settings']['user_id'] = ys_id
@@ -238,7 +245,7 @@ def update_sc(file_path, ak_info, user_config):
     config['iam']['ys_id'] = ys_id
     config['iam']['endpoint'] = f"http://{iam_ip}:8899"
     config['hpc_storage_address'] = f"http://{hpc_ip}:8001"
-    new_dsn = create_dsn(user_config['mysql'])
+    new_dsn = create_dsn_sc(user_config['mysql'])
     config['database']['dsn'] = new_dsn
     with open(file_path, 'w') as f:
         yaml.dump(config, f, default_flow_style=False)
@@ -250,6 +257,22 @@ def update_AK(user_config,devops_path):
     update_custom_config_files(result, devops_path, user_config, userId)
     update_ysadmin_config_file(result, devops_path)
     update_sc_config_file(result, devops_path, user_config)
+    update_nginx_config_file(devops_path, user_config)
+
+def update_nginx_config_file(devops_path, user_config):
+    file_path = os.path.join(devops_path, 'config', 'ipaas', 'nginx', 'conf.d', 'root.conf')
+    if not os.path.exists(file_path):
+        print(f"Warning: {file_path} 不存在")
+        return
+    with open(file_path, 'r') as f:
+        content = f.read()
+    new_content = re.sub(
+        r'set \$backend_ip\s+[\d\.]+;',
+        f"set $backend_ip {user_config['server_ip']['hpc']};",
+        content
+    )
+    with open(file_path, 'w') as f:
+        f.write(new_content)
 
 def add_user(devops_path):
     ysadmin_path = os.path.join(devops_path, "ysadmin", "ysadmin")
@@ -288,7 +311,22 @@ def create_access_keys(devops_path, userId):
         return None
     return ak_info
 
+def set_directory_permissions():
+    try:
+        subprocess.run(['sudo', 'chown', '-R', '1001:1001', '/home/data/kafka'], check=True)
+        subprocess.run(['sudo', 'chmod', '-R', '755', '/home/data/kafka'], check=True)
+        subprocess.run(['sudo', 'chown', '-R', '65534:65534', '/home/data/prometheus'], check=True)
+        subprocess.run(['sudo', 'chmod', '-R', '755', '/home/data/prometheus'], check=True)
+    except subprocess.CalledProcessError as e:
+        print(f"设置目录权限时出错: {e}")
+        return False
+    return True
+
 def start_base_services(devops_path, user_config):
+    # 设置目录权限
+    if not set_directory_permissions():
+        return
+
     if user_config['deploy_switch']['base']:
         subprocess.run(['docker', 'compose', '-f', os.path.join(devops_path, 'docker-compose-base.yml'), 'up', '-d'])
     time.sleep(1)
@@ -321,20 +359,29 @@ def start_other_services(devops_path, user_config):
 def start_agent_services(devops_path, user_config):
     if user_config['deploy_switch']['agent']:
         try:
+            # 安装 RPM 包
             subprocess.run([
-                os.path.join(devops_path, 'psp_agent'),
-                '--port=9100',
-                f"--log_path={devops_path}/agent.log",
-                '--log_max_size=50',
-                '--log_max_num=20'
-        ], check=True)
+                'rpm',
+                '-ivh',
+                '--prefix',
+                '/opt/yuansuan',
+                os.path.join(devops_path, 'agent', 'psp-agent-4.*.*.rpm'),
+                '--nodeps'
+            ], check=True)
+            
+            # 启动服务
+            subprocess.run([   
+                'systemctl',
+                'start',
+                'psp-agent'
+            ], check=True)
         except subprocess.CalledProcessError as e:
             print(f"Error starting agent services: {e}")
 
 def init_mysql(devops_path, user_config):
     init_db_sh = os.path.join(devops_path, "ticp_portal_sql", "init_db.sh")
     max_retries = 5
-    retry_interval = 3
+    retry_interval = 5
     for attempt in range(max_retries):
         try:
             subprocess.run([

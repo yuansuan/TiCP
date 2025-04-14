@@ -1,4 +1,7 @@
 override BUILD_CONTEXT ?= $(PWD)
+override DOCKER_CONTEXT ?= $(PWD)
+CLEANROOTPATH ?= $(patsubst %/,%,$(ROOTPATH))
+override DOCKER_BUILD_ARGS ?= --build-arg BUILDPATH=$(addprefix /workspace,$(subst $(CLEANROOTPATH),,$(BUILD_CONTEXT))) --build-arg MODULENAME=$(IMAGE_NAME)
 override DOCKERFILE ?= ${ROOTPATH}/iPaaS/project-root/devops/docker/Dockerfile
 ifdef ENABLED_DEBUG
 override DOCKERFILE = ${ROOTPATH}/iPaaS/project-root/devops/docker/golang.Dockerfile

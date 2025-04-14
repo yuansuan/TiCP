@@ -13,7 +13,7 @@ services:
     - /home/data/nginx/logs:/var/log/nginx
   standard-compute:
     container_name: standard-compute
-    image: harbor.yuansuan.cn/ticp/standard-compute:202503261317
+    image: harbor.yuansuan.cn/ticp/standard-compute:202504111516
     logging:
       driver: json-file
       options:

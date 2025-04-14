@@ -33,7 +33,7 @@ log:
 
 database:
   type: mysql
-  dsn: "wukong_user:wukong6655@tcp(mysql:3306)/wukong?charset=utf8&parseTime=true&loc=Local&multiStatements=true"
+  dsn: "ticp_user:ticp6655@tcp(mysql:3306)/ticp?charset=utf8&parseTime=true&loc=Local&multiStatements=true"
 
 migrations:
   auto-migration: true

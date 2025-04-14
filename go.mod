@@ -4,15 +4,10 @@ go 1.23.0
 
 require (
 	github.com/DATA-DOG/go-sqlmock v1.5.0
-	github.com/alibabacloud-go/darabonba-openapi/v2 v2.0.0
-	github.com/alibabacloud-go/dysmsapi-20170525/v3 v3.0.4
-	github.com/alibabacloud-go/tea v1.1.19
 	github.com/aws/aws-sdk-go v1.43.40
 	github.com/brianvoe/gofakeit/v6 v6.23.1
 	github.com/coreos/etcd v3.3.27+incompatible
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc
-	github.com/dchest/captcha v1.0.0
-	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/doug-martin/goqu/v9 v9.18.0
 	github.com/garyburd/redigo v1.6.4
 	github.com/gin-gonic/gin v1.10.0
@@ -44,12 +39,9 @@ require (
 	github.com/satori/go.uuid v1.2.1-0.20181028125025-b2ce2384e17b
 	github.com/schollz/progressbar/v3 v3.14.3
 	github.com/shirou/gopsutil v3.21.11+incompatible
-	github.com/silenceper/wechat/v2 v2.0.3
 	github.com/spf13/cobra v1.7.0
 	github.com/spf13/viper v1.18.2
 	github.com/stretchr/testify v1.10.0
-	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common v1.0.655
-	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/sms v1.0.495
 	go.etcd.io/etcd/client/v3 v3.5.19
 	go.mongodb.org/mongo-driver v1.11.6
 	go.uber.org/multierr v1.11.0
@@ -257,19 +249,8 @@ require (
 	github.com/BurntSushi/toml v1.3.2 // indirect
 	github.com/Knetic/govaluate v3.0.1-0.20171022003610-9aa49832a739+incompatible // indirect
 	github.com/KyleBanks/depth v1.2.1 // indirect
-	github.com/alibabacloud-go/alibabacloud-gateway-spi v0.0.4 // indirect
-	github.com/alibabacloud-go/debug v0.0.0-20190504072949-9472017b5c68 // indirect
-	github.com/alibabacloud-go/endpoint-util v1.1.0 // indirect
-	github.com/alibabacloud-go/openapi-util v0.0.11 // indirect
-	github.com/alibabacloud-go/tea-utils v1.3.1 // indirect
-	github.com/alibabacloud-go/tea-utils/v2 v2.0.0 // indirect
-	github.com/alibabacloud-go/tea-xml v1.1.2 // indirect
-	github.com/aliyun/credentials-go v1.1.2 // indirect
 	github.com/asaskevich/govalidator v0.0.0-20200428143746-21a406dcc535 // indirect
 	github.com/avast/retry-go/v4 v4.0.5 // indirect
-	github.com/bradfitz/gomemcache v0.0.0-20220106215444-fb4bf637b56d // indirect
-	github.com/clbanning/mxj/v2 v2.5.5 // indirect
-	github.com/fatih/structs v1.1.0 // indirect
 	github.com/felixge/httpsnoop v1.0.4 // indirect
 	github.com/go-asn1-ber/asn1-ber v1.5.7 // indirect
 	github.com/go-logfmt/logfmt v0.5.1 // indirect
@@ -285,7 +266,6 @@ require (
 	github.com/go-openapi/validate v0.19.10 // indirect
 	github.com/gobuffalo/pop/v6 v6.0.6 // indirect
 	github.com/goccy/go-yaml v1.9.5 // indirect
-	github.com/gomodule/redigo v1.8.1 // indirect
 	github.com/hashicorp/errwrap v1.0.0 // indirect
 	github.com/hashicorp/go-cleanhttp v0.5.2 // indirect
 	github.com/hashicorp/go-multierror v1.1.0 // indirect
@@ -302,7 +282,6 @@ require (
 	github.com/richardlehane/mscfb v1.0.4 // indirect
 	github.com/richardlehane/msoleps v1.0.3 // indirect
 	github.com/seatgeek/logrus-gelf-formatter v0.0.0-20210414080842-5b05eb8ff761 // indirect
-	github.com/tjfoc/gmsm v1.3.2 // indirect
 	github.com/tklauser/go-sysconf v0.3.11 // indirect
 	github.com/tklauser/numcpus v0.6.0 // indirect
 	github.com/xuri/efp v0.0.0-20220603152613-6918739fd470 // indirect

@@ -40,13 +40,3 @@ const (
 	SystemRoleNameIsAdmin      = "管理员"
 	SystemRoleNameIsNormal     = "普通用户"
 )
-
-// IsAdmin 是否是管理员以上
-func (userRole *UserRole) IsAdmin() bool {
-	if userRole.Name == SystemRoleNameIsAdmin || userRole.Name == SystemRoleNameIsSuperAdmin {
-		// 企业管理员，有权限
-		return true
-	}
-	return false
-
-}

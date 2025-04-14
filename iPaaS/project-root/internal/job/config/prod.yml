@@ -40,7 +40,7 @@ app:
     mysql:
       default:
         _startup: true
-        dsn: "wukong_user:wukong6655@tcp(mysql:3306)/wukong?charset=utf8&parseTime=true&loc=Local"
+        dsn: "ticp_user:ticp6655@tcp(mysql:3306)/ticp?charset=utf8&parseTime=true&loc=Local"
 
     redis:
       default:
