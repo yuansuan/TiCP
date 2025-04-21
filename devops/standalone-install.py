@@ -313,6 +313,10 @@ def create_access_keys(devops_path, userId):
 
 def set_directory_permissions():
     try:
+        if not os.path.exists('/home/data/kafka'):
+            subprocess.run(['sudo', 'mkdir', '-p', '/home/data/kafka'], check=True)
+        if not os.path.exists('/home/data/prometheus'):
+            subprocess.run(['sudo', 'mkdir', '-p', '/home/data/prometheus'], check=True)
         subprocess.run(['sudo', 'chown', '-R', '1001:1001', '/home/data/kafka'], check=True)
         subprocess.run(['sudo', 'chmod', '-R', '755', '/home/data/kafka'], check=True)
         subprocess.run(['sudo', 'chown', '-R', '65534:65534', '/home/data/prometheus'], check=True)
